@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="632.0" minWidth="1148.0" prefHeight="632.0" prefWidth="1148.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" GridPane.columnSpan="2" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ConfigurationCalendarController">
+    <children>
+      <GridPane layoutX="21.0" layoutY="14.0" prefHeight="591.0" prefWidth="1106.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="14.0">
+        <columnConstraints>
+            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="506.0" minWidth="10.0" prefWidth="427.0" />
+          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="506.0" minWidth="10.0" prefWidth="326.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="244.0" minWidth="0.0" prefWidth="27.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="338.0" minWidth="10.0" prefWidth="321.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="89.66" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="89.66" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="89.66" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="251.0" minHeight="10.0" prefHeight="89.66" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="89.66" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="89.66" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="89.66" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="89.66" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="67.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="71.0" minHeight="10.0" prefHeight="71.0" valignment="CENTER" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Calendario a doble vuelta" textFill="#2f2484" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Segoe UI Symbol" size="24.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <JFXToggleButton fx:id="secondRoundButton" contentDisplay="RIGHT" onAction="#setSecondRound" prefHeight="76.0" prefWidth="135.0" size="12.0" text="Sí" textFill="#2f2484" toggleColor="WHITE" toggleLineColor="#2f2484" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Segoe UI Symbol" size="22.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <tooltip>
+                  <Tooltip text="El calendario será a doble vuelta">
+                     <font>
+                        <Font name="Segoe UI Emoji" size="24.0" />
+                     </font>
+                  </Tooltip>
+               </tooltip>
+            </JFXToggleButton>
+            <Label prefHeight="35.0" prefWidth="304.0" text="Juegos seguidos de local" textFill="#2f2484" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Segoe UI Symbol" size="24.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label prefHeight="35.0" prefWidth="333.0" text="Juegos seguidos de visitante" textFill="#2f2484" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Segoe UI Symbol" size="24.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Spinner fx:id="maxHomeGamesSpinner" prefHeight="48.0" prefWidth="249.0" stylesheets="@../styles/PrincipalMenu.css" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Spinner>
+            <Spinner fx:id="maxVisitorGamesSpinner" prefHeight="48.0" prefWidth="248.0" stylesheets="@../styles/PrincipalMenu.css" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Spinner>
+              <JFXButton fx:id="select" onAction="#selectTeams" prefHeight="51.0" prefWidth="135.0" stylesheets="@../styles/PrincipalMenu.css" text="Avanzar" textFill="#fcf8f8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+                  <font>
+                      <Font name="Segoe UI Symbol" size="20.0" />
+                  </font>
+                  <cursor>
+                      <Cursor fx:constant="HAND" />
+                  </cursor>
+              </JFXButton>
+            <JFXToggleButton fx:id="selectAll" contentDisplay="RIGHT" onAction="#selectAllTeams" prefHeight="71.0" prefWidth="418.0" size="11.0" text="Seleccionar todos los equipos" textFill="#2f2484" toggleColor="WHITE" toggleLineColor="#2f2484">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <tooltip>
+                  <Tooltip contentDisplay="CENTER" text="Participarán todos los equipos en el torneo">
+                     <font>
+                        <Font name="Segoe UI Symbol" size="24.0" />
+                     </font>
+                  </Tooltip>
+               </tooltip>
+            </JFXToggleButton>
+              <JFXListView fx:id="teamsSelectionListView" prefHeight="482.0" prefWidth="409.0" showTooltip="true" stylesheets="@../styles/PrincipalMenu.css" GridPane.rowIndex="1" GridPane.rowSpan="8">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <GridPane.margin>
+                  <Insets right="20.0" />
+               </GridPane.margin>
+            </JFXListView>
+            <JFXButton fx:id="advanceConfigurationBtn" buttonType="RAISED" contentDisplay="CENTER" onAction="#advanceConfiguration" prefHeight="35.0" prefWidth="38.0" text=" " GridPane.rowIndex="9">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="39.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/settings.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Configuración avanzada" textAlignment="JUSTIFY">
+                     <font>
+                        <Font name="Segoe UI Symbol" size="24.0" />
+                     </font>
+                  </Tooltip>
+               </tooltip>
+            </JFXButton>
+         </children>
+      </GridPane>
+    </children>
+</AnchorPane>

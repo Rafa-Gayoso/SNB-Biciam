@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="1148.0" stylesheets="@../styles/PrincipalMenu.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CalendarStatisticsController">
+   <children>
+      <JFXTabPane layoutX="14.0" layoutY="64.0" prefHeight="503.0" prefWidth="1114.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="64.0">
+         <tabs>
+            <Tab text="Calendarios">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <BarChart fx:id="barChartCalendar" barGap="0.0" categoryGap="0.0" prefHeight="421.0" prefWidth="1114.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" fx:id="xAxisCalendar" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis fx:id="yAxisCalendar" side="LEFT" />
+                          </yAxis>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </BarChart>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Equipos que menor distancia recorren">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <BarChart fx:id="barChartLessTeam" prefHeight="421.0" prefWidth="1114.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" fx:id="xAxisLessTeam" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis fx:id="yAxisLessTeam" side="LEFT" />
+                          </yAxis>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </BarChart>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Equipos que mayor distancia recorren">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <BarChart fx:id="barChartMoreTeam" prefHeight="421.0" prefWidth="1114.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" fx:id="xAxisMoreTeam" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis fx:id="yAxisMoreTeam" side="LEFT" />
+                          </yAxis>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </BarChart>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+      <JFXButton fx:id="backButton" layoutX="1009.0" layoutY="582.0" onAction="#returnButton" stylesheets="@../styles/PrincipalMenu.css" text="Regresar" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="1009.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="582.0">
+         <font>
+            <Font name="Segoe UI Emoji" size="20.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="422.0" layoutY="26.0" text="Estadísticas de los calendarios" textFill="#2f2484" AnchorPane.bottomAnchor="580.0" AnchorPane.leftAnchor="422.0" AnchorPane.rightAnchor="422.0" AnchorPane.topAnchor="26.0">
+         <font>
+            <Font name="Segoe UI Emoji" size="23.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

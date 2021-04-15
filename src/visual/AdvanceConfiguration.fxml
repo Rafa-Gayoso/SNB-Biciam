@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="632.0" prefWidth="1148.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdvanceConfigurationController">
+   <children>
+      <Label layoutX="21.0" layoutY="7.0" text="Mutaciones" textFill="#2f2484" AnchorPane.bottomAnchor="580.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="973.0" AnchorPane.topAnchor="7.0">
+         <font>
+            <Font name="Segoe UI Symbol" size="30.0" />
+         </font>
+      </Label>
+      <JFXListView fx:id="mutationListView" layoutX="14.0" layoutY="52.0" prefHeight="219.0" prefWidth="1105.0" stylesheets="@../styles/PrincipalMenu.css" AnchorPane.bottomAnchor="361.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="52.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXListView>
+      <JFXButton fx:id="select" layoutX="507.0" layoutY="560.0" onAction="#saveNewAdvancesConfigurations" prefHeight="51.0" prefWidth="135.0" stylesheets="@../styles/PrincipalMenu.css" text="Aceptar" textFill="#fcf8f8" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="507.0" AnchorPane.rightAnchor="506.0" AnchorPane.topAnchor="560.0">
+         <font>
+            <Font name="Segoe UI Symbol" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXListView fx:id="heuristicsListView" layoutX="14.0" layoutY="334.0" prefHeight="219.0" prefWidth="1105.0" stylesheets="@../styles/PrincipalMenu.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXListView>
+      <Label layoutX="14.0" layoutY="281.0" text="Construcción del calendario inicial" textFill="#2f2484">
+         <font>
+            <Font name="Segoe UI Symbol" size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
