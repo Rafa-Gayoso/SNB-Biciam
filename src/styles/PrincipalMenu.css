@@ -1,0 +1,163 @@
+.jfx-button, .jfx-button:focused{
+    -fx-effect: dropshadow(three-pass-box , #011b1d, 50, 0.1 , 1, 3);
+    -fx-background-color: #2F2484;
+    -fx-background-insets: 2 2 2 2 ;
+    /*-fx-border-color: white;*/
+    -fx-background-radius: 0 10 0 10;
+    -fx-text-fill: white;
+    /*-fx-border-radius:100;*/
+}
+
+.jfx-button:hover{
+    -fx-effect: dropshadow(two-pass-box , #011b1d, 8, 0.1 , 1, 3);
+}
+.list-cell {
+    -fx-border-color: -fx-box-border -fx-box-border transparent transparent;
+    -fx-font: 20px "Segoe UI Symbol";
+    -fx-text-fill: #2f2484;
+}
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #2163cf 75%, #1e27cf 100%);
+    -fx-text-fill: white;
+}
+
+.list-cell:even { /* <=== changed to even */
+    -fx-background-color: white;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #0093ff;
+    -fx-text-fill: white;
+}
+
+.spinner {
+    -fx-prompt-text-fill: black;
+    -fx-text-fill: black;
+    -fx-background-color: none;
+    -fx-padding: 0 0 3 0;
+}
+
+.spinner .increment-arrow-button, .spinner .decrement-arrow-button {
+    -fx-background-color: transparent;
+}
+
+.spinner .increment-arrow-button .increment-arrow, .spinner .decrement-arrow-button .decrement-arrow {
+    -fx-background-color: #2F2484;
+    -fx-font-size: 20px;
+}
+.spinner .text-field {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #bdbdbd;
+    -fx-font-size: 20px;
+}
+
+.jfx-textfield{
+    -fx-text-inner-color: #2F2484;
+}
+
+.table-cruds {
+
+    -fx-base: white;
+    -fx-control-inner-background: white;
+    -fx-background-color: white;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.table-cruds .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-cruds .column-header, .table-cruds .filler {
+    -fx-size: 60pt;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    -fx-border-color:
+            transparent
+            transparent
+            derive(-fx-base, 80%)
+            transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+.table-cruds .column-header .label {
+    -fx-font-size: 22px;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: #2f2484;
+    -fx-alignment: center;
+    -fx-opacity: 1;
+}
+
+.table-cruds:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color;
+}
+
+/*.table-cell{
+    /*-fx-pref-width: 548;*/
+    /*-fx-border-color: -fx-box-border transparent transparent;
+    -fx-font: 21px "Segoe UI Symbol";
+    -fx-text-fill: #2f2484;
+    -fx-alignment: CENTER;
+    -fx-background-color:white;
+}*/
+
+#itineraryTable .column-header,
+#itineraryTable .column-header-background .filler {
+    -fx-cell-size : 36;
+    -fx-background-color:   #2D75E8;
+}
+#itineraryTable .column-header .label{
+    -fx-font-size: 28px;
+
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+}
+#itineraryTable .cell{
+    -fx-cell-size: 38px;
+    -fx-font: 24px "Segoe UI Symbol";
+    -fx-alignment: center;
+    -fx-text-fill: #000000;
+    -fx-alignment: CENTER;
+}
+
+.table-row-cell:selected {
+    -fx-background-color:  rgb(127, 172, 243);
+}
+.table-row-cell:selected .text {
+    -fx-fill : white ;
+
+}
+/* scroll bar starts here */
+
+/* The increment and decrement button CSS class of scrollbar */
+#itineraryTable .increment-button ,#itineraryTable .decrement-button {
+    -fx-background-color:transparent;
+    -fx-background-radius: 2em;
+
+}
+
+/* The main scrollbar **track** CSS class  */
+#itineraryTable .scroll-bar:horizontal .track,
+#itineraryTable .scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color:derive(  #2D75E8,80%);
+    -fx-background-radius: 2em;
+    -fx-border-radius:2em;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+#itineraryTable .scroll-bar:horizontal .thumb,
+#itineraryTable .scroll-bar:vertical .thumb {
+    -fx-background-color:derive( #2D75E8,90%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
+
+}
+
+.jfx-combobox:filled{
+    -fx-border-color: transparent;
+}
