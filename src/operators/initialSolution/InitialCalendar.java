@@ -14,6 +14,7 @@ import java.util.Random;
 public class InitialCalendar implements ICopyState {
 
     private int [][] duelMatrix;
+    private ArrayList<ArrayList<Integer>> duels;
     private static InitialCalendar initialCalendarInstance;
 
     private InitialCalendar(){
@@ -30,17 +31,47 @@ public class InitialCalendar implements ICopyState {
 
     public State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
 
+        duels = new ArrayList<>();
+
+        int[][] newMatrix = new int[duelMatrix.length][duelMatrix.length];
+
+        for (int i = 0; i < duelMatrix.length; i++) {
+            for (int j = 0; j < duelMatrix.length; j++) {
+                newMatrix[i][j] = duelMatrix[i][j];
+            }
+        }
+
+        ArrayList<Integer> teamsIndexes = TTPDefinition.getInstance().getTeamsIndexes();
+
+            for (int i = 0; i < newMatrix.length; i++) {
+                for (int j = 0; j < newMatrix[i].length; j++) {
+                    if (i < j) {
+
+                        ArrayList<Integer> pair = new ArrayList<>(2);
+                        if (newMatrix[i][j] == 1) {
+                            pair.add(teamsIndexes.get(j));
+                            pair.add(teamsIndexes.get(i));
+                        } else {
+                            pair.add(teamsIndexes.get(i));
+                            pair.add(teamsIndexes.get(j));
+                        }
+                        duels.add(pair);
+                    }
+                }
+            }
+
+
         Random random = new Random();
         int randomNumber = random.nextInt(heuristics.size());
         HeuristicOperator heuristic = HeuristicOperatorFactory.getInstance(heuristics.get(randomNumber));
 
         State state = new State();
-        state = heuristic.generateCalendar();
+        state.getCode().addAll(heuristic.generateCalendar(duels));
 
 
 
-        ArrayList<Object> codes = new ArrayList<>();
-        int[][] newMatrix = new int[duelMatrix.length][duelMatrix.length];
+        //ArrayList<Object> codes = new ArrayList<>();
+        /*int[][] newMatrix = new int[duelMatrix.length][duelMatrix.length];
 
         for (int i = 0; i < duelMatrix.length; i++) {
             for (int j = 0; j < duelMatrix.length; j++) {
@@ -104,9 +135,9 @@ public class InitialCalendar implements ICopyState {
                 }
             }
             codes.add(date);
-        }
+        }*/
 
-        state.setCode(codes);
+        //state.setCode(codes);
 
         if(TTPDefinition.getInstance().isDobleVuelta()){
             setSecondRound(state);

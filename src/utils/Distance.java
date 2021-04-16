@@ -43,7 +43,7 @@ public class Distance {
     public void fillMatrixDistance() {
 
         ArrayList<TeamsPairDistance> teamsPairDistances = DataFiles.getSingletonDataFiles().getTeamsPairDistances();
-        this.matrixDistance = new double[TTPDefinition.getInstance().getCantEquipos()][TTPDefinition.getInstance().getCantEquipos()];
+        this.matrixDistance = new double[DataFiles.getSingletonDataFiles().getTeams().size()][DataFiles.getSingletonDataFiles().getTeams().size()];
         for (TeamsPairDistance aux : teamsPairDistances) {
             int indexTeam1 = aux.getFirstTeam();
             int indexTeam2 = aux.getSecondTeam();
