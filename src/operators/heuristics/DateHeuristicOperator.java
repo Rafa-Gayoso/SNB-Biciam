@@ -55,7 +55,6 @@ public class DateHeuristicOperator extends HeuristicOperator{
         return calendar;
     }
 
-
     private AuxPosDateAndPace posLessDistanceDate(ArrayList<Date> calendar, State state){
         int posDate = -1;
         int posPlace = -1;

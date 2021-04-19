@@ -66,9 +66,16 @@ public class InitialCalendar implements ICopyState {
         HeuristicOperator heuristic = HeuristicOperatorFactory.getInstance(heuristics.get(randomNumber));
 
         State state = new State();
-        state.getCode().addAll(heuristic.generateCalendar(duels));
-
-
+        boolean good = false;
+        while (!good){
+            state.getCode().addAll(heuristic.generateCalendar(duels));
+            if (state.getCode().size() == newMatrix.length-1){
+                good = true;
+            }
+            else {
+                state = new State();
+            }
+        }
 
         //ArrayList<Object> codes = new ArrayList<>();
         /*int[][] newMatrix = new int[duelMatrix.length][duelMatrix.length];

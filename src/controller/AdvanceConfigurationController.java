@@ -3,6 +3,7 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import execute.Executer;
+import operators.heuristics.HeuristicOperatorType;
 import operators.mutation.MutationOperatorType;
 import utils.DataFiles;
 import javafx.collections.FXCollections;
@@ -80,10 +81,20 @@ public class AdvanceConfigurationController implements Initializable {
     void saveNewAdvancesConfigurations(ActionEvent event) throws IOException {
 
         ArrayList<Integer> indexesMutations = new ArrayList<>(mutationListView.getSelectionModel().getSelectedIndices());
+        ArrayList<Integer> indexesHeuristics = new ArrayList<>(heuristicsListView.getSelectionModel().getSelectedIndices());
         if (indexesMutations.isEmpty()) {
             notification = getNotification();
             notification.setTitle("Selección de cambios");
             notification.setMessage("Debe escoger al menos una mutación");
+            notification.setNotificationType(NotificationType.ERROR);
+            notification.setRectangleFill(Paint.valueOf("#2F2484"));
+            notification.setAnimationType(AnimationType.FADE);
+            notification.showAndDismiss(Duration.seconds(1));
+        }
+        else if(indexesHeuristics.isEmpty()){
+            notification = getNotification();
+            notification.setTitle("Selección de cambios");
+            notification.setMessage("Debe escoger al menos una heurística");
             notification.setNotificationType(NotificationType.ERROR);
             notification.setRectangleFill(Paint.valueOf("#2F2484"));
             notification.setAnimationType(AnimationType.FADE);
@@ -110,6 +121,22 @@ public class AdvanceConfigurationController implements Initializable {
 
             }
             Executer.getInstance().setMutations(mutationOperatorTypes);
+
+            ArrayList<HeuristicOperatorType> heuristicOperatorTypes = new ArrayList<>();
+            HeuristicOperatorType [] heuristicOperators = HeuristicOperatorType.values();
+
+            for (int i: indexesHeuristics) {
+                for (int j = 0; j < heuristicOperators.length; j++) {
+
+                    HeuristicOperatorType operatorType = heuristicOperators[j];
+                    if(operatorType.ordinal() == i){
+                        heuristicOperatorTypes.add(operatorType);
+                        break;
+                    }
+                }
+
+            }
+            Executer.getInstance().setHeuristics(heuristicOperatorTypes);
 
             AnchorPane structureOver = homeController.getPrincipalPane();
             homeController.createPage(new ConfigurationCalendarController(), structureOver, "/visual/ConfigurationCalendar.fxml");

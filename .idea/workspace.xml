@@ -7,15 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31c4c62d-8161-430c-9912-ecee8f383fae" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TareaBiciam.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TareaBiciam.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/META-INF/TareaBiciam.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operators/heuristics/DateHeuristicOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/heuristics/DateHeuristicOperator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operators/heuristics/HeuristicOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/heuristics/HeuristicOperator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operators/heuristics/HeuristicOperatorType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/heuristics/HeuristicOperatorType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/InitialCalendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/InitialCalendar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/execute/Executer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execute/Executer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,11 +38,19 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1qXK9QfxzaCZs6pqQvAk9ZyVEpx" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/files" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SNB/TransporteSerieNacionalFX" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.0" />
@@ -103,6 +104,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -130,13 +132,28 @@
       <workItem from="1618076452246" duration="3568000" />
       <workItem from="1618099233124" duration="18030000" />
       <workItem from="1618191778140" duration="10808000" />
+      <workItem from="1618625998298" duration="12000" />
+      <workItem from="1618627370662" duration="10788000" />
+      <workItem from="1618692982590" duration="1107000" />
+      <workItem from="1618707521097" duration="633000" />
+      <workItem from="1618780226141" duration="3327000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="845" y="284" key="FileChooserDialogImpl" timestamp="1618666472572">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="845" y="284" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1618666472572" />
+    <state x="389" y="276" key="new project wizard" timestamp="1618630808197">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="389" y="276" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1618630808197" />
   </component>
 </project>

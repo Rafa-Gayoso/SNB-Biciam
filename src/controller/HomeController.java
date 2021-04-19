@@ -22,6 +22,7 @@ import javafx.util.Duration;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
+import utils.DataFiles;
 
 import java.awt.*;
 import java.io.File;
@@ -114,9 +115,9 @@ public class HomeController implements Initializable {
     @FXML
     void exportCalendar(ActionEvent event) {
 
-       /* int calendarToExport = CalendarController.selectedCalendar;
+       int calendarToExport = CalendarController.selectedCalendar;
         System.out.println(calendarToExport+"EXPORTAR");
-        if(modelsController.getCalendarList().isEmpty()){
+        if(Executer.getInstance().getResultStates().isEmpty()){
             notification = getNotification();
             notification.setTitle("Exportación de Calendario");
             notification.setMessage("No hay calendarios para exportar");
@@ -126,9 +127,8 @@ public class HomeController implements Initializable {
             notification.showAndDismiss(Duration.seconds(2));
         }
         else{
-
-            models.Controller.getSingletonController().getDataFiles().exportItineraryInExcelFormat(calendarToExport);
-        }*/
+            //DataFiles.getSingletonDataFiles().exportItineraryInExcelFormat();
+        }
     }
 
 

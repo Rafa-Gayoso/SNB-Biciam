@@ -73,8 +73,6 @@ public class CalendarController implements Initializable {
         notification = new TrayNotification();
         selectedCalendar = 0;
 
-
-
         tables = new ArrayList<>();
         List<State> calendarsList = Executer.getInstance().getResultStates();
 
