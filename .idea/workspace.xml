@@ -5,10 +5,71 @@
       <artifact name="TareaBiciam:jar" />
     </artifacts-to-build>
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="31c4c62d-8161-430c-9912-ecee8f383fae" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/fontawesomefx_8_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/TareaBiciam/files/Resultados.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/controlsfx_8_40_15.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/controlsfx_8_40_15.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TareaBiciam.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TareaBiciam.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/META-INF/TareaBiciam.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/resources/teams/Artemisa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/resources/teams/Camaguey.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/resources/teams/Ciego de Ávila.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/resources/teams/Cienfuegos.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/resources/teams/Granma.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/resources/teams/Guantánamo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/resources/teams/Holguín.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/resources/teams/Industriales.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/resources/teams/Isla de la Juventud.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/resources/teams/Las Tunas.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/resources/teams/Matanzas.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/resources/teams/Mayabeque.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/resources/teams/Pinar del Río.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/resources/teams/Sancti Spíritus.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/resources/teams/Santiago de Cuba.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/resources/teams/Villa Clara.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/styles/PrincipalMenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TareaBiciam/styles/PrincipalMenu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/visual/AdvanceConfiguration.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TareaBiciam/visual/AdvanceConfiguration.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/AdvanceConfigurationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AdvanceConfigurationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/execute/Executer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execute/Executer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/files/Resultados.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/files/Resultados.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/teams/Artemisa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/teams/Camaguey.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/teams/Ciego de Ávila.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/teams/Cienfuegos.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/teams/Granma.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/teams/Guantánamo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/teams/Holguín.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/teams/Industriales.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/teams/Isla de la Juventud.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/teams/Las Tunas.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/teams/Matanzas.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/teams/Mayabeque.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/teams/Pinar del Río.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/teams/Sancti Spíritus.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/teams/Santiago de Cuba.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/teams/Villa Clara.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/PrincipalMenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/PrincipalMenu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/visual/AdvanceConfiguration.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/visual/AdvanceConfiguration.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,13 +109,15 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SNB/TransporteSerieNacionalFX" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/SceneBuilder/SceneBuilder.exe" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Artifacts" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
@@ -93,6 +156,17 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -137,6 +211,8 @@
       <workItem from="1618692982590" duration="1107000" />
       <workItem from="1618707521097" duration="633000" />
       <workItem from="1618780226141" duration="3327000" />
+      <workItem from="1618858931669" duration="5378000" />
+      <workItem from="1618864690624" duration="1058000" />
     </task>
     <servers />
   </component>
@@ -144,13 +220,50 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="845" y="284" key="FileChooserDialogImpl" timestamp="1618666472572">
+    <state x="765" y="203" key="#com.intellij.ide.util.MemberChooser" timestamp="1618864826100">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="845" y="284" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1618666472572" />
+    <state x="765" y="203" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1618864826100" />
+    <state x="845" y="284" key="FileChooserDialogImpl" timestamp="1618859559662">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="845" y="284" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1618859559662" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1618864357698">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1618864357698" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1618864357698">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1618864357698" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1618864357698">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1618864357698" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1618864357698">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1618864357698" />
+    <state x="440" y="94" key="SettingsEditor" timestamp="1618862626363">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1618862626363" />
+    <state x="523" y="146" key="extract.method.dialog" timestamp="1618859884326">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="523" y="146" key="extract.method.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1618859884326" />
     <state x="389" y="276" key="new project wizard" timestamp="1618630808197">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
