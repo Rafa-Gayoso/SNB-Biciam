@@ -150,7 +150,7 @@ public class DataFiles {
     }
 
 
-    /*public  void exportItineraryInExcelFormat(){
+    public  void exportItineraryInExcelFormat(State state){
         FileChooser fc = new FileChooser();
 
         //Set extension filter for text files
@@ -163,12 +163,9 @@ public class DataFiles {
 
         XSSFWorkbook workbook = new XSSFWorkbook();
 
-        List<State> list = Executer.getInstance().getResultStates();
+            Sheet spreadsheet = workbook.createSheet();
 
-        for (int i = 0; i < list.size(); i++){
-            Sheet spreadsheet = workbook.createSheet("Calendario "+ (i+1));
-
-            ArrayList<ArrayList<Integer>> teamDate = TTPDefinition.getInstance().teamsItinerary(list.get(i));
+            ArrayList<ArrayList<Integer>> teamDate = TTPDefinition.getInstance().teamsItinerary(state);
             Row row = spreadsheet.createRow(0);
             //Style of the cell
             XSSFFont headerCellFont = workbook.createFont();
@@ -197,8 +194,8 @@ public class DataFiles {
             headerCellFont.setBold(false);
             headerCellFont.setFontHeightInPoints((short) 12);
 
-
-            for(int j=1; j < teamDate.size()-1;j++ ){
+        int j=1;
+            for(; j < teamDate.size()-1;j++ ){
                 ArrayList<Integer> date = teamDate.get(j);
                 row = spreadsheet.createRow(j);
                 for(int k=0; k < date.size();k++){
@@ -209,28 +206,21 @@ public class DataFiles {
                     cell.setCellValue(team);
                 }
             }
-        }
+            j++;
 
+        row = spreadsheet.createRow(j);
+        Cell cell1 =  row.createCell(0);
+        cell1.setCellStyle(style);
+        cell1.setCellValue("Distancia total(km): ");
 
-        Sheet spreadsheetData = workbook.createSheet("Data");
-        Row rowData = spreadsheetData.createRow(0);
-        Cell cellData =  rowData.createCell(0);
-        cellData.setCellStyle(style);
-        cellData.setCellValue("Calendario "+ (pos+1));
-
-        rowData = spreadsheetData.createRow(1);
-        cellData =  rowData.createCell(0);
-        cellData.setCellStyle(style);
-        cellData.setCellValue(Distance.getInstance().calculateCalendarDistance(state));
+        Cell cell2 =  row.createCell(1);
+        cell2.setCellStyle(style);
+        cell2.setCellValue(Distance.getInstance().calculateCalendarDistance(state));
 
 
         //autosize each column of the excel document
         for(int i=0; i < row.getLastCellNum(); i++){
             spreadsheet.autoSizeColumn(i);
-        }
-
-        for(int i=0; i < rowData.getLastCellNum(); i++){
-            spreadsheetData.autoSizeColumn(i);
         }
 
         FileOutputStream fileOut = null;
@@ -243,7 +233,8 @@ public class DataFiles {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }*/
+    }
+
 
     private static void showSuccessfulMessage() {
         TrayNotification notification = new TrayNotification();

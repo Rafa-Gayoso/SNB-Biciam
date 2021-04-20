@@ -1,6 +1,7 @@
 package definition;
 
 import definition.state.statecode.Date;
+import utils.AuxDuelDistanceAdded;
 import utils.DataFiles;
 import utils.Distance;
 import utils.TeamsPairDistance;
@@ -102,7 +103,13 @@ public class TTPDefinition {
 
     public ArrayList<ArrayList<Integer>> teamsItinerary(State state) {
         ArrayList<ArrayList<Integer>> teamDate = new ArrayList<>();
-        ArrayList<Integer> teamsIndexes =TTPDefinition.getInstance().getTeamsIndexes();
+        ArrayList<Integer> teamsIndexes = new ArrayList<>();
+
+        for (int i = 0; i < ((Date)state.getCode().get(0)).getGames().size(); i++) {
+            teamsIndexes.add(((Date)state.getCode().get(0)).getGames().get(i).get(0));
+            teamsIndexes.add(((Date)state.getCode().get(0)).getGames().get(i).get(1));
+        }
+        quickSort(teamsIndexes, 0, teamsIndexes.size()-1);
 
         ArrayList<Integer> row = new ArrayList<>();
 
@@ -321,5 +328,34 @@ public class TTPDefinition {
         return matrix;
     }
 
+    private void quickSort(ArrayList<Integer> list, int left, int right){
+        double pivot = list.get(left);
+        int i = left;
+        int j = right;
+        int aux;
 
+        while (i < j){
+            while (list.get(i) <= pivot && i < j){
+                i++;
+            }
+            while (list.get(j) > pivot){
+                j--;
+            }
+            if(i < j){
+                aux = list.get(i);
+                list.set(i, list.get(j));
+                list.set(j, aux);
+            }
+        }
+        aux = list.get(left);
+        list.set(left, list.get(j));
+        list.set(j, aux);
+
+        if(left < j - 1){
+            quickSort(list, left, j-1);
+        }
+        if (j+1 < right){
+            quickSort(list, j+1, right);
+        }
+    }
 }

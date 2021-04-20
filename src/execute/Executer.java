@@ -30,6 +30,7 @@ import problem.extension.TypeSolutionMethod;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
+import utils.AuxStatePlusIterations;
 import utils.DataFiles;
 import utils.Distance;
 
@@ -48,6 +49,7 @@ public class Executer {
     private ArrayList<MutationOperatorType> mutations;
     private ArrayList<HeuristicOperatorType> heuristics;
     private int selectedMH;// 0 - HillCimbing, 1 - Evolution Strategy  other - RandomSearch
+    private ArrayList<AuxStatePlusIterations> saveData;
 
     private static Executer executerInstance;
 
@@ -59,6 +61,7 @@ public class Executer {
         this.resultStates = new ArrayList<>();
         this.mutations = new ArrayList<>();
         this.heuristics = new ArrayList<>();
+        this.saveData = new ArrayList<>();
         this.EXECUTIONS = 5;
         this.ITERATIONS = 1000;
         this.selectedMH = 0;
@@ -94,8 +97,30 @@ public class Executer {
     public void executeEC() throws ClassNotFoundException, InvocationTargetException, InstantiationException, NoSuchMethodException, IllegalAccessException, IOException {
         configureProblem();
 
-        File file = new File("src/files/Resultados.xlsx");
+        String nameMH = "";
+        if (selectedMH == 0){
+            nameMH = "EC";
+        }else if (selectedMH == 1){
+            nameMH = "EE";
+        }else{
+            nameMH = "RS";
+        }
+
+        String rounds = "";
+        if (TTPDefinition.getInstance().isDobleVuelta()){
+            rounds = "Doble";
+        }else {
+            rounds = "Simple";
+        }
+
+        int cantEquipos = TTPDefinition.getInstance().getCantEquipos();
+
+        String fileName = nameMH+"_"+rounds+"_"+cantEquipos+"-"+"Teams"+"_"+EXECUTIONS+"-"+"Exec"+"_"+ITERATIONS+"-"+"Ite";
+
+        File file = new File("src/files/"+fileName+".xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook();
+
+        ArrayList<State> thisLapBests = new ArrayList<>();
 
         for (int i = 0; i < EXECUTIONS; i++) {
             Strategy.getStrategy().setStopexecute(new StopExecute());
@@ -196,20 +221,29 @@ public class Executer {
                 j++;
             }
 
+            /*AuxStatePlusIterations temp = new AuxStatePlusIterations(Strategy.getStrategy().getBestState(), this.selectedMH);
+
+            for (int k = 0; k < Strategy.getStrategy().listBest.size(); k++) {
+                temp.getDistItarations().add(Distance.getInstance().calculateCalendarDistance(Strategy.getStrategy().listBest.get(k)));
+            }
+            saveData.add(temp);
+*/
+            thisLapBests.add(Strategy.getStrategy().getBestState());
             resultStates.add(Strategy.getStrategy().getBestState());
             Strategy.destroyExecute();
         }
 
+
         Sheet spreadsheet = workbook.createSheet("Mejor Calendario ");
 
-        State state = resultStates.get(0);
+        State state = thisLapBests.get(0);
         double dist = Distance.getInstance().calculateCalendarDistance(state);
         int pos = 0;
 
-        for (int i = 1; i < resultStates.size(); i++) {
-            double tempDist = Distance.getInstance().calculateCalendarDistance(resultStates.get(i));
+        for (int i = 0; i < thisLapBests.size(); i++) {
+            double tempDist = Distance.getInstance().calculateCalendarDistance(thisLapBests.get(i));
             if (tempDist < dist){
-                state = resultStates.get(i);
+                state = thisLapBests.get(i);
                 dist = tempDist;
                 pos = i;
             }

@@ -127,8 +127,10 @@ public class HomeController implements Initializable {
             notification.showAndDismiss(Duration.seconds(2));
         }
         else{
-            //DataFiles.getSingletonDataFiles().exportItineraryInExcelFormat();
+            DataFiles.getSingletonDataFiles().exportItineraryInExcelFormat(Executer.getInstance().getResultStates().get(calendarToExport));
         }
+
+
     }
 
 
