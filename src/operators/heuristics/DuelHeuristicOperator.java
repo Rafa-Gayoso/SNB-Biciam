@@ -1,12 +1,12 @@
 package operators.heuristics;
 
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 import definition.TTPDefinition;
 import problem.definition.State;
 import definition.state.statecode.Date;
+import utils.AuxDuelDistanceAdded;
 import utils.Distance;
 
 public class DuelHeuristicOperator extends HeuristicOperator {
@@ -14,85 +14,231 @@ public class DuelHeuristicOperator extends HeuristicOperator {
 
     private ArrayList<Integer> teams;
     private ArrayList<ArrayList<Integer>> duels;
-    private State state;
 
-    public DuelHeuristicOperator(State state, ArrayList<ArrayList<Integer>> duels){
-        this.state = state;
+    public void initializeDuelHeuristicOperator(ArrayList<ArrayList<Integer>> duels){
         this.teams = TTPDefinition.getInstance().getTeamsIndexes();
         this.duels = duels;
     }
 
-    public State generateCalendar(){
+    public ArrayList<Date> generateCalendarSlow(ArrayList<ArrayList<Integer>> duels){
+        System.out.println("Empieza///////////////////////////////////////");
+        initializeDuelHeuristicOperator(duels);
+
         ArrayList<Date> calendar = new ArrayList<>();
-        boolean badSolution = true;
 
-        while (badSolution){
-
-            calendar = new ArrayList<>();
-
-            ArrayList<ArrayList<Integer>> duelsCopy = new ArrayList<>();
-            for (int i = 0; i < duels.size(); i++) {
-                ArrayList<Integer> temp = new ArrayList<>();
-                for (int j = 0; j < duels.get(i).size(); j++) {
-                    temp.add(duels.get(i).get(j));
-                }
-                duelsCopy.add(temp);
+        ArrayList<ArrayList<Integer>> duelsCopy = new ArrayList<>();
+        for (int i = 0; i < duels.size(); i++) {
+            ArrayList<Integer> temp = new ArrayList<>();
+            for (int j = 0; j < duels.get(i).size(); j++) {
+                temp.add(duels.get(i).get(j));
             }
+            duelsCopy.add(temp);
+        }
 
-            Date date = new Date();
-            Random random = new Random();
-            int randomDuel = random.nextInt(duelsCopy.size());
-            ArrayList<Integer> duel =  duelsCopy.get(randomDuel);
-            date.getGames().add(duel);
-            duelsCopy.remove(duel);
-            fillFirstDate(date, duelsCopy);
+        Date date = new Date();
+        Random random = new Random();
+        int randomDuel = random.nextInt(duelsCopy.size());
+        ArrayList<Integer> duel =  duelsCopy.get(randomDuel);
+        date.getGames().add(duel);
+        duelsCopy.remove(duel);
+        fillFirstDateSlow(date, duelsCopy);
+        calendar.add(date);
 
-            calendar.add(date);
+        ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> calendarBacktracking = new ArrayList<>();
 
-            for(int i = 1; i < teams.size()-1;i++){
-                Date newDate = new Date();
-                int posDuel = -2;
-                while(newDate.getGames().size() < date.getGames().size() && posDuel != -1){
-                    posDuel =  posLessDistanceDuel(calendar.get(calendar.size()-1), newDate, duelsCopy);
-                    if(posDuel != -1){
-                        newDate.getGames().add(duelsCopy.get(posDuel));
-                        duelsCopy.remove(duelsCopy.get(posDuel));
+        for (int i = 1; i < teams.size()-1; i++) {
+            ArrayList<ArrayList<ArrayList<Integer>>> dateBacktracking = new ArrayList<>();
+            for (int j = 0; j < teams.size()/2; j++) {
+                ArrayList<ArrayList<Integer>> duelBacktracking = new ArrayList<>();
+                dateBacktracking.add(duelBacktracking);
+            }
+            calendarBacktracking.add(dateBacktracking);
+        }
+
+
+        for (int i = 0; i < calendarBacktracking.size(); i++) {
+
+            Date newDate = new Date();
+            int j = 0;
+            for (; j < calendarBacktracking.get(i).size(); j++) {
+
+                calendarBacktracking.get(i).get(j).clear();
+                int pos = -2;
+                while (pos != -1){
+
+                    pos = posLessDistanceDuel(calendar, calendar.get(calendar.size()-1), newDate, duelsCopy);
+
+                    if(pos != -1){
+                        calendarBacktracking.get(i).get(j).add(duelsCopy.get(pos));
+                        duelsCopy.remove(duelsCopy.get(pos));
                     }
-                /*else{
-                    if (!tempList.isEmpty()){
-                        posDuel = -2;
-                        while (posDuel != -1){
-                            posDuel = posLessDistanceDuel(calendar.get(calendar.size()-1), newDate, tempList);
-                            if(posDuel != -1){
-                                newDate.getGames().add(tempList.get(posDuel));
-                                tempList.remove(tempList.get(posDuel));
+                }
+                if (!calendarBacktracking.get(i).get(j).isEmpty()){
+                    newDate.getGames().add(calendarBacktracking.get(i).get(j).get(0));
+                    duelsCopy.addAll(calendarBacktracking.get(i).get(j));
+                }
+                else{
+                    j = newDate.getGames().size()-1;
+                    calendarBacktracking.get(i).get(j).remove(0);
+                    newDate.getGames().remove(newDate.getGames().size()-1);
+                    if (!calendarBacktracking.get(i).get(j).isEmpty()){
+                        newDate.getGames().add(calendarBacktracking.get(i).get(j).get(0));
+                    }
+                    else{
+                        j = newDate.getGames().size()-1;
+                        boolean stop = false;
+
+                        while (i >= 0 && !stop){
+                            System.out.println("i = "+i);
+                            while (j >= 0 && !stop){
+                                System.out.println("j = "+j);
+                                calendarBacktracking.get(i).get(j).remove(0);
+                                newDate.getGames().remove(newDate.getGames().size()-1);
+                                if (!calendarBacktracking.get(i).get(j).isEmpty()){
+                                    newDate.getGames().add(calendarBacktracking.get(i).get(j).get(0));
+                                    stop = true;
+                                }
+                                j--;
+                            }
+                            if (j == -1 && !stop){
+                                i--;
+                                j = calendarBacktracking.get(i).size()-1;
+
+                                newDate.getGames().clear();
+                                newDate.getGames().addAll(calendar.get(calendar.size()-1).getGames());
+                                calendar.remove(calendar.size()-1);
+                            }
+                            if (stop){
+                                j++;
                             }
                         }
                     }
-                    if (posDuel == -1){
-                        tempList.add(newDate.getGames().get(0));
-                        newDate.getGames().remove(tempList.get(tempList.size()-1));
-                    }
-                }*/
                 }
-                //duels.addAll(tempList);
-                //tempList.clear();
-                calendar.add(newDate);
             }
 
-            badSolution = false;
-            for (int i = 0; i < calendar.size() && !badSolution; i++) {
-                if (calendar.get(i).getGames().size() != teams.size()/2){
-                    badSolution = true;
-                }
-            }
+            calendar.add(newDate);
         }
 
-        state.getCode().addAll(calendar);
-        return state;
+        System.out.println("Termina///////////////////////////////////////");
+        return calendar;
     }
 
-    private void fillFirstDate(Date date, ArrayList<ArrayList<Integer>> duelsCopy){
+    public ArrayList<Date> generateCalendar(ArrayList<ArrayList<Integer>> duels){
+        initializeDuelHeuristicOperator(duels);
+
+        Set<ArrayList<Integer>> setDuelsCalendar = new HashSet<>();
+        Set<Integer> setTeamsDate = new HashSet<>();
+
+        ArrayList<Date> calendar = new ArrayList<>();
+
+        ArrayList<ArrayList<Integer>> duelsCopy = new ArrayList<>();
+        for (int i = 0; i < duels.size(); i++) {
+            ArrayList<Integer> temp = new ArrayList<>();
+            for (int j = 0; j < duels.get(i).size(); j++) {
+                temp.add(duels.get(i).get(j));
+            }
+            duelsCopy.add(temp);
+        }
+
+        Date date = new Date();
+        Random random = new Random();
+        int randomDuel = random.nextInt(duelsCopy.size());
+        ArrayList<Integer> duel =  duelsCopy.get(randomDuel);
+        date.getGames().add(duel);
+        duelsCopy.remove(duel);
+        setDuelsCalendar.add(duel);
+        fillFirstDateFast(date, duelsCopy, setDuelsCalendar);
+        calendar.add(date);
+
+
+        ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> calendarBacktracking = new ArrayList<>();
+        for (int i = 1; i < teams.size()-1; i++) {
+            ArrayList<ArrayList<ArrayList<Integer>>> dateBacktracking = new ArrayList<>();
+            for (int j = 0; j < teams.size()/2; j++) {
+                ArrayList<ArrayList<Integer>> duelBacktracking = new ArrayList<>();
+                dateBacktracking.add(duelBacktracking);
+            }
+            calendarBacktracking.add(dateBacktracking);
+        }
+
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i < calendarBacktracking.size(); i++) {
+
+            Date newDate = new Date();
+            setTeamsDate = new HashSet<>();
+            int j = 0;
+            for (; j < calendarBacktracking.get(i).size(); j++) {
+
+                if(System.currentTimeMillis() - startTime > 1000){
+                    break;
+                }
+                calendarBacktracking.get(i).get(j).clear();
+
+                ArrayList<ArrayList<Integer>> orderedPosibleDuels = lessDistanceDuels(setDuelsCalendar, setTeamsDate, calendar.get(calendar.size()-1), duelsCopy);
+                calendarBacktracking.get(i).get(j).addAll(orderedPosibleDuels);
+
+                if (!calendarBacktracking.get(i).get(j).isEmpty()){
+                    newDate.getGames().add(calendarBacktracking.get(i).get(j).get(0));
+                    setTeamsDate.addAll(calendarBacktracking.get(i).get(j).get(0));
+                }
+                else{
+                    j = newDate.getGames().size()-1;
+                    calendarBacktracking.get(i).get(j).remove(0);
+                    setTeamsDate.removeAll(newDate.getGames().get(newDate.getGames().size()-1));
+                    newDate.getGames().remove(newDate.getGames().size()-1);
+
+                    if (!calendarBacktracking.get(i).get(j).isEmpty()){
+                        newDate.getGames().add(calendarBacktracking.get(i).get(j).get(0));
+                        setTeamsDate.addAll(calendarBacktracking.get(i).get(j).get(0));
+                    }
+                    else{
+                        j = newDate.getGames().size()-1;
+                        boolean stop = false;
+
+                        while (i >= 0 && !stop){
+                            while (j >= 0 && !stop){
+                                calendarBacktracking.get(i).get(j).remove(0);
+                                setTeamsDate.removeAll(newDate.getGames().get(newDate.getGames().size()-1));
+                                newDate.getGames().remove(newDate.getGames().size()-1);
+                                if (!calendarBacktracking.get(i).get(j).isEmpty()){
+                                    newDate.getGames().add(calendarBacktracking.get(i).get(j).get(0));
+                                    setTeamsDate.addAll(calendarBacktracking.get(i).get(j).get(0));
+                                    stop = true;
+                                }
+                                j--;
+                            }
+                            if (j == -1 && !stop){
+                                i--;
+                                j = calendarBacktracking.get(i).size()-1;
+
+                                newDate.getGames().clear();
+                                setTeamsDate.clear();
+                                for (ArrayList<Integer> temp: calendar.get(calendar.size()-1).getGames()) {
+                                    newDate.getGames().add(temp);
+                                    setTeamsDate.addAll(temp);
+                                }
+
+                                setDuelsCalendar.removeAll(calendar.get(calendar.size()-1).getGames());
+                                calendar.remove(calendar.size()-1);
+                            }
+                            if (stop){
+                                j++;
+                            }
+                        }
+                    }
+                }
+            }
+            if(System.currentTimeMillis() - startTime > 1000){
+                break;
+            }
+
+            calendar.add(newDate);
+            setDuelsCalendar.addAll(newDate.getGames());
+        }
+        return calendar;
+    }
+
+    private void fillFirstDateSlow(Date date, ArrayList<ArrayList<Integer>> duelsCopy){
 
         Date dateToAdd = new Date();
         for (ArrayList<Integer> game: date.getGames()) {
@@ -110,35 +256,71 @@ public class DuelHeuristicOperator extends HeuristicOperator {
                     if (!exists){
                         if(dateToAdd.getGames().size() < (teams.size()/2)-1){
                             dateToAdd.getGames().add(duel);
+
                         }
                     }
                 }
             }
         }
         date.getGames().addAll(dateToAdd.getGames());
-
-
-        for(int i = 1; i < date.getGames().size(); i++){
-            duelsCopy.remove(date.getGames().get(i));
-        }
+        duelsCopy.removeAll(dateToAdd.getGames());
     }
 
-    private int posLessDistanceDuel(Date date, Date newDate, ArrayList<ArrayList<Integer>> avalibleDuels){
+    private void fillFirstDateFast(Date date, ArrayList<ArrayList<Integer>> duelsCopy, Set<ArrayList<Integer>> setDuelsCalendar){
+
+        Date dateToAdd = new Date();
+        for (ArrayList<Integer> game: date.getGames()) {
+            for (ArrayList<Integer> duel: duelsCopy) {
+                if(!duel.contains(game.get(0)) && !duel.contains(game.get(1))){
+                    boolean exists = false;
+                    int i = 0;
+                    while (i < dateToAdd.getGames().size() && !exists){
+                        if (dateToAdd.getGames().get(i).contains(duel.get(0)) || dateToAdd.getGames().get(i).contains(duel.get(1))){
+                            exists = true;
+
+                        }
+                        i++;
+                    }
+                    if (!exists){
+                        if(dateToAdd.getGames().size() < (teams.size()/2)-1){
+                            dateToAdd.getGames().add(duel);
+
+                        }
+                    }
+                }
+            }
+        }
+        date.getGames().addAll(dateToAdd.getGames());
+        setDuelsCalendar.addAll(dateToAdd.getGames());
+
+        //duelsCopy.removeAll(dateToAdd.getGames());
+    }
+
+    private int posLessDistanceDuel(ArrayList<Date> calendar, Date date, Date newDate, ArrayList<ArrayList<Integer>> avalibleDuels){
         int pos = -1;
         double distance = Double.MAX_VALUE;
         for(ArrayList<Integer> gameNow: avalibleDuels){
 
-            boolean exists = false;
+            boolean existsNewDate = false;
             int i = 0;
-            while (!exists && i < newDate.getGames().size()){
+            while (!existsNewDate && i < newDate.getGames().size()){
 
                 if (newDate.getGames().get(i).contains(gameNow.get(0)) || newDate.getGames().get(i).contains(gameNow.get(1))){
-                    exists = true;
+                    existsNewDate = true;
                 }
                 i++;
             }
 
-            if (!exists){
+            boolean existsBeforeDates = false;
+            for (int j = 0; j < calendar.size(); j++) {
+                if (calendar.get(j).getGames().contains(gameNow)){
+                    existsBeforeDates = true;
+                }
+            }
+
+
+
+            if (!existsNewDate && !existsBeforeDates){
                 double dist = 0;
                 for (ArrayList<Integer> gameBefore: date.getGames()) {
 
@@ -160,5 +342,87 @@ public class DuelHeuristicOperator extends HeuristicOperator {
             }
         }
        return pos;
+    }
+
+    private ArrayList<ArrayList<Integer>> lessDistanceDuels(Set<ArrayList<Integer>> setDuelsCalendar, Set<Integer> setTeamsDate, Date date, ArrayList<ArrayList<Integer>> avalibleDuels){
+
+        ArrayList<AuxDuelDistanceAdded> list = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> listOrdered = new ArrayList<>();
+
+        for(ArrayList<Integer> gameNow: avalibleDuels){
+
+            boolean existsNewDate = false;
+
+            if (setTeamsDate.contains(gameNow.get(0)) || setTeamsDate.contains(gameNow.get(1))){
+                existsNewDate = true;
+            }
+
+            boolean existsBeforeDates = false;
+            if (setDuelsCalendar.contains(gameNow)){
+                existsBeforeDates = true;
+            }
+
+            if (!existsNewDate && !existsBeforeDates){
+                double dist = 0;
+                for (ArrayList<Integer> gameBefore: date.getGames()) {
+
+                    int indexFirst = gameBefore.indexOf(gameNow.get(0));
+                    int indexSecond = gameBefore.indexOf(gameNow.get(1));
+
+                    if(indexFirst != -1){
+                        dist += Distance.getInstance().getMatrixDistance()[gameBefore.get(0)][gameNow.get(0)];
+                    }
+                    if(indexSecond != -1){
+                        dist += Distance.getInstance().getMatrixDistance()[gameBefore.get(0)][gameNow.get(0)];
+                    }
+
+                }
+                AuxDuelDistanceAdded temp = new AuxDuelDistanceAdded(gameNow, dist);
+
+                list.add(temp);
+            }
+        }
+
+
+        if (!list.isEmpty()){
+            quickSort(list, 0, list.size()-1);
+        }
+
+        for (AuxDuelDistanceAdded temp: list) {
+            listOrdered.add(temp.getDuel());
+        }
+
+        return listOrdered;
+    }
+
+    private void quickSort(ArrayList<AuxDuelDistanceAdded> list, int left, int right){
+        double pivot = list.get(left).getDistance();
+        int i = left;
+        int j = right;
+        AuxDuelDistanceAdded aux;
+
+        while (i < j){
+            while (list.get(i).getDistance() <= pivot && i < j){
+                i++;
+            }
+            while (list.get(j).getDistance() > pivot){
+                j--;
+            }
+            if(i < j){
+                aux = list.get(i);
+                list.set(i, list.get(j));
+                list.set(j, aux);
+            }
+        }
+        aux = list.get(left);
+        list.set(left, list.get(j));
+        list.set(j, aux);
+
+        if(left < j - 1){
+            quickSort(list, left, j-1);
+        }
+        if (j+1 < right){
+            quickSort(list, j+1, right);
+        }
     }
 }

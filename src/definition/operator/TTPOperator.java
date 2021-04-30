@@ -40,7 +40,7 @@ public class TTPOperator extends Operator {
     public List<State> generateRandomState(Integer neighborhoodSize) {
         List<State> neighborhood = new ArrayList<>(neighborhoodSize);
         for (int i = 0; i < neighborhoodSize; i++) {
-            State state = operatorSelector.applyMutation(initialCalendar.generateCalendar(heuristics));
+            State state = initialCalendar.generateCalendar(heuristics);
             neighborhood.add(state);
         }
         return neighborhood;
