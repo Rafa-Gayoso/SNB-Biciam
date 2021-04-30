@@ -2,24 +2,20 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="632.0" prefWidth="1148.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdvanceConfigurationController">
+<AnchorPane prefHeight="632.0" prefWidth="1176.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdvanceConfigurationController">
    <children>
-      <Label layoutX="21.0" layoutY="7.0" text="Mutaciones" textFill="#2f2484" AnchorPane.bottomAnchor="580.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="973.0" AnchorPane.topAnchor="7.0">
-         <font>
-            <Font name="Segoe UI Symbol" size="30.0" />
-         </font>
-      </Label>
-      <JFXListView fx:id="mutationListView" layoutX="14.0" layoutY="52.0" prefHeight="219.0" prefWidth="1105.0" stylesheets="@../styles/PrincipalMenu.css" AnchorPane.bottomAnchor="361.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="52.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXListView>
-      <JFXButton fx:id="select" layoutX="507.0" layoutY="560.0" onAction="#saveNewAdvancesConfigurations" prefHeight="51.0" prefWidth="135.0" stylesheets="@../styles/PrincipalMenu.css" text="Aceptar" textFill="#fcf8f8" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="507.0" AnchorPane.rightAnchor="506.0" AnchorPane.topAnchor="560.0">
+      <JFXButton fx:id="select" layoutX="507.0" layoutY="567.0" onAction="#saveNewAdvancesConfigurations" prefHeight="51.0" prefWidth="135.0" stylesheets="@../styles/PrincipalMenu.css" text="Aceptar" textFill="#fcf8f8" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="507.0" AnchorPane.rightAnchor="506.0" AnchorPane.topAnchor="567.0">
          <font>
             <Font name="Segoe UI Symbol" size="20.0" />
          </font>
@@ -27,15 +23,90 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXListView fx:id="heuristicsListView" layoutX="14.0" layoutY="334.0" prefHeight="219.0" prefWidth="1105.0" stylesheets="@../styles/PrincipalMenu.css">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXListView>
-      <Label layoutX="14.0" layoutY="281.0" text="Construcción del calendario inicial" textFill="#2f2484">
-         <font>
-            <Font name="Segoe UI Symbol" size="30.0" />
-         </font>
-      </Label>
+      <GridPane layoutX="9.0" layoutY="14.0" prefHeight="476.0" prefWidth="1159.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="534.0" minWidth="10.0" prefWidth="534.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="380.0" minWidth="10.0" prefWidth="60.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="534.0" minWidth="10.0" prefWidth="534.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="252.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="288.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="288.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="428.0" minHeight="10.0" prefHeight="287.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Iteraciones del algoritmo" textFill="#2f2484" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Symbol" size="30.0" />
+               </font>
+            </Label>
+            <Spinner fx:id="iterationsSpinner" editable="true" prefHeight="48.0" prefWidth="180.0" stylesheets="@../styles/PrincipalMenu.css" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Spinner>
+            <Label text="Ejecuciones del algoritmo" textFill="#2f2484" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Symbol" size="30.0" />
+               </font>
+            </Label>
+            <Spinner fx:id="executionsSpinner" editable="true" prefHeight="48.0" prefWidth="180.0" stylesheets="@../styles/PrincipalMenu.css" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Spinner>
+            <Label text="Mutaciones" textFill="#2f2484" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Symbol" size="30.0" />
+               </font>
+            </Label>
+            <Label text="Construcción del calendario inicial" textFill="#2f2484" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Symbol" size="30.0" />
+               </font>
+            </Label>
+            <JFXListView fx:id="mutationListView" prefHeight="357.0" prefWidth="545.0" stylesheets="@../styles/PrincipalMenu.css" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXListView>
+            <JFXListView fx:id="heuristicsListView" prefHeight="357.0" prefWidth="545.0" stylesheets="@../styles/PrincipalMenu.css" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXListView>
+         </children>
+      </GridPane>
+      <GridPane layoutX="9.0" layoutY="500.0" prefHeight="51.0" prefWidth="1159.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <JFXRadioButton fx:id="radioHC" selected="true" styleClass="custom-radio-button" stylesheets="@../styles/PrincipalMenu.css" text="Escalador de Colinas" textFill="#2f2484" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Symbol" size="30.0" />
+               </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="metaheuristics" />
+               </toggleGroup>
+            </JFXRadioButton>
+            <JFXRadioButton fx:id="radioEE" styleClass="custom-radio-button" stylesheets="@../styles/PrincipalMenu.css" text="Estrategia Evolutiva" textFill="#2f2484" toggleGroup="$metaheuristics" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Symbol" size="30.0" />
+               </font>
+            </JFXRadioButton>
+            <JFXRadioButton fx:id="radioRS" styleClass="custom-radio-button" stylesheets="@../styles/PrincipalMenu.css" text="Búsqueda Aleatoria" textFill="#2f2484" toggleGroup="$metaheuristics" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Symbol" size="30.0" />
+               </font>
+            </JFXRadioButton>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

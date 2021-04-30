@@ -2,8 +2,11 @@ package operators.heuristics;
 
 import problem.definition.State;
 
+import java.util.ArrayList;
+import definition.state.statecode.Date;
+
 public abstract class HeuristicOperator {
 
-    public abstract State generateCalendar();
+    public abstract ArrayList<Date> generateCalendar(ArrayList<ArrayList<Integer>> duels);
 
 }
