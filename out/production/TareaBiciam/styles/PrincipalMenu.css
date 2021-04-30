@@ -56,7 +56,7 @@
 }
 
 .jfx-textfield {
-    -fx-text-inner-color: #2F2484;
+    -fx-text-inner-color: #2D75E8;
 }
 
 .table-cruds {
@@ -164,7 +164,7 @@
     -fx-border-color: transparent;
 }
 
-#radio .radio {
+.custom-radio-button .radio {
     -fx-border-width: 1px;
     -fx-border-color: #000;
     -fx-background-color: white;
@@ -173,27 +173,14 @@
     -fx-padding: 4px;
 }
 
-.radio-button .radio:selected {
-    -fx-background-color: white;
-    -fx-background-image: null;
+.custom-radio-button {
+    -jfx-selected-color: #2f2484;
 }
 
-.radio-button -radio:armed {
-    -fx-background-color: white;
-    -fx-background-image: null;
-}
-
-.radio-button -radio:determinate {
-    -fx-background-color: white;
-    -fx-background-image: null;
-}
-
-.radio-button -radio:indeterminate {
-    -fx-background-color: white;
-    -fx-background-image: null;
-}
-
-.radio-button .dot {
+.custom-radio-button .dot{
     -fx-background-radius: 15px;
     -fx-padding: 8px;
 }
+
+
+

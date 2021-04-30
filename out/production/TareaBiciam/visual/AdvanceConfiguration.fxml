@@ -88,7 +88,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <JFXRadioButton fx:id="radioHC" selected="true" text="Escalador de Colinas" textFill="#2f2484" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <JFXRadioButton fx:id="radioHC" selected="true" styleClass="custom-radio-button" stylesheets="@../styles/PrincipalMenu.css" text="Escalador de Colinas" textFill="#2f2484" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font name="Segoe UI Symbol" size="30.0" />
                </font>
@@ -96,12 +96,12 @@
                   <ToggleGroup fx:id="metaheuristics" />
                </toggleGroup>
             </JFXRadioButton>
-            <JFXRadioButton fx:id="radioEE" text="Estrategia Evolutiva" textFill="#2f2484" toggleGroup="$metaheuristics" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <JFXRadioButton fx:id="radioEE" styleClass="custom-radio-button" stylesheets="@../styles/PrincipalMenu.css" text="Estrategia Evolutiva" textFill="#2f2484" toggleGroup="$metaheuristics" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font name="Segoe UI Symbol" size="30.0" />
                </font>
             </JFXRadioButton>
-            <JFXRadioButton fx:id="radioRS" stylesheets="@../styles/PrincipalMenu.css" text="Búsqueda Aleatoria" textFill="#2f2484" toggleGroup="$metaheuristics" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <JFXRadioButton fx:id="radioRS" styleClass="custom-radio-button" stylesheets="@../styles/PrincipalMenu.css" text="Búsqueda Aleatoria" textFill="#2f2484" toggleGroup="$metaheuristics" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font name="Segoe UI Symbol" size="30.0" />
                </font>

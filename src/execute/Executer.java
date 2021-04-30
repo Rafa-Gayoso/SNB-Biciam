@@ -136,104 +136,44 @@ public class Executer {
             }
             else{
                 if(selectedMH == 1){
-                    EvolutionStrategies.countRef = 1;
+                    EvolutionStrategies.countRef = 4;
                     EvolutionStrategies.selectionType = SelectionType.RouletteSelection;
                     EvolutionStrategies.mutationType = MutationType.GenericMutation;
                     EvolutionStrategies.replaceType = ReplaceType.GenerationalReplace;
                     EvolutionStrategies.PM = 0.8;
+                    
                     System.err.println("EE-------RS");
                 }
+                else
+                    EvolutionStrategies.countRef = 0;
 
                 Strategy.getStrategy().executeStrategy(ITERATIONS,1, GeneratorType.RandomSearch);
                 System.err.println("RS-------");
             }
 
 
-            Sheet spreadsheet = workbook.createSheet("Calendario "+ (i+1));
-
-            ArrayList<ArrayList<Integer>> teamDate = TTPDefinition.getInstance().teamsItinerary(Strategy.getStrategy().getBestState());
-            Row row = spreadsheet.createRow(0);
-            //Style of the cell
-            XSSFFont headerCellFont = workbook.createFont();
-            headerCellFont.setBold(true);
-            headerCellFont.setColor(IndexedColors.WHITE.getIndex());
-            headerCellFont.setFontHeightInPoints((short) 15);
-            XSSFCellStyle style = workbook.createCellStyle();
-
-            // Setting Background color
-            style.setFillForegroundColor(IndexedColors.DARK_GREEN.getIndex());
-            style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-            style.setFont(headerCellFont);
-
-            //Header of the itinerary
-            for (int j = 0; j < teamDate.get(0).size(); j++) {
-                int posTeam = teamDate.get(0).get(j);
-                String team = DataFiles.getSingletonDataFiles().getTeams().get(posTeam);
-                Cell cell = row.createCell(j);
-                cell.setCellStyle(style);
-                cell.setCellValue(team);
-            }
-
-            //Itinerary
-            style = workbook.createCellStyle();
-            headerCellFont = workbook.createFont();
-            headerCellFont.setBold(false);
-            headerCellFont.setFontHeightInPoints((short) 12);
-
-            int j = 1;
-            for(; j < teamDate.size()-1;j++ ){
-                ArrayList<Integer> date = teamDate.get(j);
-                row = spreadsheet.createRow(j);
-                for(int k=0; k < date.size();k++){
-                    int posTeam = teamDate.get(j).get(k);
-                    String team = DataFiles.getSingletonDataFiles().getAcronyms().get(posTeam);
-                    Cell cell = row.createCell(k);
-                    cell.setCellStyle(style);
-                    cell.setCellValue(team);
-                }
-            }
-            for(int l = 0; l < row.getLastCellNum(); l++){
-                spreadsheet.autoSizeColumn(l);
-            }
-
-            row = spreadsheet.createRow(j);
-            Cell cell1 = row.createCell(0);
-            cell1.setCellValue("Mejor Resultado: ");
-            Cell cell2 = row.createCell(1);
-            cell2.setCellValue(Distance.getInstance().calculateCalendarDistance(Strategy.getStrategy().getBestState()));
-
-            j += 2;
-
-            row = spreadsheet.createRow(j);
-            Cell cell3 = row.createCell(0);
-            cell3.setCellValue("No. de iteracion: ");
-            Cell cell4 = row.createCell(1);
-            cell4.setCellValue("Distancia (km)");
-
-            j++;
-
-            for (int k = 0; k < Strategy.getStrategy().listBest.size(); k++) {
-                row = spreadsheet.createRow(j);
-                Cell cellIte = row.createCell(0);
-                cellIte.setCellValue("Iteracion: "+ (k+1));
-                Cell cellDist = row.createCell(1);
-                cellDist.setCellValue(Distance.getInstance().calculateCalendarDistance(Strategy.getStrategy().listBest.get(k)));
-                j++;
-            }
-
-            /*AuxStatePlusIterations temp = new AuxStatePlusIterations(Strategy.getStrategy().getBestState(), this.selectedMH);
-
-            for (int k = 0; k < Strategy.getStrategy().listBest.size(); k++) {
-                temp.getDistItarations().add(Distance.getInstance().calculateCalendarDistance(Strategy.getStrategy().listBest.get(k)));
-            }
-            saveData.add(temp);
-*/
+            createCalendarSheet(workbook,Strategy.getStrategy().getBestState(),i);
             thisLapBests.add(Strategy.getStrategy().getBestState());
             resultStates.add(Strategy.getStrategy().getBestState());
             Strategy.destroyExecute();
         }
 
+        createBestCalendarSheet(workbook, thisLapBests);
 
+
+        FileOutputStream fileOut = null;
+        try {
+            fileOut = new FileOutputStream(file.getAbsolutePath());
+            workbook.write(fileOut);
+            fileOut.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showMessage();
+        }
+    }
+
+    private void createBestCalendarSheet(XSSFWorkbook workbook, ArrayList<State> thisLapBests) {
         Sheet spreadsheet = workbook.createSheet("Mejor Calendario ");
 
         State state = thisLapBests.get(0);
@@ -299,17 +239,6 @@ public class Executer {
         cell1.setCellValue("Calendario "+(pos+1)+":" );
         Cell cell2 = row.createCell(1);
         cell2.setCellValue(dist);
-
-        FileOutputStream fileOut = null;
-        try {
-            fileOut = new FileOutputStream(file.getAbsolutePath());
-            workbook.write(fileOut);
-            fileOut.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            showMessage();
-        }
     }
 
     private static void showMessage() {
@@ -320,6 +249,88 @@ public class Executer {
         notification.setRectangleFill(Paint.valueOf("#2F2484"));
         notification.setAnimationType(AnimationType.FADE);
         notification.showAndDismiss(Duration.seconds(2));
+    }
+
+    private void createCalendarSheet(XSSFWorkbook workbook, State state, int calendar){
+        Sheet spreadsheet = workbook.createSheet("Calendario "+ (calendar+1));
+
+        ArrayList<ArrayList<Integer>> teamDate = TTPDefinition.getInstance().teamsItinerary(state);
+        Row row = spreadsheet.createRow(0);
+        //Style of the cell
+        XSSFFont headerCellFont = workbook.createFont();
+        headerCellFont.setBold(true);
+        headerCellFont.setColor(IndexedColors.WHITE.getIndex());
+        headerCellFont.setFontHeightInPoints((short) 15);
+        XSSFCellStyle style = workbook.createCellStyle();
+
+        // Setting Background color
+        style.setFillForegroundColor(IndexedColors.DARK_GREEN.getIndex());
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFont(headerCellFont);
+
+        //Header of the itinerary
+        for (int j = 0; j < teamDate.get(0).size(); j++) {
+            int posTeam = teamDate.get(0).get(j);
+            String team = DataFiles.getSingletonDataFiles().getTeams().get(posTeam);
+            Cell cell = row.createCell(j);
+            cell.setCellStyle(style);
+            cell.setCellValue(team);
+        }
+
+        //Itinerary
+        style = workbook.createCellStyle();
+        headerCellFont = workbook.createFont();
+        headerCellFont.setBold(false);
+        headerCellFont.setFontHeightInPoints((short) 12);
+
+        int j = 1;
+        for(; j < teamDate.size()-1;j++ ){
+            ArrayList<Integer> date = teamDate.get(j);
+            row = spreadsheet.createRow(j);
+            for(int k=0; k < date.size();k++){
+                int posTeam = teamDate.get(j).get(k);
+                String team = DataFiles.getSingletonDataFiles().getAcronyms().get(posTeam);
+                Cell cell = row.createCell(k);
+                cell.setCellStyle(style);
+                cell.setCellValue(team);
+            }
+        }
+        for(int l = 0; l < row.getLastCellNum(); l++){
+            spreadsheet.autoSizeColumn(l);
+        }
+
+        row = spreadsheet.createRow(j);
+        Cell cell1 = row.createCell(0);
+        cell1.setCellValue("Mejor Resultado: ");
+        Cell cell2 = row.createCell(1);
+        cell2.setCellValue(Distance.getInstance().calculateCalendarDistance(Strategy.getStrategy().getBestState()));
+
+        j += 2;
+
+        row = spreadsheet.createRow(j);
+        Cell cell3 = row.createCell(0);
+        cell3.setCellValue("No. de iteracion: ");
+        Cell cell4 = row.createCell(1);
+        cell4.setCellValue("Distancia (km)");
+
+        j++;
+
+        for (int k = 0; k < Strategy.getStrategy().listBest.size(); k++) {
+            row = spreadsheet.createRow(j);
+            Cell cellIte = row.createCell(0);
+            cellIte.setCellValue("Iteracion: "+ (k+1));
+            Cell cellDist = row.createCell(1);
+            cellDist.setCellValue(Distance.getInstance().calculateCalendarDistance(Strategy.getStrategy().listBest.get(k)));
+            j++;
+        }
+
+            /*AuxStatePlusIterations temp = new AuxStatePlusIterations(Strategy.getStrategy().getBestState(), this.selectedMH);
+
+            for (int k = 0; k < Strategy.getStrategy().listBest.size(); k++) {
+                temp.getDistItarations().add(Distance.getInstance().calculateCalendarDistance(Strategy.getStrategy().listBest.get(k)));
+            }
+            saveData.add(temp);
+*/
     }
 
     public ArrayList<MutationOperatorType> getMutations() {
