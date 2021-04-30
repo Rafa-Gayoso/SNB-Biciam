@@ -1,45 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="TareaBiciam:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="31c4c62d-8161-430c-9912-ecee8f383fae" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="31c4c62d-8161-430c-9912-ecee8f383fae" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/files/Resultados.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TareaBiciam/files/Resultados.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/styles/PrincipalMenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TareaBiciam/styles/PrincipalMenu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/visual/AdvanceConfiguration.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TareaBiciam/visual/AdvanceConfiguration.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/execute/Executer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execute/Executer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/files/EC_Doble_16-Teams_5-Exec_1000-Ite.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/files/EC_Doble_16-Teams_5-Exec_1000-Ite.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/files/EE_Doble_16-Teams_5-Exec_1000-Ite.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/files/EE_Doble_16-Teams_5-Exec_1000-Ite.xlsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <option name="HIDDEN_KINDS">
-      <set />
-    </option>
-    <expand />
-    <select />
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
-        <option value="Interface" />
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1qXK9QfxzaCZs6pqQvAk9ZyVEpx" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/files" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/SceneBuilder/SceneBuilder.exe" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Artifacts" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
@@ -54,18 +80,6 @@
       <recent name="C:\Users\gayos\IdeaProjects\TareaBiciam\src" />
       <recent name="C:\Users\gayos\IdeaProjects\TareaBiciam\lib" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Executer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -101,6 +115,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -128,10 +143,144 @@
       <workItem from="1618076452246" duration="3568000" />
       <workItem from="1618099233124" duration="18030000" />
       <workItem from="1618191778140" duration="10808000" />
+      <workItem from="1618625998298" duration="12000" />
+      <workItem from="1618627370662" duration="10788000" />
+      <workItem from="1618692982590" duration="1107000" />
+      <workItem from="1618707521097" duration="633000" />
+      <workItem from="1618780226141" duration="3327000" />
+      <workItem from="1618858931669" duration="5378000" />
+      <workItem from="1618864690624" duration="1350000" />
+      <workItem from="1618884143533" duration="6316000" />
+      <workItem from="1618897844173" duration="248000" />
+      <workItem from="1618951330462" duration="1936000" />
+      <workItem from="1618956802916" duration="459000" />
+      <workItem from="1618959011309" duration="297000" />
+      <workItem from="1619058339663" duration="121000" />
+      <workItem from="1619059262479" duration="720000" />
+      <workItem from="1619112678142" duration="990000" />
+      <workItem from="1619245933042" duration="19000" />
+      <workItem from="1619286962487" duration="2012000" />
+      <workItem from="1619290176390" duration="160000" />
+      <workItem from="1619448469056" duration="2466000" />
+      <workItem from="1619501922103" duration="859000" />
+      <workItem from="1619573815213" duration="340000" />
+      <workItem from="1619721474927" duration="120000" />
+      <workItem from="1619721688251" duration="1046000" />
+      <workItem from="1619723427779" duration="3953000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="714" y="321" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1619448574008">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="714" y="321" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1619448574008" />
+    <state x="765" y="203" key="#com.intellij.ide.util.MemberChooser" timestamp="1618864826100">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="203" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1618864826100" />
+    <state x="743" y="414" width="433" height="218" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1619450127667">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="743" y="414" width="433" height="218" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1619450127667" />
+    <state x="715" y="222" key="#xdebugger.evaluate" timestamp="1619744479786">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="715" y="222" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1619744479786" />
+    <state width="425" height="466" key="DebuggerActiveHint" timestamp="1619744661083">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="425" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1619744661083" />
+    <state x="845" y="284" key="FileChooserDialogImpl" timestamp="1619501993171">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="845" y="284" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1619501993171" />
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1619743171724">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1619743171724" />
+    <state width="1877" height="348" key="GridCell.Tab.0.center" timestamp="1619743171724">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1619743171724" />
+    <state width="1877" height="348" key="GridCell.Tab.0.left" timestamp="1619743171724">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1619743171724" />
+    <state width="1877" height="348" key="GridCell.Tab.0.right" timestamp="1619743171724">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1619743171724" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1619743199328">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1619743199328" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1619743199328">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1619743199328" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1619743199328">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1619743199328" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1619743199328">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1619743199328" />
+    <state x="625" y="224" key="NewModule_or_Project.wizard" timestamp="1619502000839">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="625" y="224" key="NewModule_or_Project.wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1619502000839" />
+    <state x="440" y="94" key="SettingsEditor" timestamp="1618862626363">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1618862626363" />
+    <state width="1918" height="448" key="SwitcherDM" timestamp="1618951781723">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1918" height="448" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1618951781723" />
+    <state x="523" y="146" key="extract.method.dialog" timestamp="1618859884326">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="523" y="146" key="extract.method.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1618859884326" />
+    <state x="389" y="276" key="new project wizard" timestamp="1618630808197">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="389" y="276" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1618630808197" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1619743168831">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1619743168831" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/definition/operator/TTPOperator.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/definition/objective/function/TTPObjectiveFunction.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

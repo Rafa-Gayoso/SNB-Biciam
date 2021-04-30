@@ -116,16 +116,21 @@ public class ConfigurationCalendarController implements Initializable {
             TTPDefinition.getInstance().setDobleVuelta(secondRound);
             TTPDefinition.getInstance().setCantVecesLocal(localGames);
             TTPDefinition.getInstance().setCantVecesVisitante(visitorGames);
-            ArrayList<MutationOperatorType> mutationsOperatorTypes = new ArrayList<>();
-            mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_ORDER);
-            mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_POSITION);
-            mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DUEL);
-            mutationsOperatorTypes.add(MutationOperatorType.SWAP_DATES);
-            ArrayList<HeuristicOperatorType> heuristicOperatorTypes = new ArrayList<>();
-            heuristicOperatorTypes.add(HeuristicOperatorType.DUEL_HEURISTIC);
-            heuristicOperatorTypes.add(HeuristicOperatorType.DATE_HEURISTIC);
-            Executer.getInstance().setMutations(mutationsOperatorTypes);
-            Executer.getInstance().setHeuristics(heuristicOperatorTypes);
+
+            if (Executer.getInstance().getMutations().isEmpty()){
+                ArrayList<MutationOperatorType> mutationsOperatorTypes = new ArrayList<>();
+                mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_ORDER);
+                mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_POSITION);
+                mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DUEL);
+                mutationsOperatorTypes.add(MutationOperatorType.SWAP_DATES);
+                Executer.getInstance().setMutations(mutationsOperatorTypes);
+            }
+            if(Executer.getInstance().getHeuristics().isEmpty()){
+                ArrayList<HeuristicOperatorType> heuristicOperatorTypes = new ArrayList<>();
+                heuristicOperatorTypes.add(HeuristicOperatorType.DUEL_HEURISTIC);
+                heuristicOperatorTypes.add(HeuristicOperatorType.DATE_HEURISTIC);
+                Executer.getInstance().setHeuristics(heuristicOperatorTypes);
+            }
 
             showTeamsMatrix();
         }

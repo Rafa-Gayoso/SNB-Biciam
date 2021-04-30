@@ -13,5 +13,6 @@
     <orderEntry type="library" name="activation-1.1.1" level="project" />
     <orderEntry type="library" name="jfoenix-8.0.8" level="project" />
     <orderEntry type="library" name="controlsfx-8.40.15" level="project" />
+    <orderEntry type="library" name="fontawesomefx-8.9" level="project" />
   </component>
 </module>
