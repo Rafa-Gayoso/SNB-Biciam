@@ -1,10 +1,7 @@
 package definition;
 
 import definition.state.statecode.Date;
-import utils.AuxDuelDistanceAdded;
-import utils.DataFiles;
 import utils.Distance;
-import utils.TeamsPairDistance;
 import problem.definition.State;
 
 import java.util.ArrayList;
@@ -15,10 +12,16 @@ public class TTPDefinition {
     private double [][] matrixDistance;
     private int cantEquipos;
     private int cantFechas;
-    private boolean dobleVuelta;//Puede ser otra variable del problema
+    private boolean secondRound;//Puede ser otra variable del problema
     private int cantVecesLocal;
     private int cantVecesVisitante;
     private ArrayList<Integer> teamsIndexes;
+    private boolean symmetricSecondRound;
+    private boolean inauguralGame;
+    private boolean championVsSub;
+    private int firstPlace;
+    private int secondPlace;
+    private boolean occidentVsOrient;
     private static TTPDefinition ttpDefinition;
 
     private TTPDefinition(){
@@ -72,12 +75,61 @@ public class TTPDefinition {
         this.ttpDefinition = ttpDefinition;
     }
 
-    public boolean isDobleVuelta() {
-        return dobleVuelta;
+    public boolean isSecondRound() {
+        return secondRound;
     }
 
-    public void setDobleVuelta(boolean dobleVuelta) {
-        this.dobleVuelta = dobleVuelta;
+    public void setSecondRound(boolean secondRound) {
+        this.secondRound = secondRound;
+    }
+
+    public boolean isSymmetricSecondRound() {
+        return symmetricSecondRound;
+    }
+
+    public void setSymmetricSecondRound(boolean symmetricSecondRound) {
+        this.symmetricSecondRound = symmetricSecondRound;
+    }
+
+    public boolean isChampionVsSub() {
+        return championVsSub;
+    }
+
+    public void setChampionVsSub(boolean championVsSub) {
+        this.championVsSub = championVsSub;
+    }
+
+    public boolean isInauguralGame() {
+        return inauguralGame;
+    }
+
+    public void setInauguralGame(boolean inauguralGame) {
+        this.inauguralGame = inauguralGame;
+    }
+
+
+    public int getFirstPlace() {
+        return firstPlace;
+    }
+
+    public void setFirstPlace(int firstPlace) {
+        this.firstPlace = firstPlace;
+    }
+
+    public int getSecondPlace() {
+        return secondPlace;
+    }
+
+    public void setSecondPlace(int secondPlace) {
+        this.secondPlace = secondPlace;
+    }
+
+    public boolean isOccidentVsOrient() {
+        return occidentVsOrient;
+    }
+
+    public void setOccidentVsOrient(boolean occidentVsOrient) {
+        this.occidentVsOrient = occidentVsOrient;
     }
 
     public int getCantVecesLocal() {

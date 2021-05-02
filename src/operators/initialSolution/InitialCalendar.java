@@ -77,7 +77,7 @@ public class InitialCalendar {
             }
         }
 
-        if(TTPDefinition.getInstance().isDobleVuelta()){
+        if(TTPDefinition.getInstance().isSecondRound()){
             setSecondRound(state);
         }
 

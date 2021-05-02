@@ -8,8 +8,6 @@ import evolutionary_algorithms.complement.MutationType;
 import evolutionary_algorithms.complement.ReplaceType;
 import evolutionary_algorithms.complement.SelectionType;
 import javafx.scene.paint.Paint;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import local_search.complement.StopExecute;
 import local_search.complement.UpdateParameter;
@@ -107,7 +105,7 @@ public class Executer {
         }
 
         String rounds = "";
-        if (TTPDefinition.getInstance().isDobleVuelta()){
+        if (TTPDefinition.getInstance().isSecondRound()){
             rounds = "Doble";
         }else {
             rounds = "Simple";

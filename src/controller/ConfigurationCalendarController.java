@@ -113,7 +113,7 @@ public class ConfigurationCalendarController implements Initializable {
             int visitorGames = maxVisitorGamesSpinner.getValueFactory().getValue();
 
             TTPDefinition.getInstance().setTeamIndexes(selectedIndexes);
-            TTPDefinition.getInstance().setDobleVuelta(secondRound);
+            TTPDefinition.getInstance().setSecondRound(secondRound);
             TTPDefinition.getInstance().setCantVecesLocal(localGames);
             TTPDefinition.getInstance().setCantVecesVisitante(visitorGames);
 
