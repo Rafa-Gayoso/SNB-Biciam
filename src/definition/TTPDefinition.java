@@ -22,7 +22,9 @@ public class TTPDefinition {
     private int firstPlace;
     private int secondPlace;
     private boolean occidentVsOrient;
+    private int[][] duelMatrix;
     private static TTPDefinition ttpDefinition;
+
 
     private TTPDefinition(){
         /*this.cantEquipos=16;
@@ -130,6 +132,14 @@ public class TTPDefinition {
 
     public void setOccidentVsOrient(boolean occidentVsOrient) {
         this.occidentVsOrient = occidentVsOrient;
+    }
+
+    public int[][] getDuelMatrix() {
+        return duelMatrix;
+    }
+
+    public void setDuelMatrix(int[][] duelMatrix) {
+        this.duelMatrix = duelMatrix;
     }
 
     public int getCantVecesLocal() {

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class DoubleRoundSymmetricOddInauguralSolution extends DoubleRoundSymmetricOddSolution {
 
     @Override
-    protected State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
+    public State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
         return null;
     }
 }

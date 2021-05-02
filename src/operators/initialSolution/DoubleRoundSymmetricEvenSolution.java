@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class DoubleRoundSymmetricEvenSolution extends InitialSolution {
     @Override
-    protected State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
+    public State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
         return null;
     }
 }

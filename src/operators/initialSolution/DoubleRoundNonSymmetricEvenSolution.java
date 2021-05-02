@@ -1,13 +1,16 @@
 package operators.initialSolution;
 
 import operators.heuristics.HeuristicOperatorType;
+import operators.interfaces.ISecondRound;
 import problem.definition.State;
 
 import java.util.ArrayList;
 
-public class DoubleRoundNonSymmetricEvenSolution extends InitialSolution {
+public class DoubleRoundNonSymmetricEvenSolution extends SimpleRoundEvenSolution implements ISecondRound {
     @Override
-    protected State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
-        return null;
+    public State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
+        State state = super.generateCalendar(heuristics);
+        setSecondRound(state);
+        return state;
     }
 }

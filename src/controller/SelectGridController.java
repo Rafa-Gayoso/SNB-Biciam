@@ -18,7 +18,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
-import operators.initialSolution.InitialCalendar;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
@@ -228,7 +227,7 @@ public class SelectGridController implements Initializable {
    void showCalendar() {
 
         try{
-            InitialCalendar.getInstance().setDuelMatrix(matrixCalendar);
+            TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
             Executer.getInstance().executeEC();
             AnchorPane structureOver = homeController.getPrincipalPane();
             homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");

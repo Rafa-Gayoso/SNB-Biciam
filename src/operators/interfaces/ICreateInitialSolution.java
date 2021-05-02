@@ -6,7 +6,7 @@ import operators.initialSolution.InitialSolutionType;
 
 public interface ICreateInitialSolution {
 
-    default InitialSolutionType createCalendarInstance() {
+    default InitialSolutionType createSolutionType() {
         InitialSolutionType type = null;
 
         if (TTPDefinition.getInstance().isOccidentVsOrient()) {

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class DoubleRoundNonSymmetricOddChampionSolution extends DoubleRoundNonSymmetricOddSolution {
     @Override
-    protected State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
+    public State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
         return null;
     }
 }

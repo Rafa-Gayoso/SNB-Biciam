@@ -26,11 +26,34 @@
   <component name="ChangeListManager">
     <list default="true" id="31c4c62d-8161-430c-9912-ecee8f383fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/files/EC_Doble_16-Teams_5-Exec_1000-Ite.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TareaBiciam/files/EC_Doble_16-Teams_5-Exec_1000-Ite.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/SelectGridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SelectGridController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/definition/TTPDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/TTPDefinition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execute/Executer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execute/Executer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/InitialCalendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/InitialCalendar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeDuelOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeDuelOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/definition/operator/TTPOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/operator/TTPOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/files/EC_Doble_16-Teams_5-Exec_1000-Ite.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/files/EC_Doble_16-Teams_5-Exec_1000-Ite.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundNonSymmetricEvenChampionSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundNonSymmetricEvenChampionSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundNonSymmetricEvenInauguralSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundNonSymmetricEvenInauguralSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundNonSymmetricEvenSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundNonSymmetricEvenSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundNonSymmetricOddChampionSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundNonSymmetricOddChampionSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundNonSymmetricOddInauguralSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundNonSymmetricOddInauguralSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundNonSymmetricOddSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundNonSymmetricOddSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundSymmetricEvenChampionSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundSymmetricEvenChampionSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundSymmetricEvenInauguralSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundSymmetricEvenInauguralSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundSymmetricEvenSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundSymmetricEvenSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundSymmetricOddChampionSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundSymmetricOddChampionSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundSymmetricOddInauguralSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundSymmetricOddInauguralSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundSymmetricOddSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundSymmetricOddSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/InitialCalendar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/InitialSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/InitialSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/OccidentOrientSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/OccidentOrientSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundEvenChampionSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundEvenChampionSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundEvenInauguralSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundEvenInauguralSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundEvenSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundEvenSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundOddChampionSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundOddChampionSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundOddInauguralSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundOddInauguralSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundOddSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundOddSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/interfaces/IChampionGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/interfaces/IChampionGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/interfaces/ICreateInitialSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/interfaces/ICreateInitialSolution.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,9 +63,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
         <option value="Kotlin File" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -220,10 +243,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="714" y="321" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1619448574008" />
-    <state x="765" y="203" key="#com.intellij.ide.util.MemberChooser" timestamp="1619979627112">
+    <state x="765" y="203" key="#com.intellij.ide.util.MemberChooser" timestamp="1619984987554">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="203" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1619979627112" />
+    <state x="765" y="203" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1619984987554" />
     <state x="743" y="414" width="433" height="218" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1619450127667">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -232,10 +255,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="363" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1619971357533" />
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1619979120416">
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1619985102229">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1619979120416" />
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1619985102229" />
     <state x="715" y="222" key="#xdebugger.evaluate" timestamp="1619744479786">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -248,22 +271,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="845" y="284" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1619501993171" />
-    <state width="1877" height="301" key="GridCell.Tab.0.bottom" timestamp="1619924328131">
+    <state width="1877" height="301" key="GridCell.Tab.0.bottom" timestamp="1619985141393">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="301" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1619924328131" />
-    <state width="1877" height="301" key="GridCell.Tab.0.center" timestamp="1619924328130">
+    <state width="1877" height="301" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1619985141393" />
+    <state width="1877" height="301" key="GridCell.Tab.0.center" timestamp="1619985141392">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="301" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1619924328130" />
-    <state width="1877" height="301" key="GridCell.Tab.0.left" timestamp="1619924328130">
+    <state width="1877" height="301" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1619985141392" />
+    <state width="1877" height="301" key="GridCell.Tab.0.left" timestamp="1619985141392">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="301" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1619924328130" />
-    <state width="1877" height="301" key="GridCell.Tab.0.right" timestamp="1619924328131">
+    <state width="1877" height="301" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1619985141392" />
+    <state width="1877" height="301" key="GridCell.Tab.0.right" timestamp="1619985141393">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="301" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1619924328131" />
+    <state width="1877" height="301" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1619985141393" />
     <state width="1877" height="417" key="GridCell.Tab.1.bottom" timestamp="1619921470070">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -304,6 +327,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1619743168831" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1619984953899">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1619984953899" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -317,11 +344,6 @@
           <url>file://$PROJECT_DIR$/src/application/TestMain.java</url>
           <line>43</line>
           <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/operators/initialSolution/InitialCalendar.java</url>
-          <line>94</line>
-          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -6,11 +6,15 @@ import java.util.ArrayList;
 
 public abstract class InitialSolution {
 
-    protected int [][] duelMatrix;
+    protected static int [][] duelMatrix;
     protected ArrayList<ArrayList<Integer>> duels;
+    protected State state;
 
 
-    protected abstract State generateCalendar(ArrayList<HeuristicOperatorType> heuristics);
 
-       
+    public abstract State generateCalendar(ArrayList<HeuristicOperatorType> heuristics);
+
+    protected void setDuelMatrix(int[][] duelMatrix){
+        this.duelMatrix = duelMatrix;
+    }
 }

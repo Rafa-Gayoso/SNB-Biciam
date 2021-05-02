@@ -11,12 +11,15 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class SimpleRoundEvenSolution extends InitialSolution {
+
+
     
     @Override
-    protected State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
+    public State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
 
         duels = new ArrayList<>();
 
+        duelMatrix = TTPDefinition.getInstance().getDuelMatrix();
         int[][] newMatrix = new int[duelMatrix.length][duelMatrix.length];
 
         for (int i = 0; i < duelMatrix.length; i++) {

@@ -1,8 +1,10 @@
 package definition.operator;
 
 import operators.crossover.CrossoverOperator;
+import operators.factory.InitialSolutionFactory;
 import operators.heuristics.HeuristicOperatorType;
-import operators.initialSolution.InitialCalendar;
+import operators.initialSolution.InitialSolution;
+import operators.interfaces.ICreateInitialSolution;
 import operators.mutation.CombineMutationOperator;
 import operators.mutation.MutationOperatorType;
 import problem.definition.Operator;
@@ -11,15 +13,15 @@ import problem.definition.State;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TTPOperator extends Operator {
+public class TTPOperator extends Operator implements ICreateInitialSolution {
 
-    private InitialCalendar initialCalendar;
+    private InitialSolution initialSolution;
     private CombineMutationOperator operatorSelector;
     private CrossoverOperator crossoverOperator;
     private ArrayList<HeuristicOperatorType> heuristics;
 
     public TTPOperator(ArrayList<MutationOperatorType> mutations, ArrayList<HeuristicOperatorType> heuristics){
-        this.initialCalendar = InitialCalendar.getInstance();
+
         this.operatorSelector = new CombineMutationOperator();
         this.heuristics = heuristics;
         this.crossoverOperator = new CrossoverOperator();
@@ -39,8 +41,9 @@ public class TTPOperator extends Operator {
     @Override
     public List<State> generateRandomState(Integer neighborhoodSize) {
         List<State> neighborhood = new ArrayList<>(neighborhoodSize);
+        this.initialSolution = InitialSolutionFactory.getInstance(createSolutionType());
         for (int i = 0; i < neighborhoodSize; i++) {
-            State state = initialCalendar.generateCalendar(heuristics);
+            State state = initialSolution.generateCalendar(heuristics);
             neighborhood.add(state);
         }
         return neighborhood;
