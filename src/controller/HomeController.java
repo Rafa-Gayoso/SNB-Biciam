@@ -49,6 +49,14 @@ public class HomeController implements Initializable {
     private JFXButton buttonCalendarConfiguration;
 
 
+    @FXML
+    private JFXButton dataBtn;
+
+
+
+    @FXML
+    private JFXButton buttonImportCalendar;
+
 
     @FXML
     private AnchorPane pane;
@@ -95,9 +103,19 @@ public class HomeController implements Initializable {
     }
 
     @FXML
+    void showData(ActionEvent event) {
+
+    }
+
+    @FXML
     void showReturnSelectionTeamConfiguration(ActionEvent event) throws IOException {
         this.createPage(new ConfigurationCalendarController(), home, "/visual/ConfigurationCalendar.fxml");
         buttonReturnSelectionTeamConfiguration.setVisible(false);
+    }
+
+    @FXML
+    void importCalendar(ActionEvent event) {
+
     }
 
     @FXML

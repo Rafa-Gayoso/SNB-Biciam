@@ -11,8 +11,8 @@ public class ChangeDateOrderOperator extends MutationOperator {
 
     @Override
     public State applyMutation(State state) {
-        State resultState = new State();
-        copyState(resultState,state);
+        State resultState = state.clone();
+        //copyState(resultState,state);
         int firstDate = -1;
         int lastDate = -1;
         int startPosition = 0;

@@ -10,8 +10,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ChangeDuelOperator extends MutationOperator {
     @Override
     public State applyMutation(State state) {
-        State resultSate = new State();
-        copyState(resultSate,state);
+        State resultSate = state.clone();
+        //copyState(resultSate,state);
         int posFirstDate = -1;
         int posLastDate = -1;
         int posFirstDuel = -1;

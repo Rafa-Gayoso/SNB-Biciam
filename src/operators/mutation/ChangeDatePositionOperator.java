@@ -10,8 +10,8 @@ public class ChangeDatePositionOperator extends MutationOperator {
 
     @Override
     public State applyMutation(State state) {
-        State resultState = new State();
-        copyState(resultState,state);
+        State resultState = state.clone();
+        //copyState(resultState,state);
         int selectedDate = -1;
         int dateToChange = -1;
 

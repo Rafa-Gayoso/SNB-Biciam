@@ -1,5 +1,6 @@
 package operators.mutation;
 
+import definition.state.CalendarState;
 import definition.state.statecode.Date;
 import problem.definition.State;
 
@@ -8,8 +9,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class SwapDatesOperator extends MutationOperator {
     @Override
     public State applyMutation(State state) {
-        State resultState = new State();
-        copyState(resultState,state);
+        State resultState = state.clone();
+        //copyState(resultState,state);
         int firstDate = -1;
         int secondDate = -1;
         int startPosition = 0;
