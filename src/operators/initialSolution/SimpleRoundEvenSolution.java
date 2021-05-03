@@ -36,11 +36,11 @@ public class SimpleRoundEvenSolution extends InitialSolution {
 
                     ArrayList<Integer> pair = new ArrayList<>(2);
                     if (newMatrix[i][j] == 1) {
-                        pair.add(teamsIndexes.get(j));
                         pair.add(teamsIndexes.get(i));
+                        pair.add(teamsIndexes.get(j));
                     } else {
-                        pair.add(teamsIndexes.get(i));
                         pair.add(teamsIndexes.get(j));
+                        pair.add(teamsIndexes.get(i));
                     }
                     duels.add(pair);
                 }

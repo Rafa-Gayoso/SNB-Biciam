@@ -13,7 +13,7 @@ public interface IInauguralGame {
         Date inauguralDate = new Date();
         ArrayList<Integer> pair = new ArrayList<>();
         pair.add(TTPDefinition.getInstance().getFirstPlace());
-        pair.add(TTPDefinition.getInstance().getFirstPlace());
+        pair.add(TTPDefinition.getInstance().getSecondPlace());
         inauguralDate.getGames().add(pair);
         state.getCode().add(0, inauguralDate);
     }

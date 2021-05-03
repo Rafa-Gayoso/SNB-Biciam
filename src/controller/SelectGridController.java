@@ -142,6 +142,11 @@ public class SelectGridController implements Initializable {
             }
 
         }
+
+        if (TTPDefinition.getInstance().isChampionVsSub()) {
+            matrix[TTPDefinition.getInstance().getFirstPlace()][TTPDefinition.getInstance().getSecondPlace()].setDisable(true);
+            matrix[TTPDefinition.getInstance().getSecondPlace()][TTPDefinition.getInstance().getFirstPlace()].setDisable(true);
+        }
         return matrix;
     }
 
