@@ -7,7 +7,7 @@ public class CalendarState extends State {
 
     @Override
     public State clone() {
-        State state = new State();
+        State state = new CalendarState();
         for (Object object : this.getCode()) {
             try {
                 state.getCode().add(((Date)(object)).clone());

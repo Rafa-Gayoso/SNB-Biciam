@@ -181,7 +181,24 @@ public class TTPDefinition {
 
         teamDate.add(row);
 
-        for (int i = 0; i < state.getCode().size(); i++) {
+        int i=0;
+
+        if(TTPDefinition.getInstance().isChampionVsSub()){
+            ArrayList<Integer> pivotRow = (ArrayList<Integer>) row.clone();
+            int posChampeon = teamsIndexes.indexOf(TTPDefinition.getInstance().getFirstPlace());
+            int posSub = teamsIndexes.indexOf(TTPDefinition.getInstance().getSecondPlace());
+
+            if (posChampeon != -1 && posSub != -1) {
+                pivotRow.set(posSub, TTPDefinition.getInstance().getFirstPlace());
+            } else if (posChampeon == -1 && posSub != -1) {
+                pivotRow.set(posSub, TTPDefinition.getInstance().getFirstPlace());
+            }
+            teamDate.add(pivotRow);
+
+            i=1;
+        }
+
+        for (; i < state.getCode().size(); i++) {
             row = new ArrayList<>();
             for (int k = 0; k < teamsIndexes.size(); k++) {
                 row.add(-1);

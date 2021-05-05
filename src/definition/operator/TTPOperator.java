@@ -1,10 +1,13 @@
 package definition.operator;
 
+import definition.TTPDefinition;
 import operators.crossover.CrossoverOperator;
 import operators.factory.InitialSolutionFactory;
 import operators.heuristics.HeuristicOperatorType;
 import operators.initialSolution.InitialSolution;
+import operators.interfaces.IChampionGame;
 import operators.interfaces.ICreateInitialSolution;
+import operators.interfaces.IInauguralGame;
 import operators.mutation.CombineMutationOperator;
 import operators.mutation.MutationOperatorType;
 import problem.definition.Operator;
@@ -13,7 +16,7 @@ import problem.definition.State;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TTPOperator extends Operator implements ICreateInitialSolution {
+public class TTPOperator extends Operator implements ICreateInitialSolution, IChampionGame, IInauguralGame {
 
     private InitialSolution initialSolution;
     private CombineMutationOperator operatorSelector;
@@ -33,6 +36,12 @@ public class TTPOperator extends Operator implements ICreateInitialSolution {
         List<State> neighborhood = new ArrayList<>(neighborhoodSize);
         for (int i = 0; i <  neighborhoodSize; i++) {
             State newState = operatorSelector.applyMutation(state);
+            if(TTPDefinition.getInstance().isChampionVsSub()){
+                fixChampionSubchampion(newState);
+            }
+            else if(TTPDefinition.getInstance().isInauguralGame()){
+                addInauguralGame(newState);
+            }
             neighborhood.add(newState);
         }
         return neighborhood;

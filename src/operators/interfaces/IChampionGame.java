@@ -20,7 +20,7 @@ public interface IChampionGame extends ISwapTeams{
             Date date = (Date) state.getCode().get(i);
             int j = 0;
             while (j < date.getGames().size() && !found) {
-                if (date.getGames().get(j).get(0) == posChampion && date.getGames().get(j).get(0) == posSubChampion) {
+                if (date.getGames().get(j).get(0) == posChampion && date.getGames().get(j).get(1) == posSubChampion) {
                     found = true;
                     posDate = i;
                     posGame = j;

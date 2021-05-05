@@ -26,18 +26,13 @@
   <component name="ChangeListManager">
     <list default="true" id="31c4c62d-8161-430c-9912-ecee8f383fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/files/EC_Doble_16-Teams_5-Exec_1000-Ite.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TareaBiciam/files/EC_Doble_16-Teams_5-Exec_1000-Ite.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/visual/ConfigurationCalendar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TareaBiciam/visual/ConfigurationCalendar.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/SelectGridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SelectGridController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TareaBiciam/files/EC_Simple_16-Teams_5-Exec_1000-Ite.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TareaBiciam/files/EC_Simple_16-Teams_5-Exec_1000-Ite.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/definition/TTPDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/TTPDefinition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/definition/objective/function/TTPObjectiveFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/objective/function/TTPObjectiveFunction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/definition/operator/TTPOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/operator/TTPOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/definition/state/CalendarState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/state/CalendarState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/files/EC_Simple_16-Teams_5-Exec_1000-Ite.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/files/EC_Simple_16-Teams_5-Exec_1000-Ite.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundEvenInauguralSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundEvenInauguralSolution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundEvenSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundEvenSolution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operators/interfaces/IInauguralGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/interfaces/IInauguralGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/visual/ConfigurationCalendar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/visual/ConfigurationCalendar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/interfaces/IChampionGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/interfaces/IChampionGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/CombineMutationOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/CombineMutationOperator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,19 +124,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -203,6 +185,7 @@
       <workItem from="1619721688251" duration="1046000" />
       <workItem from="1619723427779" duration="3953000" />
       <workItem from="1620012002751" duration="6226000" />
+      <workItem from="1620185255539" duration="899000" />
     </task>
     <servers />
   </component>
@@ -258,38 +241,46 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="845" y="284" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1619501993171" />
-    <state width="1877" height="301" key="GridCell.Tab.0.bottom" timestamp="1620018198360">
+    <state width="1877" height="269" key="GridCell.Tab.0.bottom" timestamp="1620186057339">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="301" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620018198360" />
-    <state width="1877" height="301" key="GridCell.Tab.0.center" timestamp="1620018198359">
+    <state width="1877" height="384" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620165644862" />
+    <state width="1877" height="269" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620186057339" />
+    <state width="1877" height="269" key="GridCell.Tab.0.center" timestamp="1620186057339">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="301" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620018198359" />
-    <state width="1877" height="301" key="GridCell.Tab.0.left" timestamp="1620018198359">
+    <state width="1877" height="384" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620165644862" />
+    <state width="1877" height="269" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620186057339" />
+    <state width="1877" height="269" key="GridCell.Tab.0.left" timestamp="1620186057339">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="301" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620018198359" />
-    <state width="1877" height="301" key="GridCell.Tab.0.right" timestamp="1620018198360">
+    <state width="1877" height="384" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620165644861" />
+    <state width="1877" height="269" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620186057339" />
+    <state width="1877" height="269" key="GridCell.Tab.0.right" timestamp="1620186057339">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="301" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620018198360" />
-    <state width="1877" height="350" key="GridCell.Tab.1.bottom" timestamp="1620018168490">
+    <state width="1877" height="384" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620165644862" />
+    <state width="1877" height="269" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620186057339" />
+    <state width="1877" height="269" key="GridCell.Tab.1.bottom" timestamp="1620186057340">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="350" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620018168490" />
-    <state width="1877" height="350" key="GridCell.Tab.1.center" timestamp="1620018168490">
+    <state width="1877" height="110" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620165338886" />
+    <state width="1877" height="269" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620186057340" />
+    <state width="1877" height="269" key="GridCell.Tab.1.center" timestamp="1620186057340">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="350" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620018168490" />
-    <state width="1877" height="350" key="GridCell.Tab.1.left" timestamp="1620018168490">
+    <state width="1877" height="110" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620165338886" />
+    <state width="1877" height="269" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620186057340" />
+    <state width="1877" height="269" key="GridCell.Tab.1.left" timestamp="1620186057339">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="350" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620018168490" />
-    <state width="1877" height="350" key="GridCell.Tab.1.right" timestamp="1620018168490">
+    <state width="1877" height="110" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620165338886" />
+    <state width="1877" height="269" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620186057339" />
+    <state width="1877" height="269" key="GridCell.Tab.1.right" timestamp="1620186057340">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="350" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620018168490" />
+    <state width="1877" height="110" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620165338886" />
+    <state width="1877" height="269" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620186057340" />
     <state x="625" y="224" key="NewModule_or_Project.wizard" timestamp="1619502000839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -314,9 +305,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1619743168831" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1619984953899">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="-1168" y="378" key="scopes" timestamp="1620165368928">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
+    <state x="-1168" y="378" key="scopes/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620165368928" />
+    <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1620165407082">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620165407082" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1619984953899" />
   </component>
   <component name="XDebuggerManager">
@@ -328,22 +324,34 @@
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/operators/interfaces/IChampionGame.java</url>
-          <line>10</line>
-          <option name="timeStamp" value="14" />
+          <url>file://$PROJECT_DIR$/src/operators/mutation/ChangeDateOrderOperator.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <condition expression="found == true" language="JAVA" />
-          <url>file://$PROJECT_DIR$/src/operators/interfaces/IChampionGame.java</url>
-          <line>18</line>
-          <option name="timeStamp" value="15" />
+          <url>file://$PROJECT_DIR$/src/operators/mutation/ChangeDatePositionOperator.java</url>
+          <line>12</line>
+          <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/definition/TTPDefinition.java</url>
-          <line>169</line>
-          <option name="timeStamp" value="31" />
+          <url>file://$PROJECT_DIR$/src/operators/mutation/ChangeDuelOperator.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/operators/mutation/SwapDatesOperator.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="57" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="i" />
+        <watch expression="thisLapBests.get(0)" />
+        <watch expression="thisLapBests.get(0)" />
+        <watch expression="thisLapBests.get(0)" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

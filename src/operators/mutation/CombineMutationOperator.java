@@ -14,12 +14,10 @@ public class CombineMutationOperator extends MutationOperator {
     @Override
     public State applyMutation(State state) {
 
-        State finalState = new State();
-        finalState.setCode(state.getCode());
         Random random = new Random();
         int randomNumber = random.nextInt(types.size());
         MutationOperator mutation = MutationOperatorFactory.getInstance(types.get(randomNumber));
-        finalState = mutation.applyMutation(state);
+        State finalState = mutation.applyMutation(state);
         return finalState;
     }
 
