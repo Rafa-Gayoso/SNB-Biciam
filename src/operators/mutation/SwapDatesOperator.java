@@ -8,11 +8,10 @@ import problem.definition.State;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class SwapDatesOperator extends MutationOperator implements ICopyState {
+public class SwapDatesOperator extends MutationOperator {
     @Override
     public State applyMutation(State state) {
-        State resultState = new State();
-        copyState(resultState,state);
+        State resultState =state.clone();
         int firstDate = -1;
         int secondDate = -1;
         int startPosition = 0;

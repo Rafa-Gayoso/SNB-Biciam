@@ -3,18 +3,16 @@ package operators.mutation;
 import com.sun.prism.shader.Solid_Color_AlphaTest_Loader;
 import definition.TTPDefinition;
 import definition.state.statecode.Date;
-import operators.interfaces.ICopyState;
-import operators.interfaces.ISwapTeams;
+import operators.interfaces.*;
 import problem.definition.State;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class ChangeDuelOperator extends MutationOperator implements ISwapTeams, ICopyState {
+public class ChangeDuelOperator extends MutationOperator implements ISwapTeams {
     @Override
     public State applyMutation(State state) {
-        State resultSate = new State();//state.clone();
-        copyState(resultSate,state);
+        State resultSate = state.clone();
         int posFirstDate = -1;
         int posLastDate = -1;
         int posFirstDuel = -1;

@@ -100,7 +100,7 @@ public class CalendarStatisticsController {
         for(int i =0; i < calendarsList.size();i++){
             
             //Distancias de los calendarios
-            State calendar = calendarsList.get(i);
+            State calendar = calendarsList.get(i).clone();
 
             ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(calendar);
             StateWithDistance stateDistance = new StateWithDistance(calendar);

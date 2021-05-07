@@ -7,13 +7,13 @@ import problem.definition.State;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class ChangeDatePositionOperator extends MutationOperator implements ICopyState {
+public class ChangeDatePositionOperator extends MutationOperator {
 
 
     @Override
     public State applyMutation(State state) {
-        State resultState = new State();//state.clone();
-        copyState(resultState,state);
+        State resultState = state.clone();
+
         int selectedDate = -1;
         int dateToChange = -1;
 

@@ -55,8 +55,6 @@ public class RestrictionsController implements Initializable {
 
         State calendar = Executer.getInstance().getResultStates().get(CalendarController.selectedCalendar);
 
-        ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(calendar);
-
 
         int maxVisitorGamesBrokeRule = TTPDefinition.getInstance().penalizeVisitorGames(calendar);
         int maxHomeGamesBrokeRule =TTPDefinition.getInstance().penalizeLocalGames(calendar);

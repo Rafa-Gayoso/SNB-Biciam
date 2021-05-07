@@ -61,7 +61,7 @@ public class Executer {
         this.heuristics = new ArrayList<>();
         this.saveData = new ArrayList<>();
         this.EXECUTIONS = 5;
-        this.ITERATIONS = 2;
+        this.ITERATIONS = 1000;
         this.selectedMH = 0;
     }
 

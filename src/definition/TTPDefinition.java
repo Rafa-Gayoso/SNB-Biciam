@@ -175,10 +175,10 @@ public class TTPDefinition {
             }
         }*/
 
-        System.out.println("-------");
-        for (int i = 0; i < ((Date)calendar.getCode().get(1)).getGames().size(); i++) {
-            teamsIndexes.add(((Date)calendar.getCode().get(1)).getGames().get(i).get(0));
-            teamsIndexes.add(((Date)calendar.getCode().get(1)).getGames().get(i).get(1));
+
+        for (int i = 0; i < ((Date)calendar.getCode().get(calendar.getCode().size()-1)).getGames().size(); i++) {
+            teamsIndexes.add(((Date)calendar.getCode().get(calendar.getCode().size()-1)).getGames().get(i).get(0));
+            teamsIndexes.add(((Date)calendar.getCode().get(calendar.getCode().size()-1)).getGames().get(i).get(1));
         }
         quickSort(teamsIndexes, 0, teamsIndexes.size()-1);
 
@@ -230,18 +230,12 @@ public class TTPDefinition {
         return teamDate;
     }
 
-    private ArrayList<Integer> createTeamsIndexes(int cantEquipos){
-        ArrayList<Integer> teamsIndexes = new ArrayList<>();
 
-        for (int i = 0; i < cantEquipos ; i++) {
-            teamsIndexes.add(i);
-        }
-        return teamsIndexes;
-    }
 
-    public int penalizeVisitorGames(State state){
+    public int penalizeVisitorGames(State calendar){
         int cont = 0;
         ArrayList<Integer> counts = new ArrayList<>();
+        State state = calendar.clone();
         ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(state);
         int maxVisitorGames = TTPDefinition.getInstance().getCantVecesVisitante();
         ArrayList<Integer> teamsIndexes = TTPDefinition.getInstance().getTeamsIndexes();
@@ -271,8 +265,28 @@ public class TTPDefinition {
         return cont;
     }
 
-    public int penalizeLocalGames(State state){
+    public int penalizeChampionGame(State calendar){
+
+        boolean penalize = true;
+
+        Date date = (Date) calendar.getCode().get(0);
+        int i =0;
+        while (i < date.getGames().size() && penalize){
+            ArrayList<Integer> duel = date.getGames().get(i);
+
+            if(duel.get(0) == TTPDefinition.getInstance().getFirstPlace() && duel.get(1) == TTPDefinition.getInstance().getSecondPlace()){
+                penalize = false;
+            }
+            else{
+                i++;
+            }
+        }
+        return penalize? PENALIZATION: 0;
+    }
+
+    public int penalizeLocalGames(State calendar){
         int cont = 0;
+        State state = calendar.clone();
         ArrayList<Integer> counts = new ArrayList<>();
         ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(state);
         int maxHomeGames = TTPDefinition.getInstance().getCantVecesLocal();

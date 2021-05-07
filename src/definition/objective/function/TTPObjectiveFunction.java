@@ -8,9 +8,14 @@ import java.util.ArrayList;
 
 public class TTPObjectiveFunction extends ObjetiveFunction {
     @Override
-    public Double Evaluation(State state) {
+    public Double Evaluation(State calendar) {
+        State state = calendar.clone();
         int penalizeVisitorGames = TTPDefinition.getInstance().penalizeVisitorGames(state);
         int penalizeHomeGames = TTPDefinition.getInstance().penalizeLocalGames(state);
+        int penalizeChampion = 0;
+        if(!TTPDefinition.getInstance().isInauguralGame() && TTPDefinition.getInstance().isChampionVsSub()){
+            penalizeChampion = TTPDefinition.getInstance().penalizeChampionGame(state);
+        }
         double totalDistance = 0;
         ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(state);
         for (int i = 0; i < itinerary.size() - 1; i++) {
@@ -23,7 +28,8 @@ public class TTPObjectiveFunction extends ObjetiveFunction {
                 totalDistance += dist;
             }
         }
-        return totalDistance + (TTPDefinition.getInstance().getPenalization() * (penalizeHomeGames + penalizeVisitorGames));
+        return totalDistance + (TTPDefinition.getInstance().getPenalization() * (penalizeHomeGames + penalizeVisitorGames
+        + penalizeChampion));
     }
 
 

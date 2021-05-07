@@ -9,12 +9,11 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class ChangeDateOrderOperator extends MutationOperator implements ICopyState {
+public class ChangeDateOrderOperator extends MutationOperator {
 
     @Override
     public State applyMutation(State state) {
-        State resultState = new State();//state.clone();
-        copyState(resultState,state);
+        State resultState = state.clone();
         int firstDate = -1;
         int lastDate = -1;
         int startPosition = 0;
