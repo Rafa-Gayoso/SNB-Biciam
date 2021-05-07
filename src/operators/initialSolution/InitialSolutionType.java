@@ -6,18 +6,9 @@ public enum InitialSolutionType {
         @Override
         public String toString() {
 
-            return SimpleRoundEvenSolution.class.getName();
+            return SimpleRoundSolution.class.getName();
         }
     },
-
-    SIMPLE_ROUND_ODD_SOLUTION{
-        @Override
-        public String toString() {
-
-            return SimpleRoundOddSolution.class.getName();
-        }
-    },
-
 
     OCCIDENT_ORIENT_SOLUTION{
         @Override
@@ -31,15 +22,7 @@ public enum InitialSolutionType {
         @Override
         public String toString() {
 
-            return SimpleRoundEvenInauguralSolution.class.getName();
-        }
-    },
-
-    SIMPLE_ROUND_ODD_INAUGURAL_SOLUTION{
-        @Override
-        public String toString() {
-
-            return SimpleRoundOddInauguralSolution.class.getName();
+            return SimpleRoundInauguralSolution.class.getName();
         }
     },
 
@@ -47,15 +30,7 @@ public enum InitialSolutionType {
         @Override
         public String toString() {
 
-            return SimpleRoundEvenChampionSolution.class.getName();
-        }
-    },
-
-    SIMPLE_ROUND_ODD_CHAMPION_SOLUTION{
-        @Override
-        public String toString() {
-
-            return SimpleRoundOddChampionSolution.class.getName();
+            return SimpleRoundChampionSolution.class.getName();
         }
     },
 
@@ -64,99 +39,58 @@ public enum InitialSolutionType {
         @Override
         public String toString() {
 
-            return DoubleRoundSymmetricEvenSolution.class.getName();
+            return DoubleRoundSymmetricSolution.class.getName();
         }
     },
 
-    DOUBLE_ROUND_SYMMETRIC_ODD_SOLUTION{
-        @Override
-        public String toString() {
-
-            return DoubleRoundSymmetricOddSolution.class.getName();
-        }
-    },
 
     DOUBLE_ROUND_SYMMETRIC_EVEN_INAUGURAL_SOLUTION{
         @Override
         public String toString() {
 
-            return DoubleRoundSymmetricEvenInauguralSolution.class.getName();
+            return DoubleRoundSymmetricInauguralSolution.class.getName();
         }
     },
 
-    DOUBLE_ROUND_SYMMETRIC_ODD_INAUGURAL_SOLUTION{
-        @Override
-        public String toString() {
 
-            return DoubleRoundSymmetricOddInauguralSolution.class.getName();
-        }
-    },
 
     DOUBLE_ROUND_SYMMETRIC_EVEN_CHAMPION_SOLUTION{
         @Override
         public String toString() {
 
-            return DoubleRoundSymmetricEvenChampionSolution.class.getName();
+            return DoubleRoundSymmetricChampionSolution.class.getName();
         }
     },
 
-    DOUBLE_ROUND_SYMMETRIC_ODD_CHAMPION_SOLUTION{
-        @Override
-        public String toString() {
 
-            return DoubleRoundSymmetricOddChampionSolution.class.getName();
-        }
-    },
 
     DOUBLE_ROUND_NON_SYMMETRIC_EVEN_SOLUTION{
         @Override
         public String toString() {
 
-            return DoubleRoundNonSymmetricEvenSolution.class.getName();
+            return DoubleRoundNonSymmetricSolution.class.getName();
         }
     },
 
-    DOUBLE_ROUND_NON_SYMMETRIC_ODD_SOLUTION{
-        @Override
-        public String toString() {
 
-            return DoubleRoundNonSymmetricOddSolution.class.getName();
-        }
-    },
 
     DOUBLE_ROUND_NON_SYMMETRIC_EVEN_INAUGURAL_SOLUTION{
         @Override
         public String toString() {
 
-            return DoubleRoundNonSymmetricEvenInauguralSolution.class.getName();
+            return DoubleRoundNonSymmetricInauguralSolution.class.getName();
         }
     },
 
-    DOUBLE_ROUND_NON_SYMMETRIC_ODD_INAUGURAL_SOLUTION{
-        @Override
-        public String toString() {
 
-            return DoubleRoundNonSymmetricOddInauguralSolution.class.getName();
-        }
-    },
 
     DOUBLE_ROUND_NON_SYMMETRIC_EVEN_CHAMPION_SOLUTION{
         @Override
         public String toString() {
 
-            return DoubleRoundNonSymmetricEvenChampionSolution.class.getName();
+            return DoubleRoundNonSymmetricChampionSolution.class.getName();
         }
     },
-
-    DOUBLE_ROUND_NON_SYMMETRIC_ODD_CHAMPION_SOLUTION{
-        @Override
-        public String toString() {
-
-            return DoubleRoundNonSymmetricOddChampionSolution.class.getName();
-        }
-    },
-
-
 
 
 }

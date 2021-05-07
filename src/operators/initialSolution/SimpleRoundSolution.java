@@ -10,7 +10,7 @@ import problem.definition.State;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class SimpleRoundEvenSolution extends InitialSolution {
+public class SimpleRoundSolution extends InitialSolution {
 
 
     

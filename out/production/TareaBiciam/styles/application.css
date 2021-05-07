@@ -20,6 +20,7 @@
 
 .jfx-tab-pane .tab-selected-line {
     -fx-border-color: #ff0006;
+    -fx-pref-height: 10;
 }
 
 .jfx-tab-pane .tab .tab-label {
@@ -28,6 +29,14 @@
     -fx-font-size: 24px; /* before it was 12px */
     -fx-font-weight: bold;
     -fx-wrap-text: true;
+}
+
+.jfx-tab-pane .tab {
+    -fx-border-color:
+            transparent
+            derive(-fx-base, 80%)
+            transparent
+            transparent;
 }
 
 .list-cell {

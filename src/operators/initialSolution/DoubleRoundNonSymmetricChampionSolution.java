@@ -1,16 +1,16 @@
 package operators.initialSolution;
 
 import operators.heuristics.HeuristicOperatorType;
-import operators.interfaces.IInauguralGame;
+import operators.interfaces.IChampionGame;
 import problem.definition.State;
 
 import java.util.ArrayList;
 
-public class DoubleRoundNonSymmetricEvenInauguralSolution extends DoubleRoundNonSymmetricEvenSolution implements IInauguralGame {
+public class DoubleRoundNonSymmetricChampionSolution extends DoubleRoundNonSymmetricSolution implements IChampionGame {
     @Override
     public State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
         State state = super.generateCalendar(heuristics);
-        addInauguralGame(state);
+        fixChampionSubchampion(state);
 
         return state;
     }

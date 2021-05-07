@@ -5,8 +5,7 @@ import problem.definition.State;
 
 import java.util.ArrayList;
 
-public class DoubleRoundSymmetricOddInauguralSolution extends DoubleRoundSymmetricOddSolution {
-
+public class DoubleRoundSymmetricInauguralSolution extends DoubleRoundSymmetricSolution {
     @Override
     public State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
         return null;
