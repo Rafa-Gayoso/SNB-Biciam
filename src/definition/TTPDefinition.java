@@ -163,13 +163,22 @@ public class TTPDefinition {
         return teamsIndexes;
     }
 
-    public ArrayList<ArrayList<Integer>> teamsItinerary(State state) {
+    public ArrayList<ArrayList<Integer>> teamsItinerary(State calendar) {
         ArrayList<ArrayList<Integer>> teamDate = new ArrayList<>();
         ArrayList<Integer> teamsIndexes = new ArrayList<>();
+        /*int length = calendar.getCode().size();
+        if(length < 15){
+            System.out.println("------ELIMINO-------");
+            for(int i =0; i < calendar.getCode().size(); i++){
+                Date date = (Date) calendar.getCode().get(i);
+                System.out.println(date);
+            }
+        }*/
 
-        for (int i = 0; i < ((Date)state.getCode().get(0)).getGames().size(); i++) {
-            teamsIndexes.add(((Date)state.getCode().get(0)).getGames().get(i).get(0));
-            teamsIndexes.add(((Date)state.getCode().get(0)).getGames().get(i).get(1));
+        System.out.println("-------");
+        for (int i = 0; i < ((Date)calendar.getCode().get(1)).getGames().size(); i++) {
+            teamsIndexes.add(((Date)calendar.getCode().get(1)).getGames().get(i).get(0));
+            teamsIndexes.add(((Date)calendar.getCode().get(1)).getGames().get(i).get(1));
         }
         quickSort(teamsIndexes, 0, teamsIndexes.size()-1);
 
@@ -198,13 +207,13 @@ public class TTPDefinition {
             i=1;
         }
 
-        for (; i < state.getCode().size(); i++) {
+        for (; i < calendar.getCode().size(); i++) {
             row = new ArrayList<>();
             for (int k = 0; k < teamsIndexes.size(); k++) {
                 row.add(-1);
             }
 
-            Date date = (Date)state.getCode().get(i);
+            Date date = (Date)calendar.getCode().get(i);
 
             for (int m = 0; m < date.getGames().size(); m++) {
                 int first = date.getGames().get(m).get(0);

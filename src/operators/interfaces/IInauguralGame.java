@@ -10,11 +10,14 @@ import java.util.ArrayList;
 public interface IInauguralGame {
 
     default void addInauguralGame(State state){
-        Date inauguralDate = new Date();
-        ArrayList<Integer> pair = new ArrayList<>();
-        pair.add(TTPDefinition.getInstance().getFirstPlace());
-        pair.add(TTPDefinition.getInstance().getSecondPlace());
-        inauguralDate.getGames().add(pair);
-        state.getCode().add(0, inauguralDate);
+        Date date = (Date) state.getCode().get(0);
+        if(date.getGames().size()>1) {
+            Date inauguralDate = new Date();
+            ArrayList<Integer> pair = new ArrayList<>();
+            pair.add(TTPDefinition.getInstance().getFirstPlace());
+            pair.add(TTPDefinition.getInstance().getSecondPlace());
+            inauguralDate.getGames().add(pair);
+            state.getCode().add(0, inauguralDate);
+        }
     }
 }

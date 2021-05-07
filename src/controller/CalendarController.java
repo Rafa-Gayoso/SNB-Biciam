@@ -138,7 +138,8 @@ public class CalendarController implements Initializable {
     private ArrayList<Integer> addRestToCalendar(State calendar){
         ArrayList<Integer> rest = new ArrayList<>();
         ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(calendar);
-        ArrayList<Integer> teams= TTPDefinition.getInstance().getTeamsIndexes();
+        ArrayList<Integer> teams= (ArrayList<Integer>) itinerary.get(0).clone();
+
         for(int i=1; i < itinerary.size()-1;i++){
            if(itinerary.get(i).containsAll(teams)){
                rest.add(i - 1);

@@ -1,22 +1,27 @@
 package operators.mutation;
 
+import definition.TTPDefinition;
 import definition.state.statecode.Date;
+import operators.interfaces.ICopyState;
 import problem.definition.State;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class ChangeDateOrderOperator extends MutationOperator {
+public class ChangeDateOrderOperator extends MutationOperator implements ICopyState {
 
     @Override
     public State applyMutation(State state) {
-        State resultState = state.clone();
-        //copyState(resultState,state);
+        State resultState = new State();//state.clone();
+        copyState(resultState,state);
         int firstDate = -1;
         int lastDate = -1;
         int startPosition = 0;
 
+        if(TTPDefinition.getInstance().isInauguralGame()){
+            startPosition = 1;
+        }
 
         if (firstDate == -1) {
             firstDate = ThreadLocalRandom.current().nextInt(startPosition, resultState.getCode().size() - 1);
@@ -38,6 +43,9 @@ public class ChangeDateOrderOperator extends MutationOperator {
         for (int i = firstDate; i <= lastDate; i++) {
             Date date = stack.poll();
             resultState.getCode().set(i, date);
+        }
+        if(resultState.getCode().size()<15){
+            System.out.println("ELIMINO");
         }
         return resultState;
     }

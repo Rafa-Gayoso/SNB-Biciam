@@ -20,7 +20,7 @@
 
 .jfx-tab-pane .tab-selected-line {
     -fx-border-color: #ff0006;
-    -fx-pref-height: 10;
+    -fx-pref-height: 5;
 }
 
 .jfx-tab-pane .tab .tab-label {

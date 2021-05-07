@@ -36,10 +36,10 @@ public class TTPOperator extends Operator implements ICreateInitialSolution, ICh
         List<State> neighborhood = new ArrayList<>(neighborhoodSize);
         for (int i = 0; i <  neighborhoodSize; i++) {
             State newState = operatorSelector.applyMutation(state);
-            if(TTPDefinition.getInstance().isChampionVsSub()){
+            /*if(TTPDefinition.getInstance().isChampionVsSub()){
                 fixChampionSubchampion(newState);
-            }
-            else if(TTPDefinition.getInstance().isInauguralGame()){
+            }*/
+            if(TTPDefinition.getInstance().isInauguralGame()){
                 addInauguralGame(newState);
             }
             neighborhood.add(newState);
