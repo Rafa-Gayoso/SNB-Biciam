@@ -18,12 +18,11 @@ public class ChangeDateDuelsOrderOperator extends MutationOperator{
         }
 
         int selectedDate =  -1;
-        if(TTPDefinition.getInstance().isInauguralGame()){
-            do {
+        do {
                 selectedDate = ThreadLocalRandom.current().nextInt(startPosition, resultState.getCode().size() - 1);
-            }
-            while (selectedDate == -1);
         }
+        while (selectedDate == -1);
+
 
         Date date = (Date) resultState.getCode().get(selectedDate);
 

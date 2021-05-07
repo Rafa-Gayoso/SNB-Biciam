@@ -2,7 +2,6 @@ package operators.mutation;
 
 import definition.TTPDefinition;
 import definition.state.statecode.Date;
-import operators.interfaces.ICopyState;
 import problem.definition.State;
 
 import java.util.ArrayDeque;

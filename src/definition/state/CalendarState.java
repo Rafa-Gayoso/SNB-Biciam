@@ -4,6 +4,8 @@ import definition.state.statecode.Date;
 import problem.definition.State;
 
 public class CalendarState extends State {
+    
+    private int calendarType;
 
     @Override
     public State clone() {
@@ -16,5 +18,14 @@ public class CalendarState extends State {
             }
         }
         return state;
+    }
+
+
+    public int getCalendarType() {
+        return calendarType;
+    }
+
+    public void setCalendarType(int calendarType) {
+        this.calendarType = calendarType;
     }
 }

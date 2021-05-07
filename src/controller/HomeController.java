@@ -156,7 +156,7 @@ public class HomeController implements Initializable {
 
     @FXML
     void showInformation(ActionEvent event) throws IOException{
-        File file = new File("files/help.pdf");
+        File file = new File("config_files"+File.separator+"help.pdf");
 
         //first check if Desktop is supported by Platform or not
         if(!Desktop.isDesktopSupported()){

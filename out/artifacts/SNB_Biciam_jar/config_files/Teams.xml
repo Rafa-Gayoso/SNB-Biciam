@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Teams>
+    <team>
+        <name>Pinar del Río</name>
+        <acronym>PRI</acronym>
+        <region>Occidental</region>
+    </team>
+    <team>
+        <name>Artemisa</name>
+        <acronym>ART</acronym>
+        <region>Occidental</region>
+    </team>
+    <team>
+        <name>Isla de la Juventud</name>
+        <acronym>ISJ</acronym>
+        <region>Occidental</region>
+    </team>
+    <team>
+        <name>Mayabeque</name>
+        <acronym>MAY</acronym>
+        <region>Occidental</region>
+    </team>
+    <team>
+        <name>Industriales</name>
+        <acronym>IND</acronym>
+        <region>Occidental</region>
+    </team>
+    <team>
+        <name>Matanzas</name>
+        <acronym>MTZ</acronym>
+        <region>Occidental</region>
+    </team>
+    <team>
+        <name>Cienfuegos</name>
+        <acronym>CFG</acronym>
+        <region>Occidental</region>
+    </team>
+    <team>
+        <name>Sancti Spíritus</name>
+        <acronym>SSP</acronym>
+        <region>Occidental</region>
+    </team>
+    <team>
+        <name>Villa Clara</name>
+        <acronym>VCL</acronym>
+        <region>Oriental</region>
+    </team>
+    <team>
+        <name>Ciego de Ávila</name>
+        <acronym>CAV</acronym>
+        <region>Oriental</region>
+    </team>
+    <team>
+        <name>Camagüey</name>
+        <acronym>CMG</acronym>
+        <region>Oriental</region>
+    </team>
+    <team>
+        <name>Las Tunas</name>
+        <acronym>LTU</acronym>
+        <region>Oriental</region>
+    </team>
+    <team>
+        <name>Granma</name>
+        <acronym>GRA</acronym>
+        <region>Oriental</region>
+    </team>
+    <team>
+        <name>Holguín</name>
+        <acronym>HOL</acronym>
+        <region>Oriental</region>
+    </team>
+    <team>
+        <name>Santiago de Cuba</name>
+        <acronym>SCU</acronym>
+        <region>Oriental</region>
+    </team>
+    <team>
+        <name>Guantánamo</name>
+        <acronym>GTM</acronym>
+        <region>Oriental</region>
+    </team>
+</Teams>

@@ -31,12 +31,8 @@
     -fx-wrap-text: true;
 }
 
-.jfx-tab-pane .tab {
-    -fx-border-color:
-            transparent
-            derive(-fx-base, 80%)
-            transparent
-            transparent;
+.jfx-tab-pane .tab:selected {
+
 }
 
 .list-cell {

@@ -4,7 +4,6 @@ import definition.TTPDefinition;
 import definition.state.statecode.Date;
 import problem.definition.State;
 
-import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ChangeTeamsOperator extends MutationOperator{

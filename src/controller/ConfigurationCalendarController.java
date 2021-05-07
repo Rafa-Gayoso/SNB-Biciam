@@ -5,6 +5,7 @@ import definition.TTPDefinition;
 import execute.Executer;
 import javafx.collections.ObservableList;
 import operators.heuristics.HeuristicOperatorType;
+import operators.mutation.MutationOperator;
 import operators.mutation.MutationOperatorType;
 import utils.DataFiles;
 import javafx.collections.FXCollections;
@@ -201,13 +202,31 @@ public class ConfigurationCalendarController implements Initializable {
                 mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_POSITION);
                 mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DUEL);
                 mutationsOperatorTypes.add(MutationOperatorType.SWAP_DATES);
-                mutationsOperatorTypes.add(MutationOperatorType.CHANGE_TEAMS_OPERATOR);
-                mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_DUELS_ORDER_OPERATOR);
-                mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_SINGLE_DUEL_ORDER_OPERATOR);
-                mutationsOperatorTypes.add(MutationOperatorType.CHANGE_LOCAL_VISITOR_SINGLE_TEAM_OPERATOR);
+
+                if(TTPDefinition.getInstance().isSecondRound() && !TTPDefinition.getInstance().isSymmetricSecondRound()){
+                    mutationsOperatorTypes.add(MutationOperatorType.CHANGE_TEAMS_OPERATOR);
+                    mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_DUELS_ORDER_OPERATOR);
+                    mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_SINGLE_DUEL_ORDER_OPERATOR);
+                    mutationsOperatorTypes.add(MutationOperatorType.CHANGE_LOCAL_VISITOR_SINGLE_TEAM_OPERATOR);
+                }
+
 
                 Executer.getInstance().setMutations(mutationsOperatorTypes);
             }
+            else {
+                if((TTPDefinition.getInstance().isSecondRound() && TTPDefinition.getInstance().isSymmetricSecondRound())
+                        || !TTPDefinition.getInstance().isSecondRound()) {
+                    MutationOperatorType [] types = MutationOperatorType.values();
+
+                    for (int i = 4; i < types.length ; i++) {
+                        if(Executer.getInstance().getMutations().contains(types[i])){
+                            Executer.getInstance().getMutations().remove(types[i]);
+                        }
+                    }
+
+                }
+            }
+
             if (Executer.getInstance().getHeuristics().isEmpty()) {
                 ArrayList<HeuristicOperatorType> heuristicOperatorTypes = new ArrayList<>();
                 heuristicOperatorTypes.add(HeuristicOperatorType.DUEL_HEURISTIC);

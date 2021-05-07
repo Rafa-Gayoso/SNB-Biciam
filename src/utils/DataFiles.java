@@ -33,10 +33,10 @@ import java.util.List;
 
 public class DataFiles {
 
-    private static final String MUTATIONS = "files/Mutations.xml";
-    private static final String HEURISTICS = "files/Heuristics.xml";
-    private static final String TEAMS = "files/Teams.xml";
-    private static final String DATA = "files/Data.xlsx";
+    private static final String MUTATIONS = "config_files"+File.separator+"Mutations.xml";
+    private static final String HEURISTICS = "config_files"+File.separator+"Heuristics.xml";
+    private static final String TEAMS = "config_files"+File.separator+"Teams.xml";
+    private static final String DATA = "config_files"+File.separator+"Data.xlsx";
     private static DataFiles singletonFiles;//Singleton Pattern
     private ArrayList<String> teams;//List of resources.teams
     private ArrayList<String> acronyms;

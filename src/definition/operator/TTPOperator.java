@@ -1,10 +1,12 @@
 package definition.operator;
 
 import definition.TTPDefinition;
+import definition.state.CalendarState;
 import operators.crossover.CrossoverOperator;
 import operators.factory.InitialSolutionFactory;
 import operators.heuristics.HeuristicOperatorType;
 import operators.initialSolution.InitialSolution;
+import operators.initialSolution.InitialSolutionType;
 import operators.interfaces.IChampionGame;
 import operators.interfaces.ICreateInitialSolution;
 import operators.interfaces.IInauguralGame;
@@ -15,6 +17,7 @@ import problem.definition.Operator;
 import problem.definition.State;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class TTPOperator extends Operator implements ICreateInitialSolution, ISecondRound, IInauguralGame, IChampionGame {
@@ -24,7 +27,7 @@ public class TTPOperator extends Operator implements ICreateInitialSolution, ISe
     private CrossoverOperator crossoverOperator;
     private ArrayList<HeuristicOperatorType> heuristics;
 
-    public TTPOperator(ArrayList<MutationOperatorType> mutations, ArrayList<HeuristicOperatorType> heuristics){
+    public TTPOperator(ArrayList<MutationOperatorType> mutations, ArrayList<HeuristicOperatorType> heuristics) {
 
         this.operatorSelector = new CombineMutationOperator();
         this.heuristics = heuristics;
@@ -35,16 +38,16 @@ public class TTPOperator extends Operator implements ICreateInitialSolution, ISe
     @Override
     public List<State> generatedNewState(State state, Integer neighborhoodSize) {
         List<State> neighborhood = new ArrayList<>(neighborhoodSize);
-        for (int i = 0; i <  neighborhoodSize; i++) {
+        for (int i = 0; i < neighborhoodSize; i++) {
             State newState = operatorSelector.applyMutation(state);
-            if(TTPDefinition.getInstance().isSymmetricSecondRound()){
+            if (TTPDefinition.getInstance().isSymmetricSecondRound()) {
                 setSecondRound(newState);
-                if(TTPDefinition.getInstance().isChampionVsSub()){
-                    if(TTPDefinition.getInstance().isInauguralGame())
-                        addInauguralGame(newState);
-                    else
-                        fixChampionSubchampion(newState);
-                }
+            }
+            if (TTPDefinition.getInstance().isChampionVsSub()) {
+                if (TTPDefinition.getInstance().isInauguralGame())
+                    addInauguralGame(newState);
+                else
+                    fixChampionSubchampion(newState);
             }
             neighborhood.add(newState);
         }
@@ -54,9 +57,11 @@ public class TTPOperator extends Operator implements ICreateInitialSolution, ISe
     @Override
     public List<State> generateRandomState(Integer neighborhoodSize) {
         List<State> neighborhood = new ArrayList<>(neighborhoodSize);
-        this.initialSolution = InitialSolutionFactory.getInstance(createSolutionType());
+        InitialSolutionType type = createSolutionType();
+        this.initialSolution = InitialSolutionFactory.getInstance(type);
         for (int i = 0; i < neighborhoodSize; i++) {
             State state = initialSolution.generateCalendar(heuristics);
+            ((CalendarState) state).setCalendarType(type.ordinal());
             neighborhood.add(state);
         }
         return neighborhood;
@@ -65,7 +70,7 @@ public class TTPOperator extends Operator implements ICreateInitialSolution, ISe
     @Override
     public List<State> generateNewStateByCrossover(State state, State state1) {
         List<State> newStates = new ArrayList<>();
-        State crossedState =  crossoverOperator.createNewStateByCrossover(state, state1);
+        State crossedState = crossoverOperator.createNewStateByCrossover(state, state1);
         newStates.add(crossedState);
         return newStates;
     }

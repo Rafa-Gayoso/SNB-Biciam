@@ -21,7 +21,7 @@ public class TTPObjectiveFunction extends ObjetiveFunction {
             else
                 penalizeInauguralGame = TTPDefinition.getInstance().penalizeInauguralGame(state);
         }
-        
+
         double totalDistance = 0;
         ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(state);
         for (int i = 0; i < itinerary.size() - 1; i++) {

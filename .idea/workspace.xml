@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="TareaBiciam:jar" />
+      <artifact name="SNB-Biciam:jar" />
     </artifacts-to-build>
   </component>
   <component name="BranchesTreeState">
@@ -25,19 +25,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31c4c62d-8161-430c-9912-ecee8f383fae" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/SNB_Biciam_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TareaBiciam.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SNB-Biciam.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/Mutations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/files/Mutations.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/AdvanceConfigurationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AdvanceConfigurationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/config_files/Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/Heuristics.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config_files/Heuristics.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/Mutations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config_files/Mutations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/Teams.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config_files/Teams.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/help.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/config_files/help.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SNB-Biciam/styles/application.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SNB-Biciam/styles/application.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/definition/TTPDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/TTPDefinition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/definition/objective/function/TTPObjectiveFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/objective/function/TTPObjectiveFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/definition/operator/TTPOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/operator/TTPOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/definition/state/CalendarState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/state/CalendarState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/interfaces/ICopyState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeDateDuelsOrderOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeDateDuelsOrderOperator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeDateOrderOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeDateOrderOperator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeDatePositionOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeDatePositionOperator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeDuelOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeDuelOperator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operators/mutation/MutationOperatorType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/MutationOperatorType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeTeamsOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeTeamsOperator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/operators/mutation/SwapDatesOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/SwapDatesOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/application.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/application.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/DataFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/DataFiles.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +79,7 @@
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/files" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
@@ -220,7 +228,7 @@
       <workItem from="1620012002751" duration="6226000" />
       <workItem from="1620185255539" duration="899000" />
       <workItem from="1620355181876" duration="3595000" />
-      <workItem from="1620406093664" duration="8598000" />
+      <workItem from="1620406093664" duration="12190000" />
     </task>
     <servers />
   </component>
@@ -248,11 +256,15 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="714" y="321" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1619448574008" />
-    <state x="765" y="203" key="#com.intellij.ide.util.MemberChooser" timestamp="1620420991161">
+    <state x="765" y="203" key="#com.intellij.ide.util.MemberChooser" timestamp="1620423002220">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1155" y="203" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620409111309" />
-    <state x="765" y="203" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1620420991161" />
+    <state x="765" y="203" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1620423002220" />
+    <state x="690" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1620424445414">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1620424445414" />
     <state x="743" y="414" width="433" height="218" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1619450127667">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -266,10 +278,10 @@
     </state>
     <state x="-1230" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620369082646" />
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1620343239188" />
-    <state x="715" y="222" width="918" height="595" key="#xdebugger.evaluate" timestamp="1620018133249">
+    <state x="849" y="91" width="918" height="595" key="#xdebugger.evaluate" timestamp="1620424061211">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="715" y="222" width="918" height="595" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1620018133249" />
+    <state x="849" y="91" width="918" height="595" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1620424061211" />
     <state width="425" height="466" key="DebuggerActiveHint" timestamp="1620017201261">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -278,55 +290,55 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="845" y="284" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1619501993171" />
-    <state width="1877" height="253" key="GridCell.Tab.0.bottom" timestamp="1620421220699">
+    <state width="1877" height="349" key="GridCell.Tab.0.bottom" timestamp="1620425065535">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="334" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620409379954" />
-    <state width="1877" height="253" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620421220699" />
-    <state width="1877" height="253" key="GridCell.Tab.0.center" timestamp="1620421220699">
+    <state width="1877" height="349" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620425065535" />
+    <state width="1877" height="349" key="GridCell.Tab.0.center" timestamp="1620425065535">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="334" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620409379953" />
-    <state width="1877" height="253" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620421220699" />
-    <state width="1877" height="253" key="GridCell.Tab.0.left" timestamp="1620421220699">
+    <state width="1877" height="349" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620425065535" />
+    <state width="1877" height="349" key="GridCell.Tab.0.left" timestamp="1620425065535">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="334" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620409379953" />
-    <state width="1877" height="253" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620421220699" />
-    <state width="1877" height="253" key="GridCell.Tab.0.right" timestamp="1620421220699">
+    <state width="1877" height="349" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620425065535" />
+    <state width="1877" height="349" key="GridCell.Tab.0.right" timestamp="1620425065535">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="334" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620409379954" />
-    <state width="1877" height="253" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620421220699" />
-    <state width="1877" height="334" key="GridCell.Tab.1.bottom" timestamp="1620420700728">
+    <state width="1877" height="349" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620425065535" />
+    <state width="1877" height="349" key="GridCell.Tab.1.bottom" timestamp="1620425054328">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="334" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620409402376" />
-    <state width="1877" height="334" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620420700728" />
-    <state width="1877" height="334" key="GridCell.Tab.1.center" timestamp="1620420700728">
+    <state width="1877" height="349" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620425054328" />
+    <state width="1877" height="349" key="GridCell.Tab.1.center" timestamp="1620425054328">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="334" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620409402376" />
-    <state width="1877" height="334" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620420700728" />
-    <state width="1877" height="334" key="GridCell.Tab.1.left" timestamp="1620420700728">
+    <state width="1877" height="349" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620425054328" />
+    <state width="1877" height="349" key="GridCell.Tab.1.left" timestamp="1620425054328">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="334" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620409402376" />
-    <state width="1877" height="334" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620420700728" />
-    <state width="1877" height="334" key="GridCell.Tab.1.right" timestamp="1620420700728">
+    <state width="1877" height="349" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620425054328" />
+    <state width="1877" height="349" key="GridCell.Tab.1.right" timestamp="1620425054328">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="334" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620409402376" />
-    <state width="1877" height="334" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620420700728" />
+    <state width="1877" height="349" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620425054328" />
     <state x="625" y="224" key="NewModule_or_Project.wizard" timestamp="1619502000839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="625" y="224" key="NewModule_or_Project.wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1619502000839" />
-    <state x="-1132" y="200" key="SettingsEditor" timestamp="1620406253405">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state x="440" y="94" key="SettingsEditor" timestamp="1620424460764">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1132" y="200" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620406253405" />
-    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1618862626363" />
+    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1620424460764" />
     <state width="1918" height="448" key="SwitcherDM" timestamp="1618951781723">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -361,7 +373,17 @@
           <line>43</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java</url>
+          <line>198</line>
+          <option name="timeStamp" value="87" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="Executer.getInstance().getMutations()" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
