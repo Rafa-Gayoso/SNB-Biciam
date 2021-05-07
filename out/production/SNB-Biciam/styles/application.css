@@ -32,7 +32,7 @@
 }
 
 .jfx-tab-pane .tab:selected {
-
+    -fx-background-color: #0c588c;
 }
 
 .list-cell {

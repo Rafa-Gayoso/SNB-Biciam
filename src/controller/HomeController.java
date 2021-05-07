@@ -44,6 +44,9 @@ public class HomeController implements Initializable {
     private MenuItem exportCalendar;
 
     @FXML
+    private MenuItem exportAllCalendar;
+
+    @FXML
     private JFXButton buttonPrincipalMenu;
 
 
@@ -135,7 +138,7 @@ public class HomeController implements Initializable {
     @FXML
     void exportCalendar(ActionEvent event) {
 
-       int calendarToExport = CalendarController.selectedCalendar;
+       /*int calendarToExport = CalendarController.selectedCalendar;
         System.out.println(calendarToExport+"EXPORTAR");
         if(Executer.getInstance().getResultStates().isEmpty()){
             notification = getNotification();
@@ -148,9 +151,7 @@ public class HomeController implements Initializable {
         }
         else{
             DataFiles.getSingletonDataFiles().exportItineraryInExcelFormat(Executer.getInstance().getResultStates().get(calendarToExport));
-        }
-
-
+        }*/
     }
 
 
@@ -276,7 +277,7 @@ public class HomeController implements Initializable {
 
     @FXML
     void exportSelectedCalendar(ActionEvent event) {
-        int calendarToExport = CalendarController.selectedCalendar;
+        /*int calendarToExport = CalendarController.selectedCalendar;
         System.out.println(calendarToExport+"EXPORTAR");
         if(Executer.getInstance().getResultStates().isEmpty()){
             notification = getNotification();
@@ -289,6 +290,36 @@ public class HomeController implements Initializable {
         }
         else{
             DataFiles.getSingletonDataFiles().exportItineraryInExcelFormat(Executer.getInstance().getResultStates().get(calendarToExport));
+        }*/
+        boolean all = false;
+        if(Executer.getInstance().getResultStates().isEmpty()){
+            notification = getNotification();
+            notification.setTitle("Exportación de Calendario");
+            notification.setMessage("No hay calendarios para exportar");
+            notification.setNotificationType(NotificationType.ERROR);
+            notification.setRectangleFill(Paint.valueOf("#2F2484"));
+            notification.setAnimationType(AnimationType.FADE);
+            notification.showAndDismiss(Duration.seconds(2));
+        }
+        else{
+            DataFiles.getSingletonDataFiles().exportItinerary(all);
+        }
+    }
+
+    @FXML
+    void exportAllCalendar(ActionEvent event) {
+        boolean all = true;
+        if(Executer.getInstance().getResultStates().isEmpty()){
+            notification = getNotification();
+            notification.setTitle("Exportación de Calendario");
+            notification.setMessage("No hay calendarios para exportar");
+            notification.setNotificationType(NotificationType.ERROR);
+            notification.setRectangleFill(Paint.valueOf("#2F2484"));
+            notification.setAnimationType(AnimationType.FADE);
+            notification.showAndDismiss(Duration.seconds(2));
+        }
+        else{
+            DataFiles.getSingletonDataFiles().exportItinerary(all);
         }
     }
 }

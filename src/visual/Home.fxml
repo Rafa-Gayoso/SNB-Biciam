@@ -98,7 +98,7 @@
                            <ContextMenu>
                              <items>
                                <MenuItem fx:id="exportCalendar" onAction="#exportSelectedCalendar" text="Exportar Calendario Seleccionado" />
-                                 <MenuItem mnemonicParsing="false" text="Exportar todos los calendarios" />
+                                 <MenuItem fx:id="exportAllCalendar" mnemonicParsing="false" onAction="#exportAllCalendar" text="Exportar todos los calendarios" />
                              </items>
                            </ContextMenu>
                         </contextMenu>
