@@ -95,7 +95,7 @@ public class Executer {
     public void executeEC() throws ClassNotFoundException, InvocationTargetException, InstantiationException, NoSuchMethodException, IllegalAccessException, IOException {
         configureProblem();
 
-        String nameMH = "";
+        /*String nameMH = "";
         if (selectedMH == 0){
             nameMH = "EC";
         }else if (selectedMH == 1){
@@ -118,7 +118,7 @@ public class Executer {
         File file = new File("src/files/"+fileName+".xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook();
 
-        ArrayList<State> thisLapBests = new ArrayList<>();
+        ArrayList<State> thisLapBests = new ArrayList<>();*/
 
         for (int i = 0; i < EXECUTIONS; i++) {
             Strategy.getStrategy().setStopexecute(new StopExecute());
@@ -150,16 +150,16 @@ public class Executer {
             }
 
 
-            createCalendarSheet(workbook,Strategy.getStrategy().getBestState(),i);
-            thisLapBests.add(Strategy.getStrategy().getBestState());
+            //createCalendarSheet(workbook,Strategy.getStrategy().getBestState(),i);
+            //thisLapBests.add(Strategy.getStrategy().getBestState());
             resultStates.add(Strategy.getStrategy().getBestState());
             Strategy.destroyExecute();
         }
 
-        createBestCalendarSheet(workbook, thisLapBests);
+       // createBestCalendarSheet(workbook, thisLapBests);
 
 
-        FileOutputStream fileOut = null;
+       /* FileOutputStream fileOut = null;
         try {
             fileOut = new FileOutputStream(file.getAbsolutePath());
             workbook.write(fileOut);
@@ -168,10 +168,10 @@ public class Executer {
         } catch (Exception e) {
             e.printStackTrace();
             showMessage();
-        }
+        }*/
     }
 
-    private void createBestCalendarSheet(XSSFWorkbook workbook, ArrayList<State> thisLapBests) {
+   /* private void createBestCalendarSheet(XSSFWorkbook workbook, ArrayList<State> thisLapBests) {
         Sheet spreadsheet = workbook.createSheet("Mejor Calendario ");
 
         State state = thisLapBests.get(0);
@@ -237,7 +237,7 @@ public class Executer {
         cell1.setCellValue("Calendario "+(pos+1)+":" );
         Cell cell2 = row.createCell(1);
         cell2.setCellValue(dist);
-    }
+    }*/
 
     private static void showMessage() {
         TrayNotification notification = new TrayNotification();
@@ -249,7 +249,7 @@ public class Executer {
         notification.showAndDismiss(Duration.seconds(2));
     }
 
-    private void createCalendarSheet(XSSFWorkbook workbook, State state, int calendar){
+    /*private void createCalendarSheet(XSSFWorkbook workbook, State state, int calendar){
         Sheet spreadsheet = workbook.createSheet("Calendario "+ (calendar+1));
 
         ArrayList<ArrayList<Integer>> teamDate = TTPDefinition.getInstance().teamsItinerary(state);
@@ -322,14 +322,8 @@ public class Executer {
             j++;
         }
 
-            /*AuxStatePlusIterations temp = new AuxStatePlusIterations(Strategy.getStrategy().getBestState(), this.selectedMH);
 
-            for (int k = 0; k < Strategy.getStrategy().listBest.size(); k++) {
-                temp.getDistItarations().add(Distance.getInstance().calculateCalendarDistance(Strategy.getStrategy().listBest.get(k)));
-            }
-            saveData.add(temp);
-*/
-    }
+    }*/
 
     public ArrayList<MutationOperatorType> getMutations() {
         return mutations;

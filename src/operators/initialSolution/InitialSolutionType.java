@@ -2,7 +2,7 @@ package operators.initialSolution;
 
 public enum InitialSolutionType {
 
-    SIMPLE_ROUND_EVEN_SOLUTION{
+    SIMPLE_ROUND_SOLUTION{
         @Override
         public String toString() {
 
@@ -18,7 +18,7 @@ public enum InitialSolutionType {
         }
     },
 
-    SIMPLE_ROUND_EVEN_INAUGURAL_SOLUTION{
+    SIMPLE_ROUND_INAUGURAL_SOLUTION{
         @Override
         public String toString() {
 
@@ -26,7 +26,7 @@ public enum InitialSolutionType {
         }
     },
 
-    SIMPLE_ROUND_EVEN_CHAMPION_SOLUTION{
+    SIMPLE_ROUND_CHAMPION_SOLUTION{
         @Override
         public String toString() {
 
@@ -34,37 +34,7 @@ public enum InitialSolutionType {
         }
     },
 
-
-    DOUBLE_ROUND_SYMMETRIC_EVEN_SOLUTION{
-        @Override
-        public String toString() {
-
-            return DoubleRoundSymmetricSolution.class.getName();
-        }
-    },
-
-
-    DOUBLE_ROUND_SYMMETRIC_EVEN_INAUGURAL_SOLUTION{
-        @Override
-        public String toString() {
-
-            return DoubleRoundSymmetricInauguralSolution.class.getName();
-        }
-    },
-
-
-
-    DOUBLE_ROUND_SYMMETRIC_EVEN_CHAMPION_SOLUTION{
-        @Override
-        public String toString() {
-
-            return DoubleRoundSymmetricChampionSolution.class.getName();
-        }
-    },
-
-
-
-    DOUBLE_ROUND_NON_SYMMETRIC_EVEN_SOLUTION{
+    DOUBLE_ROUND_NON_SYMMETRIC_SOLUTION{
         @Override
         public String toString() {
 
@@ -74,7 +44,7 @@ public enum InitialSolutionType {
 
 
 
-    DOUBLE_ROUND_NON_SYMMETRIC_EVEN_INAUGURAL_SOLUTION{
+    DOUBLE_ROUND_NON_SYMMETRIC_INAUGURAL_SOLUTION{
         @Override
         public String toString() {
 
@@ -84,7 +54,7 @@ public enum InitialSolutionType {
 
 
 
-    DOUBLE_ROUND_NON_SYMMETRIC_EVEN_CHAMPION_SOLUTION{
+    DOUBLE_ROUND_NON_SYMMETRIC_CHAMPION_SOLUTION{
         @Override
         public String toString() {
 

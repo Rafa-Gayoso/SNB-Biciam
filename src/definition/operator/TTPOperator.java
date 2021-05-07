@@ -8,6 +8,7 @@ import operators.initialSolution.InitialSolution;
 import operators.interfaces.IChampionGame;
 import operators.interfaces.ICreateInitialSolution;
 import operators.interfaces.IInauguralGame;
+import operators.interfaces.ISecondRound;
 import operators.mutation.CombineMutationOperator;
 import operators.mutation.MutationOperatorType;
 import problem.definition.Operator;
@@ -16,7 +17,7 @@ import problem.definition.State;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TTPOperator extends Operator implements ICreateInitialSolution, IChampionGame, IInauguralGame {
+public class TTPOperator extends Operator implements ICreateInitialSolution, ISecondRound, IInauguralGame, IChampionGame {
 
     private InitialSolution initialSolution;
     private CombineMutationOperator operatorSelector;
@@ -36,6 +37,15 @@ public class TTPOperator extends Operator implements ICreateInitialSolution, ICh
         List<State> neighborhood = new ArrayList<>(neighborhoodSize);
         for (int i = 0; i <  neighborhoodSize; i++) {
             State newState = operatorSelector.applyMutation(state);
+            if(TTPDefinition.getInstance().isSymmetricSecondRound()){
+                setSecondRound(newState);
+                if(TTPDefinition.getInstance().isChampionVsSub()){
+                    if(TTPDefinition.getInstance().isInauguralGame())
+                        addInauguralGame(newState);
+                    else
+                        fixChampionSubchampion(newState);
+                }
+            }
             neighborhood.add(newState);
         }
         return neighborhood;

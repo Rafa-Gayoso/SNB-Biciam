@@ -25,16 +25,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31c4c62d-8161-430c-9912-ecee8f383fae" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jdom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/Data.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/Heuristics.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/Mutations.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/Teams.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TareaBiciam.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TareaBiciam.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/AdvanceConfigurationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AdvanceConfigurationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/DataFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/DataFiles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/MainTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/definition/operator/TTPOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/operator/TTPOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/execute/Executer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execute/Executer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundSymmetricChampionSolution.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundSymmetricInauguralSolution.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundSymmetricSolution.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/InitialSolutionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/InitialSolutionType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/interfaces/ICreateInitialSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/interfaces/ICreateInitialSolution.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -257,9 +256,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="363" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1620343481398" />
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1620343239188">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="-1230" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1620369082646">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
+    <state x="-1230" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620369082646" />
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1620343239188" />
     <state x="715" y="222" width="918" height="595" key="#xdebugger.evaluate" timestamp="1620018133249">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -273,25 +273,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="845" y="284" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1619501993171" />
-    <state width="1877" height="242" key="GridCell.Tab.0.bottom" timestamp="1620367769962">
+    <state width="1877" height="242" key="GridCell.Tab.0.bottom" timestamp="1620369448519">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="242" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620367769962" />
+    <state width="1877" height="242" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620369448519" />
     <state width="1877" height="384" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620346957826" />
-    <state width="1877" height="242" key="GridCell.Tab.0.center" timestamp="1620367769962">
+    <state width="1877" height="242" key="GridCell.Tab.0.center" timestamp="1620369448519">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="242" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620367769962" />
+    <state width="1877" height="242" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620369448519" />
     <state width="1877" height="384" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620346957826" />
-    <state width="1877" height="242" key="GridCell.Tab.0.left" timestamp="1620367769962">
+    <state width="1877" height="242" key="GridCell.Tab.0.left" timestamp="1620369448519">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="242" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620367769962" />
+    <state width="1877" height="242" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620369448519" />
     <state width="1877" height="384" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620346957826" />
-    <state width="1877" height="242" key="GridCell.Tab.0.right" timestamp="1620367769962">
+    <state width="1877" height="242" key="GridCell.Tab.0.right" timestamp="1620369448519">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="242" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620367769962" />
+    <state width="1877" height="242" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620369448519" />
     <state width="1877" height="384" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620346957826" />
     <state width="1877" height="334" key="GridCell.Tab.1.bottom" timestamp="1620367743508">
       <screen x="-1920" y="0" width="1920" height="1040" />
@@ -354,11 +354,6 @@
           <url>file://$PROJECT_DIR$/src/application/TestMain.java</url>
           <line>43</line>
           <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/execute/Executer.java</url>
-          <line>123</line>
-          <option name="timeStamp" value="73" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/controller/SelectGridController.java</url>
