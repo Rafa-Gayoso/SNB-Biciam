@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
@@ -39,7 +40,8 @@ public class HomeController implements Initializable {
     private File file;
     private static HomeController singletonController;
 
-
+    @FXML
+    private MenuItem exportCalendar;
 
     @FXML
     private JFXButton buttonPrincipalMenu;
@@ -154,7 +156,7 @@ public class HomeController implements Initializable {
 
     @FXML
     void showInformation(ActionEvent event) throws IOException{
-        File file = new File("src/help/help.pdf");
+        File file = new File("files/help.pdf");
 
         //first check if Desktop is supported by Platform or not
         if(!Desktop.isDesktopSupported()){
@@ -270,5 +272,23 @@ public class HomeController implements Initializable {
             setNode(anchorPane);
         }
 
+    }
+
+    @FXML
+    void exportSelectedCalendar(ActionEvent event) {
+        int calendarToExport = CalendarController.selectedCalendar;
+        System.out.println(calendarToExport+"EXPORTAR");
+        if(Executer.getInstance().getResultStates().isEmpty()){
+            notification = getNotification();
+            notification.setTitle("Exportación de Calendario");
+            notification.setMessage("No hay calendarios para exportar");
+            notification.setNotificationType(NotificationType.ERROR);
+            notification.setRectangleFill(Paint.valueOf("#2F2484"));
+            notification.setAnimationType(AnimationType.FADE);
+            notification.showAndDismiss(Duration.seconds(2));
+        }
+        else{
+            DataFiles.getSingletonDataFiles().exportItineraryInExcelFormat(Executer.getInstance().getResultStates().get(calendarToExport));
+        }
     }
 }
