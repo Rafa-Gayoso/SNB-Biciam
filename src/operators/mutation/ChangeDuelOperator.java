@@ -54,9 +54,7 @@ public class ChangeDuelOperator extends MutationOperator implements ISwapTeams {
 
 
         swapTeams(posFirstDuel, false, firstDate, secondDate);
-        if(resultSate.getCode().size()<15){
-            System.out.println("ELIMINO");
-        }
+
         return resultSate ;
     }
 

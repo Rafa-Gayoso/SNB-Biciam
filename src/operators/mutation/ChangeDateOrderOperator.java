@@ -43,9 +43,7 @@ public class ChangeDateOrderOperator extends MutationOperator {
             Date date = stack.poll();
             resultState.getCode().set(i, date);
         }
-        if(resultState.getCode().size()<15){
-            System.out.println("ELIMINO");
-        }
+
         return resultState;
     }
 }

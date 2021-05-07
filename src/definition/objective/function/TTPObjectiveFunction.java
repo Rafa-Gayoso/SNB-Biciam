@@ -13,9 +13,15 @@ public class TTPObjectiveFunction extends ObjetiveFunction {
         int penalizeVisitorGames = TTPDefinition.getInstance().penalizeVisitorGames(state);
         int penalizeHomeGames = TTPDefinition.getInstance().penalizeLocalGames(state);
         int penalizeChampion = 0;
-        if(!TTPDefinition.getInstance().isInauguralGame() && TTPDefinition.getInstance().isChampionVsSub()){
-            penalizeChampion = TTPDefinition.getInstance().penalizeChampionGame(state);
+        int penalizeInauguralGame = 0;
+
+        if(TTPDefinition.getInstance().isChampionVsSub()){
+            if(TTPDefinition.getInstance().isInauguralGame())
+                penalizeChampion = TTPDefinition.getInstance().penalizeChampionGame(state);
+            else
+                penalizeInauguralGame = TTPDefinition.getInstance().penalizeInauguralGame(state);
         }
+        
         double totalDistance = 0;
         ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(state);
         for (int i = 0; i < itinerary.size() - 1; i++) {
@@ -29,7 +35,7 @@ public class TTPObjectiveFunction extends ObjetiveFunction {
             }
         }
         return totalDistance + (TTPDefinition.getInstance().getPenalization() * (penalizeHomeGames + penalizeVisitorGames
-        + penalizeChampion));
+        + penalizeChampion + penalizeInauguralGame));
     }
 
 

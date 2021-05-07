@@ -71,18 +71,15 @@ public class AdvanceConfigurationController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         iterationsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,Integer.MAX_VALUE, Executer.getInstance().getITERATIONS()));
         executionsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,Integer.MAX_VALUE, Executer.getInstance().getEXECUTIONS()));
-        List<List<String>> dataRead = DataFiles.getSingletonDataFiles().readMutations();
-        List<String> mutations = new ArrayList<>();
-        for (List<String> mut: dataRead) {
-            mutations.add(mut.get(0));
-        }
+        List<String> mutations = DataFiles.getSingletonDataFiles().getMutations();
+
         mutationListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         mutationListView.setItems(FXCollections.observableList(mutations));
 
         mutationListView.getSelectionModel().selectAll();
 
-        List<String> heuristics = DataFiles.getSingletonDataFiles().readHeuristics();
+        List<String> heuristics = DataFiles.getSingletonDataFiles().getHeuristics();
 
         heuristicsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 

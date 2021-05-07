@@ -284,6 +284,18 @@ public class TTPDefinition {
         return penalize? PENALIZATION: 0;
     }
 
+    public int penalizeInauguralGame(State calendar){
+
+        boolean penalize = true;
+
+        Date date = (Date) calendar.getCode().get(0);
+        if(date.getGames().get(0).get(0) == TTPDefinition.getInstance().getFirstPlace() &&
+                date.getGames().get(0).get(1) == TTPDefinition.getInstance().getSecondPlace())
+            penalize = true;
+
+        return penalize? PENALIZATION: 0;
+    }
+
     public int penalizeLocalGames(State calendar){
         int cont = 0;
         State state = calendar.clone();

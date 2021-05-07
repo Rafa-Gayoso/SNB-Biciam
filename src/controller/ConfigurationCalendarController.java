@@ -201,6 +201,11 @@ public class ConfigurationCalendarController implements Initializable {
                 mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_POSITION);
                 mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DUEL);
                 mutationsOperatorTypes.add(MutationOperatorType.SWAP_DATES);
+                mutationsOperatorTypes.add(MutationOperatorType.CHANGE_TEAMS_OPERATOR);
+                mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_DUELS_ORDER_OPERATOR);
+                mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_SINGLE_DUEL_ORDER_OPERATOR);
+                mutationsOperatorTypes.add(MutationOperatorType.CHANGE_LOCAL_VISITOR_SINGLE_TEAM_OPERATOR);
+
                 Executer.getInstance().setMutations(mutationsOperatorTypes);
             }
             if (Executer.getInstance().getHeuristics().isEmpty()) {

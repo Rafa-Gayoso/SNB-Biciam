@@ -9,15 +9,27 @@
         <configuration>V,V,F,F</configuration>
     </mutation>
     <mutation>
-        <name>Intercambiar dos fechas pasando una al 
-        lugar de la otra.</name>
-       
+        <name>Intercambiar dos fechas pasando una al lugar de la otra.</name>
         <configuration>V,V,F,F</configuration>
     </mutation>
     <mutation>
-        <name>Mover un enfrentamiento de una fecha
-         hacia otra fecha.</name>
-        
+        <name>Mover un enfrentamiento de una fecha hacia otra fecha.</name>
+        <configuration>V,V,V,F</configuration>
+    </mutation>
+    <mutation>
+        <name>Intercambiar un equipo por otro.</name>
+        <configuration>V,V,V,F</configuration>
+    </mutation>
+    <mutation>
+        <name>Intercambiar en una fecha el visitador y la sede.</name>
+        <configuration>V,V,V,F</configuration>
+    </mutation>
+    <mutation>
+        <name>Intercambiar en un enfrentamiento el visitador y la sede.</name>
+        <configuration>V,V,V,F</configuration>
+    </mutation>
+    <mutation>
+        <name>Intercambiar las sedes de un equipo.</name>
         <configuration>V,V,V,F</configuration>
     </mutation>
 </Mutations>

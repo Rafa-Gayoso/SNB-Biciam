@@ -41,12 +41,18 @@ public class DataFiles {
     private ArrayList<String> teams;//List of resources.teams
     private ArrayList<String> acronyms;
     private ArrayList<String> locations;
+    private ArrayList<String> mutations;
+    private ArrayList<String> heuristics;
     private ArrayList<TeamsPairDistance> teamsPairDistances;//List of LocalVisitorDistance
 
     private DataFiles() {
         this.teams = new ArrayList<>();
         this.acronyms = new ArrayList<>();
         this.teamsPairDistances = new ArrayList<>();
+        this.mutations = new ArrayList<>();
+        this.heuristics = new ArrayList<>();
+        readMutations();
+        readHeuristics();
         readTeams();
         createTeamsPairDistances();
     }
@@ -105,8 +111,8 @@ public class DataFiles {
         }
     }
 
-    public List<List<String>> readMutations(){
-        List<List<String>> mutations = new ArrayList<>();
+    public void readMutations(){
+
         try {
 
             SAXBuilder sax = new SAXBuilder();
@@ -118,14 +124,14 @@ public class DataFiles {
 
             for (Element target : list) {
 
-                List<String> mutation = new ArrayList<>();
+
 
                 String name = target.getChildText("name");
                 String configuration = target.getChildText("configuration");
-                mutation.add(name);
-                mutation.add(configuration);
+                mutations.add(name);
+                //mutation.add(configuration);
 
-                mutations.add(mutation);
+                //mutations.add(mutation);
                 /*
                 PAra leer los parametros luego
                 String [] params = acronym.split(",");
@@ -141,11 +147,11 @@ public class DataFiles {
             e.printStackTrace();
         }
 
-        return mutations;
+        //return mutations;
     }
 
-    public List<String> readHeuristics(){
-        List<String> heuristics = new ArrayList<>();
+    public void readHeuristics(){
+
         try {
 
             SAXBuilder sax = new SAXBuilder();
@@ -164,7 +170,7 @@ public class DataFiles {
             e.printStackTrace();
         }
 
-        return heuristics;
+
     }
 
     public void readTeams(){
@@ -326,4 +332,21 @@ public class DataFiles {
     public void setTeamsPairDistances(ArrayList<TeamsPairDistance> teamsPairDistances) {
         this.teamsPairDistances = teamsPairDistances;
     }
+
+    public ArrayList<String> getMutations() {
+        return mutations;
+    }
+
+    public void setMutations(ArrayList<String> mutations) {
+        this.mutations = mutations;
+    }
+
+    public ArrayList<String> getHeuristics() {
+        return heuristics;
+    }
+
+    public void setHeuristics(ArrayList<String> heuristics) {
+        this.heuristics = heuristics;
+    }
+
 }

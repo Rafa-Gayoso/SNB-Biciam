@@ -44,9 +44,7 @@ public class SwapDatesOperator extends MutationOperator {
         resultState.getCode().set(firstDate, auxSecondDate);
         resultState.getCode().set(secondDate, auxFirstDate);
 
-        if(resultState.getCode().size()<15){
-            System.out.println("ELIMINO");
-        }
+
         return resultState;
     }
 }

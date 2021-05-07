@@ -63,9 +63,7 @@ public class ChangeDatePositionOperator extends MutationOperator {
             resultState.getCode().remove(selectedDate + 1);
         }
 
-        if(resultState.getCode().size()<15){
-            System.out.println("ELIMINO");
-        }
+
         return resultState;
     }
 }
