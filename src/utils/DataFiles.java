@@ -12,6 +12,10 @@ import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
 import problem.definition.State;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
@@ -29,7 +33,10 @@ import java.util.List;
 
 public class DataFiles {
 
-
+    private static final String MUTATIONS = "files/Mutations.xml";
+    private static final String HEURISTICS = "files/Heuristics.xml";
+    private static final String TEAMS = "files/Teams.xml";
+    private static final String DATA = "files/Data.xlsx";
     private static DataFiles singletonFiles;//Singleton Pattern
     private ArrayList<String> teams;//List of resources.teams
     private ArrayList<String> acronyms;
@@ -40,7 +47,8 @@ public class DataFiles {
         this.teams = new ArrayList<>();
         this.acronyms = new ArrayList<>();
         this.teamsPairDistances = new ArrayList<>();
-        createTeams();
+        readTeams();
+        createTeamsPairDistances();
     }
 
     public static DataFiles getSingletonDataFiles() {
@@ -50,26 +58,22 @@ public class DataFiles {
         return singletonFiles;
     }
 
-    public void createTeams() {
+    public void createTeamsPairDistances() {
 
         try {
 
-            FileInputStream fis = new FileInputStream("src/files/Data.xlsx");
+            FileInputStream fis = new FileInputStream(DATA);
             //Creamos el objeto XSSF  para el archivo excel
             XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
             Sheet sheet = workbook.getSheetAt(0);
 
-            acronyms = new ArrayList<>();
-            teams = new ArrayList<>();
-            teamsPairDistances = new ArrayList<>();
 
+            teamsPairDistances = new ArrayList<>();
             //llenar los acrónimos
             Row row = sheet.getRow(0);
             Iterator<Cell> cellAcro = row.cellIterator();
-            while (cellAcro.hasNext()){
-                acronyms.add(cellAcro.next().getStringCellValue());
-            }
+
 
             Iterator<Row> rowIterator = sheet.iterator();
 
@@ -83,7 +87,7 @@ public class DataFiles {
                 //Recorremos las celdas de la fila
                 Iterator<Cell> cellIterator = row.cellIterator();
                 Cell cell = cellIterator.next();
-                teams.add(cell.getStringCellValue());
+                //teams.add(cell.getStringCellValue());
                 posLocal++;
                 int posVisitor = -1;
                 while (cellIterator.hasNext()){
@@ -95,58 +99,102 @@ public class DataFiles {
             }
 
 
-            Sheet sheetLocations = workbook.getSheetAt(1);
-            locations = new ArrayList<>();
-            Row rowLocations = sheetLocations.getRow(0);
-            Iterator<Cell> cellLoc = rowLocations.cellIterator();
-
-            while(cellLoc.hasNext()){
-                locations.add(cellLoc.next().getStringCellValue());
-            }
 
         } catch (IOException e) {
             e.getMessage();
         }
     }
 
-    public List<String> readExcelFiles(String direction) {
-        List<String>data = new ArrayList<>();
-        try{
-            FileInputStream fis = new FileInputStream(direction);
+    public List<List<String>> readMutations(){
+        List<List<String>> mutations = new ArrayList<>();
+        try {
 
-            //Creamos el objeto XSSF  para el archivo eexcel
-            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+            SAXBuilder sax = new SAXBuilder();
+            // XML is a local file
+            Document doc = sax.build(new File(MUTATIONS));
 
-            //Nos quedamos con la primera hoja de calculo
+            Element rootNode = doc.getRootElement();
+            List<Element> list = rootNode.getChildren("mutation");
 
-            //XSSFSheet xssfSheet = workbook.getSheetAt(0);
+            for (Element target : list) {
 
-            XSSFSheet xssfSheet = workbook.getSheetAt(0);
+                List<String> mutation = new ArrayList<>();
 
-            //System.out.println(xssfSheet.getSheetName());
-            //Recorremos las filas
+                String name = target.getChildText("name");
+                String configuration = target.getChildText("configuration");
+                mutation.add(name);
+                mutation.add(configuration);
 
-            //Nos saltamos la primera fila del encabezado
+                mutations.add(mutation);
+                /*
+                PAra leer los parametros luego
+                String [] params = acronym.split(",");
 
-            for (Row row : xssfSheet) {
-                //Recorremos las celdas de la fila
-                Iterator<Cell> cellIterator = row.cellIterator();
-
-                StringBuilder sb = new StringBuilder();
-                while (cellIterator.hasNext()) {
-                    Cell cell = cellIterator.next();
-                    sb.append(cell.toString());
+                System.out.print(params.length);
+                for(int i =0; i < params.length; i++){
+                    System.out.print(params[i] + " ");
                 }
-                data.add(new String(sb));
+                System.out.println();*/
             }
 
-            workbook.close();
-            fis.close();
-        }catch (Exception e){
+        } catch (IOException | JDOMException e) {
             e.printStackTrace();
         }
 
-        return data;
+        return mutations;
+    }
+
+    public List<String> readHeuristics(){
+        List<String> heuristics = new ArrayList<>();
+        try {
+
+            SAXBuilder sax = new SAXBuilder();
+            // XML is a local file
+            Document doc = sax.build(new File(HEURISTICS));
+
+            Element rootNode = doc.getRootElement();
+            List<Element> list = rootNode.getChildren("heuristic");
+
+            for (Element target : list) {
+                String name = target.getChildText("name");
+                heuristics.add(name);
+            }
+
+        } catch (IOException | JDOMException e) {
+            e.printStackTrace();
+        }
+
+        return heuristics;
+    }
+
+    public void readTeams(){
+        List<String> heuristics = new ArrayList<>();
+        try {
+
+            SAXBuilder sax = new SAXBuilder();
+            // XML is a local file
+            Document doc = sax.build(new File(TEAMS));
+
+            Element rootNode = doc.getRootElement();
+            List<Element> list = rootNode.getChildren("team");
+
+            acronyms = new ArrayList<>();
+            teams = new ArrayList<>();
+            locations = new ArrayList<>();
+
+            for (Element target : list) {
+                String name = target.getChildText("name");
+                String acronym = target.getChildText("acronym");
+                String region = target.getChildText("region");
+                teams.add(name);
+                acronyms.add(acronym);
+                locations.add(region);
+            }
+
+        } catch (IOException | JDOMException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -239,7 +287,7 @@ public class DataFiles {
     private static void showSuccessfulMessage() {
         TrayNotification notification = new TrayNotification();
         notification.setTitle("Guardar Calendario");
-        notification.setMessage("Calendario exportado con �xito");
+        notification.setMessage("Calendario exportado con éxito");
         notification.setNotificationType(NotificationType.SUCCESS);
         notification.setRectangleFill(Paint.valueOf("#2F2484"));
         notification.setAnimationType(AnimationType.FADE);

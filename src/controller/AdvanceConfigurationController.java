@@ -29,8 +29,6 @@ import java.util.ResourceBundle;
 public class AdvanceConfigurationController implements Initializable {
 
     private HomeController homeController;
-    private final String MUTATTIONS_ADDRESS = "src\\files\\Mutations.xlsx";
-    private final String HEURISTICS_ADDRESS = "src\\files\\Heuristics.xlsx";
 
     private TrayNotification notification;
 
@@ -73,11 +71,10 @@ public class AdvanceConfigurationController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         iterationsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,Integer.MAX_VALUE, Executer.getInstance().getITERATIONS()));
         executionsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,Integer.MAX_VALUE, Executer.getInstance().getEXECUTIONS()));
-        List<String> dataRead = DataFiles.getSingletonDataFiles().readExcelFiles(MUTATTIONS_ADDRESS);
+        List<List<String>> dataRead = DataFiles.getSingletonDataFiles().readMutations();
         List<String> mutations = new ArrayList<>();
-        for (String s : dataRead) {
-            String[] mutation = s.split("\\.");
-            mutations.add(mutation[0]);
+        for (List<String> mut: dataRead) {
+            mutations.add(mut.get(0));
         }
         mutationListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -85,11 +82,11 @@ public class AdvanceConfigurationController implements Initializable {
 
         mutationListView.getSelectionModel().selectAll();
 
-        dataRead = DataFiles.getSingletonDataFiles().readExcelFiles(HEURISTICS_ADDRESS);
+        List<String> heuristics = DataFiles.getSingletonDataFiles().readHeuristics();
 
         heuristicsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        heuristicsListView.setItems(FXCollections.observableList(dataRead));
+        heuristicsListView.setItems(FXCollections.observableList(heuristics));
 
         heuristicsListView.getSelectionModel().selectAll();
 

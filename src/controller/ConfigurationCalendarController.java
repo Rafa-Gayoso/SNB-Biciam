@@ -292,9 +292,9 @@ public class ConfigurationCalendarController implements Initializable {
 
         listComboSub = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
         comboChamp.setItems(listComboChamp);
-        comboChamp.getSelectionModel().select("Matanzas");
+        comboChamp.getSelectionModel().select(5);
         comboSub.setItems(listComboSub);
-        comboSub.getSelectionModel().select("Camaguey");
+        comboSub.getSelectionModel().select(10);
         occidenteVsOrienteToggle.setSelected(false);
 
         champVsSub.setSelected(true);

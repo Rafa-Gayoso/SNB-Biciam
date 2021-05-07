@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Mutations>
+    <mutation>
+        <name>Cambiar una fecha de lugar.</name>
+        <configuration>V,V,F,F</configuration>
+    </mutation>
+    <mutation>
+        <name>Invertir el orden de una secuencia de fechas.</name>
+        <configuration>V,V,F,F</configuration>
+    </mutation>
+    <mutation>
+        <name>Intercambiar dos fechas pasando una al 
+        lugar de la otra.</name>
+       
+        <configuration>V,V,F,F</configuration>
+    </mutation>
+    <mutation>
+        <name>Mover un enfrentamiento de una fecha
+         hacia otra fecha.</name>
+        
+        <configuration>V,V,V,F</configuration>
+    </mutation>
+</Mutations>
