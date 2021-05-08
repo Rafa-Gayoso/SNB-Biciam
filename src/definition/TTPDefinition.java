@@ -24,6 +24,8 @@ public class TTPDefinition {
     private boolean occidentVsOrient;
     private int[][] duelMatrix;
     private static TTPDefinition ttpDefinition;
+    private ArrayList<ArrayList<Integer>> mutationsConfigurationsList;//list of configurations for the mutations
+    private ArrayList<Integer> mutationsIndexes;
 
 
     private TTPDefinition(){
@@ -58,6 +60,7 @@ public class TTPDefinition {
 
 
 
+
     public void setTeamIndexes(ArrayList<Integer> teamIndexes){
         this.teamsIndexes = teamIndexes;
         this.cantEquipos = teamIndexes.size();
@@ -71,6 +74,22 @@ public class TTPDefinition {
 
     public TTPDefinition getTtpDefinition() {
         return ttpDefinition;
+    }
+
+    public ArrayList<ArrayList<Integer>> getMutationsConfigurationsList() {
+        return mutationsConfigurationsList;
+    }
+
+    public void setMutationsConfigurationsList(ArrayList<ArrayList<Integer>> mutationsConfigurationsList) {
+        this.mutationsConfigurationsList = mutationsConfigurationsList;
+    }
+
+    public ArrayList<Integer> getMutationsIndexes() {
+        return mutationsIndexes;
+    }
+
+    public void setMutationsIndexes(ArrayList<Integer> mutationsIndexes) {
+        this.mutationsIndexes = mutationsIndexes;
     }
 
     public void setTtpDefinition(TTPDefinition ttpDefinition) {

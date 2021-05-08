@@ -7,6 +7,7 @@ public class CalendarState extends State {
     
     private int calendarType;
 
+
     @Override
     public State clone() {
         State state = new CalendarState();
@@ -28,4 +29,6 @@ public class CalendarState extends State {
     public void setCalendarType(int calendarType) {
         this.calendarType = calendarType;
     }
+
+
 }

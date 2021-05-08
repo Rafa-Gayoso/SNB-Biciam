@@ -197,9 +197,9 @@ public class CalendarController implements Initializable {
         }
     }
 
-    /*@FXML
+    @FXML
     void closeSelectedTab(ActionEvent event) {
-            controller.getCalendarList().remove(selectedCalendar);
+            Executer.getInstance().getResultStates().remove(selectedCalendar);
             calendarsTabPane.getTabs().remove(selectedCalendar);
 
             if(calendarsTabPane.getTabs().isEmpty()){
@@ -209,7 +209,23 @@ public class CalendarController implements Initializable {
                 calendarsTabPane.getTabs().add(tab);
             }
 
-    }*/
+    }
+
+    @FXML
+    void showConfiguration(ActionEvent event) {
+        /*if(!calendarsTabPane.getTabs().isEmpty()) {
+            try {
+                //homeController.createPage(new MutationsConfigurationController(), null, "/visual/MutationsConfiguration.fxml");
+                // Hide this current window (if this is what you want)
+                // ((Node)(event.getSource())).getScene().getWindow().hide();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            showNotification("No existe ningún calendario", "Debe crear o importar al menos un calendario.");
+        }*/
+    }
 
     private void showNotification(String title, String message) {
         notification.setTitle(title);

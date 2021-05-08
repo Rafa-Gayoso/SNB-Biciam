@@ -43,6 +43,7 @@ public class DataFiles {
     private ArrayList<String> acronyms;
     private ArrayList<String> locations;
     private ArrayList<String> mutations;
+    private ArrayList<String> mutationsConfiguration;
     private ArrayList<String> heuristics;
     private ArrayList<TeamsPairDistance> teamsPairDistances;//List of LocalVisitorDistance
 
@@ -51,6 +52,7 @@ public class DataFiles {
         this.acronyms = new ArrayList<>();
         this.teamsPairDistances = new ArrayList<>();
         this.mutations = new ArrayList<>();
+        this.mutationsConfiguration = new ArrayList<>();
         this.heuristics = new ArrayList<>();
         readMutations();
         readHeuristics();
@@ -128,7 +130,7 @@ public class DataFiles {
                 String name = target.getChildText("name");
                 String configuration = target.getChildText("configuration");
                 mutations.add(name);
-                //mutation.add(configuration);
+                mutationsConfiguration.add(configuration);
 
                 //mutations.add(mutation);
                 /*
@@ -148,6 +150,7 @@ public class DataFiles {
 
         //return mutations;
     }
+
 
     public void readHeuristics() {
 
@@ -405,6 +408,13 @@ public class DataFiles {
         notification.showAndDismiss(Duration.seconds(2));
     }
 
+    public ArrayList<String> getMutationsConfiguration() {
+        return mutationsConfiguration;
+    }
+
+    public void setMutationsConfiguration(ArrayList<String> mutationsConfiguration) {
+        this.mutationsConfiguration = mutationsConfiguration;
+    }
 
     public ArrayList<String> getTeams() {
         return teams;
