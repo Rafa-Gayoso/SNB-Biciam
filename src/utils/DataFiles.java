@@ -34,10 +34,10 @@ import java.util.List;
 
 public class DataFiles {
 
-    private static final String MUTATIONS = "config_files"+File.separator+"Mutations.xml";
-    private static final String HEURISTICS = "config_files"+File.separator+"Heuristics.xml";
-    private static final String TEAMS = "config_files"+File.separator+"Teams.xml";
-    private static final String DATA = "config_files"+File.separator+"Data.xlsx";
+    private static final String MUTATIONS = "config_files" + File.separator + "Mutations.xml";
+    private static final String HEURISTICS = "config_files" + File.separator + "Heuristics.xml";
+    private static final String TEAMS = "config_files" + File.separator + "Teams.xml";
+    private static final String DATA = "config_files" + File.separator + "Data.xlsx";
     private static DataFiles singletonFiles;//Singleton Pattern
     private ArrayList<String> teams;//List of resources.teams
     private ArrayList<String> acronyms;
@@ -87,8 +87,8 @@ public class DataFiles {
             //Nos saltamos la primera fila del encabezado
             rowIterator.next();
 
-            int posLocal =-1;
-            while (rowIterator.hasNext()){
+            int posLocal = -1;
+            while (rowIterator.hasNext()) {
                 row = rowIterator.next();
 
                 //Recorremos las celdas de la fila
@@ -97,14 +97,13 @@ public class DataFiles {
                 //teams.add(cell.getStringCellValue());
                 posLocal++;
                 int posVisitor = -1;
-                while (cellIterator.hasNext()){
+                while (cellIterator.hasNext()) {
                     posVisitor++;
-                    cell  = cellIterator.next();
+                    cell = cellIterator.next();
                     //System.out.print(cell.toString() + ";");
-                    teamsPairDistances.add(new TeamsPairDistance(posLocal,posVisitor,cell.getNumericCellValue()));
+                    teamsPairDistances.add(new TeamsPairDistance(posLocal, posVisitor, cell.getNumericCellValue()));
                 }
             }
-
 
 
         } catch (IOException e) {
@@ -112,7 +111,7 @@ public class DataFiles {
         }
     }
 
-    public void readMutations(){
+    public void readMutations() {
 
         try {
 
@@ -124,7 +123,6 @@ public class DataFiles {
             List<Element> list = rootNode.getChildren("mutation");
 
             for (Element target : list) {
-
 
 
                 String name = target.getChildText("name");
@@ -151,7 +149,7 @@ public class DataFiles {
         //return mutations;
     }
 
-    public void readHeuristics(){
+    public void readHeuristics() {
 
         try {
 
@@ -174,7 +172,7 @@ public class DataFiles {
 
     }
 
-    public void readTeams(){
+    public void readTeams() {
         List<String> heuristics = new ArrayList<>();
         try {
 
@@ -290,7 +288,7 @@ public class DataFiles {
         }
     }*/
 
-    public  void exportItinerary(boolean all){
+    public void exportItinerary(boolean all) {
         DirectoryChooser fc = new DirectoryChooser();
         int pos = CalendarController.selectedCalendar;
 
@@ -301,28 +299,27 @@ public class DataFiles {
 
         //dc = new DirectoryChooser();
         File f = fc.showDialog(new Stage());
-        File dir = new File(f.getAbsoluteFile()+"/Calendarios");
-        if(!dir.exists()){
+        File dir = new File(f.getAbsoluteFile() + "/Calendarios");
+        if (!dir.exists()) {
             dir.mkdir();
         }
 
         ArrayList<State> calendarToExport = new ArrayList<>();
-        if(all){
+        if (all) {
             calendarToExport.addAll(Executer.getInstance().getResultStates());
-        }
-        else{
+        } else {
             calendarToExport.add(Executer.getInstance().getResultStates().get(pos));
         }
 
-        for(int i=0; i < calendarToExport.size(); i++){
-            exportSingleCalendar(calendarToExport.get(i),dir.getAbsolutePath(), i);
+        for (int i = 0; i < calendarToExport.size(); i++) {
+            exportSingleCalendar(calendarToExport.get(i), dir.getAbsolutePath(), i);
         }
 
     }
 
-    private void exportSingleCalendar(State state, String route, int calendar){
+    private void exportSingleCalendar(State state, String route, int calendar) {
 
-        File file = new File(route+"/Calendario "+ calendar + ".xlsx");
+        File file = new File(route + "/Calendario " + calendar + ".xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook();
 
         Sheet spreadsheet = workbook.createSheet();
@@ -356,11 +353,11 @@ public class DataFiles {
         headerCellFont.setBold(false);
         headerCellFont.setFontHeightInPoints((short) 12);
 
-        int j=1;
-        for(; j < teamDate.size()-1;j++ ){
+        int j = 1;
+        for (; j < teamDate.size() - 1; j++) {
             ArrayList<Integer> date = teamDate.get(j);
             row = spreadsheet.createRow(j);
-            for(int k=0; k < date.size();k++){
+            for (int k = 0; k < date.size(); k++) {
                 int posTeam = teamDate.get(j).get(k);
                 String team = getAcronyms().get(posTeam);
                 Cell cell = row.createCell(k);
@@ -371,17 +368,17 @@ public class DataFiles {
         j++;
 
         row = spreadsheet.createRow(j);
-        Cell cell1 =  row.createCell(0);
+        Cell cell1 = row.createCell(0);
         cell1.setCellStyle(style);
         cell1.setCellValue("Distancia total(km): ");
 
-        Cell cell2 =  row.createCell(1);
+        Cell cell2 = row.createCell(1);
         cell2.setCellStyle(style);
         cell2.setCellValue(Distance.getInstance().calculateCalendarDistance(state));
 
 
         //autosize each column of the excel document
-        for(int i=0; i < row.getLastCellNum(); i++){
+        for (int i = 0; i < row.getLastCellNum(); i++) {
             spreadsheet.autoSizeColumn(i);
         }
 
@@ -459,7 +456,8 @@ public class DataFiles {
 
     public void addModifyTeamToData(String teamName, String acronym, String location, Double[] distances, int pos) throws IOException {
 
-        FileInputStream fis = new FileInputStream("src/files/Data.xlsx");
+
+        FileInputStream fis = new FileInputStream(DATA);
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
         XSSFSheet xssfSheet = workbook.getSheetAt(0);
 
@@ -487,10 +485,10 @@ public class DataFiles {
         style.setFont(headerCellFont);
 
 
-        for (int i = 1; i < distances.length+1; i++){
+        for (int i = 1; i < distances.length + 1; i++) {
             cell = xssfSheet.getRow(i).createCell(pos);
             cell.setCellStyle(style);
-            cell.setCellValue(distances[i-1]);
+            cell.setCellValue(distances[i - 1]);
         }
 
         Row row = xssfSheet.createRow(pos);
@@ -498,14 +496,14 @@ public class DataFiles {
         cell.setCellStyle(style);
         cell.setCellValue(teamName);
 
-        for (int i = 1; i < distances.length+1; i++){
+        for (int i = 1; i < distances.length + 1; i++) {
             cell = row.createCell(i);
             cell.setCellStyle(style);
-            cell.setCellValue(distances[i-1]);
+            cell.setCellValue(distances[i - 1]);
         }
 
-        if(pos == (getTeams().size() + 1)){
-            cell = row.createCell(distances.length+1);
+        if (pos == (getTeams().size() + 1)) {
+            cell = row.createCell(distances.length + 1);
             cell.setCellStyle(style);
             cell.setCellValue(0);
         }
@@ -516,7 +514,7 @@ public class DataFiles {
 
         FileOutputStream fileOut;
         try {
-            fileOut = new FileOutputStream("src/files/Data.xlsx");
+            fileOut = new FileOutputStream(DATA);
             workbook.write(fileOut);
             fileOut.close();
         } catch (Exception e) {
@@ -526,38 +524,39 @@ public class DataFiles {
 
     public void removeTeamFromData(int pos) throws IOException {
 
-        FileInputStream fis = new FileInputStream("src/files/Data.xlsx");
+        removeTeamFXML(pos);
+        FileInputStream fis = new FileInputStream(DATA);
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
         XSSFSheet xssfSheet = workbook.getSheetAt(0);
 
 
-        for(int i = 0; i < getTeams().size()+1; i++){
+        for (int i = 0; i < getTeams().size() + 1; i++) {
             Cell cell = xssfSheet.getRow(i).getCell(pos);
             xssfSheet.getRow(i).removeCell(cell);
         }
 
-        if(pos < xssfSheet.getRow(0).getLastCellNum()){
-            xssfSheet.shiftColumns(pos+1, xssfSheet.getRow(0).getLastCellNum(), -1);
+        if (pos < xssfSheet.getRow(0).getLastCellNum()) {
+            xssfSheet.shiftColumns(pos + 1, xssfSheet.getRow(0).getLastCellNum(), -1);
         }
 
         Row row = xssfSheet.getRow(pos);
         xssfSheet.removeRow(row);
 
-        if (pos < xssfSheet.getLastRowNum()){
-            xssfSheet.shiftRows(pos+1, xssfSheet.getLastRowNum(), -1);
+        if (pos < xssfSheet.getLastRowNum()) {
+            xssfSheet.shiftRows(pos + 1, xssfSheet.getLastRowNum(), -1);
         }
 
         XSSFSheet locationsSheet = workbook.getSheetAt(1);
         Cell cell = locationsSheet.getRow(0).getCell(pos - 1);
         locationsSheet.getRow(0).removeCell(cell);
 
-        if(pos - 1 < locationsSheet.getRow(0).getLastCellNum() - 1){
+        if (pos - 1 < locationsSheet.getRow(0).getLastCellNum() - 1) {
             locationsSheet.shiftColumns(pos, locationsSheet.getRow(0).getLastCellNum() - 1, -1);
         }
 
         FileOutputStream fileOut;
         try {
-            fileOut = new FileOutputStream("src/files/Data.xlsx");
+            fileOut = new FileOutputStream(DATA);
             workbook.write(fileOut);
             fileOut.close();
         } catch (Exception e) {
@@ -565,7 +564,7 @@ public class DataFiles {
         }
     }
 
-    private void addTeamToFXML(String teamName, String acronym, String location){
+    public void addTeamToFXML(String teamName, String acronym, String location) {
         try {
 
             //////TERMINAR METODOS DE INSERTAR ELIMINAR Y MODIFICAR
@@ -575,6 +574,8 @@ public class DataFiles {
             Document doc = sax.build(new File(TEAMS));
 
             Element rootNode = doc.getRootElement();
+            List<Element> list = rootNode.getChildren("team");
+
             Element team = new Element("team");
 
             team.addContent(new Element("name").setText(teamName));
@@ -582,41 +583,6 @@ public class DataFiles {
             team.addContent(new Element("region").setText(location));
             rootNode.addContent(team);
 
-            XMLOutputter xmlOutput = new XMLOutputter();
-
-            // display nice nice
-            xmlOutput.setFormat(Format.getPrettyFormat());
-            xmlOutput.output(doc, new FileWriter(TEAMS));
-
-            // xmlOutput.output(doc, System.out);
-
-            System.out.println("File updated!");
-        } catch (IOException io) {
-            io.printStackTrace();
-        } catch (JDOMException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void modifyTeamFXML(String teamName, String acronym, String location, int pos){
-        try {
-
-            SAXBuilder sax = new SAXBuilder();
-            // XML is a local file
-            Document doc = sax.build(new File(TEAMS));
-
-            Element rootNode = doc.getRootElement();
-            List<Element> list = rootNode.getChildren("team");
-
-            for(Element teamElement : list){
-
-                if(list.indexOf(teamElement) == pos){
-                    teamElement.getChild("name").setText(teamName);
-                    teamElement.getChild("acronym").setText(acronym);
-                    teamElement.getChild("region").setText(location);
-                    break;
-                }
-            }
 
             XMLOutputter xmlOutput = new XMLOutputter();
 
@@ -633,8 +599,8 @@ public class DataFiles {
             e.printStackTrace();
         }
     }
-    
-    private void removeTeamFXML(int pos){
+
+    public void modifyTeamFXML(String teamName, String acronym, String location, int pos) {
         try {
 
             SAXBuilder sax = new SAXBuilder();
@@ -644,9 +610,36 @@ public class DataFiles {
             Element rootNode = doc.getRootElement();
             List<Element> list = rootNode.getChildren("team");
 
-            for(Element teamElement : list){
 
-                if(list.indexOf(teamElement) == pos){
+            XMLOutputter xmlOutput = new XMLOutputter();
+
+            // display nice nice
+            xmlOutput.setFormat(Format.getPrettyFormat());
+            xmlOutput.output(doc, new FileWriter(TEAMS));
+
+            // xmlOutput.output(doc, System.out);
+
+            System.out.println("File updated!");
+        } catch (IOException io) {
+            io.printStackTrace();
+        } catch (JDOMException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removeTeamFXML(int pos) {
+        try {
+
+            SAXBuilder sax = new SAXBuilder();
+            // XML is a local file
+            Document doc = sax.build(new File(TEAMS));
+
+            Element rootNode = doc.getRootElement();
+            List<Element> list = rootNode.getChildren("team");
+
+            for (Element teamElement : list) {
+
+                if (list.indexOf(teamElement) == pos) {
                     rootNode.removeContent(teamElement);
                     break;
                 }

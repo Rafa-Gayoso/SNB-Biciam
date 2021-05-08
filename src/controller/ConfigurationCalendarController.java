@@ -250,7 +250,7 @@ public class ConfigurationCalendarController implements Initializable {
             existingConfiguration = true;
             configuration = controller.getLastSavedConfiguration();
         }*/
-
+        DataFiles.getSingletonDataFiles().readTeams();
         List<String> teams = DataFiles.getSingletonDataFiles().getTeams();
 
         teamsSelectionListView.setItems(FXCollections.observableArrayList(teams));

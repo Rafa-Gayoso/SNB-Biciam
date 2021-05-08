@@ -209,6 +209,7 @@ public class CrudsController implements Initializable {
 
                                 int pos = DataFiles.getSingletonDataFiles().getTeams().size() + 1;
                                 DataFiles.getSingletonDataFiles().addModifyTeamToData(teamName, acro, location, distances, pos);
+                                DataFiles.getSingletonDataFiles().addTeamToFXML(teamName, acro, location);
 
                                 DataFiles.getSingletonDataFiles().readTeams();
                                 Distance.getInstance().fillMatrixDistance();
@@ -288,6 +289,7 @@ public class CrudsController implements Initializable {
 
 
                             DataFiles.getSingletonDataFiles().addModifyTeamToData(teamName, acro, location, distances, pos+1);
+                            DataFiles.getSingletonDataFiles().modifyTeamFXML(teamName, acro, location, pos);
 
                             DataFiles.getSingletonDataFiles().readTeams();
                             Distance.getInstance().fillMatrixDistance();
@@ -325,7 +327,7 @@ public class CrudsController implements Initializable {
 
         int pos = teamsComboBox.getSelectionModel().getSelectedIndex();
         DataFiles.getSingletonDataFiles().removeTeamFromData(pos + 1);
-
+        DataFiles.getSingletonDataFiles().removeTeamFXML(pos);
         data.remove(pos);
         teamsComboBox.getSelectionModel().clearSelection();
         teamsComboBox.getItems().remove(pos);

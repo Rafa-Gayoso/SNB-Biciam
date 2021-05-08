@@ -109,7 +109,7 @@ public class HomeController implements Initializable {
 
     @FXML
     void showData(ActionEvent event) throws IOException {
-        this.createPage(new ConfigurationCalendarController(), home, "/visual/Cruds.fxml");
+        this.createPage(new CrudsController(), home, "/visual/Cruds.fxml");
 
     }
 
@@ -214,7 +214,25 @@ public class HomeController implements Initializable {
         loader.setLocation(HomeController.class.getResource(loc));
         anchorPane = loader.load();
 
-       if (object instanceof TeamsItineraryController) {
+        /*if (object instanceof MutationsConfigurationController) {
+
+            Parent root = FXMLLoader.load(getClass().getResource("/visual/MutationsConfiguration.fxml"));
+            Stage stage = new Stage();
+            ScalableContentPane scale = new ScalableContentPane();
+            scale.setContent(anchorPane);
+
+            stage.setTitle("Configuración de las mutaciones");
+            stage.setResizable(false);
+            stage.setScene(new Scene(scale));
+
+            object = loader.getController();
+            ((MutationsConfigurationController) object).setHomeController(this);
+
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(primaryPane.getScene().getWindow());
+
+            stage.show();
+        } else*/ if (object instanceof TeamsItineraryController) {
 
             Parent root = FXMLLoader.load(getClass().getResource("/visual/TeamsItinerary.fxml"));
             Stage stage = new Stage();
@@ -274,7 +292,26 @@ public class HomeController implements Initializable {
             setNode(anchorPane);
         }
 
+        else if (object instanceof CrudsController) {
+
+            Parent root = FXMLLoader.load(getClass().getResource("/visual/Cruds.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Gestión de datos");
+            stage.setResizable(false);
+
+            stage.setScene(new Scene(anchorPane));
+
+            object = loader.getController();
+            ((CrudsController) object).setHomeController(this);
+
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(primaryPane.getScene().getWindow());
+
+            stage.show();
+        }
     }
+
+
 
     @FXML
     void exportSelectedCalendar(ActionEvent event) {
