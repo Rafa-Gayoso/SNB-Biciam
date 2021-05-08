@@ -108,7 +108,8 @@ public class HomeController implements Initializable {
     }
 
     @FXML
-    void showData(ActionEvent event) {
+    void showData(ActionEvent event) throws IOException {
+        this.createPage(new ConfigurationCalendarController(), home, "/visual/Cruds.fxml");
 
     }
 

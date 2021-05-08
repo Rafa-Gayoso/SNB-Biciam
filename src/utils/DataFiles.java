@@ -18,6 +18,8 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
 import problem.definition.State;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
@@ -453,6 +455,217 @@ public class DataFiles {
 
     public void setHeuristics(ArrayList<String> heuristics) {
         this.heuristics = heuristics;
+    }
+
+    public void addModifyTeamToData(String teamName, String acronym, String location, Double[] distances, int pos) throws IOException {
+
+        FileInputStream fis = new FileInputStream("src/files/Data.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        XSSFSheet xssfSheet = workbook.getSheetAt(0);
+
+
+        XSSFFont headerCellFont = workbook.createFont();
+        headerCellFont.setBold(true);
+        headerCellFont.setColor(IndexedColors.WHITE.getIndex());
+        headerCellFont.setFontHeightInPoints((short) 11);
+
+        XSSFCellStyle style = workbook.createCellStyle();
+        style.setFillForegroundColor(IndexedColors.GREY_80_PERCENT.getIndex());
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setAlignment(HorizontalAlignment.CENTER);
+        style.setFont(headerCellFont);
+
+        //int addPos = Controller.getSingletonController().getTeams().size() + 1;
+        Cell cell = xssfSheet.getRow(0).createCell(pos);
+        cell.setCellStyle(style);
+        cell.setCellValue(acronym);
+
+        style = workbook.createCellStyle();
+        headerCellFont = workbook.createFont();
+        headerCellFont.setBold(false);
+        headerCellFont.setFontHeightInPoints((short) 12);
+        style.setFont(headerCellFont);
+
+
+        for (int i = 1; i < distances.length+1; i++){
+            cell = xssfSheet.getRow(i).createCell(pos);
+            cell.setCellStyle(style);
+            cell.setCellValue(distances[i-1]);
+        }
+
+        Row row = xssfSheet.createRow(pos);
+        cell = row.createCell(0);
+        cell.setCellStyle(style);
+        cell.setCellValue(teamName);
+
+        for (int i = 1; i < distances.length+1; i++){
+            cell = row.createCell(i);
+            cell.setCellStyle(style);
+            cell.setCellValue(distances[i-1]);
+        }
+
+        if(pos == (getTeams().size() + 1)){
+            cell = row.createCell(distances.length+1);
+            cell.setCellStyle(style);
+            cell.setCellValue(0);
+        }
+
+        XSSFSheet locationSheet = workbook.getSheetAt(1);
+        cell = locationSheet.getRow(0).createCell(pos - 1);
+        cell.setCellValue(location);
+
+        FileOutputStream fileOut;
+        try {
+            fileOut = new FileOutputStream("src/files/Data.xlsx");
+            workbook.write(fileOut);
+            fileOut.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removeTeamFromData(int pos) throws IOException {
+
+        FileInputStream fis = new FileInputStream("src/files/Data.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        XSSFSheet xssfSheet = workbook.getSheetAt(0);
+
+
+        for(int i = 0; i < getTeams().size()+1; i++){
+            Cell cell = xssfSheet.getRow(i).getCell(pos);
+            xssfSheet.getRow(i).removeCell(cell);
+        }
+
+        if(pos < xssfSheet.getRow(0).getLastCellNum()){
+            xssfSheet.shiftColumns(pos+1, xssfSheet.getRow(0).getLastCellNum(), -1);
+        }
+
+        Row row = xssfSheet.getRow(pos);
+        xssfSheet.removeRow(row);
+
+        if (pos < xssfSheet.getLastRowNum()){
+            xssfSheet.shiftRows(pos+1, xssfSheet.getLastRowNum(), -1);
+        }
+
+        XSSFSheet locationsSheet = workbook.getSheetAt(1);
+        Cell cell = locationsSheet.getRow(0).getCell(pos - 1);
+        locationsSheet.getRow(0).removeCell(cell);
+
+        if(pos - 1 < locationsSheet.getRow(0).getLastCellNum() - 1){
+            locationsSheet.shiftColumns(pos, locationsSheet.getRow(0).getLastCellNum() - 1, -1);
+        }
+
+        FileOutputStream fileOut;
+        try {
+            fileOut = new FileOutputStream("src/files/Data.xlsx");
+            workbook.write(fileOut);
+            fileOut.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addTeamToFXML(String teamName, String acronym, String location){
+        try {
+
+            //////TERMINAR METODOS DE INSERTAR ELIMINAR Y MODIFICAR
+
+            SAXBuilder sax = new SAXBuilder();
+            // XML is a local file
+            Document doc = sax.build(new File(TEAMS));
+
+            Element rootNode = doc.getRootElement();
+            Element team = new Element("team");
+
+            team.addContent(new Element("name").setText(teamName));
+            team.addContent(new Element("acronym").setText(acronym));
+            team.addContent(new Element("region").setText(location));
+            rootNode.addContent(team);
+
+            XMLOutputter xmlOutput = new XMLOutputter();
+
+            // display nice nice
+            xmlOutput.setFormat(Format.getPrettyFormat());
+            xmlOutput.output(doc, new FileWriter(TEAMS));
+
+            // xmlOutput.output(doc, System.out);
+
+            System.out.println("File updated!");
+        } catch (IOException io) {
+            io.printStackTrace();
+        } catch (JDOMException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void modifyTeamFXML(String teamName, String acronym, String location, int pos){
+        try {
+
+            SAXBuilder sax = new SAXBuilder();
+            // XML is a local file
+            Document doc = sax.build(new File(TEAMS));
+
+            Element rootNode = doc.getRootElement();
+            List<Element> list = rootNode.getChildren("team");
+
+            for(Element teamElement : list){
+
+                if(list.indexOf(teamElement) == pos){
+                    teamElement.getChild("name").setText(teamName);
+                    teamElement.getChild("acronym").setText(acronym);
+                    teamElement.getChild("region").setText(location);
+                    break;
+                }
+            }
+
+            XMLOutputter xmlOutput = new XMLOutputter();
+
+            // display nice nice
+            xmlOutput.setFormat(Format.getPrettyFormat());
+            xmlOutput.output(doc, new FileWriter(TEAMS));
+
+            // xmlOutput.output(doc, System.out);
+
+            System.out.println("File updated!");
+        } catch (IOException io) {
+            io.printStackTrace();
+        } catch (JDOMException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void removeTeamFXML(int pos){
+        try {
+
+            SAXBuilder sax = new SAXBuilder();
+            // XML is a local file
+            Document doc = sax.build(new File(TEAMS));
+
+            Element rootNode = doc.getRootElement();
+            List<Element> list = rootNode.getChildren("team");
+
+            for(Element teamElement : list){
+
+                if(list.indexOf(teamElement) == pos){
+                    rootNode.removeContent(teamElement);
+                    break;
+                }
+            }
+
+            XMLOutputter xmlOutput = new XMLOutputter();
+
+            // display nice nice
+            xmlOutput.setFormat(Format.getPrettyFormat());
+            xmlOutput.output(doc, new FileWriter(TEAMS));
+
+            // xmlOutput.output(doc, System.out);
+
+            System.out.println("File updated!");
+        } catch (IOException io) {
+            io.printStackTrace();
+        } catch (JDOMException e) {
+            e.printStackTrace();
+        }
     }
 
 }

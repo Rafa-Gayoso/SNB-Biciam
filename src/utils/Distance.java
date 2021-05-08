@@ -42,6 +42,7 @@ public class Distance {
 
     public void fillMatrixDistance() {
 
+        DataFiles.getSingletonDataFiles().createTeamsPairDistances();
         ArrayList<TeamsPairDistance> teamsPairDistances = DataFiles.getSingletonDataFiles().getTeamsPairDistances();
         this.matrixDistance = new double[DataFiles.getSingletonDataFiles().getTeams().size()][DataFiles.getSingletonDataFiles().getTeams().size()];
         for (TeamsPairDistance aux : teamsPairDistances) {
