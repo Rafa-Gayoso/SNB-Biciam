@@ -1,27 +1,30 @@
 package controller;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXToggleButton;
+import com.jfoenix.controls.*;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import definition.TTPDefinition;
 import execute.Executer;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
+import utils.ServiceExample;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
@@ -43,6 +46,10 @@ public class SelectGridController implements Initializable {
     private GridPane selectionGrid;
 
 
+
+    @FXML
+    private StackPane pane;
+
     @FXML
     private JFXButton saveLocations;
 
@@ -55,7 +62,7 @@ public class SelectGridController implements Initializable {
 
 
     @FXML
-    void saveLocations(ActionEvent event) throws IOException{
+    void saveLocations(ActionEvent event) throws IOException {
         if (matrix != null) {
             if (!error) {
                 HomeController.matrix = true;
@@ -151,8 +158,6 @@ public class SelectGridController implements Initializable {
     }
 
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         matrixCalendar = generateMatrix(SIZE);
@@ -163,7 +168,7 @@ public class SelectGridController implements Initializable {
         if (symmetric) {
             notBalanceCalendar.setVisible(false);
             balanceCalendar.setVisible(true);
-            error=false;
+            error = false;
         } else {
             notBalanceCalendar.setVisible(true);
             balanceCalendar.setVisible(false);
@@ -175,7 +180,7 @@ public class SelectGridController implements Initializable {
         for (int i = 0; i < SIZE + 1; i++) {
             ColumnConstraints columnConstraints = new ColumnConstraints();
             columnConstraints.setHalignment(HPos.CENTER);
-             columnConstraints.setFillWidth(true);
+            columnConstraints.setFillWidth(true);
             columnConstraints.setPercentWidth(100.0 / SIZE);
             selectionGrid.getColumnConstraints().add(columnConstraints);
         }
@@ -197,7 +202,7 @@ public class SelectGridController implements Initializable {
             selectionGrid.add(label, 0, i);
         }
 
-         for (int i = 0; i < matrix.length; i++) {
+        for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 if (i != j) {
                     selectionGrid.add(matrix[i][j], j + 1, i + 1);
@@ -208,8 +213,8 @@ public class SelectGridController implements Initializable {
 
     private boolean checkSymetricMatrix() {
         boolean symmetric = true;
-        int     cantRow   = 0;
-        int     cantLocal = (int) Math.floor((SIZE - 1) / 2) + 1;
+        int cantRow = 0;
+        int cantLocal = (int) Math.floor((SIZE - 1) / 2) + 1;
 
         for (int n = 0; n < SIZE && symmetric; n++) {
             for (int m = 0; m < SIZE && symmetric; m++) {
@@ -220,7 +225,7 @@ public class SelectGridController implements Initializable {
                     symmetric = false;
                 }
             }
-            if (cantRow == 0 || cantRow < cantLocal-1) {
+            if (cantRow == 0 || cantRow < cantLocal - 1) {
                 symmetric = false;
             }
             cantRow = 0;
@@ -228,18 +233,67 @@ public class SelectGridController implements Initializable {
         return symmetric;
     }
 
-   
-   void showCalendar() {
 
-        try{
-            TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
-            Executer.getInstance().executeEC();
-            AnchorPane structureOver = homeController.getPrincipalPane();
-            homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");
-            homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
-        }catch (IOException | ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e){
-            e.printStackTrace();
-        }
+    void showCalendar() {
+
+
+
+
+        JFXDialog jfxDialog = new JFXDialog();
+        JFXDialogLayout content = new JFXDialogLayout();
+        VBox vBox = new VBox();
+        vBox.setSpacing(25);
+        HBox hBox = new HBox();
+        Label label = new Label("Creando Calendarios. Por favor, espere.");
+        hBox.getChildren().addAll(label);
+        HBox hBox2 = new HBox();
+        JFXProgressBar progressBar = new JFXProgressBar();
+        progressBar.setPrefWidth(270);
+        System.out.println(progressBar.getPrefWidth());
+        progressBar.setProgress(0.0);
+        //progressBar.getStylesheets().add("src/styles/PrincipalMenu.css");
+        hBox2.getChildren().addAll(progressBar);
+        vBox.getChildren().addAll(hBox, hBox2);
+        content.setBody(vBox);
+        jfxDialog.setContent(content);
+        TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
+        jfxDialog.setDialogContainer(pane);
+        jfxDialog.show();
+        ServiceExample service = new ServiceExample();
+
+        service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent workerStateEvent) {
+                AnchorPane structureOver = homeController.getPrincipalPane();
+                try {
+                    homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
+            }
+        });
+
+        service.setOnRunning(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent workerStateEvent) {
+                progressBar.progressProperty().bind(service.progressProperty());
+
+                /*progressBar.progressProperty().bind(workerStateEvent.getSource().progressProperty());
+                System.out.println(workerStateEvent.getSource().progressProperty().getValue());*/
+            }
+        });
+
+
+
+        service.setOnFailed(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent workerStateEvent) {
+                //DO stuff on failed
+            }
+        });
+        service.restart();
+
 
     }
 

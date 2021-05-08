@@ -31,6 +31,7 @@ import tray.notification.TrayNotification;
 import utils.AuxStatePlusIterations;
 import utils.DataFiles;
 import utils.Distance;
+import utils.ServiceExample;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -119,7 +120,6 @@ public class Executer {
         XSSFWorkbook workbook = new XSSFWorkbook();
 
         ArrayList<State> thisLapBests = new ArrayList<>();*/
-
         for (int i = 0; i < EXECUTIONS; i++) {
             Strategy.getStrategy().setStopexecute(new StopExecute());
             Strategy.getStrategy().setUpdateparameter(new UpdateParameter());
@@ -154,6 +154,7 @@ public class Executer {
             //thisLapBests.add(Strategy.getStrategy().getBestState());
             resultStates.add(Strategy.getStrategy().getBestState());
             Strategy.destroyExecute();
+
         }
 
        // createBestCalendarSheet(workbook, thisLapBests);
