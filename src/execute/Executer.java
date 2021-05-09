@@ -1,6 +1,5 @@
 package execute;
 
-import definition.TTPDefinition;
 import definition.codification.TTPCodification;
 import definition.objective.function.TTPObjectiveFunction;
 import definition.operator.TTPOperator;
@@ -16,10 +15,6 @@ import metaheuristics.generators.EvolutionStrategies;
 import metaheuristics.generators.GeneratorType;
 import operators.heuristics.HeuristicOperatorType;
 import operators.mutation.MutationOperatorType;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFFont;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import problem.definition.ObjetiveFunction;
 import problem.definition.Operator;
 import problem.definition.Problem;
@@ -29,12 +24,7 @@ import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 import utils.AuxStatePlusIterations;
-import utils.DataFiles;
-import utils.Distance;
-import utils.ServiceExample;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;

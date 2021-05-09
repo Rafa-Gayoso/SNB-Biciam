@@ -4,29 +4,23 @@ import com.jfoenix.controls.*;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import definition.TTPDefinition;
 import execute.Executer;
-import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
-import utils.ServiceExample;
+import utils.ServiceCalendar;
 
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -46,9 +40,6 @@ public class SelectGridController implements Initializable {
     private GridPane selectionGrid;
 
 
-
-    @FXML
-    private StackPane pane;
 
     @FXML
     private JFXButton saveLocations;
@@ -238,7 +229,8 @@ public class SelectGridController implements Initializable {
 
 
 
-
+        StackPane stackPane = new StackPane();
+        stackPane.setPrefWidth(335);
         JFXDialog jfxDialog = new JFXDialog();
         JFXDialogLayout content = new JFXDialogLayout();
         VBox vBox = new VBox();
@@ -246,20 +238,26 @@ public class SelectGridController implements Initializable {
         HBox hBox = new HBox();
         Label label = new Label("Creando Calendarios. Por favor, espere.");
         hBox.getChildren().addAll(label);
+        hBox.setPrefWidth(120);
         HBox hBox2 = new HBox();
+        hBox2.setPrefWidth(120);
         JFXProgressBar progressBar = new JFXProgressBar();
         progressBar.setPrefWidth(270);
-        System.out.println(progressBar.getPrefWidth());
+        progressBar.setPrefHeight(10);
+        System.out.println(progressBar.getPrefHeight());
         progressBar.setProgress(0.0);
-        //progressBar.getStylesheets().add("src/styles/PrincipalMenu.css");
+        progressBar.getStylesheets().add("/styles/PrincipalMenu.css");
         hBox2.getChildren().addAll(progressBar);
         vBox.getChildren().addAll(hBox, hBox2);
         content.setBody(vBox);
         jfxDialog.setContent(content);
         TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
-        jfxDialog.setDialogContainer(pane);
+        jfxDialog.setDialogContainer(stackPane);
+        panel.getChildren().add(stackPane);
+        stackPane.setLayoutX(400);
+        stackPane.setLayoutY(200);
         jfxDialog.show();
-        ServiceExample service = new ServiceExample();
+        ServiceCalendar service = new ServiceCalendar();
 
         service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
