@@ -63,11 +63,19 @@ public class Executer {
         return executerInstance;
     }
 
+    public Problem getProblem() {
+        return problem;
+    }
+
+    public void setProblem(Problem problem) {
+        this.problem = problem;
+    }
+
     /**
      * Configura el problema estableciendo la funcion objetivo, el operador,
      * solucion inicial, tipo de problema, codificacion.
      */
-    private void configureProblem() {
+    public void configureProblem() {
 
         problem = new Problem();//Instancia del problema a resolver
         TTPObjectiveFunction objectiveFunction = new TTPObjectiveFunction();//Se instancia la funcion obj del problema

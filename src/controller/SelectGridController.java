@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import definition.TTPDefinition;
 import execute.Executer;
+import javafx.beans.property.Property;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -230,7 +231,7 @@ public class SelectGridController implements Initializable {
 
 
         StackPane stackPane = new StackPane();
-        stackPane.setPrefWidth(335);
+        stackPane.setPrefWidth(365);
         JFXDialog jfxDialog = new JFXDialog();
         JFXDialogLayout content = new JFXDialogLayout();
         VBox vBox = new VBox();
@@ -244,10 +245,12 @@ public class SelectGridController implements Initializable {
         JFXProgressBar progressBar = new JFXProgressBar();
         progressBar.setPrefWidth(270);
         progressBar.setPrefHeight(10);
-        System.out.println(progressBar.getPrefHeight());
         progressBar.setProgress(0.0);
         progressBar.getStylesheets().add("/styles/PrincipalMenu.css");
         hBox2.getChildren().addAll(progressBar);
+
+        Label labelProgress = new Label();
+        hBox2.getChildren().add(labelProgress);
         vBox.getChildren().addAll(hBox, hBox2);
         content.setBody(vBox);
         jfxDialog.setContent(content);
@@ -276,6 +279,7 @@ public class SelectGridController implements Initializable {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
                 progressBar.progressProperty().bind(service.progressProperty());
+                labelProgress.textProperty().bindBidirectional((Property<String>) service.messageProperty());
 
                 /*progressBar.progressProperty().bind(workerStateEvent.getSource().progressProperty());
                 System.out.println(workerStateEvent.getSource().progressProperty().getValue());*/
