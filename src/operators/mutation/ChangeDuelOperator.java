@@ -2,9 +2,11 @@ package operators.mutation;
 
 import com.sun.prism.shader.Solid_Color_AlphaTest_Loader;
 import definition.TTPDefinition;
+import definition.state.CalendarState;
 import definition.state.statecode.Date;
 import operators.interfaces.*;
 import problem.definition.State;
+import utils.CalendarConfiguration;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -12,13 +14,15 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ChangeDuelOperator extends MutationOperator implements ISwapTeams {
     @Override
     public State applyMutation(State state) {
-        State resultSate = state.clone();
+        State resultState = state.clone();
+
+        CalendarConfiguration configuration = ((CalendarState)resultState).getConfiguration();
         int posFirstDate = -1;
         int posLastDate = -1;
         int posFirstDuel = -1;
         int startPosition = 0;
 
-        if(TTPDefinition.getInstance().isInauguralGame()){
+        if(configuration.isInauguralGame()){
             startPosition = 1;
         }
         /*if (!mutationsConfigurationsList.isEmpty()) {
@@ -30,20 +34,20 @@ public class ChangeDuelOperator extends MutationOperator implements ISwapTeams {
 
         if (posFirstDate == -1) {
             do {
-                posFirstDate = ThreadLocalRandom.current().nextInt(startPosition, resultSate.getCode().size());
+                posFirstDate = ThreadLocalRandom.current().nextInt(startPosition, resultState.getCode().size());
             }
             while (posLastDate == posFirstDate);
         }
 
         if (posLastDate == -1) {
             do {
-                posLastDate = ThreadLocalRandom.current().nextInt(startPosition, resultSate.getCode().size());
+                posLastDate = ThreadLocalRandom.current().nextInt(startPosition, resultState.getCode().size());
             }
             while (posLastDate == posFirstDate);
         }
 
-        Date firstDate = (Date)resultSate.getCode().get(posFirstDate);
-        Date secondDate = (Date)resultSate.getCode().get(posLastDate);
+        Date firstDate = (Date)resultState.getCode().get(posFirstDate);
+        Date secondDate = (Date)resultState.getCode().get(posLastDate);
 
         if (posFirstDuel == -1) {
             do{
@@ -55,7 +59,7 @@ public class ChangeDuelOperator extends MutationOperator implements ISwapTeams {
 
         swapTeams(posFirstDuel, false, firstDate, secondDate);
 
-        return resultSate ;
+        return resultState ;
     }
 
 

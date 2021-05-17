@@ -26,9 +26,24 @@
   <component name="ChangeListManager">
     <list default="true" id="31c4c62d-8161-430c-9912-ecee8f383fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/SelectGridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SelectGridController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/execute/Executer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execute/Executer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/ServiceCalendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ServiceCalendar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/definition/TTPDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/TTPDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/definition/operator/TTPOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/operator/TTPOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/definition/state/CalendarState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/state/CalendarState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/heuristics/DateHeuristicOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/heuristics/DateHeuristicOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/heuristics/DuelHeuristicOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/heuristics/DuelHeuristicOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/interfaces/IChampionGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/interfaces/IChampionGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeDateDuelsOrderOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeDateDuelsOrderOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeDateOrderOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeDateOrderOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeDatePositionOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeDatePositionOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeDateSingleDuelOrderOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeDateSingleDuelOrderOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeDuelOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeDuelOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeLocalVisitorSingleTeamOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeLocalVisitorSingleTeamOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeTeamsOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeTeamsOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/SwapDatesOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/SwapDatesOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Distance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Distance.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,6 +188,7 @@
       <workItem from="1620584901996" duration="1830000" />
       <workItem from="1620706662655" duration="167000" />
       <workItem from="1620781017373" duration="2000" />
+      <workItem from="1621218508536" duration="5719000" />
     </task>
     <servers />
   </component>
@@ -196,58 +212,70 @@
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
     <state x="-1506" y="174" width="1092" height="787" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620447367938" />
-    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser" timestamp="1620694337092">
+    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser" timestamp="1621219141858">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1620694337092" />
+    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1621219141858" />
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1620485928739">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1620485928739" />
-    <state width="1877" height="253" key="GridCell.Tab.0.bottom" timestamp="1620706832721">
+    <state x="715" y="222" key="#xdebugger.evaluate" timestamp="1621222990071">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="715" y="222" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1621222990071" />
+    <state width="1877" height="822" key="GridCell.Tab.0.bottom" timestamp="1621224050309">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="333" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620497079402" />
-    <state width="1877" height="253" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620706832721" />
-    <state width="1877" height="253" key="GridCell.Tab.0.center" timestamp="1620706832721">
+    <state width="1877" height="822" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1621224050309" />
+    <state width="1877" height="822" key="GridCell.Tab.0.center" timestamp="1621224050309">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="333" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620497079401" />
-    <state width="1877" height="253" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620706832721" />
-    <state width="1877" height="253" key="GridCell.Tab.0.left" timestamp="1620706832721">
+    <state width="1877" height="822" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1621224050309" />
+    <state width="1877" height="822" key="GridCell.Tab.0.left" timestamp="1621224050308">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="333" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620497079401" />
-    <state width="1877" height="253" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620706832721" />
-    <state width="1877" height="253" key="GridCell.Tab.0.right" timestamp="1620706832721">
+    <state width="1877" height="822" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1621224050308" />
+    <state width="1877" height="822" key="GridCell.Tab.0.right" timestamp="1621224050309">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="333" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620497079402" />
-    <state width="1877" height="253" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620706832721" />
-    <state width="1877" height="333" key="GridCell.Tab.1.bottom" timestamp="1620540640745">
+    <state width="1877" height="822" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1621224050309" />
+    <state width="1877" height="822" key="GridCell.Tab.1.bottom" timestamp="1621224050309">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="333" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620497078467" />
-    <state width="1877" height="333" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620540640745" />
-    <state width="1877" height="333" key="GridCell.Tab.1.center" timestamp="1620540640745">
+    <state width="1877" height="822" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1621224050309" />
+    <state width="1877" height="822" key="GridCell.Tab.1.center" timestamp="1621224050309">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="333" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620497078467" />
-    <state width="1877" height="333" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620540640745" />
-    <state width="1877" height="333" key="GridCell.Tab.1.left" timestamp="1620540640745">
+    <state width="1877" height="822" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1621224050309" />
+    <state width="1877" height="822" key="GridCell.Tab.1.left" timestamp="1621224050309">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="333" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620497078467" />
-    <state width="1877" height="333" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620540640745" />
-    <state width="1877" height="333" key="GridCell.Tab.1.right" timestamp="1620540640745">
+    <state width="1877" height="822" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1621224050309" />
+    <state width="1877" height="822" key="GridCell.Tab.1.right" timestamp="1621224050309">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="333" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620497078467" />
-    <state width="1877" height="333" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620540640745" />
+    <state width="1877" height="822" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1621224050309" />
+    <state x="511" y="248" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1621222605521">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="511" y="248" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040@0.0.1920.1040" timestamp="1621222605521" />
     <state x="342" y="140" key="new project wizard" timestamp="1620670656484">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="342" y="140" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1620670656484" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1621222241766">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1621222241766" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -261,6 +289,21 @@
           <url>file://$PROJECT_DIR$/src/controller/HomeController.java</url>
           <line>111</line>
           <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/operators/heuristics/DateHeuristicOperator.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundSolution.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/definition/objective/function/TTPObjectiveFunction.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

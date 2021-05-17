@@ -1,8 +1,10 @@
 package operators.mutation;
 
 import definition.TTPDefinition;
+import definition.state.CalendarState;
 import definition.state.statecode.Date;
 import problem.definition.State;
+import utils.CalendarConfiguration;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -11,10 +13,10 @@ public class ChangeDateSingleDuelOrderOperator extends MutationOperator {
     @Override
     public State applyMutation(State state) {
         State resultState = state.clone();
-
+        CalendarConfiguration configuration = ((CalendarState)resultState).getConfiguration();
         int startPosition = 0;
 
-        if(TTPDefinition.getInstance().isInauguralGame()){
+        if(configuration.isInauguralGame()){
             startPosition = 1;
         }
 
@@ -37,7 +39,7 @@ public class ChangeDateSingleDuelOrderOperator extends MutationOperator {
         date.getGames().get(selectedDuel).set(0, date.getGames().get(selectedDuel).get(1));
         date.getGames().get(selectedDuel).set(1, temp);
 
-        if(TTPDefinition.getInstance().isSecondRound() && !TTPDefinition.getInstance().isSymmetricSecondRound()){
+        if(configuration.isSecondRoundCalendar() && !configuration.isSymmetricSecondRound()){
             ArrayList<Integer> duel = date.getGames().get(selectedDuel);
 
             int i=0;

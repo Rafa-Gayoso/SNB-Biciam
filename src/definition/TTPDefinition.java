@@ -1,6 +1,8 @@
 package definition;
 
+import definition.state.CalendarState;
 import definition.state.statecode.Date;
+import utils.CalendarConfiguration;
 import utils.Distance;
 import problem.definition.State;
 
@@ -23,6 +25,7 @@ public class TTPDefinition {
     private int secondPlace;
     private boolean occidentVsOrient;
     private int[][] duelMatrix;
+    private String calendarId;
     private static TTPDefinition ttpDefinition;
     private ArrayList<ArrayList<Integer>> mutationsConfigurationsList;//list of configurations for the mutations
     private ArrayList<Integer> mutationsIndexes;
@@ -177,6 +180,13 @@ public class TTPDefinition {
         this.cantVecesVisitante = cantVecesVisitante;
     }
 
+    public String getCalendarId() {
+        return calendarId;
+    }
+
+    public void setCalendarId(String calendarId) {
+        this.calendarId = calendarId;
+    }
 
     public ArrayList<Integer> getTeamsIndexes() {
         return teamsIndexes;
@@ -184,22 +194,16 @@ public class TTPDefinition {
 
     public ArrayList<ArrayList<Integer>> teamsItinerary(State calendar) {
         ArrayList<ArrayList<Integer>> teamDate = new ArrayList<>();
-        ArrayList<Integer> teamsIndexes = new ArrayList<>();
-        /*int length = calendar.getCode().size();
-        if(length < 15){
-            System.out.println("------ELIMINO-------");
-            for(int i =0; i < calendar.getCode().size(); i++){
-                Date date = (Date) calendar.getCode().get(i);
-                System.out.println(date);
-            }
-        }*/
-
-
-        for (int i = 0; i < ((Date)calendar.getCode().get(calendar.getCode().size()-1)).getGames().size(); i++) {
-            teamsIndexes.add(((Date)calendar.getCode().get(calendar.getCode().size()-1)).getGames().get(i).get(0));
-            teamsIndexes.add(((Date)calendar.getCode().get(calendar.getCode().size()-1)).getGames().get(i).get(1));
+        CalendarConfiguration configuration = ((CalendarState)calendar).getConfiguration();
+        if(configuration == null){
+            configuration = new CalendarConfiguration(
+                    TTPDefinition.getInstance().getCalendarId(), TTPDefinition.getInstance().getTeamsIndexes(), TTPDefinition.getInstance().isInauguralGame(),
+                    TTPDefinition.getInstance().isChampionVsSub(), TTPDefinition.getInstance().getFirstPlace(),
+                    TTPDefinition.getInstance().getSecondPlace(),TTPDefinition.getInstance().isSecondRound(), TTPDefinition.getInstance().isSymmetricSecondRound(),
+                    TTPDefinition.getInstance().isOccidentVsOrient(), TTPDefinition.getInstance().getCantVecesLocal(), TTPDefinition.getInstance().getCantVecesVisitante()
+            );
         }
-        quickSort(teamsIndexes, 0, teamsIndexes.size()-1);
+        ArrayList<Integer> teamsIndexes = (ArrayList<Integer>) configuration.getTeamsIndexes().clone();
 
         ArrayList<Integer> row = new ArrayList<>();
 
@@ -211,15 +215,15 @@ public class TTPDefinition {
 
         int i=0;
 
-        if(TTPDefinition.getInstance().isChampionVsSub()){
+        if(configuration.isChampionVsSecondPlace()){
             ArrayList<Integer> pivotRow = (ArrayList<Integer>) row.clone();
-            int posChampeon = teamsIndexes.indexOf(TTPDefinition.getInstance().getFirstPlace());
-            int posSub = teamsIndexes.indexOf(TTPDefinition.getInstance().getSecondPlace());
+            int posChampeon = teamsIndexes.indexOf(configuration.getChampion());
+            int posSub = teamsIndexes.indexOf(configuration.getSecondPlace());
 
             if (posChampeon != -1 && posSub != -1) {
-                pivotRow.set(posSub, TTPDefinition.getInstance().getFirstPlace());
+                pivotRow.set(posSub, configuration.getChampion());
             } else if (posChampeon == -1 && posSub != -1) {
-                pivotRow.set(posSub, TTPDefinition.getInstance().getFirstPlace());
+                pivotRow.set(posSub, configuration.getChampion());
             }
             teamDate.add(pivotRow);
 
@@ -256,8 +260,9 @@ public class TTPDefinition {
         ArrayList<Integer> counts = new ArrayList<>();
         State state = calendar.clone();
         ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(state);
-        int maxVisitorGames = TTPDefinition.getInstance().getCantVecesVisitante();
-        ArrayList<Integer> teamsIndexes = TTPDefinition.getInstance().getTeamsIndexes();
+        CalendarConfiguration configuration = ((CalendarState)calendar).getConfiguration();
+        int maxVisitorGames = configuration.getMaxVisitorGamesInARow();
+        ArrayList<Integer> teamsIndexes = (ArrayList<Integer>) configuration.getTeamsIndexes().clone();
 
         for (int i = 0; i < teamsIndexes.size(); i++) {
             counts.add(0);
@@ -287,13 +292,13 @@ public class TTPDefinition {
     public int penalizeChampionGame(State calendar){
 
         boolean penalize = true;
-
+        CalendarConfiguration configuration = ((CalendarState)calendar).getConfiguration();
         Date date = (Date) calendar.getCode().get(0);
         int i =0;
         while (i < date.getGames().size() && penalize){
             ArrayList<Integer> duel = date.getGames().get(i);
 
-            if(duel.get(0) == TTPDefinition.getInstance().getFirstPlace() && duel.get(1) == TTPDefinition.getInstance().getSecondPlace()){
+            if(duel.get(0) == configuration.getChampion() && duel.get(1) == configuration.getSecondPlace()){
                 penalize = false;
             }
             else{
@@ -306,10 +311,10 @@ public class TTPDefinition {
     public int penalizeInauguralGame(State calendar){
 
         boolean penalize = true;
-
+        CalendarConfiguration configuration = ((CalendarState)calendar).getConfiguration();
         Date date = (Date) calendar.getCode().get(0);
-        if(date.getGames().get(0).get(0) == TTPDefinition.getInstance().getFirstPlace() &&
-                date.getGames().get(0).get(1) == TTPDefinition.getInstance().getSecondPlace())
+        if(date.getGames().get(0).get(0) == configuration.getChampion() &&
+                date.getGames().get(0).get(1) == configuration.getSecondPlace())
             penalize = true;
 
         return penalize? PENALIZATION: 0;
@@ -320,8 +325,9 @@ public class TTPDefinition {
         State state = calendar.clone();
         ArrayList<Integer> counts = new ArrayList<>();
         ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(state);
-        int maxHomeGames = TTPDefinition.getInstance().getCantVecesLocal();
-        ArrayList<Integer> teamsIndexes = TTPDefinition.getInstance().getTeamsIndexes();
+        CalendarConfiguration configuration = ((CalendarState)calendar).getConfiguration();
+        int maxHomeGames = configuration.getMaxLocalGamesInARow();
+        ArrayList<Integer> teamsIndexes = (ArrayList<Integer>) configuration.getTeamsIndexes().clone();
         for (int i = 0; i < teamsIndexes.size(); i++) {
             counts.add(0);
         }

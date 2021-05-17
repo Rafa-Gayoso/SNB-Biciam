@@ -1,8 +1,10 @@
 package operators.mutation;
 
 import definition.TTPDefinition;
+import definition.state.CalendarState;
 import definition.state.statecode.Date;
 import problem.definition.State;
+import utils.CalendarConfiguration;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -10,11 +12,12 @@ public class SwapDatesOperator extends MutationOperator {
     @Override
     public State applyMutation(State state) {
         State resultState =state.clone();
+        CalendarConfiguration configuration = ((CalendarState)resultState).getConfiguration();
         int firstDate = -1;
         int secondDate = -1;
         int startPosition = 0;
 
-        if(TTPDefinition.getInstance().isInauguralGame()){
+        if(configuration.isInauguralGame()){
             startPosition = 1;
         }
         /*if (!mutationsConfigurationsList.isEmpty()) {

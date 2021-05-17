@@ -15,6 +15,7 @@ import operators.mutation.CombineMutationOperator;
 import operators.mutation.MutationOperatorType;
 import problem.definition.Operator;
 import problem.definition.State;
+import utils.CalendarConfiguration;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,11 +41,12 @@ public class TTPOperator extends Operator implements ICreateInitialSolution, ISe
         List<State> neighborhood = new ArrayList<>(neighborhoodSize);
         for (int i = 0; i < neighborhoodSize; i++) {
             State newState = operatorSelector.applyMutation(state);
-            if (TTPDefinition.getInstance().isSymmetricSecondRound()) {
+            CalendarConfiguration configuration = ((CalendarState)newState).getConfiguration();
+            if (configuration.isSymmetricSecondRound()) {
                 setSecondRound(newState);
             }
-            if (TTPDefinition.getInstance().isChampionVsSub()) {
-                if (TTPDefinition.getInstance().isInauguralGame())
+            if (configuration.isChampionVsSecondPlace()) {
+                if (configuration.isInauguralGame())
                     addInauguralGame(newState);
                 else
                     fixChampionSubchampion(newState);
@@ -62,6 +64,7 @@ public class TTPOperator extends Operator implements ICreateInitialSolution, ISe
         for (int i = 0; i < neighborhoodSize; i++) {
             State state = initialSolution.generateCalendar(heuristics);
             ((CalendarState) state).setCalendarType(type.ordinal());
+            CalendarConfiguration configuration = ((CalendarState)state).getConfiguration();
             neighborhood.add(state);
         }
         return neighborhood;

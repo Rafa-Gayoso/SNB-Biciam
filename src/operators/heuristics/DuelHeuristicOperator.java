@@ -16,7 +16,7 @@ public class DuelHeuristicOperator extends HeuristicOperator {
     private ArrayList<ArrayList<Integer>> duels;
 
     public void initializeDuelHeuristicOperator(ArrayList<ArrayList<Integer>> duels){
-        this.teams = TTPDefinition.getInstance().getTeamsIndexes();
+        this.teams = (ArrayList<Integer>) TTPDefinition.getInstance().getTeamsIndexes().clone();
         this.duels = duels;
     }
 

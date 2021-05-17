@@ -193,6 +193,7 @@ public class ConfigurationCalendarController implements Initializable {
             TTPDefinition.getInstance().setSecondPlace(posSub);
             TTPDefinition.getInstance().setInauguralGame(inauguralGame.isSelected());
             TTPDefinition.getInstance().setOccidentVsOrient(occidenteVsOrienteToggle.isSelected());
+            TTPDefinition.getInstance().setCalendarId(calendarId.getText());
 
 
 

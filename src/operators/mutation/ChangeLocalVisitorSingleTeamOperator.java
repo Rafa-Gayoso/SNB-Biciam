@@ -1,8 +1,10 @@
 package operators.mutation;
 
 import definition.TTPDefinition;
+import definition.state.CalendarState;
 import definition.state.statecode.Date;
 import problem.definition.State;
+import utils.CalendarConfiguration;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -11,7 +13,7 @@ public class ChangeLocalVisitorSingleTeamOperator extends MutationOperator {
     @Override
     public State applyMutation(State state) {
         State resultState = state.clone();
-
+        CalendarConfiguration configuration = ((CalendarState)resultState).getConfiguration();
         int selectedTeam = -1;
 
         /*if (!configurationsList.isEmpty()) {
@@ -19,7 +21,7 @@ public class ChangeLocalVisitorSingleTeamOperator extends MutationOperator {
         }*/
 
         if (selectedTeam == -1) {
-            selectedTeam = ThreadLocalRandom.current().nextInt(0, TTPDefinition.getInstance().getCantEquipos());
+            selectedTeam = ThreadLocalRandom.current().nextInt(0, configuration.getTeamsIndexes().size());
         }
 
 

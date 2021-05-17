@@ -1,6 +1,7 @@
 package utils;
 
 import definition.TTPDefinition;
+import definition.state.CalendarState;
 import problem.definition.State;
 
 import java.util.ArrayList;
@@ -59,11 +60,12 @@ public class Distance {
     public ArrayList<ArrayList<Double>> itineraryDistances(State state) {
         ArrayList<ArrayList<Double>> distancesItinerary = new ArrayList<>();
         ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(state);
+        CalendarConfiguration configuration = ((CalendarState)state).getConfiguration();
         for (int i = 0; i < itinerary.size() - 1; i++) {
 
-            ArrayList<Double> distances = new ArrayList<>(TTPDefinition.getInstance().getTeamsIndexes().size());
+            ArrayList<Double> distances = new ArrayList<>(configuration.getTeamsIndexes().size());
 
-            for (int m = 0; m < TTPDefinition.getInstance().getTeamsIndexes().size(); m++) {
+            for (int m = 0; m < configuration.getTeamsIndexes().size(); m++) {
                 distances.add(0.0);
             }
 
@@ -74,7 +76,7 @@ public class Distance {
                 int second = row2.get(j);
                 double dist = matrixDistance[second][first];
                 distances.set(j, distances.get(j) + dist);
-                if (TTPDefinition.getInstance().getTeamsIndexes().get(j) == second) {
+                if (configuration.getTeamsIndexes().get(j) == second) {
                     distances.set(j, 0.0);
                 }
             }

@@ -22,6 +22,7 @@ import tray.notification.TrayNotification;
 import utils.ServiceCalendar;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -228,8 +229,27 @@ public class SelectGridController implements Initializable {
 
     void showCalendar() {
 
+        AnchorPane structureOver = homeController.getPrincipalPane();
+        try {
+            TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
+            Executer.getInstance().executeEC();
 
-
+            homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
+/*
         StackPane stackPane = new StackPane();
         stackPane.setPrefWidth(365);
         JFXDialog jfxDialog = new JFXDialog();
@@ -265,13 +285,7 @@ public class SelectGridController implements Initializable {
         service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
-                AnchorPane structureOver = homeController.getPrincipalPane();
-                try {
-                    homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
+
             }
         });
 
@@ -281,8 +295,7 @@ public class SelectGridController implements Initializable {
                 progressBar.progressProperty().bind(service.progressProperty());
                 labelProgress.textProperty().bindBidirectional((Property<String>) service.messageProperty());
 
-                /*progressBar.progressProperty().bind(workerStateEvent.getSource().progressProperty());
-                System.out.println(workerStateEvent.getSource().progressProperty().getValue());*/
+
             }
         });
 
@@ -291,11 +304,12 @@ public class SelectGridController implements Initializable {
         service.setOnFailed(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
-                //DO stuff on failed
+                System.out.println(service.getMessage());
+
             }
         });
         service.restart();
-
+*/
 
     }
 

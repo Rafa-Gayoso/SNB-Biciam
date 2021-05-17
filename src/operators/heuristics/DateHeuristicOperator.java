@@ -1,6 +1,7 @@
 package operators.heuristics;
 
 import definition.TTPDefinition;
+import definition.state.CalendarState;
 import utils.AuxPosDateAndPace;
 import utils.Distance;
 
@@ -18,7 +19,7 @@ public class DateHeuristicOperator extends HeuristicOperator{
     private DuelHeuristicOperator duelHeuristic;
 
     public void initializeDateHeuristicOperator(ArrayList<ArrayList<Integer>> duels){
-        this.teams = TTPDefinition.getInstance().getTeamsIndexes();
+        this.teams = (ArrayList<Integer>) TTPDefinition.getInstance().getTeamsIndexes().clone();
         this.duels = duels;
         this.dateList = new ArrayList<>();
         this.duelHeuristic = new DuelHeuristicOperator();
@@ -42,7 +43,7 @@ public class DateHeuristicOperator extends HeuristicOperator{
         for(int i = 0; i < cantDates;i++){
 
             while(calendar.size() < cantDates){
-                State state = new State();
+                State state = new CalendarState();
                 state.getCode().addAll(dateList);
                 AuxPosDateAndPace posDatePlace =  posLessDistanceDate(calendar, state);
                 if(posDatePlace.getPosDate() != -1){

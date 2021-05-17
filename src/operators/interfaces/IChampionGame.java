@@ -1,20 +1,22 @@
 package operators.interfaces;
 
 import definition.TTPDefinition;
+import definition.state.CalendarState;
 import definition.state.statecode.Date;
 import problem.definition.State;
+import utils.CalendarConfiguration;
 
 public interface IChampionGame extends ISwapTeams{
 
     default void fixChampionSubchampion(State state) {
-
+        CalendarConfiguration configuration = ((CalendarState)state).getConfiguration();
         boolean found = false;
         int posDate = -1;
         int posGame = -1;
         int i = 0;
 
-        int posChampion = TTPDefinition.getInstance().getFirstPlace();
-        int posSubChampion = TTPDefinition.getInstance().getSecondPlace();
+        int posChampion = configuration.getChampion();
+        int posSubChampion = configuration.getSecondPlace();
 
         while (i <state.getCode().size() && !found) {
             Date date = (Date) state.getCode().get(i);

@@ -6,6 +6,7 @@ import operators.factory.HeuristicOperatorFactory;
 import operators.heuristics.HeuristicOperator;
 import operators.heuristics.HeuristicOperatorType;
 import problem.definition.State;
+import utils.CalendarConfiguration;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,6 +21,7 @@ public class SimpleRoundSolution extends InitialSolution {
         duels = new ArrayList<>();
 
         duelMatrix = TTPDefinition.getInstance().getDuelMatrix();
+
         int[][] newMatrix = new int[duelMatrix.length][duelMatrix.length];
 
         for (int i = 0; i < duelMatrix.length; i++) {
@@ -52,9 +54,18 @@ public class SimpleRoundSolution extends InitialSolution {
         HeuristicOperator heuristic = HeuristicOperatorFactory.getInstance(heuristics.get(randomNumber));
 
         CalendarState state = new CalendarState();
+        CalendarConfiguration configuration = new CalendarConfiguration(
+                TTPDefinition.getInstance().getCalendarId(), TTPDefinition.getInstance().getTeamsIndexes(), TTPDefinition.getInstance().isInauguralGame(),
+                TTPDefinition.getInstance().isChampionVsSub(), TTPDefinition.getInstance().getFirstPlace(),
+                TTPDefinition.getInstance().getSecondPlace(),TTPDefinition.getInstance().isSecondRound(), TTPDefinition.getInstance().isSymmetricSecondRound(),
+                TTPDefinition.getInstance().isOccidentVsOrient(), TTPDefinition.getInstance().getCantVecesLocal(), TTPDefinition.getInstance().getCantVecesVisitante()
+        );
         boolean good = false;
         while (!good){
+
+            state.setConfiguration(configuration);
             state.getCode().addAll(heuristic.generateCalendar(duels));
+
             if (state.getCode().size() == newMatrix.length-1){
                 good = true;
             }
