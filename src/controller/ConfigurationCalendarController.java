@@ -407,18 +407,7 @@ public class ConfigurationCalendarController implements Initializable {
 
     @FXML
     void selectTeamChamp(ActionEvent event) {
-        //update Sub-Champion ComboBox without Champion Team
 
-        /*
-        if (comboChamp.getSelectionModel().getSelectedItem().equalsIgnoreCase(comboSub.getSelectionModel().getSelectedItem())) {
-            comboSub.getSelectionModel().clearSelection();
-            System.out.println("Same selection. Swap Team to Sub-Champion");
-        } else if (!comboSub.getSelectionModel().isEmpty() && comboChamp.getSelectionModel().getSelectedItem().equalsIgnoreCase(comboSub.getSelectionModel().getSelectedItem())) {
-            String teamSwap = comboSub.getSelectionModel().getSelectedItem();
-            comboSub.getSelectionModel().select(comboChamp.getSelectionModel().getSelectedItem());
-            comboChamp.getSelectionModel().select(teamSwap);
-        }
-        */
         listComboSub.clear();
         listComboSub.addAll(teamsSelectionListView.getSelectionModel().getSelectedItems());
         listComboSub.remove(comboChamp.getSelectionModel().getSelectedItem());

@@ -28,7 +28,6 @@ public class TTPOperator extends Operator implements ICreateInitialSolution, ISe
 
         this.operatorSelector = new CombineMutationOperator();
         this.heuristics = heuristics;
-
         operatorSelector.setTypes(mutations);
     }
 

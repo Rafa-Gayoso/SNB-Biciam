@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXTabPane;
 import definition.TTPDefinition;
 import definition.state.statecode.Date;
 import execute.Executer;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import utils.DataFiles;
 import javafx.beans.value.ChangeListener;
@@ -214,18 +215,18 @@ public class CalendarController implements Initializable {
 
     @FXML
     void showConfiguration(ActionEvent event) {
-        /*if(!calendarsTabPane.getTabs().isEmpty()) {
+        if(!calendarsTabPane.getTabs().isEmpty()) {
             try {
-                //homeController.createPage(new MutationsConfigurationController(), null, "/visual/MutationsConfiguration.fxml");
+                homeController.createPage(new MutationsConfigurationController(), null, "/visual/MutationsConfiguration.fxml");
                 // Hide this current window (if this is what you want)
-                // ((Node)(event.getSource())).getScene().getWindow().hide();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         else{
             showNotification("No existe ningún calendario", "Debe crear o importar al menos un calendario.");
-        }*/
+        }
     }
 
     private void showNotification(String title, String message) {

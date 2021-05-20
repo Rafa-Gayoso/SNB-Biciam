@@ -46,7 +46,7 @@ public class DataFiles implements ICreateInitialSolution {
     private ArrayList<String> acronyms;
     private ArrayList<String> locations;
     private ArrayList<String> mutations;
-    private ArrayList<String> mutationsConfiguration;
+    private ArrayList<ArrayList<String>> mutationsConfiguration;
     private ArrayList<String> heuristics;
     private ArrayList<TeamsPairDistance> teamsPairDistances;//List of LocalVisitorDistance
 
@@ -129,22 +129,14 @@ public class DataFiles implements ICreateInitialSolution {
 
             for (Element target : list) {
 
-
+                ArrayList<String> config = new ArrayList<>();
                 String name = target.getChildText("name");
                 String configuration = target.getChildText("configuration");
                 mutations.add(name);
-                mutationsConfiguration.add(configuration);
+                config.add(configuration);
+                mutationsConfiguration.add(config);
 
-                //mutations.add(mutation);
-                /*
-                PAra leer los parametros luego
-                String [] params = acronym.split(",");
 
-                System.out.print(params.length);
-                for(int i =0; i < params.length; i++){
-                    System.out.print(params[i] + " ");
-                }
-                System.out.println();*/
             }
 
         } catch (IOException | JDOMException e) {
@@ -209,90 +201,7 @@ public class DataFiles implements ICreateInitialSolution {
     }
 
 
-    /*public  void exportItineraryInExcelFormat(State state){
-        FileChooser fc = new FileChooser();
 
-        //Set extension filter for text files
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xlsx)", "*.xlsx");
-        fc.getExtensionFilters().add(extFilter);
-
-
-        //dc = new DirectoryChooser();
-        File f = fc.showSaveDialog(new Stage());
-
-        XSSFWorkbook workbook = new XSSFWorkbook();
-
-            Sheet spreadsheet = workbook.createSheet();
-
-            ArrayList<ArrayList<Integer>> teamDate = TTPDefinition.getInstance().teamsItinerary(state);
-            Row row = spreadsheet.createRow(0);
-            //Style of the cell
-            XSSFFont headerCellFont = workbook.createFont();
-            headerCellFont.setBold(true);
-            headerCellFont.setColor(IndexedColors.WHITE.getIndex());
-            headerCellFont.setFontHeightInPoints((short) 15);
-            XSSFCellStyle style = workbook.createCellStyle();
-
-            // Setting Background color
-            style.setFillForegroundColor(IndexedColors.DARK_GREEN.getIndex());
-            style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-            style.setFont(headerCellFont);
-
-            //Header of the itinerary
-            for (int j = 0; j < teamDate.get(0).size(); j++) {
-                int posTeam = teamDate.get(0).get(j);
-                String team = getTeams().get(posTeam);
-                Cell cell = row.createCell(j);
-                cell.setCellStyle(style);
-                cell.setCellValue(team);
-            }
-
-            //Itinerary
-            style = workbook.createCellStyle();
-            headerCellFont = workbook.createFont();
-            headerCellFont.setBold(false);
-            headerCellFont.setFontHeightInPoints((short) 12);
-
-        int j=1;
-            for(; j < teamDate.size()-1;j++ ){
-                ArrayList<Integer> date = teamDate.get(j);
-                row = spreadsheet.createRow(j);
-                for(int k=0; k < date.size();k++){
-                    int posTeam = teamDate.get(j).get(k);
-                    String team = getAcronyms().get(posTeam);
-                    Cell cell = row.createCell(k);
-                    cell.setCellStyle(style);
-                    cell.setCellValue(team);
-                }
-            }
-            j++;
-
-        row = spreadsheet.createRow(j);
-        Cell cell1 =  row.createCell(0);
-        cell1.setCellStyle(style);
-        cell1.setCellValue("Distancia total(km): ");
-
-        Cell cell2 =  row.createCell(1);
-        cell2.setCellStyle(style);
-        cell2.setCellValue(Distance.getInstance().calculateCalendarDistance(state));
-
-
-        //autosize each column of the excel document
-        for(int i=0; i < row.getLastCellNum(); i++){
-            spreadsheet.autoSizeColumn(i);
-        }
-
-        FileOutputStream fileOut = null;
-        try {
-            fileOut = new FileOutputStream(f.getAbsolutePath());
-            workbook.write(fileOut);
-            fileOut.close();
-            showSuccessfulMessage();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
 
     public void exportItinerary(boolean all) {
         DirectoryChooser fc = new DirectoryChooser();
@@ -480,11 +389,11 @@ public class DataFiles implements ICreateInitialSolution {
         notification.showAndDismiss(Duration.seconds(2));
     }
 
-    public ArrayList<String> getMutationsConfiguration() {
+    public ArrayList<ArrayList<String>> getMutationsConfiguration() {
         return mutationsConfiguration;
     }
 
-    public void setMutationsConfiguration(ArrayList<String> mutationsConfiguration) {
+    public void setMutationsConfiguration(ArrayList<ArrayList<String>> mutationsConfiguration) {
         this.mutationsConfiguration = mutationsConfiguration;
     }
 

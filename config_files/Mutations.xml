@@ -2,34 +2,34 @@
 <Mutations>
     <mutation>
         <name>Cambiar una fecha de lugar.</name>
-        <configuration>V,V,F,F</configuration>
-    </mutation>
-    <mutation>
-        <name>Invertir el orden de una secuencia de fechas.</name>
-        <configuration>V,V,F,F</configuration>
+        <configuration>V,V,F,F,F,F</configuration>
     </mutation>
     <mutation>
         <name>Intercambiar dos fechas pasando una al lugar de la otra.</name>
-        <configuration>V,V,F,F</configuration>
+        <configuration>V,V,F,F,F,F</configuration>
+    </mutation>
+    <mutation>
+        <name>Invertir el orden de una secuencia de fechas.</name>
+        <configuration>V,V,F,F,F,F</configuration>
     </mutation>
     <mutation>
         <name>Mover un enfrentamiento de una fecha hacia otra fecha.</name>
-        <configuration>V,V,V,F</configuration>
+        <configuration>V,V,V,F,F,F</configuration>
     </mutation>
     <mutation>
         <name>Intercambiar un equipo por otro.</name>
-        <configuration>V,V,V,F</configuration>
+        <configuration>F,F,F,F,V,V</configuration>
     </mutation>
     <mutation>
         <name>Intercambiar en una fecha el visitador y la sede.</name>
-        <configuration>V,V,V,F</configuration>
+        <configuration>V,F,F,F,F,F</configuration>
     </mutation>
     <mutation>
         <name>Intercambiar en un enfrentamiento el visitador y la sede.</name>
-        <configuration>V,V,V,F</configuration>
+        <configuration>V,F,V,F,F,F</configuration>
     </mutation>
     <mutation>
         <name>Intercambiar las sedes de un equipo.</name>
-        <configuration>V,V,V,F</configuration>
+        <configuration>F,F,F,F,V,F</configuration>
     </mutation>
 </Mutations>

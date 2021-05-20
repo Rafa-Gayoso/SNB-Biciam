@@ -26,11 +26,23 @@
   <component name="ChangeListManager">
     <list default="true" id="31c4c62d-8161-430c-9912-ecee8f383fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config_files/Mutations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config_files/Mutations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/MutationsConfiguration.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/MutationsConfiguration.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/CalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CalendarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/CalendarStatisticsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CalendarStatisticsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/definition/state/CalendarState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/state/CalendarState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/definition/TTPDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/TTPDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/definition/operator/TTPOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/operator/TTPOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeDateDuelsOrderOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeDateDuelsOrderOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeDateOrderOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeDateOrderOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeDatePositionOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeDatePositionOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeDateSingleDuelOrderOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeDateSingleDuelOrderOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeDuelOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeDuelOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeLocalVisitorSingleTeamOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeLocalVisitorSingleTeamOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeTeamsOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeTeamsOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/SwapDatesOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/SwapDatesOperator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/DataFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/DataFiles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/visual/MutationsConfiguration.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/visual/MutationsConfiguration.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +79,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/utils" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/visual" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
@@ -76,21 +88,21 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="utils" />
       <recent name="controller" />
+      <recent name="utils" />
       <recent name="operators.interfaces" />
       <recent name="application" />
       <recent name="files" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\utils" />
       <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\visual" />
+      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\utils" />
       <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\config_files" />
       <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\files" />
       <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\operators\interfaces" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="application.Main" />
       <module name="SNB-Biciam" />
@@ -104,9 +116,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="utils.Test" />
+      <module name="SNB-Biciam" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
   </component>
@@ -179,7 +218,11 @@
       <workItem from="1621308197292" duration="1011000" />
       <workItem from="1621309234949" duration="4000" />
       <workItem from="1621363661324" duration="1787000" />
-      <workItem from="1621475681929" duration="2585000" />
+      <workItem from="1621475681929" duration="5743000" />
+      <workItem from="1621482362833" duration="1766000" />
+      <workItem from="1621484154331" duration="1000" />
+      <workItem from="1621537328597" duration="760000" />
+      <workItem from="1621539972353" duration="6995000" />
     </task>
     <servers />
   </component>
@@ -203,58 +246,69 @@
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
     <state x="-1506" y="174" width="1092" height="787" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620447367938" />
-    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser" timestamp="1621219141858">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="-1155" y="226" key="#com.intellij.ide.util.MemberChooser" timestamp="1621478809631">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
+    <state x="-1155" y="226" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621478809631" />
     <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1621219141858" />
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1620485928739">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="-1177" y="414" width="433" height="218" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1621483173932">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
+    <state x="-1177" y="414" width="433" height="218" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621483173932" />
+    <state x="-1230" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1621479874782">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1230" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621479874782" />
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1621478207096" />
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1620485928739" />
     <state x="715" y="222" key="#xdebugger.evaluate" timestamp="1621222990071">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="715" y="222" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1621222990071" />
-    <state width="1877" height="300" key="GridCell.Tab.0.bottom" timestamp="1621365463121">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="300" key="GridCell.Tab.0.bottom" timestamp="1621551071604">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="333" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620497079402" />
-    <state width="1877" height="300" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1621365463121" />
-    <state width="1877" height="300" key="GridCell.Tab.0.center" timestamp="1621365463121">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="300" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621551071604" />
+    <state width="1877" height="253" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1621478315766" />
+    <state width="1877" height="300" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1621538097273" />
+    <state width="1877" height="300" key="GridCell.Tab.0.center" timestamp="1621551071604">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="333" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620497079401" />
-    <state width="1877" height="300" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1621365463121" />
-    <state width="1877" height="300" key="GridCell.Tab.0.left" timestamp="1621365463121">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="300" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621551071604" />
+    <state width="1877" height="253" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1621478315766" />
+    <state width="1877" height="300" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1621538097273" />
+    <state width="1877" height="300" key="GridCell.Tab.0.left" timestamp="1621551071603">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="333" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620497079401" />
-    <state width="1877" height="300" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1621365463121" />
-    <state width="1877" height="300" key="GridCell.Tab.0.right" timestamp="1621365463121">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="300" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621551071603" />
+    <state width="1877" height="253" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1621478315765" />
+    <state width="1877" height="300" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1621538097273" />
+    <state width="1877" height="300" key="GridCell.Tab.0.right" timestamp="1621551071604">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="333" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620497079402" />
-    <state width="1877" height="300" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1621365463121" />
-    <state width="1877" height="300" key="GridCell.Tab.1.bottom" timestamp="1621365463122">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="300" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621551071604" />
+    <state width="1877" height="253" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1621478315766" />
+    <state width="1877" height="300" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1621538097273" />
+    <state width="1877" height="300" key="GridCell.Tab.1.bottom" timestamp="1621551097162">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="333" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620497078467" />
-    <state width="1877" height="300" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1621365463122" />
-    <state width="1877" height="300" key="GridCell.Tab.1.center" timestamp="1621365463121">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="300" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621551097162" />
+    <state width="1877" height="300" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1621538097274" />
+    <state width="1877" height="300" key="GridCell.Tab.1.center" timestamp="1621551097162">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="333" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620497078467" />
-    <state width="1877" height="300" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1621365463121" />
-    <state width="1877" height="300" key="GridCell.Tab.1.left" timestamp="1621365463121">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="300" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621551097162" />
+    <state width="1877" height="300" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1621538097274" />
+    <state width="1877" height="300" key="GridCell.Tab.1.left" timestamp="1621551097162">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="333" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620497078467" />
-    <state width="1877" height="300" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1621365463121" />
-    <state width="1877" height="300" key="GridCell.Tab.1.right" timestamp="1621365463122">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="300" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621551097162" />
+    <state width="1877" height="300" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1621538097274" />
+    <state width="1877" height="300" key="GridCell.Tab.1.right" timestamp="1621551097162">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="333" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1620497078467" />
-    <state width="1877" height="300" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1621365463122" />
+    <state width="1877" height="300" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621551097162" />
+    <state width="1877" height="300" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1621538097274" />
     <state x="511" y="248" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1621222605521">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -278,13 +332,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/utils/DataFiles.java</url>
-          <line>746</line>
+          <line>655</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/utils/DataFiles.java</url>
-          <line>327</line>
-          <option name="timeStamp" value="35" />
+          <url>file://$PROJECT_DIR$/src/controller/MutationsConfigurationController.java</url>
+          <line>153</line>
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

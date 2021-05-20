@@ -1,5 +1,6 @@
 package operators.mutation;
 
+import controller.MutationsConfigurationController;
 import definition.TTPDefinition;
 import definition.state.CalendarState;
 import definition.state.statecode.Date;
@@ -16,9 +17,12 @@ public class ChangeLocalVisitorSingleTeamOperator extends MutationOperator {
         CalendarConfiguration configuration = ((CalendarState)resultState).getConfiguration();
         int selectedTeam = -1;
 
-        /*if (!configurationsList.isEmpty()) {
-            selectedTeam = configurationsList.get(number).get(2);
-        }*/
+
+
+        if (!TTPDefinition.getInstance().getMutationsConfigurationsList().isEmpty()) {
+            int position = MutationsConfigurationController.currentMutationPostion;
+            selectedTeam = TTPDefinition.getInstance().getMutationsConfigurationsList().get(position).get(4);
+        }
 
         if (selectedTeam == -1) {
             selectedTeam = ThreadLocalRandom.current().nextInt(0, configuration.getTeamsIndexes().size());

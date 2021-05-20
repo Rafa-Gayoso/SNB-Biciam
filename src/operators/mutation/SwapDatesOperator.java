@@ -1,5 +1,6 @@
 package operators.mutation;
 
+import controller.MutationsConfigurationController;
 import definition.TTPDefinition;
 import definition.state.CalendarState;
 import definition.state.statecode.Date;
@@ -20,10 +21,14 @@ public class SwapDatesOperator extends MutationOperator {
         if(configuration.isInauguralGame()){
             startPosition = 1;
         }
-        /*if (!mutationsConfigurationsList.isEmpty()) {
-            firstDate = mutationsConfigurationsList.get(number).get(0);
-            secondDate = mutationsConfigurationsList.get(number).get(1);
-        }*/
+
+
+        if (!TTPDefinition.getInstance().getMutationsConfigurationsList().isEmpty()) {
+            int position = MutationsConfigurationController.currentMutationPostion;
+            firstDate = TTPDefinition.getInstance().getMutationsConfigurationsList().get(position).get(0);
+            secondDate = TTPDefinition.getInstance().getMutationsConfigurationsList().get(position).get(1);
+
+        }
 
         if (firstDate == -1) {
             do {

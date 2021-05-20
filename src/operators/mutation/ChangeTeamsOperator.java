@@ -1,5 +1,6 @@
 package operators.mutation;
 
+import controller.MutationsConfigurationController;
 import definition.TTPDefinition;
 import definition.state.CalendarState;
 import definition.state.statecode.Date;
@@ -13,12 +14,29 @@ public class ChangeTeamsOperator extends MutationOperator{
     public State applyMutation(State state) {
         State resultState = state.clone();
         CalendarConfiguration configuration = ((CalendarState)resultState).getConfiguration();
-        int firstTeam = ThreadLocalRandom.current().nextInt(0, configuration.getTeamsIndexes().size());
-        int secondTeam = firstTeam;
+        int firstTeam = -1;
+        int secondTeam = -1;;
 
-        while (firstTeam == secondTeam) {
-            secondTeam = ThreadLocalRandom.current().nextInt(0, configuration.getTeamsIndexes().size());
+
+
+        if (!TTPDefinition.getInstance().getMutationsConfigurationsList().isEmpty()) {
+            int position = MutationsConfigurationController.currentMutationPostion;
+            firstTeam = TTPDefinition.getInstance().getMutationsConfigurationsList().get(position).get(4);
+            secondTeam = TTPDefinition.getInstance().getMutationsConfigurationsList().get(position).get(5);
         }
+
+        if(firstTeam == -1){
+            firstTeam = ThreadLocalRandom.current().nextInt(0, configuration.getTeamsIndexes().size());
+            secondTeam = firstTeam;
+
+            while (firstTeam == secondTeam) {
+                secondTeam = ThreadLocalRandom.current().nextInt(0, configuration.getTeamsIndexes().size());
+            }
+        }
+
+
+
+
 
         for (int i = 0; i < resultState.getCode().size(); i++) {
             Date date =  (Date)resultState.getCode().get(i);

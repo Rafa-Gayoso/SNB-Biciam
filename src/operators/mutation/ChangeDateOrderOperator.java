@@ -1,5 +1,6 @@
 package operators.mutation;
 
+import controller.MutationsConfigurationController;
 import definition.TTPDefinition;
 import definition.state.CalendarState;
 import definition.state.statecode.Date;
@@ -24,6 +25,18 @@ public class ChangeDateOrderOperator extends MutationOperator {
             startPosition = 1;
         }
 
+        if (!TTPDefinition.getInstance().getMutationsConfigurationsList().isEmpty()) {
+            int position = MutationsConfigurationController.currentMutationPostion;
+            firstDate = TTPDefinition.getInstance().getMutationsConfigurationsList().get(position).get(0);
+            lastDate = TTPDefinition.getInstance().getMutationsConfigurationsList().get(position).get(1);
+
+            if (firstDate > lastDate) {
+                int temp = lastDate;
+                lastDate = firstDate;
+                firstDate = temp;
+            }
+
+        }
         if (firstDate == -1) {
             firstDate = ThreadLocalRandom.current().nextInt(startPosition, resultState.getCode().size() - 1);
         }

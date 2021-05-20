@@ -1,5 +1,6 @@
 package operators.mutation;
 
+import controller.MutationsConfigurationController;
 import definition.TTPDefinition;
 import definition.state.CalendarState;
 import definition.state.statecode.Date;
@@ -21,10 +22,20 @@ public class ChangeDateDuelsOrderOperator extends MutationOperator{
         }
 
         int selectedDate =  -1;
-        do {
-                selectedDate = ThreadLocalRandom.current().nextInt(startPosition, resultState.getCode().size() - 1);
+
+        if (!TTPDefinition.getInstance().getMutationsConfigurationsList().isEmpty()) {
+            int position = MutationsConfigurationController.currentMutationPostion;
+            selectedDate = TTPDefinition.getInstance().getMutationsConfigurationsList().get(position).get(0);
+
         }
-        while (selectedDate == -1);
+
+        if(selectedDate == -1){
+            do {
+                selectedDate = ThreadLocalRandom.current().nextInt(startPosition, resultState.getCode().size() - 1);
+            }
+            while (selectedDate == -1);
+        }
+
 
 
         Date date = (Date) resultState.getCode().get(selectedDate);

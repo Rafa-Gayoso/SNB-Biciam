@@ -1,5 +1,6 @@
 package operators.mutation;
 
+import controller.MutationsConfigurationController;
 import definition.TTPDefinition;
 import definition.state.CalendarState;
 import definition.state.statecode.Date;
@@ -24,6 +25,12 @@ public class ChangeDateSingleDuelOrderOperator extends MutationOperator {
         int selectedDate = -1;
         int selectedDuel = -1;
 
+        if (!TTPDefinition.getInstance().getMutationsConfigurationsList().isEmpty()) {
+            int position = MutationsConfigurationController.currentMutationPostion;
+            selectedDate = TTPDefinition.getInstance().getMutationsConfigurationsList().get(position).get(0);
+            selectedDuel = TTPDefinition.getInstance().getMutationsConfigurationsList().get(position).get(2);
+
+        }
 
 
         if (selectedDate == -1) {

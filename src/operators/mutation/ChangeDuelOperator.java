@@ -1,6 +1,7 @@
 package operators.mutation;
 
 import com.sun.prism.shader.Solid_Color_AlphaTest_Loader;
+import controller.MutationsConfigurationController;
 import definition.TTPDefinition;
 import definition.state.CalendarState;
 import definition.state.statecode.Date;
@@ -25,12 +26,14 @@ public class ChangeDuelOperator extends MutationOperator implements ISwapTeams {
         if(configuration.isInauguralGame()){
             startPosition = 1;
         }
-        /*if (!mutationsConfigurationsList.isEmpty()) {
-            posFirstDate = mutationsConfigurationsList.get(number).get(0);
-            posLastDate = mutationsConfigurationsList.get(number).get(1);
-            posFirstDuel = mutationsConfigurationsList.get(number).get(2);
 
-        }*/
+        if (!TTPDefinition.getInstance().getMutationsConfigurationsList().isEmpty()) {
+            int position = MutationsConfigurationController.currentMutationPostion;
+            posFirstDate = TTPDefinition.getInstance().getMutationsConfigurationsList().get(position).get(0);
+            posLastDate =  TTPDefinition.getInstance().getMutationsConfigurationsList().get(position).get(1);
+            posFirstDuel = TTPDefinition.getInstance().getMutationsConfigurationsList().get(position).get(2);
+        }
+
 
         if (posFirstDate == -1) {
             do {

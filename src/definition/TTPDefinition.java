@@ -69,6 +69,7 @@ public class TTPDefinition {
         this.cantEquipos = teamIndexes.size();
         this.cantFechas = this.cantEquipos -1;
         this.matrixDistance = Distance.getInstance().getMatrixDistance();
+        this.mutationsConfigurationsList = new ArrayList<>();
     }
 
     public int getCantFechas() {

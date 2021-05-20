@@ -244,7 +244,7 @@ public class HomeController implements Initializable {
         loader.setLocation(HomeController.class.getResource(loc));
         anchorPane = loader.load();
 
-        /*if (object instanceof MutationsConfigurationController) {
+        if (object instanceof MutationsConfigurationController) {
 
             Parent root = FXMLLoader.load(getClass().getResource("/visual/MutationsConfiguration.fxml"));
             Stage stage = new Stage();
@@ -262,7 +262,7 @@ public class HomeController implements Initializable {
             stage.initOwner(primaryPane.getScene().getWindow());
 
             stage.show();
-        } else*/ if (object instanceof TeamsItineraryController) {
+        } else if (object instanceof TeamsItineraryController) {
 
             Parent root = FXMLLoader.load(getClass().getResource("/visual/TeamsItinerary.fxml"));
             Stage stage = new Stage();
