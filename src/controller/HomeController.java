@@ -2,6 +2,7 @@ package controller;
 
 
 import com.jfoenix.controls.JFXButton;
+import definition.state.CalendarState;
 import eu.mihosoft.scaledfx.ScalableContentPane;
 import execute.Executer;
 import javafx.animation.FadeTransition;
@@ -121,7 +122,36 @@ public class HomeController implements Initializable {
 
     @FXML
     void importCalendar(ActionEvent event) {
+        Stage stage = new Stage();
+        FileChooser fc = new FileChooser();
 
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Documento Excel", "*xlsx"));
+        file = fc.showOpenDialog(stage);
+
+        try {
+            if (file != null) {
+                CalendarState calendar = DataFiles.getSingletonDataFiles().readExcelItineraryToCalendar(file.toString());
+                if(calendar.getCode().size()>0){
+                    Executer.getInstance().getResultStates().add(calendar);
+
+
+                    notification = getNotification();
+                    notification.setTitle("Importación de Calendario");
+                    notification.setMessage("Calendario importado con éxito");
+                    notification.setNotificationType(NotificationType.SUCCESS);
+                    notification.setRectangleFill(Paint.valueOf("#2F2484"));
+                    notification.setAnimationType(AnimationType.FADE);
+                    notification.showAndDismiss(Duration.seconds(2));
+                    buttonReturnSelectionTeamConfiguration.setVisible(false);
+                    this.createPage(new CalendarController(),home, "/visual/Calendar.fxml");
+                    this.buttonReturnSelectionTeamConfiguration.setVisible(true);
+                }
+
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

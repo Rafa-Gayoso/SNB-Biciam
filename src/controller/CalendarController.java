@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXTabPane;
 import definition.TTPDefinition;
 import definition.state.statecode.Date;
 import execute.Executer;
+import javafx.scene.control.*;
 import utils.DataFiles;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,10 +13,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
@@ -70,6 +67,8 @@ public class CalendarController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+
         notification = new TrayNotification();
         selectedCalendar = 0;
 
@@ -132,6 +131,8 @@ public class CalendarController implements Initializable {
                     }
                 }
         );
+
+        calendarsTabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
 
     }
 

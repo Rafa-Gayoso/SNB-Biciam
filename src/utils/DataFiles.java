@@ -2,6 +2,7 @@ package utils;
 
 import controller.CalendarController;
 import definition.TTPDefinition;
+import definition.state.CalendarState;
 import definition.state.statecode.Date;
 import execute.Executer;
 import javafx.scene.paint.Paint;
@@ -9,6 +10,8 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import operators.initialSolution.InitialSolutionType;
+import operators.interfaces.ICreateInitialSolution;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
@@ -32,7 +35,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class DataFiles {
+public class DataFiles implements ICreateInitialSolution {
 
     private static final String MUTATIONS = "config_files" + File.separator + "Mutations.xml";
     private static final String HEURISTICS = "config_files" + File.separator + "Heuristics.xml";
@@ -326,7 +329,7 @@ public class DataFiles {
         XSSFWorkbook workbook = new XSSFWorkbook();
 
         Sheet spreadsheet = workbook.createSheet();
-
+        CalendarConfiguration configuration = ((CalendarState)state).getConfiguration();
         ArrayList<ArrayList<Integer>> teamDate = TTPDefinition.getInstance().teamsItinerary(state);
         Row row = spreadsheet.createRow(0);
         //Style of the cell
@@ -380,6 +383,75 @@ public class DataFiles {
         cell2.setCellValue(Distance.getInstance().calculateCalendarDistance(state));
 
 
+        Sheet spreadsheetData = workbook.createSheet("Data");
+        Row rowData = spreadsheetData.createRow(0);
+        Cell cellData =  rowData.createCell(0);
+        cellData.setCellStyle(style);
+        cellData.setCellValue(configuration.getCalendarId());
+
+        rowData = spreadsheetData.createRow(1);
+
+        for (int i = 0; i < configuration.getTeamsIndexes().size(); i++){
+            cellData = rowData.createCell(i);
+            cellData.setCellStyle(style);
+            cellData.setCellValue(configuration.getTeamsIndexes().get(i));
+        }
+
+        rowData = spreadsheetData.createRow(2);
+        cellData =  rowData.createCell(0);
+        cellData.setCellStyle(style);
+        cellData.setCellValue(configuration.isInauguralGame());
+
+        rowData = spreadsheetData.createRow(3);
+        cellData =  rowData.createCell(0);
+        cellData.setCellStyle(style);
+        cellData.setCellValue(configuration.isChampionVsSecondPlace());
+
+        rowData = spreadsheetData.createRow(4);
+        cellData =  rowData.createCell(0);
+        cellData.setCellStyle(style);
+        cellData.setCellValue(configuration.getChampion());
+
+        rowData = spreadsheetData.createRow(5);
+        cellData =  rowData.createCell(0);
+        cellData.setCellStyle(style);
+        cellData.setCellValue(configuration.getSecondPlace());
+
+        rowData = spreadsheetData.createRow(6);
+        cellData =  rowData.createCell(0);
+        cellData.setCellStyle(style);
+        cellData.setCellValue(configuration.isSecondRoundCalendar());
+
+        rowData = spreadsheetData.createRow(7);
+        cellData =  rowData.createCell(0);
+        cellData.setCellStyle(style);
+        cellData.setCellValue(configuration.isSymmetricSecondRound());
+
+        rowData = spreadsheetData.createRow(8);
+        cellData =  rowData.createCell(0);
+        cellData.setCellStyle(style);
+        cellData.setCellValue(configuration.isOccidenteVsOriente());
+
+        rowData = spreadsheetData.createRow(9);
+        cellData =  rowData.createCell(0);
+        cellData.setCellStyle(style);
+        cellData.setCellValue(configuration.getMaxLocalGamesInARow());
+
+        rowData = spreadsheetData.createRow(10);
+        cellData =  rowData.createCell(0);
+        cellData.setCellStyle(style);
+        cellData.setCellValue(configuration.getMaxVisitorGamesInARow());
+
+        //workbook.setSheetHidden(1, true);
+
+        //autosize each column of the excel document
+        for(int i=0; i < row.getLastCellNum(); i++){
+            spreadsheet.autoSizeColumn(i);
+        }
+
+        for(int i=0; i < rowData.getLastCellNum(); i++){
+            spreadsheetData.autoSizeColumn(i);
+        }
         //autosize each column of the excel document
         for (int i = 0; i < row.getLastCellNum(); i++) {
             spreadsheet.autoSizeColumn(i);
@@ -669,6 +741,129 @@ public class DataFiles {
         } catch (JDOMException e) {
             e.printStackTrace();
         }
+    }
+
+    public CalendarState readExcelItineraryToCalendar(String route) throws IOException {
+        CalendarState cal = null;
+        try {
+            CalendarConfiguration configuration  = new CalendarConfiguration();
+
+            ArrayList<Date> dates = new ArrayList<>();
+            //ArrayList<Integer>teamsIndexes = new ArrayList<>();
+
+            FileInputStream fis = new FileInputStream(route);
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+
+            XSSFSheet xssfSheetData = workbook.getSheetAt(1);
+            Iterator<Row> rowIteratorData = xssfSheetData.iterator();
+
+            configuration.setCalendarId(rowIteratorData.next().getCell(0).getStringCellValue());
+
+            Row rowTeamIndexes = rowIteratorData.next();
+
+            for (Cell cellData : rowTeamIndexes) {
+                configuration.getTeamsIndexes().add((int) cellData.getNumericCellValue());
+            }
+
+            configuration.setInauguralGame(rowIteratorData.next().getCell(0).getBooleanCellValue());
+            configuration.setChampionVsSecondPlace(rowIteratorData.next().getCell(0).getBooleanCellValue());
+            configuration.setChampion((int) rowIteratorData.next().getCell(0).getNumericCellValue());
+            configuration.setSecondPlace((int) rowIteratorData.next().getCell(0).getNumericCellValue());
+            configuration.setSecondRoundCalendar(rowIteratorData.next().getCell(0).getBooleanCellValue());
+            configuration.setSymmetricSecondRound(rowIteratorData.next().getCell(0).getBooleanCellValue());
+            configuration.setOccidenteVsOriente(rowIteratorData.next().getCell(0).getBooleanCellValue());
+            configuration.setMaxLocalGamesInARow((int) rowIteratorData.next().getCell(0).getNumericCellValue());
+            configuration.setMaxVisitorGamesInARow((int) rowIteratorData.next().getCell(0).getNumericCellValue());
+
+            TTPDefinition.getInstance().setTeamIndexes(configuration.getTeamsIndexes());
+            TTPDefinition.getInstance().setSymmetricSecondRound(configuration.isSymmetricSecondRound());
+            TTPDefinition.getInstance().setSecondRound(configuration.isSecondRoundCalendar());
+            TTPDefinition.getInstance().setCantVecesLocal(configuration.getMaxLocalGamesInARow());
+            TTPDefinition.getInstance().setCantVecesVisitante(configuration.getMaxVisitorGamesInARow());
+            TTPDefinition.getInstance().setChampionVsSub(configuration.isChampionVsSecondPlace());
+            TTPDefinition.getInstance().setFirstPlace(configuration.getChampion());
+            TTPDefinition.getInstance().setSecondPlace(configuration.getSecondPlace());
+            TTPDefinition.getInstance().setInauguralGame(configuration.isInauguralGame());
+            TTPDefinition.getInstance().setOccidentVsOrient(configuration.isOccidenteVsOriente());
+            TTPDefinition.getInstance().setCalendarId(configuration.getCalendarId());
+
+
+            XSSFSheet xssfSheet = workbook.getSheetAt(0);
+
+            Iterator<Row> rowIterator = xssfSheet.iterator();
+            rowIterator.next();
+
+            if (configuration.isInauguralGame()) {
+                rowIterator.next();
+                Date date = new Date();
+                ArrayList<Integer> pair = new ArrayList<>();
+                pair.add(configuration.getChampion());
+                pair.add(configuration.getSecondPlace());
+                date.getGames().add(pair);
+                dates.add(date);
+            }
+
+
+            boolean secondRound = configuration.isSecondRoundCalendar();
+            int cantRealRowAdded = 0;
+            int restMoment = configuration.getTeamsIndexes().size() - 1;
+
+
+            while (rowIterator.hasNext()) {
+                Row row = rowIterator.next();
+                if (!secondRound || cantRealRowAdded != restMoment) {
+
+                    Date date = new Date();
+                    Iterator<Cell> cellIterator = row.cellIterator();
+
+                    int i = 0;
+                    while (cellIterator.hasNext()) {
+
+                        Cell cell = cellIterator.next();
+                        int local = getAcronyms().indexOf(cell.toString());
+                        int visitor = configuration.getTeamsIndexes().get(i);
+
+                        if(local != -1 && visitor != -1){
+                            ArrayList<Integer> pair = new ArrayList<>();
+                            pair.add(local);
+                            pair.add(visitor);
+
+
+                            if (local != visitor) {
+                                date.getGames().add(pair);
+                            }
+
+                        }
+
+                        i++;
+                    }
+                    if(date.getGames().size() > 0){
+
+                        dates.add(date);
+                    }
+                }
+                cantRealRowAdded++;
+            }
+
+            cal = new CalendarState();
+            InitialSolutionType initialSolutionType = createSolutionType();
+            int type = initialSolutionType.ordinal();
+            cal.getCode().addAll(dates);
+            cal.setCalendarType(type);
+            cal.setConfiguration(configuration);
+            workbook.close();
+            fis.close();
+        }catch (Exception e) {
+            TrayNotification notification = new TrayNotification();
+            notification.setTitle("Importación de Calendario");
+            notification.setMessage("Archivo con formato incorrecto.");
+            notification.setNotificationType(NotificationType.ERROR);
+            notification.setRectangleFill(Paint.valueOf("#2F2484"));
+            notification.setAnimationType(AnimationType.FADE);
+            notification.showAndDismiss(Duration.seconds(2));
+        }
+
+        return cal;
     }
 
 }

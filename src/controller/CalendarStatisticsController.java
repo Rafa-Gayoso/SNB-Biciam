@@ -2,7 +2,7 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import definition.TTPDefinition;
-import definition.state.StateWithDistance;
+import definition.state.CalendarState;
 import execute.Executer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -100,15 +100,15 @@ public class CalendarStatisticsController {
         for(int i =0; i < calendarsList.size();i++){
             
             //Distancias de los calendarios
-            State calendar = calendarsList.get(i).clone();
+            CalendarState calendar = (CalendarState) calendarsList.get(i);
 
             ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(calendar);
-            StateWithDistance stateDistance = new StateWithDistance(calendar);
+
             xAxisCalendarData.add("Calendario "+(i+1));
             calendarData.add(xAxisCalendarData.get(i));
             XYChart.Series<String, Float>seriesCalendar = new XYChart.Series<String, Float>();
             seriesCalendar.setName(calendarData.get(i));
-            seriesCalendar.getData().add(new XYChart.Data(xAxisCalendarData.get(i), stateDistance.getDistance()));
+            seriesCalendar.getData().add(new XYChart.Data(xAxisCalendarData.get(i), calendar.getDistance()));
             barChartCalendar.getData().addAll(seriesCalendar);
             
             //Estadísticas de los calendarios
