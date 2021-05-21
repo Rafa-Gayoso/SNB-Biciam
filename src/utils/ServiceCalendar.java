@@ -1,5 +1,6 @@
 package utils;
 
+import definition.TTPDefinition;
 import definition.state.CalendarState;
 import evolutionary_algorithms.complement.MutationType;
 import evolutionary_algorithms.complement.ReplaceType;
@@ -30,6 +31,7 @@ public class ServiceCalendar extends javafx.concurrent.Service<String> implement
                 updateProgress(i,Executer.getInstance().getEXECUTIONS());
                 int percent = percent(i);
                 updateMessage(percent+" %");
+                TTPDefinition.getInstance().setOccidentOrientCOnConfiguration(null);
                 for (; i < Executer.getInstance().getEXECUTIONS(); i++) {
                     Strategy.getStrategy().setStopexecute(new StopExecute());
                     Strategy.getStrategy().setUpdateparameter(new UpdateParameter());

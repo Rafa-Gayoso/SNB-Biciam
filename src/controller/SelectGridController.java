@@ -20,6 +20,7 @@ import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 import utils.ServiceCalendar;
+import utils.ServiceOccidentOrientCalendar;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -279,49 +280,97 @@ public class SelectGridController implements Initializable {
         stackPane.setLayoutX(400);
         stackPane.setLayoutY(200);
         jfxDialog.show();
-        ServiceCalendar service = new ServiceCalendar();
+        if(TTPDefinition.getInstance().isOccidentVsOrient()){
+            ServiceOccidentOrientCalendar serviceOccidentOrientCalendar = new ServiceOccidentOrientCalendar();
 
-        service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent workerStateEvent) {
-                AnchorPane structureOver = homeController.getPrincipalPane();
-                try {
-                    TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
-                    //Executer.getInstance().executeEC();
-                    homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
-                    homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");
-                } catch (IOException e) {
-                    e.printStackTrace();
+            serviceOccidentOrientCalendar.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                @Override
+                public void handle(WorkerStateEvent workerStateEvent) {
+                    AnchorPane structureOver = homeController.getPrincipalPane();
+                    try {
+                        TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
+                        //Executer.getInstance().executeEC();
+                        homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
+                        homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                 }
+            });
 
-            }
-        });
-
-        service.setOnRunning(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent workerStateEvent) {
-                progressBar.progressProperty().bind(service.progressProperty());
-                labelProgress.textProperty().bindBidirectional((Property<String>) service.messageProperty());
+            serviceOccidentOrientCalendar.setOnRunning(new EventHandler<WorkerStateEvent>() {
+                @Override
+                public void handle(WorkerStateEvent workerStateEvent) {
+                    progressBar.progressProperty().bind(serviceOccidentOrientCalendar.progressProperty());
+                    labelProgress.textProperty().bindBidirectional((Property<String>) serviceOccidentOrientCalendar.messageProperty());
 
 
-            }
-        });
+                }
+            });
 
 
-        service.setOnFailed(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent workerStateEvent) {
-                TrayNotification notification = new TrayNotification();
-                notification.setTitle("Generar Caeldnarios");
-                notification.setMessage("Ocurrió un error y no se pudo generar los calendarios");
-                notification.setNotificationType(NotificationType.ERROR);
-                notification.setRectangleFill(Paint.valueOf("#2F2484"));
-                notification.setAnimationType(AnimationType.FADE);
-                notification.showAndDismiss(Duration.seconds(2));
+            serviceOccidentOrientCalendar.setOnFailed(new EventHandler<WorkerStateEvent>() {
+                @Override
+                public void handle(WorkerStateEvent workerStateEvent) {
+                    TrayNotification notification = new TrayNotification();
+                    notification.setTitle("Generar Caeldnarios");
+                    notification.setMessage("Ocurrió un error y no se pudo generar los calendarios");
+                    notification.setNotificationType(NotificationType.ERROR);
+                    notification.setRectangleFill(Paint.valueOf("#2F2484"));
+                    notification.setAnimationType(AnimationType.FADE);
+                    notification.showAndDismiss(Duration.seconds(2));
 
-            }
-        });
-        service.restart();
+                }
+            });
+            serviceOccidentOrientCalendar.restart();
+        }
+        else {
+            ServiceCalendar service = new ServiceCalendar();
+
+            service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                @Override
+                public void handle(WorkerStateEvent workerStateEvent) {
+                    AnchorPane structureOver = homeController.getPrincipalPane();
+                    try {
+                        TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
+                        //Executer.getInstance().executeEC();
+                        homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
+                        homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+
+            service.setOnRunning(new EventHandler<WorkerStateEvent>() {
+                @Override
+                public void handle(WorkerStateEvent workerStateEvent) {
+                    progressBar.progressProperty().bind(service.progressProperty());
+                    labelProgress.textProperty().bindBidirectional((Property<String>) service.messageProperty());
+
+
+                }
+            });
+
+
+            service.setOnFailed(new EventHandler<WorkerStateEvent>() {
+                @Override
+                public void handle(WorkerStateEvent workerStateEvent) {
+                    TrayNotification notification = new TrayNotification();
+                    notification.setTitle("Generar Caeldnarios");
+                    notification.setMessage("Ocurrió un error y no se pudo generar los calendarios");
+                    notification.setNotificationType(NotificationType.ERROR);
+                    notification.setRectangleFill(Paint.valueOf("#2F2484"));
+                    notification.setAnimationType(AnimationType.FADE);
+                    notification.showAndDismiss(Duration.seconds(2));
+
+                }
+            });
+            service.restart();
+        }
+
 
     }
 

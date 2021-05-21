@@ -29,6 +29,7 @@ public class TTPDefinition {
     private static TTPDefinition ttpDefinition;
     private ArrayList<ArrayList<Integer>> mutationsConfigurationsList;//list of configurations for the mutations
     private ArrayList<Integer> mutationsIndexes;
+    private CalendarConfiguration occidentOrientCOnConfiguration;
 
 
     private TTPDefinition(){
@@ -193,6 +194,18 @@ public class TTPDefinition {
         return teamsIndexes;
     }
 
+    public CalendarConfiguration getOccidentOrientCOnConfiguration() {
+        return occidentOrientCOnConfiguration;
+    }
+
+    public void setOccidentOrientCOnConfiguration(CalendarConfiguration occidentOrientCOnConfiguration) {
+        this.occidentOrientCOnConfiguration = occidentOrientCOnConfiguration;
+    }
+
+    public void setCantFechas(int cantFechas) {
+        this.cantFechas = cantFechas;
+    }
+
     public ArrayList<ArrayList<Integer>> teamsItinerary(State calendar) {
         ArrayList<ArrayList<Integer>> teamDate = new ArrayList<>();
         CalendarConfiguration configuration = ((CalendarState)calendar).getConfiguration();
@@ -204,7 +217,7 @@ public class TTPDefinition {
                     TTPDefinition.getInstance().isOccidentVsOrient(), TTPDefinition.getInstance().getCantVecesLocal(), TTPDefinition.getInstance().getCantVecesVisitante()
             );
         }
-        System.out.println("CANTIDAD DE FECHAS :"+calendar.getCode().size()+"--------------");
+
         ArrayList<Integer> teamsIndexes = (ArrayList<Integer>) configuration.getTeamsIndexes().clone();
 
         ArrayList<Integer> row = new ArrayList<>();

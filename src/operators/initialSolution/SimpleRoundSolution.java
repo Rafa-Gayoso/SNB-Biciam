@@ -54,24 +54,41 @@ public class SimpleRoundSolution extends InitialSolution {
         HeuristicOperator heuristic = HeuristicOperatorFactory.getInstance(heuristics.get(randomNumber));
 
         CalendarState state = new CalendarState();
-        CalendarConfiguration configuration = new CalendarConfiguration(
-                TTPDefinition.getInstance().getCalendarId(), TTPDefinition.getInstance().getTeamsIndexes(), TTPDefinition.getInstance().isInauguralGame(),
-                TTPDefinition.getInstance().isChampionVsSub(), TTPDefinition.getInstance().getFirstPlace(),
-                TTPDefinition.getInstance().getSecondPlace(),TTPDefinition.getInstance().isSecondRound(), TTPDefinition.getInstance().isSymmetricSecondRound(),
-                TTPDefinition.getInstance().isOccidentVsOrient(), TTPDefinition.getInstance().getCantVecesLocal(), TTPDefinition.getInstance().getCantVecesVisitante()
-        );
+        CalendarConfiguration configuration;
+        if(TTPDefinition.getInstance().getOccidentOrientCOnConfiguration() !=null){
+            configuration = TTPDefinition.getInstance().getOccidentOrientCOnConfiguration();
+        }else{
+            configuration = new CalendarConfiguration(
+                    TTPDefinition.getInstance().getCalendarId(), TTPDefinition.getInstance().getTeamsIndexes(), TTPDefinition.getInstance().isInauguralGame(),
+                    TTPDefinition.getInstance().isChampionVsSub(), TTPDefinition.getInstance().getFirstPlace(),
+                    TTPDefinition.getInstance().getSecondPlace(),TTPDefinition.getInstance().isSecondRound(), TTPDefinition.getInstance().isSymmetricSecondRound(),
+                    TTPDefinition.getInstance().isOccidentVsOrient(), TTPDefinition.getInstance().getCantVecesLocal(), TTPDefinition.getInstance().getCantVecesVisitante()
+            );
+        }
+
         boolean good = false;
         while (!good){
 
             state.setConfiguration(configuration);
             state.getCode().addAll(heuristic.generateCalendar(duels));
 
-            if (state.getCode().size() == newMatrix.length-1){
-                good = true;
+            if(TTPDefinition.getInstance().isOccidentVsOrient()){
+                if (state.getCode().size() == (newMatrix.length-1)/2){
+                    good = true;
+                }
+                else {
+                    state = new CalendarState();
+                }
             }
-            else {
-                state = new CalendarState();
+            else{
+                if (state.getCode().size() == newMatrix.length-1){
+                    good = true;
+                }
+                else {
+                    state = new CalendarState();
+                }
             }
+
         }
 
         return state;
