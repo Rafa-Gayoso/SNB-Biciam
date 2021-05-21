@@ -204,6 +204,7 @@ public class TTPDefinition {
                     TTPDefinition.getInstance().isOccidentVsOrient(), TTPDefinition.getInstance().getCantVecesLocal(), TTPDefinition.getInstance().getCantVecesVisitante()
             );
         }
+        System.out.println("CANTIDAD DE FECHAS :"+calendar.getCode().size()+"--------------");
         ArrayList<Integer> teamsIndexes = (ArrayList<Integer>) configuration.getTeamsIndexes().clone();
 
         ArrayList<Integer> row = new ArrayList<>();

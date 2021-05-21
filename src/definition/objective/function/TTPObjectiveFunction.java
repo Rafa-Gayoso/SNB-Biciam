@@ -1,8 +1,10 @@
 package definition.objective.function;
 
 import definition.TTPDefinition;
+import definition.state.CalendarState;
 import problem.definition.ObjetiveFunction;
 import problem.definition.State;
+import utils.CalendarConfiguration;
 
 import java.util.ArrayList;
 
@@ -10,13 +12,14 @@ public class TTPObjectiveFunction extends ObjetiveFunction {
     @Override
     public Double Evaluation(State calendar) {
         State state = calendar.clone();
+        CalendarConfiguration configuration = ((CalendarState)state).getConfiguration();
         int penalizeVisitorGames = TTPDefinition.getInstance().penalizeVisitorGames(state);
         int penalizeHomeGames = TTPDefinition.getInstance().penalizeLocalGames(state);
         int penalizeChampion = 0;
         int penalizeInauguralGame = 0;
 
-        if(TTPDefinition.getInstance().isChampionVsSub()){
-            if(TTPDefinition.getInstance().isInauguralGame())
+        if(configuration.isChampionVsSecondPlace()){
+            if(configuration.isInauguralGame())
                 penalizeChampion = TTPDefinition.getInstance().penalizeChampionGame(state);
             else
                 penalizeInauguralGame = TTPDefinition.getInstance().penalizeInauguralGame(state);

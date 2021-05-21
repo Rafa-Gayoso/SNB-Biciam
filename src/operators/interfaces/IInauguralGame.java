@@ -2,6 +2,7 @@ package operators.interfaces;
 
 
 import definition.TTPDefinition;
+import definition.state.CalendarState;
 import definition.state.statecode.Date;
 import problem.definition.State;
 
@@ -19,5 +20,12 @@ public interface IInauguralGame {
             inauguralDate.getGames().add(pair);
             state.getCode().add(0, inauguralDate);
         }
+    }
+
+
+    default void deleteInauguralGame(State state){
+
+        if(((CalendarState)state).getConfiguration().isInauguralGame())
+            state.getCode().remove(0);
     }
 }

@@ -3,6 +3,7 @@ package execute;
 import definition.codification.TTPCodification;
 import definition.objective.function.TTPObjectiveFunction;
 import definition.operator.TTPOperator;
+import definition.state.CalendarState;
 import evolutionary_algorithms.complement.MutationType;
 import evolutionary_algorithms.complement.ReplaceType;
 import evolutionary_algorithms.complement.SelectionType;
@@ -14,6 +15,9 @@ import metaheurictics.strategy.Strategy;
 import metaheuristics.generators.EvolutionStrategies;
 import metaheuristics.generators.GeneratorType;
 import operators.heuristics.HeuristicOperatorType;
+import operators.interfaces.IChampionGame;
+import operators.interfaces.IInauguralGame;
+import operators.interfaces.ISecondRound;
 import operators.mutation.MutationOperatorType;
 import problem.definition.ObjetiveFunction;
 import problem.definition.Operator;
@@ -24,13 +28,14 @@ import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 import utils.AuxStatePlusIterations;
+import utils.CalendarConfiguration;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Executer {
+public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
 
     private int ITERATIONS;
     private int EXECUTIONS;
@@ -150,7 +155,24 @@ public class Executer {
 
             //createCalendarSheet(workbook,Strategy.getStrategy().getBestState(),i);
             //thisLapBests.add(Strategy.getStrategy().getBestState());
-            resultStates.add(Strategy.getStrategy().getBestState());
+            CalendarState state = (CalendarState) Strategy.getStrategy().getBestState();
+
+            CalendarConfiguration configuration = state.getConfiguration();
+
+            if(configuration.isSymmetricSecondRound()){
+                deleteInauguralGame(state);
+                deleteSecondRound(state);
+                setSecondRound(state);
+                if (configuration.isChampionVsSecondPlace()) {
+                    if (configuration.isInauguralGame())
+                        addInauguralGame(state);
+                    else
+                        fixChampionSubchampion(state);
+                }
+            }
+
+            resultStates.add(state);
+            //resultStates.add(Strategy.getStrategy().getBestState());
             Strategy.destroyExecute();
 
         }

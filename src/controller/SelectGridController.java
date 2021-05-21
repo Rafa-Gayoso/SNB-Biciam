@@ -311,7 +311,13 @@ public class SelectGridController implements Initializable {
         service.setOnFailed(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
-                System.out.println(service.getMessage());
+                TrayNotification notification = new TrayNotification();
+                notification.setTitle("Generar Caeldnarios");
+                notification.setMessage("Ocurrió un error y no se pudo generar los calendarios");
+                notification.setNotificationType(NotificationType.ERROR);
+                notification.setRectangleFill(Paint.valueOf("#2F2484"));
+                notification.setAnimationType(AnimationType.FADE);
+                notification.showAndDismiss(Duration.seconds(2));
 
             }
         });

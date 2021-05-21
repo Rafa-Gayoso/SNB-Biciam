@@ -1,5 +1,6 @@
 package utils;
 
+import definition.state.CalendarState;
 import evolutionary_algorithms.complement.MutationType;
 import evolutionary_algorithms.complement.ReplaceType;
 import evolutionary_algorithms.complement.SelectionType;
@@ -11,8 +12,11 @@ import local_search.complement.UpdateParameter;
 import metaheurictics.strategy.Strategy;
 import metaheuristics.generators.EvolutionStrategies;
 import metaheuristics.generators.GeneratorType;
+import operators.interfaces.IChampionGame;
+import operators.interfaces.IInauguralGame;
+import operators.interfaces.ISecondRound;
 
-public class ServiceCalendar extends javafx.concurrent.Service<String> {
+public class ServiceCalendar extends javafx.concurrent.Service<String> implements ISecondRound, IInauguralGame, IChampionGame {
 
     @Override
     protected Task<String> createTask() {
@@ -58,7 +62,22 @@ public class ServiceCalendar extends javafx.concurrent.Service<String> {
 
                     //createCalendarSheet(workbook,Strategy.getStrategy().getBestState(),i);
                     //thisLapBests.add(Strategy.getStrategy().getBestState());
-                    Executer.getInstance().getResultStates().add(Strategy.getStrategy().getBestState());
+                    CalendarState state = (CalendarState) Strategy.getStrategy().getBestState();
+
+                    CalendarConfiguration configuration = state.getConfiguration();
+
+                    if(configuration.isSymmetricSecondRound()){
+                        deleteInauguralGame(state);
+                        deleteSecondRound(state);
+                        setSecondRound(state);
+                        if (configuration.isChampionVsSecondPlace()) {
+                            if (configuration.isInauguralGame())
+                                addInauguralGame(state);
+                            else
+                                fixChampionSubchampion(state);
+                        }
+                    }
+                    Executer.getInstance().getResultStates().add(state);
                     Strategy.destroyExecute();
                     updateProgress(i+1,Executer.getInstance().getEXECUTIONS());
 
