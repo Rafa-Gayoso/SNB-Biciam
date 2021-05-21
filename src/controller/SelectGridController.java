@@ -42,7 +42,6 @@ public class SelectGridController implements Initializable {
     private GridPane selectionGrid;
 
 
-
     @FXML
     private JFXButton saveLocations;
 
@@ -229,7 +228,7 @@ public class SelectGridController implements Initializable {
 
     void showCalendar() {
 
-        AnchorPane structureOver = homeController.getPrincipalPane();
+        /*AnchorPane structureOver = homeController.getPrincipalPane();
         try {
             TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
             Executer.getInstance().executeEC();
@@ -248,8 +247,8 @@ public class SelectGridController implements Initializable {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
-/*
+        homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);*/
+
         StackPane stackPane = new StackPane();
         stackPane.setPrefWidth(365);
         JFXDialog jfxDialog = new JFXDialog();
@@ -285,6 +284,15 @@ public class SelectGridController implements Initializable {
         service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
+                AnchorPane structureOver = homeController.getPrincipalPane();
+                try {
+                    TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
+                    //Executer.getInstance().executeEC();
+                    homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
+                    homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
             }
         });
@@ -300,7 +308,6 @@ public class SelectGridController implements Initializable {
         });
 
 
-
         service.setOnFailed(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent workerStateEvent) {
@@ -309,7 +316,6 @@ public class SelectGridController implements Initializable {
             }
         });
         service.restart();
-*/
 
     }
 

@@ -60,9 +60,9 @@ public class ServiceCalendar extends javafx.concurrent.Service<String> {
                     //thisLapBests.add(Strategy.getStrategy().getBestState());
                     Executer.getInstance().getResultStates().add(Strategy.getStrategy().getBestState());
                     Strategy.destroyExecute();
-                    updateProgress(i,Executer.getInstance().getEXECUTIONS());
+                    updateProgress(i+1,Executer.getInstance().getEXECUTIONS());
 
-                    percent = percent(i);
+                    percent = percent(i+1);
                     updateMessage(percent+" %");
                 }
 

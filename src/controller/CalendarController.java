@@ -5,8 +5,12 @@ import com.jfoenix.controls.JFXTabPane;
 import definition.TTPDefinition;
 import definition.state.statecode.Date;
 import execute.Executer;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import utils.DataFiles;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -58,8 +62,6 @@ public class CalendarController implements Initializable {
     @FXML
     private JFXButton stadiumItineraryBtn;
 
-    @FXML
-    private JFXButton restrictionsBtn;
 
     public void setHomeController(HomeController homeController) {
         this.homeController = homeController;
@@ -76,64 +78,85 @@ public class CalendarController implements Initializable {
         tables = new ArrayList<>();
         List<State> calendarsList = Executer.getInstance().getResultStates();
 
-        for(int i=0; i < calendarsList.size();i++){
-            State calendar = calendarsList.get(i);
-            ArrayList<Object> calendarDates = calendar.getCode();
-            JFXTabPane currentCalendarTabPane = new JFXTabPane();
+        try{
+            for(int i=0; i < calendarsList.size();i++){
+                State calendar = calendarsList.get(i);
+                AnchorPane allContent = new AnchorPane();
+
+                FXMLLoader fxmlLoader =  new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/visual/Restrictions.fxml"));
+                AnchorPane restrictionsContent = fxmlLoader.load();
+                RestrictionsController restrictionsController = fxmlLoader.getController();
+                restrictionsController.setData(calendar);
+                ArrayList<Object> calendarDates = calendar.getCode();
+                JFXTabPane currentCalendarTabPane = new JFXTabPane();
 
 
-            //currentCalendarTabPane.setPrefHeight(calendarsTabPane.getHeight());
-            for(int j=0; j < calendarDates.size();j++){
-                TableView<Duel> table = new TableView<Duel>();
-                TableColumn<Duel, String> col = new TableColumn<>("Local");
-                TableColumn<Duel, String> col2 = new TableColumn<>("Visitante");
+                for(int j=0; j < calendarDates.size();j++){
+                    TableView<Duel> table = new TableView<Duel>();
+                    TableColumn<Duel, String> col = new TableColumn<>("Local");
+                    TableColumn<Duel, String> col2 = new TableColumn<>("Visitante");
 
-                col.setCellValueFactory(new PropertyValueFactory<>("local"));
-                col2.setCellValueFactory(new PropertyValueFactory<>("visitor"));
+                    col.setCellValueFactory(new PropertyValueFactory<>("local"));
+                    col2.setCellValueFactory(new PropertyValueFactory<>("visitor"));
 
-                ObservableList<TableColumn<Duel, ?>> columns = table.getColumns();
-                columns.add(col);
-                columns.add(col2);
-                Date date = (Date) calendarDates.get(j);
-                for (int k = 0; k < date.getGames().size(); k++) {
-                    int posLocal = date.getGames().get(k).get(0);
-                    int posVisitor = date.getGames().get(k).get(1);
-                    table.getItems().add(new Duel(DataFiles.getSingletonDataFiles().getTeams().get(posLocal),
-                            DataFiles.getSingletonDataFiles().getTeams().get(posVisitor)));
-                }
+                    ObservableList<TableColumn<Duel, ?>> columns = table.getColumns();
+                    columns.add(col);
+                    columns.add(col2);
+                    Date date = (Date) calendarDates.get(j);
+                    for (int k = 0; k < date.getGames().size(); k++) {
+                        int posLocal = date.getGames().get(k).get(0);
+                        int posVisitor = date.getGames().get(k).get(1);
+                        table.getItems().add(new Duel(DataFiles.getSingletonDataFiles().getAcronyms().get(posLocal),
+                                DataFiles.getSingletonDataFiles().getAcronyms().get(posVisitor)));
+                    }
 
+                    table.setPrefWidth(restrictionsContent.getPrefWidth());
+                    Tab tab = new Tab("Fecha " + (j + 1));
+                    tab.setContent(table);
+                    tables.add(table);
+                    currentCalendarTabPane.getTabs().add(tab);
 
-                Tab tab = new Tab("Fecha " + (j + 1));
-                tab.setContent(table);
-                tables.add(table);
-                currentCalendarTabPane.getTabs().add(tab);
-
-                if(calendarDates.size()-j == 1){
-                   ArrayList<Integer> rest = addRestToCalendar(calendar);
-                    for (Integer restDate:
-                         rest) {
-                        Label label = new Label("Descanso");
-                        Tab t = new Tab("Descanso");
-                        t.setContent(label);
-                        currentCalendarTabPane.getTabs().add(restDate,t);
+                    if(calendarDates.size()-j == 1){
+                        ArrayList<Integer> rest = addRestToCalendar(calendar);
+                        for (Integer restDate:
+                                rest) {
+                            Label label = new Label("Descanso");
+                            Tab t = new Tab("Descanso");
+                            t.setContent(label);
+                            currentCalendarTabPane.getTabs().add(restDate,t);
+                        }
                     }
                 }
+                currentCalendarTabPane.setPrefWidth(restrictionsContent.getPrefWidth());
+                HBox hboxCalendarContent = new HBox();
+                HBox hboxRestrictionContent = new HBox();
+                hboxCalendarContent.getChildren().addAll(currentCalendarTabPane);
+
+                hboxRestrictionContent.getChildren().addAll(restrictionsContent);
+
+                allContent.getChildren().addAll(hboxCalendarContent,hboxRestrictionContent);
+                allContent.setLeftAnchor(hboxCalendarContent, 0.0);
+                allContent.setLeftAnchor(hboxRestrictionContent, currentCalendarTabPane.getPrefWidth());
+                Tab tab =  new Tab("Calendario "+(i+1));
+                tab.setContent(allContent);
+                calendarsTabPane.getTabs().add(tab);
             }
-            Tab tab =  new Tab("Calendario "+(i+1));
-            tab.setContent(currentCalendarTabPane);
-            calendarsTabPane.getTabs().add(tab);
+
+            calendarsTabPane.getSelectionModel().selectedItemProperty().addListener(
+                    new ChangeListener<Tab>() {
+                        @Override
+                        public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
+                            selectedCalendar = calendarsTabPane.getTabs().indexOf(t1);
+                        }
+                    }
+            );
+
+            calendarsTabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
+        }catch(Exception e){
+            e.printStackTrace();
         }
 
-        calendarsTabPane.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<Tab>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
-                        selectedCalendar = calendarsTabPane.getTabs().indexOf(t1);
-                    }
-                }
-        );
-
-        calendarsTabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
 
     }
 
@@ -183,21 +206,7 @@ public class CalendarController implements Initializable {
         }
     }
 
-    @FXML
-    void showRestrictions(ActionEvent event) {
-        if(!calendarsTabPane.getTabs().isEmpty()){
-            try {
-                homeController.createPage(new RestrictionsController(), null, "/visual/Restrictions.fxml");
-                // Hide this current window (if this is what you want)
-                // ((Node)(event.getSource())).getScene().getWindow().hide();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else{
-            showNotification("No existe ningún calendario", "Debe crear o importar al menos un calendario.");
-        }
-    }
+
 
     @FXML
     void closeSelectedTab(ActionEvent event) {
