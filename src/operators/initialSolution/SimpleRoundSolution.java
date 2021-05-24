@@ -36,15 +36,18 @@ public class SimpleRoundSolution extends InitialSolution {
             for (int j = 0; j < newMatrix[i].length; j++) {
                 if (i < j) {
 
-                    ArrayList<Integer> pair = new ArrayList<>(2);
-                    if (newMatrix[i][j] == 1) {
-                        pair.add(teamsIndexes.get(i));
-                        pair.add(teamsIndexes.get(j));
-                    } else {
-                        pair.add(teamsIndexes.get(j));
-                        pair.add(teamsIndexes.get(i));
+                    if(newMatrix[i][j] !=0){
+                        ArrayList<Integer> pair = new ArrayList<>(2);
+                        if (newMatrix[i][j] == 1) {
+                            pair.add(teamsIndexes.get(i));
+                            pair.add(teamsIndexes.get(j));
+                        } else {
+                            pair.add(teamsIndexes.get(j));
+                            pair.add(teamsIndexes.get(i));
+                        }
+                        duels.add(pair);
                     }
-                    duels.add(pair);
+
                 }
             }
         }
@@ -67,27 +70,23 @@ public class SimpleRoundSolution extends InitialSolution {
         }
 
         boolean good = false;
+
+
         while (!good){
 
             state.setConfiguration(configuration);
             state.getCode().addAll(heuristic.generateCalendar(duels));
 
-            if(TTPDefinition.getInstance().isOccidentVsOrient()){
-                if (state.getCode().size() == (newMatrix.length-1)/2){
+            if (state.getCode().size() == newMatrix.length-1){
                     good = true;
-                }
-                else {
-                    state = new CalendarState();
-                }
             }
-            else{
-                if (state.getCode().size() == newMatrix.length-1){
-                    good = true;
-                }
-                else {
-                    state = new CalendarState();
-                }
+            else if(TTPDefinition.getInstance().getCantFechas() == state.getCode().size()){
+                good = true;
             }
+            else {
+                state = new CalendarState();
+            }
+
 
         }
 

@@ -9,6 +9,7 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
@@ -227,13 +228,13 @@ public class SelectGridController implements Initializable {
     }
 
 
-    void showCalendar() {
+    void showCalendar() throws IOException {
 
         /*AnchorPane structureOver = homeController.getPrincipalPane();
         try {
             TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
-            Executer.getInstance().executeEC();
-
+            //Executer.getInstance().executeEC();
+            Executer.getInstance().executeOCC();
             homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");
         } catch (IOException e) {
             e.printStackTrace();
@@ -251,35 +252,26 @@ public class SelectGridController implements Initializable {
         homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);*/
 
         StackPane stackPane = new StackPane();
-        stackPane.setPrefWidth(365);
+
         JFXDialog jfxDialog = new JFXDialog();
         JFXDialogLayout content = new JFXDialogLayout();
-        VBox vBox = new VBox();
-        vBox.setSpacing(25);
-        HBox hBox = new HBox();
-        Label label = new Label("Creando Calendarios. Por favor, espere.");
-        hBox.getChildren().addAll(label);
-        hBox.setPrefWidth(120);
-        HBox hBox2 = new HBox();
-        hBox2.setPrefWidth(120);
-        JFXProgressBar progressBar = new JFXProgressBar();
-        progressBar.setPrefWidth(270);
-        progressBar.setPrefHeight(10);
-        progressBar.setProgress(0.0);
-        progressBar.getStylesheets().add("/styles/PrincipalMenu.css");
-        hBox2.getChildren().addAll(progressBar);
+        FXMLLoader fxmlLoader =  new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/visual/CalendarService.fxml"));
+        AnchorPane progressContent = fxmlLoader.load();
+        CalendarServiceController serviceController = fxmlLoader.getController();
 
-        Label labelProgress = new Label();
-        hBox2.getChildren().add(labelProgress);
-        vBox.getChildren().addAll(hBox, hBox2);
-        content.setBody(vBox);
+        content.setBody(progressContent);
+
         jfxDialog.setContent(content);
         TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
         jfxDialog.setDialogContainer(stackPane);
         panel.getChildren().add(stackPane);
         stackPane.setLayoutX(400);
         stackPane.setLayoutY(200);
+        jfxDialog.setPrefHeight(105);
+        jfxDialog.setPrefWidth(432);
         jfxDialog.show();
+
         if(TTPDefinition.getInstance().isOccidentVsOrient()){
             ServiceOccidentOrientCalendar serviceOccidentOrientCalendar = new ServiceOccidentOrientCalendar();
 
@@ -302,8 +294,8 @@ public class SelectGridController implements Initializable {
             serviceOccidentOrientCalendar.setOnRunning(new EventHandler<WorkerStateEvent>() {
                 @Override
                 public void handle(WorkerStateEvent workerStateEvent) {
-                    progressBar.progressProperty().bind(serviceOccidentOrientCalendar.progressProperty());
-                    labelProgress.textProperty().bindBidirectional((Property<String>) serviceOccidentOrientCalendar.messageProperty());
+                    serviceController.getProgress().progressProperty().bind(serviceOccidentOrientCalendar.progressProperty());
+                    serviceController.getLblProgress().textProperty().bindBidirectional((Property<String>) serviceOccidentOrientCalendar.messageProperty());
 
 
                 }
@@ -347,8 +339,8 @@ public class SelectGridController implements Initializable {
             service.setOnRunning(new EventHandler<WorkerStateEvent>() {
                 @Override
                 public void handle(WorkerStateEvent workerStateEvent) {
-                    progressBar.progressProperty().bind(service.progressProperty());
-                    labelProgress.textProperty().bindBidirectional((Property<String>) service.messageProperty());
+                    serviceController.getProgress().progressProperty().bind(service.progressProperty());
+                    serviceController.getLblProgress().textProperty().bindBidirectional((Property<String>) service.messageProperty());
 
 
                 }

@@ -258,11 +258,11 @@ public class ServiceOccidentOrientCalendar extends javafx.concurrent.Service<Str
 
                     ArrayList<Date> allTogether = new ArrayList<>();
 
-                    if (((Date) stateOccident.getCode().get(0)).getGames().size() == 1) {
+                    /*if (((Date) stateOccident.getCode().get(0)).getGames().size() == 1) {
                         stateOccident.getCode().remove(0);
                     } else if (((Date) stateOrient.getCode().get(0)).getGames().size() == 1) {
                         stateOccident.getCode().remove(0);
-                    }
+                    }*/
 
                     for (int k = 0; k < stateOccident.getCode().size(); k++) {
                         Date dateToAdd = new Date();

@@ -1,9 +1,11 @@
 package execute;
 
+import definition.TTPDefinition;
 import definition.codification.TTPCodification;
 import definition.objective.function.TTPObjectiveFunction;
 import definition.operator.TTPOperator;
 import definition.state.CalendarState;
+import definition.state.statecode.Date;
 import evolutionary_algorithms.complement.MutationType;
 import evolutionary_algorithms.complement.ReplaceType;
 import evolutionary_algorithms.complement.SelectionType;
@@ -29,6 +31,7 @@ import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 import utils.AuxStatePlusIterations;
 import utils.CalendarConfiguration;
+import utils.DataFiles;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -177,174 +180,294 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
 
         }
 
-       // createBestCalendarSheet(workbook, thisLapBests);
 
-
-       /* FileOutputStream fileOut = null;
-        try {
-            fileOut = new FileOutputStream(file.getAbsolutePath());
-            workbook.write(fileOut);
-            fileOut.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            showMessage();
-        }*/
     }
 
-   /* private void createBestCalendarSheet(XSSFWorkbook workbook, ArrayList<State> thisLapBests) {
-        Sheet spreadsheet = workbook.createSheet("Mejor Calendario ");
+    public void executeOCC() throws ClassNotFoundException, InvocationTargetException, InstantiationException, NoSuchMethodException, IllegalAccessException, IOException {
+        configureProblem();
 
-        State state = thisLapBests.get(0);
-        double dist = Distance.getInstance().calculateCalendarDistance(state);
-        int pos = 0;
+        /*String nameMH = "";
+        if (selectedMH == 0){
+            nameMH = "EC";
+        }else if (selectedMH == 1){
+            nameMH = "EE";
+        }else{
+            nameMH = "RS";
+        }
 
-        for (int i = 0; i < thisLapBests.size(); i++) {
-            double tempDist = Distance.getInstance().calculateCalendarDistance(thisLapBests.get(i));
-            if (tempDist < dist){
-                state = thisLapBests.get(i);
-                dist = tempDist;
-                pos = i;
+        String rounds = "";
+        if (TTPDefinition.getInstance().isSecondRound()){
+            rounds = "Doble";
+        }else {
+            rounds = "Simple";
+        }
+
+        int cantEquipos = TTPDefinition.getInstance().getCantEquipos();
+
+        String fileName = nameMH+"_"+rounds+"_"+cantEquipos+"-"+"Teams"+"_"+EXECUTIONS+"-"+"Exec"+"_"+ITERATIONS+"-"+"Ite";
+
+        File file = new File("src/files/"+fileName+".xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook();
+
+        ArrayList<State> thisLapBests = new ArrayList<>();*/
+        for (int i=0; i < Executer.getInstance().getEXECUTIONS(); i++) {
+            ArrayList<Integer> teamsOnlyOccident = new ArrayList<>();
+            ArrayList<Integer> teamsOnlyOrient = new ArrayList<>();
+            ArrayList<Integer> allTeams = (ArrayList<Integer>) TTPDefinition.getInstance().getTeamsIndexes().clone();
+
+            int newMatrix[][] = TTPDefinition.getInstance().getDuelMatrix().clone();
+
+
+            for (Integer index : TTPDefinition.getInstance().getTeamsIndexes()) {
+                if (DataFiles.getSingletonDataFiles().getLocations().get(index).equalsIgnoreCase("Occidental")) {
+                    teamsOnlyOccident.add(index);
+                } else {
+                    teamsOnlyOrient.add(index);
+                }
             }
-        }
 
-        ArrayList<ArrayList<Integer>> teamDate = TTPDefinition.getInstance().teamsItinerary(state);
-        Row row = spreadsheet.createRow(0);
-        //Style of the cell
-        XSSFFont headerCellFont = workbook.createFont();
-        headerCellFont.setBold(true);
-        headerCellFont.setColor(IndexedColors.WHITE.getIndex());
-        headerCellFont.setFontHeightInPoints((short) 15);
-        XSSFCellStyle style = workbook.createCellStyle();
+            int[][] matrixOnlyOccident = new int[teamsOnlyOccident.size()][teamsOnlyOccident.size()];
+            int[][] matrixOnlyOrient = new int[teamsOnlyOrient.size()][teamsOnlyOrient.size()];
 
-        // Setting Background color
-        style.setFillForegroundColor(IndexedColors.DARK_GREEN.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        style.setFont(headerCellFont);
+            for (int k = 0; k < newMatrix.length; k++) {
+                int posIOccident = teamsOnlyOccident.indexOf(TTPDefinition.getInstance().getTeamsIndexes().get(k));
+                int posIOrient = teamsOnlyOrient.indexOf(TTPDefinition.getInstance().getTeamsIndexes().get(k));
 
-        //Header of the itinerary
-        for (int j = 0; j < teamDate.get(0).size(); j++) {
-            int posTeam = teamDate.get(0).get(j);
-            String team = DataFiles.getSingletonDataFiles().getTeams().get(posTeam);
-            Cell cell = row.createCell(j);
-            cell.setCellStyle(style);
-            cell.setCellValue(team);
-        }
-
-        //Itinerary
-        style = workbook.createCellStyle();
-        headerCellFont = workbook.createFont();
-        headerCellFont.setBold(false);
-        headerCellFont.setFontHeightInPoints((short) 12);
-
-        int j = 1;
-        for(; j < teamDate.size()-1;j++ ){
-            ArrayList<Integer> date = teamDate.get(j);
-            row = spreadsheet.createRow(j);
-            for(int k=0; k < date.size();k++){
-                int posTeam = teamDate.get(j).get(k);
-                String team = DataFiles.getSingletonDataFiles().getAcronyms().get(posTeam);
-                Cell cell = row.createCell(k);
-                cell.setCellStyle(style);
-                cell.setCellValue(team);
+                for (int j = 0; j < newMatrix[k].length; j++) {
+                    if (k < j) {
+                        int posJOccident = teamsOnlyOccident.indexOf(TTPDefinition.getInstance().getTeamsIndexes().get(j));
+                        int posJOrient = teamsOnlyOrient.indexOf(TTPDefinition.getInstance().getTeamsIndexes().get(j));
+                        if (posIOccident != -1 && posJOccident != -1) {
+                            matrixOnlyOccident[posIOccident][posJOccident] = newMatrix[k][j];
+                            matrixOnlyOccident[posJOccident][posIOccident] = newMatrix[j][k];
+                            newMatrix[k][j] = 0;
+                            newMatrix[j][k] = 0;
+                        } else if (posIOrient != -1 && posJOrient != -1) {
+                            matrixOnlyOrient[posIOrient][posJOrient] = newMatrix[k][j];
+                            matrixOnlyOrient[posJOrient][posIOrient] = newMatrix[j][k];
+                            newMatrix[k][j] = 0;
+                            newMatrix[j][k] = 0;
+                        }
+                    }
+                }
             }
-        }
-        for(int l=0; l < row.getLastCellNum(); l++){
-            spreadsheet.autoSizeColumn(l);
+
+            TTPDefinition.getInstance().setTeamIndexes(teamsOnlyOccident);
+            TTPDefinition.getInstance().setOccidentOrientCOnConfiguration(new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
+                    teamsOnlyOccident, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
+                    TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
+                    TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
+                    TTPDefinition.getInstance().getCantVecesVisitante()));
+            TTPDefinition.getInstance().setDuelMatrix(matrixOnlyOccident);
+
+
+            Strategy.getStrategy().setStopexecute(new StopExecute());
+            Strategy.getStrategy().setUpdateparameter(new UpdateParameter());
+            Strategy.getStrategy().setProblem(Executer.getInstance().getProblem());
+            Strategy.getStrategy().saveListBestStates = true;
+            Strategy.getStrategy().saveListStates = true;
+            Strategy.getStrategy().calculateTime = true;
+            if (Executer.getInstance().getSelectedMH() == 0) {
+
+                Strategy.getStrategy().executeStrategy(Executer.getInstance().getITERATIONS(), 1, GeneratorType.HillClimbing);
+                System.err.println("HC-------");
+            } else {
+                if (Executer.getInstance().getSelectedMH() == 1) {
+                    EvolutionStrategies.countRef = 4;
+                    EvolutionStrategies.selectionType = SelectionType.RouletteSelection;
+                    EvolutionStrategies.mutationType = MutationType.GenericMutation;
+                    EvolutionStrategies.replaceType = ReplaceType.GenerationalReplace;
+                    EvolutionStrategies.PM = 0.8;
+
+                    System.err.println("EE-------RS");
+                } else
+                    EvolutionStrategies.countRef = 0;
+
+                Strategy.getStrategy().executeStrategy(Executer.getInstance().getITERATIONS(), 1, GeneratorType.RandomSearch);
+                System.err.println("RS-------");
+            }
+
+
+            //createCalendarSheet(workbook,Strategy.getStrategy().getBestState(),i);
+            //thisLapBests.add(Strategy.getStrategy().getBestState());
+            CalendarState stateOccident = (CalendarState) Strategy.getStrategy().getBestState();
+
+            CalendarConfiguration configuration = stateOccident.getConfiguration();
+
+            if (configuration.isSymmetricSecondRound()) {
+                deleteInauguralGame(stateOccident);
+                deleteSecondRound(stateOccident);
+                setSecondRound(stateOccident);
+                if (configuration.isChampionVsSecondPlace()) {
+                    if (configuration.isInauguralGame())
+                        addInauguralGame(stateOccident);
+                    else
+                        fixChampionSubchampion(stateOccident);
+                }
+            }
+
+            /*Executer.getInstance().getResultStates().add(Strategy.getStrategy().getBestState());*/
+            Strategy.destroyExecute();
+
+            TTPDefinition.getInstance().setTeamIndexes(teamsOnlyOrient);
+            TTPDefinition.getInstance().setOccidentOrientCOnConfiguration(new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
+                    teamsOnlyOrient, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
+                    TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
+                    TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
+                    TTPDefinition.getInstance().getCantVecesVisitante()));
+
+
+            TTPDefinition.getInstance().setDuelMatrix(matrixOnlyOrient);
+            Strategy.getStrategy().setStopexecute(new StopExecute());
+            Strategy.getStrategy().setUpdateparameter(new UpdateParameter());
+            Strategy.getStrategy().setProblem(Executer.getInstance().getProblem());
+            Strategy.getStrategy().saveListBestStates = true;
+            Strategy.getStrategy().saveListStates = true;
+            Strategy.getStrategy().calculateTime = true;
+            if (Executer.getInstance().getSelectedMH() == 0) {
+
+                Strategy.getStrategy().executeStrategy(Executer.getInstance().getITERATIONS(), 1, GeneratorType.HillClimbing);
+                System.err.println("HC-------");
+            } else {
+                if (Executer.getInstance().getSelectedMH() == 1) {
+                    EvolutionStrategies.countRef = 4;
+                    EvolutionStrategies.selectionType = SelectionType.RouletteSelection;
+                    EvolutionStrategies.mutationType = MutationType.GenericMutation;
+                    EvolutionStrategies.replaceType = ReplaceType.GenerationalReplace;
+                    EvolutionStrategies.PM = 0.8;
+
+                    System.err.println("EE-------RS");
+                } else
+                    EvolutionStrategies.countRef = 0;
+
+                Strategy.getStrategy().executeStrategy(Executer.getInstance().getITERATIONS(), 1, GeneratorType.RandomSearch);
+                System.err.println("RS-------");
+            }
+
+
+            //createCalendarSheet(workbook,Strategy.getStrategy().getBestState(),i);
+            //thisLapBests.add(Strategy.getStrategy().getBestState());
+            CalendarState stateOrient = (CalendarState) Strategy.getStrategy().getBestState();
+
+            CalendarConfiguration configurationOrient = stateOrient.getConfiguration();
+
+            if (configurationOrient.isSymmetricSecondRound()) {
+                deleteInauguralGame(stateOrient);
+                deleteSecondRound(stateOrient);
+                setSecondRound(stateOccident);
+                if (configurationOrient.isChampionVsSecondPlace()) {
+                    if (configurationOrient.isInauguralGame())
+                        addInauguralGame(stateOrient);
+                    else
+                        fixChampionSubchampion(stateOrient);
+                }
+            }
+
+            /*Executer.getInstance().getResultStates().add(Strategy.getStrategy().getBestState());*/
+            Strategy.destroyExecute();
+
+            TTPDefinition.getInstance().setTeamIndexes(allTeams);
+            TTPDefinition.getInstance().setOccidentOrientCOnConfiguration(new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
+                    allTeams, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
+                    TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
+                    TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
+                    TTPDefinition.getInstance().getCantVecesVisitante()));
+
+            TTPDefinition.getInstance().setDuelMatrix(newMatrix);
+
+            int numberOfDate = 0;
+            if (!TTPDefinition.getInstance().isSecondRound()){
+                numberOfDate = (allTeams.size()-1) - stateOccident.getCode().size();
+            }
+            else{
+                numberOfDate = (allTeams.size()-1-1) - (stateOccident.getCode().size()/2);
+            }
+
+            TTPDefinition.getInstance().setCantFechas(numberOfDate);
+
+            Strategy.getStrategy().setStopexecute(new StopExecute());
+            Strategy.getStrategy().setUpdateparameter(new UpdateParameter());
+            Strategy.getStrategy().setProblem(Executer.getInstance().getProblem());
+            Strategy.getStrategy().saveListBestStates = true;
+            Strategy.getStrategy().saveListStates = true;
+            Strategy.getStrategy().calculateTime = true;
+            if (Executer.getInstance().getSelectedMH() == 0) {
+
+                Strategy.getStrategy().executeStrategy(Executer.getInstance().getITERATIONS(), 1, GeneratorType.HillClimbing);
+                System.err.println("HC-------");
+            } else {
+                if (Executer.getInstance().getSelectedMH() == 1) {
+                    EvolutionStrategies.countRef = 4;
+                    EvolutionStrategies.selectionType = SelectionType.RouletteSelection;
+                    EvolutionStrategies.mutationType = MutationType.GenericMutation;
+                    EvolutionStrategies.replaceType = ReplaceType.GenerationalReplace;
+                    EvolutionStrategies.PM = 0.8;
+
+                    System.err.println("EE-------RS");
+                } else
+                    EvolutionStrategies.countRef = 0;
+
+                Strategy.getStrategy().executeStrategy(Executer.getInstance().getITERATIONS(), 1, GeneratorType.RandomSearch);
+                System.err.println("RS-------");
+            }
+
+
+            //createCalendarSheet(workbook,Strategy.getStrategy().getBestState(),i);
+            //thisLapBests.add(Strategy.getStrategy().getBestState());
+            CalendarState stateAll = (CalendarState) Strategy.getStrategy().getBestState();
+
+            CalendarConfiguration configurationAll = stateAll.getConfiguration();
+
+            if (configurationAll.isSymmetricSecondRound()) {
+                deleteInauguralGame(stateAll);
+                deleteSecondRound(stateAll);
+                setSecondRound(stateAll);
+                if (configurationAll.isChampionVsSecondPlace()) {
+                    if (configurationAll.isInauguralGame())
+                        addInauguralGame(stateAll);
+                    else
+                        fixChampionSubchampion(stateAll);
+                }
+            }
+
+            /*Executer.getInstance().getResultStates().add(Strategy.getStrategy().getBestState());*/
+            Strategy.destroyExecute();
+
+            ArrayList<Date> allTogether = new ArrayList<>();
+
+                    /*if (((Date) stateOccident.getCode().get(0)).getGames().size() == 1) {
+                        stateOccident.getCode().remove(0);
+                    } else if (((Date) stateOrient.getCode().get(0)).getGames().size() == 1) {
+                        stateOccident.getCode().remove(0);
+                    }*/
+
+            for (int k = 0; k < stateOccident.getCode().size(); k++) {
+                Date dateToAdd = new Date();
+                dateToAdd.getGames().addAll(((Date) stateOccident.getCode().get(k)).getGames());
+                dateToAdd.getGames().addAll(((Date) stateOrient.getCode().get(k)).getGames());
+                allTogether.add(dateToAdd);
+            }
+
+
+            for (Object object : stateAll.getCode()) {
+                Date date = (Date) object;
+                allTogether.add(date);
+            }
+
+            CalendarState finalState = new CalendarState();
+            finalState.getCode().addAll(allTogether);
+            CalendarConfiguration finalConfiguration = stateOccident.getConfiguration();
+            finalConfiguration.setTeamsIndexes(allTeams);
+            finalState.setConfiguration(finalConfiguration);
+            finalState.setCalendarType(stateOccident.getCalendarType());
+            Executer.getInstance().getResultStates().add(finalState);
+
+
         }
 
-        row = spreadsheet.createRow(j);
-        Cell cell1 = row.createCell(0);
-        cell1.setCellValue("Calendario "+(pos+1)+":" );
-        Cell cell2 = row.createCell(1);
-        cell2.setCellValue(dist);
-    }*/
 
-    private static void showMessage() {
-        TrayNotification notification = new TrayNotification();
-        notification.setTitle("Guardar Resultados");
-        notification.setMessage("No se pudo guardar los resultados porque el archivo está en uso.");
-        notification.setNotificationType(NotificationType.ERROR);
-        notification.setRectangleFill(Paint.valueOf("#2F2484"));
-        notification.setAnimationType(AnimationType.FADE);
-        notification.showAndDismiss(Duration.seconds(2));
     }
 
-    /*private void createCalendarSheet(XSSFWorkbook workbook, State state, int calendar){
-        Sheet spreadsheet = workbook.createSheet("Calendario "+ (calendar+1));
-
-        ArrayList<ArrayList<Integer>> teamDate = TTPDefinition.getInstance().teamsItinerary(state);
-        Row row = spreadsheet.createRow(0);
-        //Style of the cell
-        XSSFFont headerCellFont = workbook.createFont();
-        headerCellFont.setBold(true);
-        headerCellFont.setColor(IndexedColors.WHITE.getIndex());
-        headerCellFont.setFontHeightInPoints((short) 15);
-        XSSFCellStyle style = workbook.createCellStyle();
-
-        // Setting Background color
-        style.setFillForegroundColor(IndexedColors.DARK_GREEN.getIndex());
-        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        style.setFont(headerCellFont);
-
-        //Header of the itinerary
-        for (int j = 0; j < teamDate.get(0).size(); j++) {
-            int posTeam = teamDate.get(0).get(j);
-            String team = DataFiles.getSingletonDataFiles().getTeams().get(posTeam);
-            Cell cell = row.createCell(j);
-            cell.setCellStyle(style);
-            cell.setCellValue(team);
-        }
-
-        //Itinerary
-        style = workbook.createCellStyle();
-        headerCellFont = workbook.createFont();
-        headerCellFont.setBold(false);
-        headerCellFont.setFontHeightInPoints((short) 12);
-
-        int j = 1;
-        for(; j < teamDate.size()-1;j++ ){
-            ArrayList<Integer> date = teamDate.get(j);
-            row = spreadsheet.createRow(j);
-            for(int k=0; k < date.size();k++){
-                int posTeam = teamDate.get(j).get(k);
-                String team = DataFiles.getSingletonDataFiles().getAcronyms().get(posTeam);
-                Cell cell = row.createCell(k);
-                cell.setCellStyle(style);
-                cell.setCellValue(team);
-            }
-        }
-        for(int l = 0; l < row.getLastCellNum(); l++){
-            spreadsheet.autoSizeColumn(l);
-        }
-
-        row = spreadsheet.createRow(j);
-        Cell cell1 = row.createCell(0);
-        cell1.setCellValue("Mejor Resultado: ");
-        Cell cell2 = row.createCell(1);
-        cell2.setCellValue(Distance.getInstance().calculateCalendarDistance(Strategy.getStrategy().getBestState()));
-
-        j += 2;
-
-        row = spreadsheet.createRow(j);
-        Cell cell3 = row.createCell(0);
-        cell3.setCellValue("No. de iteracion: ");
-        Cell cell4 = row.createCell(1);
-        cell4.setCellValue("Distancia (km)");
-
-        j++;
-
-        for (int k = 0; k < Strategy.getStrategy().listBest.size(); k++) {
-            row = spreadsheet.createRow(j);
-            Cell cellIte = row.createCell(0);
-            cellIte.setCellValue("Iteracion: "+ (k+1));
-            Cell cellDist = row.createCell(1);
-            cellDist.setCellValue(Distance.getInstance().calculateCalendarDistance(Strategy.getStrategy().listBest.get(k)));
-            j++;
-        }
-
-
-    }*/
 
     public ArrayList<MutationOperatorType> getMutations() {
         return mutations;
