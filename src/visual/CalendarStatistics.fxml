@@ -84,5 +84,13 @@
             <Font name="Segoe UI Emoji" size="23.0" />
          </font>
       </Label>
+      <JFXButton fx:id="btnStatisticsResume" layoutX="791.0" layoutY="582.0" onAction="#statisticsResume" stylesheets="@../styles/PrincipalMenu.css" text="Resumen Estadístico">
+         <font>
+            <Font name="Segoe UI Emoji" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
    </children>
 </AnchorPane>

@@ -5,6 +5,9 @@ import definition.TTPDefinition;
 import definition.state.CalendarState;
 import definition.state.statecode.Date;
 import execute.Executer;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.paint.Paint;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -199,8 +202,6 @@ public class DataFiles implements ICreateInitialSolution {
         }
 
     }
-
-
 
 
     public void exportItinerary(boolean all) {
@@ -773,6 +774,117 @@ public class DataFiles implements ICreateInitialSolution {
         }
 
         return cal;
+    }
+
+    public void exportsStatistics(TableView<TableStatisticsData> table) {
+        DirectoryChooser fc = new DirectoryChooser();
+        //int pos = CalendarController.selectedCalendar;
+
+        //Set extension filter for text files
+        /*FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xlsx)", "*.xlsx");
+        fc.getExtensionFilters().add(extFilter);*/
+
+
+        //dc = new DirectoryChooser();
+        File f = fc.showDialog(new Stage());
+        File dir = new File(f.getAbsoluteFile() + "/Estadísticas");
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+
+        File file = new File(dir.getAbsolutePath() + "/Estadísticas.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook();
+
+        Sheet spreadsheet = workbook.createSheet();
+
+
+        Row row = spreadsheet.createRow(0);
+        //Style of the cell
+        XSSFFont headerCellFont = workbook.createFont();
+        headerCellFont.setBold(true);
+        headerCellFont.setColor(IndexedColors.WHITE.getIndex());
+        headerCellFont.setFontHeightInPoints((short) 15);
+        XSSFCellStyle style = workbook.createCellStyle();
+
+        // Setting Background color
+        style.setFillForegroundColor(IndexedColors.DARK_GREEN.getIndex());
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setFont(headerCellFont);
+
+        ObservableList<TableColumn<TableStatisticsData, ?>> columns = table.getColumns();
+
+        for (int i = 0; i < columns.size(); i++) {
+            Cell cell = row.createCell(i);
+            cell.setCellStyle(style);
+            cell.setCellValue(columns.get(i).getText());
+        }
+
+
+        //Itinerary
+        style = workbook.createCellStyle();
+        headerCellFont = workbook.createFont();
+        headerCellFont.setBold(false);
+        headerCellFont.setFontHeightInPoints((short) 12);
+
+
+        for (int i =1; i <=table.getItems().size(); i++) {
+            row = spreadsheet.createRow(i);
+
+            TableStatisticsData data = table.getItems().get(i-1);
+            //
+            Cell cellCalendar = row.createCell(0);
+            cellCalendar.setCellStyle(style);
+            cellCalendar.setCellValue("Calendario "+(i)/*data.getCalendarId()*/);
+
+            //
+            Cell cellCalendarDistance = row.createCell(1);
+            cellCalendarDistance.setCellStyle(style);
+            cellCalendarDistance.setCellValue(data.getCalendarDistance());
+
+            //
+            Cell cellLessTeam = row.createCell(2);
+            cellLessTeam.setCellStyle(style);
+            cellLessTeam.setCellValue(data.getLessTeam());
+
+            //
+            Cell cellLessTeamDistance = row.createCell(3);
+            cellLessTeamDistance.setCellStyle(style);
+            cellLessTeamDistance.setCellValue(data.getLessTeamDistance());
+
+            //
+            Cell cellMoreTeam = row.createCell(4);
+            cellMoreTeam.setCellStyle(style);
+            cellMoreTeam.setCellValue(data.getMoreTeam());
+
+            //
+            Cell cellMoreTeamDistance = row.createCell(5);
+            cellMoreTeamDistance.setCellStyle(style);
+            cellMoreTeamDistance.setCellValue(data.getMoreTeamDistance());
+
+
+        }
+
+
+
+
+        //autosize each column of the excel document
+        for (int i = 0; i < row.getLastCellNum(); i++) {
+            spreadsheet.autoSizeColumn(i);
+        }
+
+        OutputStream fileOut = null;
+        try {
+            fileOut = new FileOutputStream(file.getAbsolutePath());
+            workbook.write(fileOut);
+            fileOut.close();
+            showSuccessfulMessage();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 
 }

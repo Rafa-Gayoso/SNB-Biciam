@@ -6,6 +6,7 @@ import definition.state.CalendarState;
 import execute.Executer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -57,6 +58,10 @@ public class CalendarStatisticsController {
     private NumberAxis yAxisMoreTeam;
 
 
+    @FXML
+    private JFXButton btnStatisticsResume;
+
+
    /* @FXML
     private BarChart<String, Float> barChart;
 
@@ -102,7 +107,7 @@ public class CalendarStatisticsController {
             //Distancias de los calendarios
             CalendarState calendar = (CalendarState) calendarsList.get(i);
 
-            ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(calendar);
+
 
             xAxisCalendarData.add("Calendario "+(i+1));
             calendarData.add(xAxisCalendarData.get(i));
@@ -187,6 +192,18 @@ public class CalendarStatisticsController {
             e.printStackTrace();
         }
 
+    }
+
+
+    @FXML
+    void statisticsResume(ActionEvent event) {
+        try {
+            AnchorPane structureOver = homeController.getPrincipalPane();
+            homeController.createPage(new StatisticsResumeController(), structureOver, "/visual/StatisticsResume.fxml");
+            homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -154,17 +154,7 @@ public class HomeController implements Initializable {
         }
     }
 
-    @FXML
-    void showTeams(ActionEvent event) throws IOException {
-        this.createPage(home, "/visual/Teams.fxml");
-        notification = getNotification();
-        notification.setTitle("Listado de Equipos");
-        notification.setMessage("Equipos participantes");
-        notification.setNotificationType(NotificationType.SUCCESS);
-        notification.setRectangleFill(Paint.valueOf("#2F2484"));
-        notification.setAnimationType(AnimationType.FADE);
-        notification.showAndDismiss(Duration.seconds(2));
-    }
+
 
     @FXML
     void exportCalendar(ActionEvent event) {
@@ -333,6 +323,24 @@ public class HomeController implements Initializable {
 
             object = loader.getController();
             ((CrudsController) object).setHomeController(this);
+
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(primaryPane.getScene().getWindow());
+
+            stage.show();
+        }
+        else if (object instanceof StatisticsResumeController) {
+
+            Parent root = FXMLLoader.load(getClass().getResource("/visual/StatisticsResume.fxml"));
+            Stage stage = new Stage();
+            ScalableContentPane scale = new ScalableContentPane();
+            scale.setContent(anchorPane);
+            stage.setTitle("Resumen estadístico");
+            stage.setResizable(false);
+            stage.setScene(new Scene(scale));
+
+            object = loader.getController();
+            ((StatisticsResumeController) object).setHomeController(this);
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(primaryPane.getScene().getWindow());
