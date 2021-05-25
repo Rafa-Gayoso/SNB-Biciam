@@ -3,6 +3,7 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 import definition.TTPDefinition;
+import definition.state.CalendarState;
 import definition.state.statecode.Date;
 import execute.Executer;
 import javafx.fxml.FXMLLoader;
@@ -80,7 +81,7 @@ public class CalendarController implements Initializable {
 
         try{
             for(int i=0; i < calendarsList.size();i++){
-                State calendar = calendarsList.get(i);
+                CalendarState calendar = (CalendarState) calendarsList.get(i);
                 AnchorPane allContent = new AnchorPane();
 
                 FXMLLoader fxmlLoader =  new FXMLLoader();
@@ -138,7 +139,7 @@ public class CalendarController implements Initializable {
                 allContent.getChildren().addAll(hboxCalendarContent,hboxRestrictionContent);
                 allContent.setLeftAnchor(hboxCalendarContent, 0.0);
                 allContent.setLeftAnchor(hboxRestrictionContent, currentCalendarTabPane.getPrefWidth());
-                Tab tab =  new Tab("Calendario "+(i+1));
+                Tab tab =  new Tab(calendar.getConfiguration().getCalendarId());
                 tab.setContent(allContent);
                 calendarsTabPane.getTabs().add(tab);
             }

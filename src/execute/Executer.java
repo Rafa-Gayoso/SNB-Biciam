@@ -36,7 +36,9 @@ import utils.DataFiles;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
 
@@ -49,6 +51,7 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
     private ArrayList<AuxStatePlusIterations> saveData;
 
     private static Executer executerInstance;
+    private Map<String, Integer> idMaps;
 
 
 
@@ -62,6 +65,7 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
         this.EXECUTIONS = 5;
         this.ITERATIONS = 1000;
         this.selectedMH = 0;
+        this.idMaps = new HashMap<>();
     }
 
     public static Executer getInstance(){
@@ -186,30 +190,7 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
     public void executeOCC() throws ClassNotFoundException, InvocationTargetException, InstantiationException, NoSuchMethodException, IllegalAccessException, IOException {
         configureProblem();
 
-        /*String nameMH = "";
-        if (selectedMH == 0){
-            nameMH = "EC";
-        }else if (selectedMH == 1){
-            nameMH = "EE";
-        }else{
-            nameMH = "RS";
-        }
 
-        String rounds = "";
-        if (TTPDefinition.getInstance().isSecondRound()){
-            rounds = "Doble";
-        }else {
-            rounds = "Simple";
-        }
-
-        int cantEquipos = TTPDefinition.getInstance().getCantEquipos();
-
-        String fileName = nameMH+"_"+rounds+"_"+cantEquipos+"-"+"Teams"+"_"+EXECUTIONS+"-"+"Exec"+"_"+ITERATIONS+"-"+"Ite";
-
-        File file = new File("src/files/"+fileName+".xlsx");
-        XSSFWorkbook workbook = new XSSFWorkbook();
-
-        ArrayList<State> thisLapBests = new ArrayList<>();*/
         for (int i=0; i < Executer.getInstance().getEXECUTIONS(); i++) {
             ArrayList<Integer> teamsOnlyOccident = new ArrayList<>();
             ArrayList<Integer> teamsOnlyOrient = new ArrayList<>();
@@ -515,5 +496,13 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
 
     public void setSelectedMH(int selectedMH) {
         this.selectedMH = selectedMH;
+    }
+
+    public Map<String, Integer> getIdMaps() {
+        return idMaps;
+    }
+
+    public void setIdMaps(Map<String, Integer> idMaps) {
+        this.idMaps = idMaps;
     }
 }

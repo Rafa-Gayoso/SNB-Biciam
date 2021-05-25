@@ -27,12 +27,16 @@ public class ServiceCalendar extends javafx.concurrent.Service<String> implement
 
                 Executer.getInstance().configureProblem();
 
+
+
                 int i=0;
                 updateProgress(i,Executer.getInstance().getEXECUTIONS());
                 int percent = percent(i);
                 updateMessage(percent+" %");
                 TTPDefinition.getInstance().setOccidentOrientCOnConfiguration(null);
                 for (; i < Executer.getInstance().getEXECUTIONS(); i++) {
+
+
                     Strategy.getStrategy().setStopexecute(new StopExecute());
                     Strategy.getStrategy().setUpdateparameter(new UpdateParameter());
                     Strategy.getStrategy().setProblem(Executer.getInstance().getProblem());
@@ -79,6 +83,17 @@ public class ServiceCalendar extends javafx.concurrent.Service<String> implement
                                 fixChampionSubchampion(state);
                         }
                     }
+                    if( Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId()) == null){
+                        Executer.getInstance().getIdMaps().put(TTPDefinition.getInstance().getCalendarId(), 1);
+                    }else{
+                        ;
+                        Executer.getInstance().getIdMaps().put(TTPDefinition.getInstance().getCalendarId(),
+                                Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId())+1);
+
+                    }
+                    state.getConfiguration().setCalendarId(TTPDefinition.getInstance().getCalendarId() +"."+
+                            Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId()));
+
                     Executer.getInstance().getResultStates().add(state);
                     Strategy.destroyExecute();
                     updateProgress(i+1,Executer.getInstance().getEXECUTIONS());

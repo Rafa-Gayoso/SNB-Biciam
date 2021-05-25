@@ -230,14 +230,14 @@ public class DataFiles implements ICreateInitialSolution {
 
         for (int i = 0; i < calendarToExport.size(); i++) {
             CalendarState state = (CalendarState) calendarToExport.get(i);
-            exportSingleCalendar(state, dir.getAbsolutePath(), i);
+            exportSingleCalendar(state, dir.getAbsolutePath());
         }
 
     }
 
-    private void exportSingleCalendar(CalendarState state, String route, int calendar) {
+    private void exportSingleCalendar(CalendarState state, String route) {
 
-        File file = new File(route + "/Calendario " + calendar + ".xlsx");
+        File file = new File(route + "/Calendario " + state.getConfiguration().getCalendarId() + ".xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook();
 
         Sheet spreadsheet = workbook.createSheet("Itinerario");
