@@ -94,6 +94,13 @@ public class ServiceCalendar extends javafx.concurrent.Service<String> implement
                     state.getConfiguration().setCalendarId(TTPDefinition.getInstance().getCalendarId() +"."+
                             Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId()));
 
+                    if( Executer.getInstance().getIdMaps().get(state.getConfiguration().getCalendarId()) == null){
+                        Executer.getInstance().getIdMaps().put(state.getConfiguration().getCalendarId(), 1);
+                    }else{
+                        Executer.getInstance().getIdMaps().put(state.getConfiguration().getCalendarId(),
+                                Executer.getInstance().getIdMaps().get(state.getConfiguration().getCalendarId())+1);
+                    }
+
                     Executer.getInstance().getResultStates().add(state);
                     Strategy.destroyExecute();
                     updateProgress(i+1,Executer.getInstance().getEXECUTIONS());

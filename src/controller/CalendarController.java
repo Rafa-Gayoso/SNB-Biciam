@@ -149,6 +149,7 @@ public class CalendarController implements Initializable {
                         @Override
                         public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
                             selectedCalendar = calendarsTabPane.getTabs().indexOf(t1);
+                            System.out.println(selectedCalendar);
                         }
                     }
             );

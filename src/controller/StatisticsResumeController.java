@@ -75,7 +75,7 @@ public class StatisticsResumeController implements Initializable {
             Statistics.getInstance().moreStatistics(itineraryDistance);
             String teamMoreDistance = Statistics.getInstance().getTeam();
             double moreDistance = Statistics.getInstance().getDistance();
-            data.add(new TableStatisticsData("Calendario "+(i+1), teamLessDistance, teamMoreDistance, calendar.getDistance(), lessDistance, moreDistance));
+            data.add(new TableStatisticsData(calendar.getConfiguration().getCalendarId(), teamLessDistance, teamMoreDistance, calendar.getDistance(), lessDistance, moreDistance));
 
         }
         statisticsTable.setItems(data);

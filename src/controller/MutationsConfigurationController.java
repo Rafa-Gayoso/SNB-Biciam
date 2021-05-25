@@ -97,11 +97,11 @@ public class MutationsConfigurationController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        calendar = (CalendarState) Executer.getInstance().getResultStates().get(selectedCalendar);
-        configuration = calendar.getConfiguration();
         this.operatorSelector = new CombineMutationOperator();
         currentMutationPostion = -1;
         this.selectedCalendar = CalendarController.selectedCalendar;
+        calendar = (CalendarState) Executer.getInstance().getResultStates().get(selectedCalendar);
+        configuration = calendar.getConfiguration();
         iterations.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE));
         iterations.getValueFactory().setValue(20000);
         mutationsToAdd = new ArrayList<>();
@@ -151,7 +151,7 @@ public class MutationsConfigurationController implements Initializable {
             booleanValues.add(booleans);
         }
 
-        if(configuration.isSecondRoundCalendar() && !configuration.isSymmetricSecondRound()){
+        if(!configuration.isSymmetricSecondRound()){
             for(int i=mutationSize-1; i >=4 ; i--){
                 mutationsReaded.remove(i);
                 booleanValues.remove(i);
@@ -195,6 +195,7 @@ public class MutationsConfigurationController implements Initializable {
         }
         comboBoxValidation(comboDate1, comboDuel1);
         comboBoxValidation(comboDate2, comboDuel2);
+        comboBoxTeamValidation(comboTeam1,comboTeam2);
 
         mutationsListView.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -241,6 +242,27 @@ public class MutationsConfigurationController implements Initializable {
             }
         });
 
+    }
+
+    private void comboBoxTeamValidation(JFXComboBox<String> comboTeam1, JFXComboBox<String> comboTeam2) {
+        comboTeam1.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if ((int) newValue != -1) {
+                    comboTeam2.getItems().clear();
+                    int position = (int) newValue;
+
+                    for(int i = 0; i < calendar.getConfiguration().getTeamsIndexes().size();i++){
+                        if(i != position){
+                            comboTeam2.getItems().add(DataFiles.getSingletonDataFiles().getTeams().get(calendar.getConfiguration().getTeamsIndexes().get(i)));
+                        }
+                    }
+
+
+                }
+
+            }
+        });
     }
 
     private void comboBoxValidation(JFXComboBox<String> comboDate, JFXComboBox<String> comboDuel) {
@@ -324,11 +346,7 @@ public class MutationsConfigurationController implements Initializable {
             mutationOperatorTypes.add(mutationsOperators[posMutation]);
 
         }
-        if(comboTeam1.getSelectionModel().getSelectedItem().equalsIgnoreCase(comboTeam2.getSelectionModel().getSelectedItem())){
-            TrayNotification notification = new TrayNotification();
-            notification.setMessage("Los equipos deben ser diferentes");
-            notification.showAndDismiss(Duration.seconds(1));
-        }
+
 
         if (atLestOneMutationSelected != 0) {
 
@@ -369,9 +387,27 @@ public class MutationsConfigurationController implements Initializable {
                 }
 
             }
+
+
+
+            int numeration = Executer.getInstance().getIdMaps().get(newState.getConfiguration().getCalendarId());
+
+            Executer.getInstance().getIdMaps().put(calendar.getConfiguration().getCalendarId(),
+                    Executer.getInstance().getIdMaps().get(calendar.getConfiguration().getCalendarId())+1);
+
+            newState.getConfiguration().setCalendarId(newState.getConfiguration().getCalendarId()+"."+numeration);
+
             TTPDefinition.getInstance().setMutationsConfigurationsList(new ArrayList<>());
 
+            if( Executer.getInstance().getIdMaps().get(newState.getConfiguration().getCalendarId()) == null){
+                Executer.getInstance().getIdMaps().put(newState.getConfiguration().getCalendarId(), 1);
+            }else{
+
+                Executer.getInstance().getIdMaps().put(newState.getConfiguration().getCalendarId(),
+                        Executer.getInstance().getIdMaps().get(newState.getConfiguration().getCalendarId())+1);
+            }
             Executer.getInstance().getResultStates().add(newState);
+
 
 
             Stage stage = (Stage) selectMutations.getScene().getWindow();
