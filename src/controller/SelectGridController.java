@@ -63,7 +63,7 @@ public class SelectGridController implements Initializable {
 
                 TrayNotification notification = new TrayNotification();
                 notification.setTitle("Escoger sedes");
-                notification.setMessage("Sedes guardadas con éxito");
+                notification.setMessage("Sedes guardadas con \u00e9xito");
                 notification.setNotificationType(NotificationType.SUCCESS);
                 notification.setRectangleFill(Paint.valueOf("#2F2484"));
                 notification.setAnimationType(AnimationType.FADE);
@@ -306,8 +306,8 @@ public class SelectGridController implements Initializable {
                 @Override
                 public void handle(WorkerStateEvent workerStateEvent) {
                     TrayNotification notification = new TrayNotification();
-                    notification.setTitle("Generar Caeldnarios");
-                    notification.setMessage("Ocurrió un error y no se pudo generar los calendarios");
+                    notification.setTitle("Generar Calendarios");
+                    notification.setMessage("Ocurri\u00f3 un error y no se pudo generar los calendarios");
                     notification.setNotificationType(NotificationType.ERROR);
                     notification.setRectangleFill(Paint.valueOf("#2F2484"));
                     notification.setAnimationType(AnimationType.FADE);
@@ -351,8 +351,8 @@ public class SelectGridController implements Initializable {
                 @Override
                 public void handle(WorkerStateEvent workerStateEvent) {
                     TrayNotification notification = new TrayNotification();
-                    notification.setTitle("Generar Caeldnarios");
-                    notification.setMessage("Ocurrió un error y no se pudo generar los calendarios");
+                    notification.setTitle("Generar Calendarios");
+                    notification.setMessage("Ocurri\u00f3 un error y no se pudo generar los calendarios");
                     notification.setNotificationType(NotificationType.ERROR);
                     notification.setRectangleFill(Paint.valueOf("#2F2484"));
                     notification.setAnimationType(AnimationType.FADE);

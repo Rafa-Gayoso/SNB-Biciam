@@ -111,8 +111,8 @@ public class AdvanceConfigurationController implements Initializable {
         ArrayList<Integer> indexesHeuristics = new ArrayList<>(heuristicsListView.getSelectionModel().getSelectedIndices());
         if (indexesMutations.isEmpty()) {
             notification = getNotification();
-            notification.setTitle("Selección de cambios");
-            notification.setMessage("Debe escoger al menos una mutación");
+            notification.setTitle("Selecci\u00f3n de cambios");
+            notification.setMessage("Debe escoger al menos una mutaci\u00f3n");
             notification.setNotificationType(NotificationType.ERROR);
             notification.setRectangleFill(Paint.valueOf("#2F2484"));
             notification.setAnimationType(AnimationType.FADE);
@@ -120,8 +120,8 @@ public class AdvanceConfigurationController implements Initializable {
         }
         else if(indexesHeuristics.isEmpty()){
             notification = getNotification();
-            notification.setTitle("Selección de cambios");
-            notification.setMessage("Debe escoger al menos una heurística");
+            notification.setTitle("Selecci\u00f3n de cambios");
+            notification.setMessage("Debe escoger al menos una heur\u00edstica");
             notification.setNotificationType(NotificationType.ERROR);
             notification.setRectangleFill(Paint.valueOf("#2F2484"));
             notification.setAnimationType(AnimationType.FADE);

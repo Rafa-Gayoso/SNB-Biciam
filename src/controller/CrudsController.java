@@ -153,7 +153,7 @@ public class CrudsController implements Initializable {
 
     @FXML
     void addNewTeam() throws IOException {
-        String messageTitle = "Añadir Equipo";
+        String messageTitle = "A\u00f1adir Equipo";
 
         String teamName = nameTextField.getText();
         String acro = acronymTextField.getText();
@@ -228,13 +228,13 @@ public class CrudsController implements Initializable {
                             showNotification(messageTitle, "Ya existe un equipo con ese nombre");
                         }
                     }else{
-                        showNotification(messageTitle,"Ya existe un equipo con ese acrónimo");
+                        showNotification(messageTitle,"Ya existe un equipo con ese acr\u00f3nimo");
                     }
                 }else{
-                    showNotification(messageTitle,"El acrónimo debe tener tres caracteres");
+                    showNotification(messageTitle,"El acr\u00f3nimo debe tener tres caracteres");
                 }
             }else{
-                showNotification(messageTitle,"Debe llenar el campo de acrónimo");
+                showNotification(messageTitle,"Debe llenar el campo de acr\u00f3nimo");
             }
         }else{
             showNotification(messageTitle,"Debe llenar el campo de nombre");
@@ -309,16 +309,16 @@ public class CrudsController implements Initializable {
                             showNotification(messageTitle,"Ya existe un equipo con ese nombre");
                         }
                     }else{
-                        showNotification(messageTitle,"Ya existe un equipo con ese acrónimo");
+                        showNotification(messageTitle,"Ya existe un equipo con ese acr\u00f3nimo");
                     }
                 }else{
-                    showNotification(messageTitle,"El acrónimo debe tener tres caracteres");
+                    showNotification(messageTitle,"El acr\u00f3nimo debe tener tres caracteres");
                 }
             }else{
-                showNotification(messageTitle,"El campo de acrónimo no puede estar vacío");
+                showNotification(messageTitle,"El campo de acr\u00f3nimo no puede estar vac\u00edo");
             }
         }else{
-            showNotification(messageTitle,"El campo de nombre no puede estar vacío");
+            showNotification(messageTitle,"El campo de nombre no puede estar vac\u00edo");
         }
     }
 
@@ -336,7 +336,7 @@ public class CrudsController implements Initializable {
         Distance.getInstance().fillMatrixDistance();
 
         restore();
-        showSuccessfulMessage("Eliminar Equipo", "El equipo se eliminó correctamente");
+        showSuccessfulMessage("Eliminar Equipo", "El equipo se elimin\u00f3 correctamente");
     }
 
     @FXML

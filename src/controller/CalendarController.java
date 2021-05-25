@@ -186,7 +186,7 @@ public class CalendarController implements Initializable {
             }
         }
         else{
-            showNotification("No existe ningún calendario", "Debe crear o importar al menos un calendario.");
+            showNotification("No existe ning\u00fan calendario", "Debe crear o importar al menos un calendario.");
         }
     }
 
@@ -202,7 +202,7 @@ public class CalendarController implements Initializable {
             }
         }
         else{
-            showNotification("No existe ningún calendario", "Debe crear o importar al menos un calendario.");
+            showNotification("No existe ning\u00fan calendario", "Debe crear o importar al menos un calendario.");
         }
     }
 

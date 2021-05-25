@@ -431,7 +431,7 @@ public class ConfigurationCalendarController implements Initializable {
             comboChamp.setVisible(true);
             comboSub.setVisible(true);
             btnSwap.setVisible(true);
-            champVsSub.setText("Sí");
+            champVsSub.setText("S\u00ed");
 
         } else {
             comboChamp.setVisible(false);
@@ -444,7 +444,7 @@ public class ConfigurationCalendarController implements Initializable {
     @FXML
     void setSecondRound(ActionEvent event) {
         if (secondRoundButton.isSelected()) {
-            secondRoundButton.setText("Sí");
+            secondRoundButton.setText("S\u00ed");
             lblSymmetricSecondRound.setVisible(true);
             symmetricSecondRound.setVisible(true);
         } else {
@@ -459,7 +459,7 @@ public class ConfigurationCalendarController implements Initializable {
     @FXML
     void setSymmetricSecondRound(ActionEvent event) {
         if (symmetricSecondRound.isSelected()) {
-            symmetricSecondRound.setText("Sí");
+            symmetricSecondRound.setText("S\u00ed");
         } else {
             symmetricSecondRound.setText("No");
         }
@@ -468,7 +468,7 @@ public class ConfigurationCalendarController implements Initializable {
     @FXML
     void setOccidenteVsOriente(ActionEvent event) {
         if (occidenteVsOrienteToggle.isSelected()) {
-            occidenteVsOrienteToggle.setText("Sí");
+            occidenteVsOrienteToggle.setText("S\u00ed");
         } else {
             occidenteVsOrienteToggle.setText("No");
         }
@@ -477,9 +477,9 @@ public class ConfigurationCalendarController implements Initializable {
     @FXML
     void setInauguralGame(ActionEvent event) {
         if (inauguralGame.isSelected()) {
-            inauguralGame.setText("Sí");
+            inauguralGame.setText("S\u00ed");
             champVsSub.setSelected(true);
-            champVsSub.setText("Sí");
+            champVsSub.setText("S\u00ed");
             comboChamp.setVisible(true);
             comboSub.setVisible(true);
             btnSwap.setVisible(true);
@@ -507,7 +507,7 @@ public class ConfigurationCalendarController implements Initializable {
     }
 
     private void showNotification(String message) {
-        notification.setTitle("Selección de equipos.");
+        notification.setTitle("Selecci\u00f3n de equipos.");
         notification.setMessage(message);
         notification.setNotificationType(NotificationType.ERROR);
         notification.setRectangleFill(Paint.valueOf("#2F2484"));
@@ -601,8 +601,8 @@ public class ConfigurationCalendarController implements Initializable {
                     @Override
                     public void handle(WorkerStateEvent workerStateEvent) {
                         TrayNotification notification = new TrayNotification();
-                        notification.setTitle("Generar Caeldnarios");
-                        notification.setMessage("Ocurrió un error y no se pudo generar los calendarios");
+                        notification.setTitle("Generar Calendarios");
+                        notification.setMessage("Ocurri\u00f3 un error y no se pudo generar los calendarios");
                         notification.setNotificationType(NotificationType.ERROR);
                         notification.setRectangleFill(Paint.valueOf("#2F2484"));
                         notification.setAnimationType(AnimationType.FADE);

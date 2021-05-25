@@ -383,7 +383,7 @@ public class MutationsConfigurationController implements Initializable {
 
         } else {
             TrayNotification notification = new TrayNotification();
-            notification.setMessage("Debe elegir al menos una mutación");
+            notification.setMessage("Debe elegir al menos una mutaci\u00f3n");
             notification.showAndDismiss(Duration.seconds(1));
         }
     }

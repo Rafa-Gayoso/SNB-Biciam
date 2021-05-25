@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
@@ -136,8 +137,8 @@ public class HomeController implements Initializable {
 
 
                     notification = getNotification();
-                    notification.setTitle("Importación de Calendario");
-                    notification.setMessage("Calendario importado con éxito");
+                    notification.setTitle("Importaci\u00f3n de Calendario");
+                    notification.setMessage("Calendario importado con \u00e9xito");
                     notification.setNotificationType(NotificationType.SUCCESS);
                     notification.setRectangleFill(Paint.valueOf("#2F2484"));
                     notification.setAnimationType(AnimationType.FADE);
@@ -153,8 +154,6 @@ public class HomeController implements Initializable {
             e.printStackTrace();
         }
     }
-
-
 
     @FXML
     void exportCalendar(ActionEvent event) {
@@ -241,7 +240,8 @@ public class HomeController implements Initializable {
             ScalableContentPane scale = new ScalableContentPane();
             scale.setContent(anchorPane);
 
-            stage.setTitle("Configuración de las mutaciones");
+            stage.setTitle("Configuraci\u00f3n de las mutaciones");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
             stage.setResizable(false);
             stage.setScene(new Scene(scale));
 
@@ -259,6 +259,7 @@ public class HomeController implements Initializable {
             ScalableContentPane scale = new ScalableContentPane();
             scale.setContent(anchorPane);
             stage.setTitle("Itinerario de equipos");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
             stage.setResizable(false);
             stage.setScene(new Scene(scale));
 
@@ -276,6 +277,7 @@ public class HomeController implements Initializable {
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setTitle("Restricciones del calendario");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
             stage.setResizable(false);
             stage.setScene(new Scene(anchorPane));
 
@@ -316,7 +318,8 @@ public class HomeController implements Initializable {
 
             Parent root = FXMLLoader.load(getClass().getResource("/visual/Cruds.fxml"));
             Stage stage = new Stage();
-            stage.setTitle("Gestión de datos");
+            stage.setTitle("Gesti\u00f3n de datos");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
             stage.setResizable(false);
 
             stage.setScene(new Scene(anchorPane));
@@ -335,7 +338,8 @@ public class HomeController implements Initializable {
             Stage stage = new Stage();
             ScalableContentPane scale = new ScalableContentPane();
             scale.setContent(anchorPane);
-            stage.setTitle("Resumen estadístico");
+            stage.setTitle("Resumen estad\u00edtico");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
             stage.setResizable(false);
             stage.setScene(new Scene(scale));
 
@@ -370,7 +374,7 @@ public class HomeController implements Initializable {
         boolean all = false;
         if(Executer.getInstance().getResultStates().isEmpty()){
             notification = getNotification();
-            notification.setTitle("Exportación de Calendario");
+            notification.setTitle("Exportaci\u00f3n de Calendario");
             notification.setMessage("No hay calendarios para exportar");
             notification.setNotificationType(NotificationType.ERROR);
             notification.setRectangleFill(Paint.valueOf("#2F2484"));
@@ -387,7 +391,7 @@ public class HomeController implements Initializable {
         boolean all = true;
         if(Executer.getInstance().getResultStates().isEmpty()){
             notification = getNotification();
-            notification.setTitle("Exportación de Calendario");
+            notification.setTitle("Exportaci\u00f3n de Calendario");
             notification.setMessage("No hay calendarios para exportar");
             notification.setNotificationType(NotificationType.ERROR);
             notification.setRectangleFill(Paint.valueOf("#2F2484"));

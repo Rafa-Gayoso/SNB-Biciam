@@ -35,6 +35,7 @@ import tray.notification.TrayNotification;
 import java.io.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -228,19 +229,21 @@ public class DataFiles implements ICreateInitialSolution {
         }
 
         for (int i = 0; i < calendarToExport.size(); i++) {
-            exportSingleCalendar(calendarToExport.get(i), dir.getAbsolutePath(), i);
+            CalendarState state = (CalendarState) calendarToExport.get(i);
+            exportSingleCalendar(state, dir.getAbsolutePath(), i);
         }
 
     }
 
-    private void exportSingleCalendar(State state, String route, int calendar) {
+    private void exportSingleCalendar(CalendarState state, String route, int calendar) {
 
         File file = new File(route + "/Calendario " + calendar + ".xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook();
 
-        Sheet spreadsheet = workbook.createSheet();
-        CalendarConfiguration configuration = ((CalendarState)state).getConfiguration();
+        Sheet spreadsheet = workbook.createSheet("Itinerario");
+        CalendarConfiguration configuration = state.getConfiguration();
         ArrayList<ArrayList<Integer>> teamDate = TTPDefinition.getInstance().teamsItinerary(state);
+
         Row row = spreadsheet.createRow(0);
         //Style of the cell
         XSSFFont headerCellFont = workbook.createFont();
@@ -254,11 +257,18 @@ public class DataFiles implements ICreateInitialSolution {
         style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         style.setFont(headerCellFont);
 
+        for(int i=0; i < Days.values().length; i++){
+            String day = Days.values()[i].toString();
+            Cell cell = row.createCell(i);
+            cell.setCellStyle(style);
+            cell.setCellValue(day);
+        }
+
         //Header of the itinerary
         for (int j = 0; j < teamDate.get(0).size(); j++) {
             int posTeam = teamDate.get(0).get(j);
             String team = getTeams().get(posTeam);
-            Cell cell = row.createCell(j);
+            Cell cell = row.createCell(j+7);
             cell.setCellStyle(style);
             cell.setCellValue(team);
         }
@@ -276,7 +286,7 @@ public class DataFiles implements ICreateInitialSolution {
             for (int k = 0; k < date.size(); k++) {
                 int posTeam = teamDate.get(j).get(k);
                 String team = getAcronyms().get(posTeam);
-                Cell cell = row.createCell(k);
+                Cell cell = row.createCell(k+7);
                 cell.setCellStyle(style);
                 cell.setCellValue(team);
             }
@@ -352,21 +362,55 @@ public class DataFiles implements ICreateInitialSolution {
         cellData.setCellStyle(style);
         cellData.setCellValue(configuration.getMaxVisitorGamesInARow());
 
-        //workbook.setSheetHidden(1, true);
+
+        XSSFFont headerCellDateFont = workbook.createFont();
+        headerCellDateFont.setBold(true);
+        headerCellDateFont.setColor(IndexedColors.WHITE.getIndex());
+        headerCellDateFont.setFontHeightInPoints((short) 15);
+
+        XSSFCellStyle newStyle = workbook.createCellStyle();
+        newStyle.setFillForegroundColor(IndexedColors.DARK_GREEN.getIndex());
+        newStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        newStyle.setFont(headerCellDateFont);
+
+        for (int i = 0; i < state.getCode().size(); i++) {
+            Sheet spreadsheetDate = workbook.createSheet("Fecha "+(i+1));
+            Row rowLocalVisitor = spreadsheetDate.createRow(0);
+            Cell cellLocal=  rowLocalVisitor.createCell(0);
+            cellLocal.setCellStyle(newStyle);
+            cellLocal.setCellValue("Local");
+
+            Cell cellVisitor=  rowLocalVisitor.createCell(1);
+            cellVisitor.setCellStyle(newStyle);
+            cellVisitor.setCellValue("Visitante");
+
+            Date date = (Date) state.getCode().get(i);
+
+            for (int n =0; n < date.getGames().size(); n++){
+                Row row1 = spreadsheetDate.createRow(n+1);
+                cellLocal=  row1.createCell(0);
+                cellLocal.setCellValue(DataFiles.getSingletonDataFiles().getTeams().get(date.getGames().get(n).get(0)));
+
+                cellVisitor=  row1.createCell(1);
+                cellVisitor.setCellValue(DataFiles.getSingletonDataFiles().getTeams().get(date.getGames().get(n).get(1)));
+            }
+
+            for(int k=0; k < rowLocalVisitor.getLastCellNum(); k++){
+                spreadsheetDate.autoSizeColumn(k);
+            }
+        }
 
         //autosize each column of the excel document
-        for(int i=0; i < row.getLastCellNum(); i++){
-            spreadsheet.autoSizeColumn(i);
-        }
+        //for(int i=0; i < row.getLastCellNum(); i++){
+            spreadsheet.autoSizeColumn(0);
+        //}
 
         for(int i=0; i < rowData.getLastCellNum(); i++){
             spreadsheetData.autoSizeColumn(i);
         }
-        //autosize each column of the excel document
-        for (int i = 0; i < row.getLastCellNum(); i++) {
-            spreadsheet.autoSizeColumn(i);
-        }
 
+
+        workbook.setSheetHidden(1, true);
         OutputStream fileOut = null;
         try {
             fileOut = new FileOutputStream(file.getAbsolutePath());
@@ -724,14 +768,12 @@ public class DataFiles implements ICreateInitialSolution {
                 if (!secondRound || cantRealRowAdded != restMoment) {
 
                     Date date = new Date();
-                    Iterator<Cell> cellIterator = row.cellIterator();
 
-                    int i = 0;
-                    while (cellIterator.hasNext()) {
-
-                        Cell cell = cellIterator.next();
+                    int pos = 0;
+                    for(int i =7; i < row.getLastCellNum(); i++){
+                        Cell cell = row.getCell(i);
                         int local = getAcronyms().indexOf(cell.toString());
-                        int visitor = configuration.getTeamsIndexes().get(i);
+                        int visitor = configuration.getTeamsIndexes().get(pos);
 
                         if(local != -1 && visitor != -1){
                             ArrayList<Integer> pair = new ArrayList<>();
@@ -745,8 +787,9 @@ public class DataFiles implements ICreateInitialSolution {
 
                         }
 
-                        i++;
+                        pos++;
                     }
+
                     if(date.getGames().size() > 0){
 
                         dates.add(date);
