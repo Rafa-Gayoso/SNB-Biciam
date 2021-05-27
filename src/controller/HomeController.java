@@ -252,7 +252,27 @@ public class HomeController implements Initializable {
             stage.initOwner(primaryPane.getScene().getWindow());
 
             stage.show();
-        } else if (object instanceof TeamsItineraryController) {
+        }
+        else if (object instanceof RestSelectorController) {
+
+            Parent root = FXMLLoader.load(getClass().getResource("/visual/RestSelector.fxml"));
+            Stage stage = new Stage();
+            ScalableContentPane scale = new ScalableContentPane();
+            scale.setContent(anchorPane);
+
+            stage.setTitle("Selecci\u00f3n de descansos");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
+            stage.setResizable(false);
+            stage.setScene(new Scene(scale));
+
+            object = loader.getController();
+            ((RestSelectorController) object).setHomeController(this);
+
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(primaryPane.getScene().getWindow());
+
+            stage.show();
+        }else if (object instanceof TeamsItineraryController) {
 
             Parent root = FXMLLoader.load(getClass().getResource("/visual/TeamsItinerary.fxml"));
             Stage stage = new Stage();
@@ -338,7 +358,7 @@ public class HomeController implements Initializable {
             Stage stage = new Stage();
             ScalableContentPane scale = new ScalableContentPane();
             scale.setContent(anchorPane);
-            stage.setTitle("Resumen estad\u00edtico");
+            stage.setTitle("Resumen estad\u00edstico");
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
             stage.setResizable(false);
             stage.setScene(new Scene(scale));

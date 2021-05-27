@@ -112,13 +112,25 @@ public class CalendarController implements Initializable {
                                 DataFiles.getSingletonDataFiles().getAcronyms().get(posVisitor)));
                     }
 
+                    if(!calendar.getConfiguration().getRestDates().isEmpty()){
+
+                            if(calendar.getConfiguration().getRestDates().contains(j)){
+                                Label label = new Label("Descanso");
+                                Tab t = new Tab("Descanso");
+                                t.setContent(label);
+                                currentCalendarTabPane.getTabs().add(t);
+                            }
+
+
+                    }
+
                     table.setPrefWidth(restrictionsContent.getPrefWidth());
                     Tab tab = new Tab("Fecha " + (j + 1));
                     tab.setContent(table);
                     tables.add(table);
                     currentCalendarTabPane.getTabs().add(tab);
 
-                    if(calendarDates.size()-j == 1){
+                    /*if(calendarDates.size()-j == 1){
                         ArrayList<Integer> rest = addRestToCalendar(calendar);
                         for (Integer restDate:
                                 rest) {
@@ -127,8 +139,9 @@ public class CalendarController implements Initializable {
                             t.setContent(label);
                             currentCalendarTabPane.getTabs().add(restDate,t);
                         }
-                    }
+                    }*/
                 }
+
                 currentCalendarTabPane.setPrefWidth(restrictionsContent.getPrefWidth());
                 HBox hboxCalendarContent = new HBox();
                 HBox hboxRestrictionContent = new HBox();
@@ -162,8 +175,19 @@ public class CalendarController implements Initializable {
 
     }
 
-    private ArrayList<Integer> addRestToCalendar(State calendar){
-        ArrayList<Integer> rest = new ArrayList<>();
+    private void/*ArrayList<Integer>*/ addRestToCalendar(JFXTabPane currentCalendarTabPane, CalendarState calendar){
+
+
+        ArrayList<Integer> rest = calendar.getConfiguration().getRestDates();
+        for(int i=0; i < rest.size(); i++){
+            int descanso = rest.get(i);
+            Label label = new Label("Descanso");
+            Tab t = new Tab("Descanso");
+            t.setContent(label);
+            currentCalendarTabPane.getTabs().add(descanso,t);
+        }
+
+        /*ArrayList<Integer> rest = new ArrayList<>();
         State state = calendar.clone();
         ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(state);
         ArrayList<Integer> teams= (ArrayList<Integer>) itinerary.get(0).clone();
@@ -173,7 +197,7 @@ public class CalendarController implements Initializable {
                rest.add(i - 1);
            }
         }
-        return rest;
+        return rest;*/
     }
 
 

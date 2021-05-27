@@ -830,12 +830,12 @@ public class DataFiles implements ICreateInitialSolution {
 
         //dc = new DirectoryChooser();
         File f = fc.showDialog(new Stage());
-        File dir = new File(f.getAbsoluteFile() + "/Estadísticas");
+        File dir = new File(f.getAbsoluteFile() + "/Estad\u00edsticas");
         if (!dir.exists()) {
             dir.mkdir();
         }
 
-        File file = new File(dir.getAbsolutePath() + "/Estadísticas.xlsx");
+        File file = new File(dir.getAbsolutePath() + "/Estad\u00edsticas.xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook();
 
         Sheet spreadsheet = workbook.createSheet();

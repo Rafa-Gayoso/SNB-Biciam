@@ -255,6 +255,25 @@
                   </Tooltip>
                </tooltip>
             </JFXToggleButton>
+            <JFXButton fx:id="restBtn" buttonType="RAISED" contentDisplay="CENTER" onAction="#showRest" prefHeight="35.0" prefWidth="38.0" text=" " GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="39.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/settings.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Configuración avanzada" textAlignment="JUSTIFY">
+                     <font>
+                        <Font name="Segoe UI Symbol" size="24.0" />
+                     </font>
+                  </Tooltip>
+               </tooltip>
+            </JFXButton>
          </children>
       </GridPane>
     </children>

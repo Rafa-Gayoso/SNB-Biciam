@@ -80,7 +80,7 @@ public class ServiceOccidentOrientCalendar extends javafx.concurrent.Service<Str
                             teamsOnlyOccident, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                             TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                             TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
-                            TTPDefinition.getInstance().getCantVecesVisitante()));
+                            TTPDefinition.getInstance().getCantVecesVisitante(),TTPDefinition.getInstance().getRestIndexes()));
                     TTPDefinition.getInstance().setDuelMatrix(matrixOnlyOccident);
 
 
@@ -137,7 +137,7 @@ public class ServiceOccidentOrientCalendar extends javafx.concurrent.Service<Str
                             teamsOnlyOrient, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                             TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                             TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
-                            TTPDefinition.getInstance().getCantVecesVisitante()));
+                            TTPDefinition.getInstance().getCantVecesVisitante(),TTPDefinition.getInstance().getRestIndexes()));
 
 
                     TTPDefinition.getInstance().setDuelMatrix(matrixOnlyOrient);
@@ -194,7 +194,7 @@ public class ServiceOccidentOrientCalendar extends javafx.concurrent.Service<Str
                             allTeams, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                             TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                             TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
-                            TTPDefinition.getInstance().getCantVecesVisitante()));
+                            TTPDefinition.getInstance().getCantVecesVisitante(),TTPDefinition.getInstance().getRestIndexes()));
 
                     TTPDefinition.getInstance().setDuelMatrix(newMatrix);
 

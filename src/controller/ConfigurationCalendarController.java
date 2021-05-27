@@ -105,6 +105,10 @@ public class ConfigurationCalendarController implements Initializable {
     @FXML
     private JFXToggleButton occidenteVsOrienteToggle;
 
+    @FXML
+    private JFXButton restBtn;
+
+
 
     @FXML
     void selectAllTeams(ActionEvent event) {
@@ -325,6 +329,7 @@ public class ConfigurationCalendarController implements Initializable {
         symmetricSecondRound.setVisible(true);
         secondRoundButton.setSelected(true);
         teamsSelectionListView.getSelectionModel().selectAll();
+        this.teams = teamsSelectionListView.getSelectionModel().getSelectedIndices().size();
         listComboChamp = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
 
         listComboSub = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
@@ -386,7 +391,7 @@ public class ConfigurationCalendarController implements Initializable {
         //if(!existingConfiguration){
         maxHomeGamesSpinner.getValueFactory().setValue(4);
         maxVisitorGamesSpinner.getValueFactory().setValue(4);
-        ConfigurationCalendarController.teams = 0;
+
         //}
 
     }
@@ -684,5 +689,14 @@ public class ConfigurationCalendarController implements Initializable {
         }
         matrix = TTPDefinition.getInstance().symmetricCalendar(matrix);
         return matrix;
+    }
+
+    @FXML
+    void showRest(ActionEvent event) throws IOException  {
+        teams = teamsSelectionListView.getSelectionModel().getSelectedIndices().size();
+        AnchorPane structureOver = homeController.getPrincipalPane();
+        homeController.createPage(new RestSelectorController(), structureOver, "/visual/RestSelector.fxml");
+
+        homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
     }
 }

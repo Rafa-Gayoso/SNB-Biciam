@@ -15,11 +15,12 @@ public class CalendarConfiguration {
     private boolean OccidenteVsOriente;
     private int maxLocalGamesInARow;
     private int maxVisitorGamesInARow;
+    private ArrayList<Integer> restDates;
 
     public CalendarConfiguration(String calendarId, ArrayList<Integer> teamsIndexes, boolean inauguralGame,
                                  boolean championVsSecondPlace, int champion, int secondPlace,
                                  boolean secondRoundCalendar, boolean symmetricSecondRound, boolean OccidenteVsOriente,
-                                 int maxLocalGamesInARow, int maxVisitorGamesInARow) {
+                                 int maxLocalGamesInARow, int maxVisitorGamesInARow, ArrayList<Integer> restDates) {
         this.calendarId = calendarId;
         this.teamsIndexes = teamsIndexes;
         this.inauguralGame = inauguralGame;
@@ -31,6 +32,7 @@ public class CalendarConfiguration {
         this.OccidenteVsOriente = OccidenteVsOriente;
         this.maxLocalGamesInARow = maxLocalGamesInARow;
         this.maxVisitorGamesInARow = maxVisitorGamesInARow;
+        this.restDates = restDates;
     }
 
     public CalendarConfiguration() {
@@ -144,6 +146,7 @@ public class CalendarConfiguration {
                 ", symmetricSecondRound=" + symmetricSecondRound +
                 ", maxLocalGamesInARow=" + maxLocalGamesInARow +
                 ", maxVisitorGamesInARow=" + maxVisitorGamesInARow +
+                ", restDates=" + restDates +
                 '}';
     }
 
@@ -161,6 +164,15 @@ public class CalendarConfiguration {
         clone.setOccidenteVsOriente(this.OccidenteVsOriente);
         clone.setMaxLocalGamesInARow(this.maxLocalGamesInARow);
         clone.setMaxVisitorGamesInARow(this.maxVisitorGamesInARow);
+        clone.setRestDates(this.restDates);
         return clone;
+    }
+
+    public ArrayList<Integer> getRestDates() {
+        return restDates;
+    }
+
+    public void setRestDates(ArrayList<Integer> restDates) {
+        this.restDates = restDates;
     }
 }

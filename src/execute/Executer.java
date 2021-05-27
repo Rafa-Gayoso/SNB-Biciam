@@ -238,7 +238,7 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
                     teamsOnlyOccident, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                     TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                     TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
-                    TTPDefinition.getInstance().getCantVecesVisitante()));
+                    TTPDefinition.getInstance().getCantVecesVisitante(),TTPDefinition.getInstance().getRestIndexes()));
             TTPDefinition.getInstance().setDuelMatrix(matrixOnlyOccident);
 
 
@@ -295,7 +295,7 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
                     teamsOnlyOrient, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                     TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                     TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
-                    TTPDefinition.getInstance().getCantVecesVisitante()));
+                    TTPDefinition.getInstance().getCantVecesVisitante(),TTPDefinition.getInstance().getRestIndexes()));
 
 
             TTPDefinition.getInstance().setDuelMatrix(matrixOnlyOrient);
@@ -352,7 +352,7 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
                     allTeams, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                     TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                     TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
-                    TTPDefinition.getInstance().getCantVecesVisitante()));
+                    TTPDefinition.getInstance().getCantVecesVisitante(),TTPDefinition.getInstance().getRestIndexes()));
 
             TTPDefinition.getInstance().setDuelMatrix(newMatrix);
 

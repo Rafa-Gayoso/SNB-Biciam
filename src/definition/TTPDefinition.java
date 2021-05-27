@@ -7,6 +7,8 @@ import utils.Distance;
 import problem.definition.State;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class TTPDefinition {
 
@@ -30,6 +32,7 @@ public class TTPDefinition {
     private ArrayList<ArrayList<Integer>> mutationsConfigurationsList;//list of configurations for the mutations
     private ArrayList<Integer> mutationsIndexes;
     private CalendarConfiguration occidentOrientCOnConfiguration;
+    private ArrayList<Integer> restIndexes;
 
 
     private TTPDefinition(){
@@ -41,6 +44,7 @@ public class TTPDefinition {
         this.teamsIndexes = createTeamsIndexes(cantEquipos);*/
 
         //fillMatrixDistance( DataFiles.getSingletonDataFiles().getTeamsPairDistances());
+        this.restIndexes = new ArrayList<>();
     }
 
     public static TTPDefinition getInstance(){
@@ -214,7 +218,7 @@ public class TTPDefinition {
                     TTPDefinition.getInstance().getCalendarId(), TTPDefinition.getInstance().getTeamsIndexes(), TTPDefinition.getInstance().isInauguralGame(),
                     TTPDefinition.getInstance().isChampionVsSub(), TTPDefinition.getInstance().getFirstPlace(),
                     TTPDefinition.getInstance().getSecondPlace(),TTPDefinition.getInstance().isSecondRound(), TTPDefinition.getInstance().isSymmetricSecondRound(),
-                    TTPDefinition.getInstance().isOccidentVsOrient(), TTPDefinition.getInstance().getCantVecesLocal(), TTPDefinition.getInstance().getCantVecesVisitante()
+                    TTPDefinition.getInstance().isOccidentVsOrient(), TTPDefinition.getInstance().getCantVecesLocal(), TTPDefinition.getInstance().getCantVecesVisitante(), TTPDefinition.getInstance().getRestIndexes()
             );
         }
 
@@ -251,6 +255,13 @@ public class TTPDefinition {
                 row.add(-1);
             }
 
+            if(!restIndexes.isEmpty()){
+                if(restIndexes.contains(i) || (configuration.isSecondRoundCalendar() && configuration.getTeamsIndexes().size()-1 == i)){
+                    teamDate.add(getRestList());
+                }
+            }
+
+
             Date date = (Date)calendar.getCode().get(i);
 
             for (int m = 0; m < date.getGames().size(); m++) {
@@ -265,6 +276,8 @@ public class TTPDefinition {
 
         row = new ArrayList<>(teamsIndexes);
         teamDate.add(row);
+
+
         return teamDate;
     }
 
@@ -350,21 +363,24 @@ public class TTPDefinition {
         for(int i = 1; i  < itinerary.size() - 1; i++) {
             ArrayList<Integer> row = itinerary.get(i);
 
-            for (int j = 0; j < row.size(); j++) {
-                int destiny = row.get(j);
+            if(Collections.disjoint(row, configuration.getTeamsIndexes())){
+                for (int j = 0; j < row.size(); j++) {
+                    int destiny = row.get(j);
 
-                if(destiny == teamsIndexes.get(j)){
-                    counts.set(j, counts.get(j) + 1);
-                }
-                else{
-                    counts.set(j, 0);
-                }
+                    if(destiny == teamsIndexes.get(j)){
+                        counts.set(j, counts.get(j) + 1);
+                    }
+                    else{
+                        counts.set(j, 0);
+                    }
 
-                if (counts.get(j) > maxHomeGames) {
-                    cont++;
-                    counts.set(j, 0);
+                    if (counts.get(j) > maxHomeGames) {
+                        cont++;
+                        counts.set(j, 0);
+                    }
                 }
             }
+
         }
         return cont;
     }
@@ -511,5 +527,21 @@ public class TTPDefinition {
         if (j+1 < right){
             quickSort(list, j+1, right);
         }
+    }
+
+    public ArrayList<Integer> getRestIndexes() {
+        return restIndexes;
+    }
+
+    public void setRestIndexes(ArrayList<Integer> restIndexes) {
+        this.restIndexes = restIndexes;
+    }
+
+    private  ArrayList<Integer> getRestList(){
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int k = 0; k < teamsIndexes.size(); k++) {
+            list.add(teamsIndexes.get(k));
+        }
+        return list;
     }
 }

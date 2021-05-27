@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="508.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RestSelectorController">
+   <children>
+      <JFXListView fx:id="restList" prefHeight="400.0" prefWidth="260.0" stylesheets="@../styles/PrincipalMenu.css" />
+      <JFXButton fx:id="saveBtn" layoutX="275.0" layoutY="336.0" onAction="#save" prefHeight="50.0" prefWidth="233.0" stylesheets="@../styles/PrincipalMenu.css" text="Guardar Descansos">
+         <font>
+            <Font name="Segoe UI Symbol" size="23.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
