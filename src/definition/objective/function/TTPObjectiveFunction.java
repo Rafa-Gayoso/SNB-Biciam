@@ -21,7 +21,7 @@ public class TTPObjectiveFunction extends ObjetiveFunction implements ISecondRou
         int penalizeInauguralGame = 0;
 
         if(configuration.isChampionVsSecondPlace()){
-            if(configuration.isInauguralGame())
+            if(!configuration.isInauguralGame())
                 penalizeChampion = TTPDefinition.getInstance().penalizeChampionGame(state);
             else
                 penalizeInauguralGame = TTPDefinition.getInstance().penalizeInauguralGame(state);

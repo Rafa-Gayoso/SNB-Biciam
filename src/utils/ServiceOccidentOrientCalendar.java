@@ -76,7 +76,7 @@ public class ServiceOccidentOrientCalendar extends javafx.concurrent.Service<Str
                     }
 
                     TTPDefinition.getInstance().setTeamIndexes(teamsOnlyOccident);
-                    TTPDefinition.getInstance().setOccidentOrientCOnConfiguration(new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
+                    TTPDefinition.getInstance().setOccidentOrientConfiguration(new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
                             teamsOnlyOccident, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                             TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                             TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
@@ -133,7 +133,7 @@ public class ServiceOccidentOrientCalendar extends javafx.concurrent.Service<Str
                     Strategy.destroyExecute();
 
                     TTPDefinition.getInstance().setTeamIndexes(teamsOnlyOrient);
-                    TTPDefinition.getInstance().setOccidentOrientCOnConfiguration(new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
+                    TTPDefinition.getInstance().setOccidentOrientConfiguration(new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
                             teamsOnlyOrient, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                             TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                             TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
@@ -190,7 +190,7 @@ public class ServiceOccidentOrientCalendar extends javafx.concurrent.Service<Str
                     Strategy.destroyExecute();
 
                     TTPDefinition.getInstance().setTeamIndexes(allTeams);
-                    TTPDefinition.getInstance().setOccidentOrientCOnConfiguration(new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
+                    TTPDefinition.getInstance().setOccidentOrientConfiguration(new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
                             allTeams, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                             TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                             TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
@@ -283,6 +283,23 @@ public class ServiceOccidentOrientCalendar extends javafx.concurrent.Service<Str
                     finalConfiguration.setTeamsIndexes(allTeams);
                     finalState.setConfiguration(finalConfiguration);
                     finalState.setCalendarType(stateOccident.getCalendarType());
+                    if( Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId()) == null){
+                        Executer.getInstance().getIdMaps().put(TTPDefinition.getInstance().getCalendarId(), 1);
+                    }else{
+                        ;
+                        Executer.getInstance().getIdMaps().put(TTPDefinition.getInstance().getCalendarId(),
+                                Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId())+1);
+
+                    }
+                    finalState.getConfiguration().setCalendarId(TTPDefinition.getInstance().getCalendarId() +"."+
+                            Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId()));
+
+                    if( Executer.getInstance().getIdMaps().get(finalState.getConfiguration().getCalendarId()) == null){
+                        Executer.getInstance().getIdMaps().put(finalState.getConfiguration().getCalendarId(), 1);
+                    }else{
+                        Executer.getInstance().getIdMaps().put(finalState.getConfiguration().getCalendarId(),
+                                Executer.getInstance().getIdMaps().get(finalState.getConfiguration().getCalendarId())+1);
+                    }
                     Executer.getInstance().getResultStates().add(finalState);
 
 

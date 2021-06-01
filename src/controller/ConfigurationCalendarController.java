@@ -38,6 +38,7 @@ public class ConfigurationCalendarController implements Initializable {
     private TrayNotification notification;
     private HomeController homeController;
     public static boolean secondRound = false;
+    public static boolean inaugural = false;
     public static boolean ok = true;
 
     private int posChampion = -1, posSub = -2;
@@ -157,13 +158,18 @@ public class ConfigurationCalendarController implements Initializable {
             }
         }
 
+        if(calendarId.getText().equalsIgnoreCase(" ")||calendarId.getText().equalsIgnoreCase("")){
+            showNotification("Debe Introducir el identificador del calendario");
+            ok = false;
+        }
+
         if (selectedIndexes.size() <= 2) {
             showNotification("Debe escoger al menos dos equipos");
             ok = false;
         }
 
         else if (selectedIndexes.size() % 2 !=0) {
-            showNotification("Debe escoger al una cantidad par de equipos");
+            showNotification("Debe escoger una cantidad par de equipos");
             ok = false;
         }
         else if(occidenteVsOrienteToggle.isSelected() && (occAmount != orAmount)){
@@ -314,6 +320,9 @@ public class ConfigurationCalendarController implements Initializable {
             }
         });
 
+        calendarId.setTextFormatter(new TextFormatter<>(change ->
+                (change.getControlNewText().matches("^[A-Za-z0-9Ò—·ÈÌÛ˙¡…Õ”⁄ _]*$")) ? change : null));
+
         //if(!existingConfiguration){
         HomeController.escogidos = false;
         selectAll.setSelected(true);
@@ -375,8 +384,6 @@ public class ConfigurationCalendarController implements Initializable {
                 secondRoundButton.setText("No");
             }
 
-
-
             int maxGames = teamsSelectionListView.getSelectionModel().getSelectedIndices().size() / 2;
             maxHomeGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGames));
             maxVisitorGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGames));
@@ -393,7 +400,6 @@ public class ConfigurationCalendarController implements Initializable {
         maxVisitorGamesSpinner.getValueFactory().setValue(4);
 
         //}
-
     }
 
     private void validateChampionAndSubchampion() {
@@ -442,6 +448,8 @@ public class ConfigurationCalendarController implements Initializable {
             comboChamp.setVisible(false);
             comboSub.setVisible(false);
             btnSwap.setVisible(false);
+            inauguralGame.setSelected(false);
+            inauguralGame.setText("No");
             champVsSub.setText("No");
         }
     }
@@ -488,8 +496,6 @@ public class ConfigurationCalendarController implements Initializable {
             comboChamp.setVisible(true);
             comboSub.setVisible(true);
             btnSwap.setVisible(true);
-
-
         } else {
             inauguralGame.setText("No");
         }
@@ -526,19 +532,19 @@ public class ConfigurationCalendarController implements Initializable {
     }
 
     void showTeamsMatrix() throws IOException {
-        if(TTPDefinition.getInstance().isSecondRound() && TTPDefinition.getInstance().isSymmetricSecondRound()) {
+        /*if(TTPDefinition.getInstance().isSecondRound() && TTPDefinition.getInstance().isSymmetricSecondRound()) {
 
             int [][] matrixCalendar = generateMatrix(TTPDefinition.getInstance().getCantEquipos());
 
-             /*AnchorPane structureOver = homeController.getPrincipalPane();
+             AnchorPane structureOver = homeController.getPrincipalPane();
         try {
             TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
-            //Executer.getInstance().executeEC();
-            Executer.getInstance().executeOCC();
+            Executer.getInstance().executeEC();
+            //Executer.getInstance().executeOCC();
             homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (InstantiationException e) {
+        } /*catch (InstantiationException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             e.printStackTrace();
@@ -548,10 +554,10 @@ public class ConfigurationCalendarController implements Initializable {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
-        homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);*/
+        }*/
+        homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
 
-            StackPane stackPane = new StackPane();
+           /* StackPane stackPane = new StackPane();
 
             JFXDialog jfxDialog = new JFXDialog();
             JFXDialogLayout content = new JFXDialogLayout();
@@ -663,13 +669,15 @@ public class ConfigurationCalendarController implements Initializable {
                 service.restart();
             }
 
-        }
-        else{
+        }*/
+        //else{
+
+
             AnchorPane structureOver = homeController.getPrincipalPane();
             homeController.createPage(new SelectGridController(), structureOver, "/visual/SelectGrid.fxml");
 
             homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
-        }
+        //}
 
     }
 
@@ -694,6 +702,8 @@ public class ConfigurationCalendarController implements Initializable {
     @FXML
     void showRest(ActionEvent event) throws IOException  {
         teams = teamsSelectionListView.getSelectionModel().getSelectedIndices().size();
+        secondRound = secondRoundButton.isSelected();
+        inaugural = inauguralGame.isSelected();
         AnchorPane structureOver = homeController.getPrincipalPane();
         homeController.createPage(new RestSelectorController(), structureOver, "/visual/RestSelector.fxml");
 

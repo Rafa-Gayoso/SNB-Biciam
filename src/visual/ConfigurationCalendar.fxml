@@ -28,16 +28,16 @@
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="338.0" minWidth="10.0" prefWidth="321.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="89.66" valignment="CENTER" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="89.66" valignment="CENTER" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="89.66" valignment="CENTER" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="251.0" minHeight="10.0" prefHeight="89.66" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="89.66" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="89.66" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="89.66" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="89.66" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="67.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="71.0" minHeight="10.0" prefHeight="71.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="61.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="62.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="63.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="251.0" minHeight="10.0" prefHeight="62.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="62.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="64.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="62.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="62.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="56.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="73.0" valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label text="Calendario a doble vuelta" textFill="#2f2484" GridPane.columnIndex="1" GridPane.rowIndex="4">
@@ -87,13 +87,16 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Spinner>
-              <JFXButton fx:id="select" onAction="#selectTeams" prefHeight="51.0" prefWidth="135.0" stylesheets="@../styles/PrincipalMenu.css" text="Avanzar" textFill="#fcf8f8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+              <JFXButton fx:id="select" onAction="#selectTeams" prefHeight="51.0" prefWidth="135.0" stylesheets="@../styles/PrincipalMenu.css" text="Avanzar" textFill="#fcf8f8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
                   <font>
                       <Font name="Segoe UI Symbol" size="20.0" />
                   </font>
                   <cursor>
                       <Cursor fx:constant="HAND" />
                   </cursor>
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin>
               </JFXButton>
             <JFXToggleButton fx:id="selectAll" contentDisplay="RIGHT" onAction="#selectAllTeams" prefHeight="71.0" prefWidth="418.0" size="11.0" text="Seleccionar todos los equipos" textFill="#2f2484" toggleColor="WHITE" toggleLineColor="#2f2484">
                <font>
@@ -115,7 +118,7 @@
                   <Insets right="20.0" />
                </GridPane.margin>
             </JFXListView>
-            <JFXButton fx:id="advanceConfigurationBtn" buttonType="RAISED" contentDisplay="CENTER" onAction="#advanceConfiguration" prefHeight="35.0" prefWidth="38.0" text=" " GridPane.rowIndex="9">
+            <JFXButton fx:id="advanceConfigurationBtn" buttonType="RAISED" contentDisplay="CENTER" onAction="#advanceConfiguration" prefHeight="35.0" prefWidth="38.0" text=" " GridPane.halignment="RIGHT" GridPane.rowIndex="9">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -133,6 +136,9 @@
                      </font>
                   </Tooltip>
                </tooltip>
+               <GridPane.margin>
+                  <Insets right="40.0" />
+               </GridPane.margin>
             </JFXButton>
             <JFXComboBox fx:id="comboChamp" labelFloat="true" onAction="#selectTeamChamp" prefHeight="53.0" prefWidth="254.0" promptText="Campeón" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             <JFXTextField fx:id="calendarId" focusColor="#2f2484" labelFloat="true" promptText="Identificador del Calendario" stylesheets="@../styles/PrincipalMenu.css" GridPane.columnIndex="3" GridPane.halignment="CENTER">
@@ -255,25 +261,41 @@
                   </Tooltip>
                </tooltip>
             </JFXToggleButton>
-            <JFXButton fx:id="restBtn" buttonType="RAISED" contentDisplay="CENTER" onAction="#showRest" prefHeight="35.0" prefWidth="38.0" text=" " GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+            <JFXButton fx:id="restBtn" buttonType="RAISED" contentDisplay="CENTER" onAction="#showRest" prefHeight="35.0" prefWidth="38.0" text=" " GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <graphic>
                   <ImageView fitHeight="39.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/settings.png" />
+                        <Image url="@../resources/baseball-field-return.png" />
                      </image>
                   </ImageView>
                </graphic>
                <tooltip>
-                  <Tooltip text="Configuración avanzada" textAlignment="JUSTIFY">
+                  <Tooltip text="Selección de descansos" textAlignment="JUSTIFY">
                      <font>
                         <Font name="Segoe UI Symbol" size="24.0" />
                      </font>
                   </Tooltip>
                </tooltip>
             </JFXButton>
+            <Label prefHeight="35.0" prefWidth="277.0" text="Configuración avanzada" textFill="#2f2484" GridPane.rowIndex="9">
+               <font>
+                  <Font name="Segoe UI Symbol" size="24.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="30.0" />
+               </GridPane.margin>
+            </Label>
+            <Label prefHeight="35.0" prefWidth="244.0" text="Seleccionar descansos" textFill="#2f2484" GridPane.columnIndex="1" GridPane.rowIndex="9">
+               <font>
+                  <Font name="Segoe UI Symbol" size="24.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
          </children>
       </GridPane>
     </children>

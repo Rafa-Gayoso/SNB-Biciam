@@ -31,8 +31,12 @@ public class TTPDefinition {
     private static TTPDefinition ttpDefinition;
     private ArrayList<ArrayList<Integer>> mutationsConfigurationsList;//list of configurations for the mutations
     private ArrayList<Integer> mutationsIndexes;
-    private CalendarConfiguration occidentOrientCOnConfiguration;
+    private CalendarConfiguration occidentOrientConfiguration;
     private ArrayList<Integer> restIndexes;
+    private Integer numberOfDates;
+    private ArrayList<Date> dateToStartList;
+    private Date dateToStart;
+    private boolean useDateToStart;
 
 
     private TTPDefinition(){
@@ -45,6 +49,9 @@ public class TTPDefinition {
 
         //fillMatrixDistance( DataFiles.getSingletonDataFiles().getTeamsPairDistances());
         this.restIndexes = new ArrayList<>();
+        this.dateToStartList = new ArrayList<>();
+        this.dateToStart = new Date();
+        this.useDateToStart = false;
     }
 
     public static TTPDefinition getInstance(){
@@ -96,6 +103,10 @@ public class TTPDefinition {
     public ArrayList<Integer> getMutationsIndexes() {
         return mutationsIndexes;
     }
+
+    public ArrayList<Date> getDateToStartList() {return dateToStartList;}
+
+    public void setDateToStartList(ArrayList<Date> dateToStartList) {this.dateToStartList = dateToStartList;}
 
     public void setMutationsIndexes(ArrayList<Integer> mutationsIndexes) {
         this.mutationsIndexes = mutationsIndexes;
@@ -198,13 +209,25 @@ public class TTPDefinition {
         return teamsIndexes;
     }
 
-    public CalendarConfiguration getOccidentOrientCOnConfiguration() {
-        return occidentOrientCOnConfiguration;
+    public CalendarConfiguration getOccidentOrientConfiguration() {
+        return occidentOrientConfiguration;
     }
 
-    public void setOccidentOrientCOnConfiguration(CalendarConfiguration occidentOrientCOnConfiguration) {
-        this.occidentOrientCOnConfiguration = occidentOrientCOnConfiguration;
+    public void setOccidentOrientConfiguration(CalendarConfiguration occidentOrientConfiguration) {
+        this.occidentOrientConfiguration = occidentOrientConfiguration;
     }
+
+    public boolean isUseDateToStart() {return useDateToStart;}
+
+    public void setUseDateToStart(boolean useDateToStart) {this.useDateToStart = useDateToStart;}
+
+    public Integer getNumberOfDates() {return numberOfDates;}
+
+    public void setNumberOfDates(Integer numberOfDates) {this.numberOfDates = numberOfDates;}
+
+    public Date getDateToStart() {return dateToStart;}
+
+    public void setDateToStart(Date dateToStart) {this.dateToStart = dateToStart;}
 
     public void setCantFechas(int cantFechas) {
         this.cantFechas = cantFechas;
@@ -226,15 +249,34 @@ public class TTPDefinition {
 
         ArrayList<Integer> row = new ArrayList<>();
 
-        for (int k = 0; k < teamsIndexes.size(); k++) {
-            row.add(teamsIndexes.get(k));
+        if (!useDateToStart){
+            for (int k = 0; k < teamsIndexes.size(); k++) {
+                row.add(teamsIndexes.get(k));
+            }
         }
+        else{
+            for (int k = 0; k < teamsIndexes.size(); k++) {
+                row.add(-1);
+            }
 
+            for (int k = 0; k < dateToStart.getGames().size(); k++) {
+
+                int local = dateToStart.getGames().get(k).get(0);
+                int visitor = dateToStart.getGames().get(k).get(1);
+
+                int posLocal = teamsIndexes.indexOf(local);
+                int posVisitor = teamsIndexes.indexOf(visitor);
+
+                row.set(posLocal, local);
+                row.set(posVisitor, local);
+
+            }
+        }
         teamDate.add(row);
 
         int i=0;
 
-        if(configuration.isChampionVsSecondPlace()){
+        if(configuration.isInauguralGame()){
             ArrayList<Integer> pivotRow = (ArrayList<Integer>) row.clone();
             int posChampeon = teamsIndexes.indexOf(configuration.getChampion());
             int posSub = teamsIndexes.indexOf(configuration.getSecondPlace());
@@ -363,7 +405,7 @@ public class TTPDefinition {
         for(int i = 1; i  < itinerary.size() - 1; i++) {
             ArrayList<Integer> row = itinerary.get(i);
 
-            if(Collections.disjoint(row, configuration.getTeamsIndexes())){
+            //if(Collections.disjoint(row, configuration.getTeamsIndexes())){
                 for (int j = 0; j < row.size(); j++) {
                     int destiny = row.get(j);
 
@@ -379,7 +421,7 @@ public class TTPDefinition {
                         counts.set(j, 0);
                     }
                 }
-            }
+            //}
 
         }
         return cont;

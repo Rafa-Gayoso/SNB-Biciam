@@ -33,7 +33,7 @@ public class ServiceCalendar extends javafx.concurrent.Service<String> implement
                 updateProgress(i,Executer.getInstance().getEXECUTIONS());
                 int percent = percent(i);
                 updateMessage(percent+" %");
-                TTPDefinition.getInstance().setOccidentOrientCOnConfiguration(null);
+                TTPDefinition.getInstance().setOccidentOrientConfiguration(null);
                 for (; i < Executer.getInstance().getEXECUTIONS(); i++) {
 
 

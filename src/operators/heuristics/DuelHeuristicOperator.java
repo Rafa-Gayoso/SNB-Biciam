@@ -20,7 +20,7 @@ public class DuelHeuristicOperator extends HeuristicOperator {
         this.duels = duels;
     }
 
-    public ArrayList<Date> generateCalendarSlow(ArrayList<ArrayList<Integer>> duels){
+    /*public ArrayList<Date> generateCalendarSlow(ArrayList<ArrayList<Integer>> duels){
         System.out.println("Empieza///////////////////////////////////////");
         initializeDuelHeuristicOperator(duels);
 
@@ -121,7 +121,7 @@ public class DuelHeuristicOperator extends HeuristicOperator {
 
         System.out.println("Termina///////////////////////////////////////");
         return calendar;
-    }
+    }*/
 
     public ArrayList<Date> generateCalendar(ArrayList<ArrayList<Integer>> duels){
         initializeDuelHeuristicOperator(duels);
@@ -152,7 +152,7 @@ public class DuelHeuristicOperator extends HeuristicOperator {
 
 
         ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> calendarBacktracking = new ArrayList<>();
-        for (int i = 1; i < teams.size()-1; i++) {
+        for (int i = 1; i < TTPDefinition.getInstance().getNumberOfDates(); i++) {
             ArrayList<ArrayList<ArrayList<Integer>>> dateBacktracking = new ArrayList<>();
             for (int j = 0; j < teams.size()/2; j++) {
                 ArrayList<ArrayList<Integer>> duelBacktracking = new ArrayList<>();

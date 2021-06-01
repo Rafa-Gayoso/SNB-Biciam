@@ -8,7 +8,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="494.0" prefWidth="1319.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StatisticsResumeController">
    <children>
       <TableView fx:id="statisticsTable" layoutX="-5.0" layoutY="-6.0" prefHeight="503.0" prefWidth="1326.0" stylesheets="@../styles/statictisTable.css" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="-6.0">

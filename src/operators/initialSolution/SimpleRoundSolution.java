@@ -58,8 +58,8 @@ public class SimpleRoundSolution extends InitialSolution {
 
         CalendarState state = new CalendarState();
         CalendarConfiguration configuration;
-        if(TTPDefinition.getInstance().getOccidentOrientCOnConfiguration() !=null){
-            configuration = TTPDefinition.getInstance().getOccidentOrientCOnConfiguration();
+        if(TTPDefinition.getInstance().getOccidentOrientConfiguration() !=null){
+            configuration = TTPDefinition.getInstance().getOccidentOrientConfiguration();
         }else{
             configuration = new CalendarConfiguration(
                     TTPDefinition.getInstance().getCalendarId(), TTPDefinition.getInstance().getTeamsIndexes(), TTPDefinition.getInstance().isInauguralGame(),
@@ -80,17 +80,14 @@ public class SimpleRoundSolution extends InitialSolution {
             if (state.getCode().size() == newMatrix.length-1){
                     good = true;
             }
-            else if(TTPDefinition.getInstance().getCantFechas() == state.getCode().size()){
+            else if(TTPDefinition.getInstance().getNumberOfDates() == state.getCode().size()){
                 good = true;
             }
             else {
                 state = new CalendarState();
             }
-
-
         }
 
         return state;
-        
     }
 }

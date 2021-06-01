@@ -52,20 +52,19 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
 
     private static Executer executerInstance;
     private Map<String, Integer> idMaps;
-
-
-
     private List<State> resultStates;
+    private boolean timeToSetDateToStart;
 
     private Executer(){
         this.resultStates = new ArrayList<>();
         this.mutations = new ArrayList<>();
         this.heuristics = new ArrayList<>();
         this.saveData = new ArrayList<>();
-        this.EXECUTIONS = 5;
+        this.EXECUTIONS = 1;
         this.ITERATIONS = 1000;
         this.selectedMH = 0;
         this.idMaps = new HashMap<>();
+        this.timeToSetDateToStart = false;
     }
 
     public static Executer getInstance(){
@@ -82,6 +81,7 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
     public void setProblem(Problem problem) {
         this.problem = problem;
     }
+
 
     /**
      * Configura el problema estableciendo la funcion objetivo, el operador,
@@ -131,6 +131,11 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
 
         ArrayList<State> thisLapBests = new ArrayList<>();*/
         for (int i = 0; i < EXECUTIONS; i++) {
+
+            if(timeToSetDateToStart){
+                TTPDefinition.getInstance().setDateToStart(TTPDefinition.getInstance().getDateToStartList().get(i));
+            }
+
             Strategy.getStrategy().setStopexecute(new StopExecute());
             Strategy.getStrategy().setUpdateparameter(new UpdateParameter());
             Strategy.getStrategy().setProblem(this.problem);
@@ -168,7 +173,6 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
 
             if(configuration.isSymmetricSecondRound()){
                 deleteInauguralGame(state);
-                deleteSecondRound(state);
                 setSecondRound(state);
                 if (configuration.isChampionVsSecondPlace()) {
                     if (configuration.isInauguralGame())
@@ -178,13 +182,30 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
                 }
             }
 
+            if (!TTPDefinition.getInstance().isOccidentVsOrient()){
+                if( Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId()) == null){
+                    Executer.getInstance().getIdMaps().put(TTPDefinition.getInstance().getCalendarId(), 1);
+                }else{
+                    ;
+                    Executer.getInstance().getIdMaps().put(TTPDefinition.getInstance().getCalendarId(),
+                            Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId())+1);
+
+                }
+                state.getConfiguration().setCalendarId(TTPDefinition.getInstance().getCalendarId() +"."+
+                        Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId()));
+
+                if( Executer.getInstance().getIdMaps().get(state.getConfiguration().getCalendarId()) == null){
+                    Executer.getInstance().getIdMaps().put(state.getConfiguration().getCalendarId(), 1);
+                }else{
+                    Executer.getInstance().getIdMaps().put(state.getConfiguration().getCalendarId(),
+                            Executer.getInstance().getIdMaps().get(state.getConfiguration().getCalendarId())+1);
+                }
+            }
+
             resultStates.add(state);
             //resultStates.add(Strategy.getStrategy().getBestState());
             Strategy.destroyExecute();
-
         }
-
-
     }
 
     public void executeOCC() throws ClassNotFoundException, InvocationTargetException, InstantiationException, NoSuchMethodException, IllegalAccessException, IOException {
@@ -234,7 +255,7 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
             }
 
             TTPDefinition.getInstance().setTeamIndexes(teamsOnlyOccident);
-            TTPDefinition.getInstance().setOccidentOrientCOnConfiguration(new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
+            TTPDefinition.getInstance().setOccidentOrientConfiguration(new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
                     teamsOnlyOccident, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                     TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                     TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
@@ -291,7 +312,7 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
             Strategy.destroyExecute();
 
             TTPDefinition.getInstance().setTeamIndexes(teamsOnlyOrient);
-            TTPDefinition.getInstance().setOccidentOrientCOnConfiguration(new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
+            TTPDefinition.getInstance().setOccidentOrientConfiguration(new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
                     teamsOnlyOrient, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                     TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                     TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
@@ -348,7 +369,7 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
             Strategy.destroyExecute();
 
             TTPDefinition.getInstance().setTeamIndexes(allTeams);
-            TTPDefinition.getInstance().setOccidentOrientCOnConfiguration(new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
+            TTPDefinition.getInstance().setOccidentOrientConfiguration(new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
                     allTeams, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                     TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                     TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
@@ -441,12 +462,29 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
             finalConfiguration.setTeamsIndexes(allTeams);
             finalState.setConfiguration(finalConfiguration);
             finalState.setCalendarType(stateOccident.getCalendarType());
+
+
+                if( Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId()) == null){
+                    Executer.getInstance().getIdMaps().put(TTPDefinition.getInstance().getCalendarId(), 1);
+                }else{
+                    ;
+                    Executer.getInstance().getIdMaps().put(TTPDefinition.getInstance().getCalendarId(),
+                            Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId())+1);
+
+                }
+                finalState.getConfiguration().setCalendarId(TTPDefinition.getInstance().getCalendarId() +"."+
+                        Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId()));
+
+                if( Executer.getInstance().getIdMaps().get(finalState.getConfiguration().getCalendarId()) == null){
+                    Executer.getInstance().getIdMaps().put(finalState.getConfiguration().getCalendarId(), 1);
+                }else{
+                    Executer.getInstance().getIdMaps().put(finalState.getConfiguration().getCalendarId(),
+                            Executer.getInstance().getIdMaps().get(finalState.getConfiguration().getCalendarId())+1);
+                }
+
+
             Executer.getInstance().getResultStates().add(finalState);
-
-
         }
-
-
     }
 
 
@@ -504,5 +542,13 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
 
     public void setIdMaps(Map<String, Integer> idMaps) {
         this.idMaps = idMaps;
+    }
+
+    public boolean isTimeToSetDateToStart() {
+        return timeToSetDateToStart;
+    }
+
+    public void setTimeToSetDateToStart(boolean timeToSetDateToStart) {
+        this.timeToSetDateToStart = timeToSetDateToStart;
     }
 }

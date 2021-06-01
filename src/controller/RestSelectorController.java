@@ -30,17 +30,32 @@ public class RestSelectorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        int size = ConfigurationCalendarController.teams;
+        int size = ConfigurationCalendarController.teams - 1;
 
         ArrayList<String> dates = new ArrayList<>();
 
-        for(int i=1; i < size-1; i++){
+        int i=0;
+        for(i=1; i < size; i++){
             dates.add("Fecha "+(i));
+        }
+
+        if(ConfigurationCalendarController.inaugural){
+            dates.add("Fecha "+(i));
+        }
+
+        if (ConfigurationCalendarController.secondRound){
+            size = size*2;
+            if (ConfigurationCalendarController.inaugural){
+                size += 1;
+            }
+            i++;
+            for(; i < size; i++){
+                dates.add("Fecha "+(i));
+            }
         }
 
         restList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         restList.setItems(FXCollections.observableArrayList(dates));
-
 
     }
 

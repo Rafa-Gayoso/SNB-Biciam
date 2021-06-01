@@ -72,7 +72,6 @@ public class CalendarController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
         notification = new TrayNotification();
         selectedCalendar = 0;
 
