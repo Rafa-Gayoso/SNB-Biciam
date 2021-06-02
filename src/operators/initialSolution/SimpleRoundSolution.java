@@ -30,6 +30,14 @@ public class SimpleRoundSolution extends InitialSolution {
             }
         }
 
+        for (int i = 0; i <newMatrix.length; i++) {
+            for (int j = 0; j < newMatrix.length; j++) {
+
+                System.out.print(newMatrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+
         ArrayList<Integer> teamsIndexes = TTPDefinition.getInstance().getTeamsIndexes();
 
         for (int i = 0; i < newMatrix.length; i++) {

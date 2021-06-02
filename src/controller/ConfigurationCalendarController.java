@@ -164,7 +164,7 @@ public class ConfigurationCalendarController implements Initializable {
             ok = false;
         }
 
-        if (selectedIndexes.size() <= 2) {
+        else if (selectedIndexes.size() <= 2) {
             showNotification("Debe escoger al menos dos equipos");
             ok = false;
         }
@@ -533,142 +533,136 @@ public class ConfigurationCalendarController implements Initializable {
     }
 
     void showTeamsMatrix() throws IOException {
-        if(TTPDefinition.getInstance().isSecondRound()){
-            if(TTPDefinition.getInstance().getRestIndexes().size() == 0 || !TTPDefinition.getInstance().getRestIndexes().contains(teams-1)){
-                TTPDefinition.getInstance().getRestIndexes().add(teams-1);
-            }
-        }
 
-        //System.out.println(restIndices);
-        //TTPDefinition.getInstance().setRestIndexes(restIndices);
-        if(TTPDefinition.getInstance().isSecondRound() && TTPDefinition.getInstance().isSymmetricSecondRound()) {
+            //System.out.println(restIndices);
+            //TTPDefinition.getInstance().setRestIndexes(restIndices);
+            if (TTPDefinition.getInstance().isSecondRound()) {
 
-            TTPDefinition.getInstance().setDuelMatrix(generateMatrix(TTPDefinition.getInstance().getCantEquipos()));
-            StackPane stackPane = new StackPane();
+                TTPDefinition.getInstance().setDuelMatrix(generateMatrix(TTPDefinition.getInstance().getCantEquipos()));
+                StackPane stackPane = new StackPane();
 
-            JFXDialog jfxDialog = new JFXDialog();
-            JFXDialogLayout content = new JFXDialogLayout();
-            FXMLLoader fxmlLoader =  new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/visual/CalendarService.fxml"));
-            AnchorPane progressContent = fxmlLoader.load();
-            CalendarServiceController serviceController = fxmlLoader.getController();
+                JFXDialog jfxDialog = new JFXDialog();
+                JFXDialogLayout content = new JFXDialogLayout();
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/visual/CalendarService.fxml"));
+                AnchorPane progressContent = fxmlLoader.load();
+                CalendarServiceController serviceController = fxmlLoader.getController();
 
-            content.setBody(progressContent);
+                content.setBody(progressContent);
 
-            jfxDialog.setContent(content);
-            //TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
-            jfxDialog.setDialogContainer(stackPane);
-            panel.getChildren().add(stackPane);
-            stackPane.setLayoutX(400);
-            stackPane.setLayoutY(200);
-            jfxDialog.setPrefHeight(105);
-            jfxDialog.setPrefWidth(432);
-            jfxDialog.show();
-            if (!TTPDefinition.getInstance().isOccidentVsOrient()) {
-                TTPDefinition.getInstance().setNumberOfDates(TTPDefinition.getInstance().getTeamsIndexes().size() - 1);
+                jfxDialog.setContent(content);
+                //TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
+                jfxDialog.setDialogContainer(stackPane);
+                panel.getChildren().add(stackPane);
+                stackPane.setLayoutX(400);
+                stackPane.setLayoutY(200);
+                jfxDialog.setPrefHeight(105);
+                jfxDialog.setPrefWidth(432);
+                jfxDialog.show();
+                if (!TTPDefinition.getInstance().isOccidentVsOrient()) {
+                    TTPDefinition.getInstance().setNumberOfDates(TTPDefinition.getInstance().getTeamsIndexes().size() - 1);
 
 
-                ServiceCalendar service = new ServiceCalendar();
+                    ServiceCalendar service = new ServiceCalendar();
 
-                service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-                    @Override
-                    public void handle(WorkerStateEvent workerStateEvent) {
-                        AnchorPane structureOver = homeController.getPrincipalPane();
-                        try {
-                            //TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
-                            //Executer.getInstance().executeEC();
-                            homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
-                            homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                    service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                        @Override
+                        public void handle(WorkerStateEvent workerStateEvent) {
+                            AnchorPane structureOver = homeController.getPrincipalPane();
+                            try {
+                                //TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
+                                //Executer.getInstance().executeEC();
+                                homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
+                                homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
                         }
+                    });
 
-                    }
-                });
-
-                service.setOnRunning(new EventHandler<WorkerStateEvent>() {
-                    @Override
-                    public void handle(WorkerStateEvent workerStateEvent) {
-                        serviceController.getProgress().progressProperty().bind(service.progressProperty());
-                        serviceController.getLblProgress().textProperty().bindBidirectional((Property<String>) service.messageProperty());
+                    service.setOnRunning(new EventHandler<WorkerStateEvent>() {
+                        @Override
+                        public void handle(WorkerStateEvent workerStateEvent) {
+                            serviceController.getProgress().progressProperty().bind(service.progressProperty());
+                            serviceController.getLblProgress().textProperty().bindBidirectional((Property<String>) service.messageProperty());
 
 
-                    }
-                });
+                        }
+                    });
 
 
-                service.setOnFailed(new EventHandler<WorkerStateEvent>() {
-                    @Override
-                    public void handle(WorkerStateEvent workerStateEvent) {
-                        TrayNotification notification = new TrayNotification();
-                        notification.setTitle("Generar Calendarios");
-                        notification.setMessage("Ocurri\u00f3 un error y no se pudo generar los calendarios");
-                        notification.setNotificationType(NotificationType.ERROR);
-                        notification.setRectangleFill(Paint.valueOf("#2F2484"));
-                        notification.setAnimationType(AnimationType.FADE);
-                        notification.showAndDismiss(Duration.seconds(2));
+                    service.setOnFailed(new EventHandler<WorkerStateEvent>() {
+                        @Override
+                        public void handle(WorkerStateEvent workerStateEvent) {
+                            TrayNotification notification = new TrayNotification();
+                            notification.setTitle("Generar Calendarios");
+                            notification.setMessage("Ocurri\u00f3 un error y no se pudo generar los calendarios");
+                            notification.setNotificationType(NotificationType.ERROR);
+                            notification.setRectangleFill(Paint.valueOf("#2F2484"));
+                            notification.setAnimationType(AnimationType.FADE);
+                            notification.showAndDismiss(Duration.seconds(2));
 
-                    }
-                });
-                service.restart();
-                //Executer.getInstance().executeEC();
+                        }
+                    });
+                    service.restart();
+                    //Executer.getInstance().executeEC();
+                } else {
+                    ServiceOccidentOrientCalendar serviceOccidentOrientCalendar = new ServiceOccidentOrientCalendar();
+
+                    serviceOccidentOrientCalendar.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                        @Override
+                        public void handle(WorkerStateEvent workerStateEvent) {
+                            AnchorPane structureOver = homeController.getPrincipalPane();
+                            try {
+                                //TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
+                                //Executer.getInstance().executeEC();
+                                homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
+                                homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+
+                    serviceOccidentOrientCalendar.setOnRunning(new EventHandler<WorkerStateEvent>() {
+                        @Override
+                        public void handle(WorkerStateEvent workerStateEvent) {
+                            serviceController.getProgress().progressProperty().bind(serviceOccidentOrientCalendar.progressProperty());
+                            serviceController.getLblProgress().textProperty().bindBidirectional((Property<String>) serviceOccidentOrientCalendar.messageProperty());
+
+
+                        }
+                    });
+
+
+                    serviceOccidentOrientCalendar.setOnFailed(new EventHandler<WorkerStateEvent>() {
+                        @Override
+                        public void handle(WorkerStateEvent workerStateEvent) {
+                            TrayNotification notification = new TrayNotification();
+                            notification.setTitle("Generar Calendarios");
+                            notification.setMessage("Ocurri\u00f3 un error y no se pudo generar los calendarios");
+                            notification.setNotificationType(NotificationType.ERROR);
+                            notification.setRectangleFill(Paint.valueOf("#2F2484"));
+                            notification.setAnimationType(AnimationType.FADE);
+                            notification.showAndDismiss(Duration.seconds(2));
+
+                        }
+                    });
+                    serviceOccidentOrientCalendar.restart();
+
+                }
+
+
             } else {
-                ServiceOccidentOrientCalendar serviceOccidentOrientCalendar = new ServiceOccidentOrientCalendar();
-
-                serviceOccidentOrientCalendar.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-                    @Override
-                    public void handle(WorkerStateEvent workerStateEvent) {
-                        AnchorPane structureOver = homeController.getPrincipalPane();
-                        try {
-                            //TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
-                            //Executer.getInstance().executeEC();
-                            homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
-                            homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                });
-
-                serviceOccidentOrientCalendar.setOnRunning(new EventHandler<WorkerStateEvent>() {
-                    @Override
-                    public void handle(WorkerStateEvent workerStateEvent) {
-                        serviceController.getProgress().progressProperty().bind(serviceOccidentOrientCalendar.progressProperty());
-                        serviceController.getLblProgress().textProperty().bindBidirectional((Property<String>) serviceOccidentOrientCalendar.messageProperty());
 
 
-                    }
-                });
+                AnchorPane structureOver = homeController.getPrincipalPane();
+                homeController.createPage(new SelectGridController(), structureOver, "/visual/SelectGrid.fxml");
 
-
-                serviceOccidentOrientCalendar.setOnFailed(new EventHandler<WorkerStateEvent>() {
-                    @Override
-                    public void handle(WorkerStateEvent workerStateEvent) {
-                        TrayNotification notification = new TrayNotification();
-                        notification.setTitle("Generar Calendarios");
-                        notification.setMessage("Ocurri\u00f3 un error y no se pudo generar los calendarios");
-                        notification.setNotificationType(NotificationType.ERROR);
-                        notification.setRectangleFill(Paint.valueOf("#2F2484"));
-                        notification.setAnimationType(AnimationType.FADE);
-                        notification.showAndDismiss(Duration.seconds(2));
-
-                    }
-                });
-                serviceOccidentOrientCalendar.restart();
-
+                homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
             }
-
-
-        }
-        else{
-
-
-            AnchorPane structureOver = homeController.getPrincipalPane();
-            homeController.createPage(new SelectGridController(), structureOver, "/visual/SelectGrid.fxml");
-
-            homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
-        }
 
     }
 

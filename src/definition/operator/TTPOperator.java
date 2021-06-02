@@ -57,7 +57,13 @@ public class TTPOperator extends Operator implements ICreateInitialSolution, ISe
         for (int i = 0; i < neighborhoodSize; i++) {
             State state = initialSolution.generateCalendar(heuristics);
             ((CalendarState) state).setCalendarType(type.ordinal());
-
+            CalendarConfiguration configuration = ((CalendarState)state).getConfiguration();
+            if (configuration.isChampionVsSecondPlace()) {
+                if (configuration.isInauguralGame())
+                    addInauguralGame(state);
+                else
+                    fixChampionSubchampion(state);
+            }
             neighborhood.add(state);
         }
         return neighborhood;

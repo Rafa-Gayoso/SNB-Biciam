@@ -455,6 +455,29 @@ public class TTPDefinition {
             cantLocalsAndVisitorsPerRow.add(row);
         }
 
+        int posChampion =TTPDefinition.getInstance().getFirstPlace();
+        int posSecond = TTPDefinition.getInstance().getSecondPlace();
+        boolean champion = false;
+        if (posChampion != -1) {
+            champion = true;
+            if(TTPDefinition.getInstance().isInauguralGame()) {
+
+                // if(posChampion < posSecond){
+                matrix[posChampion][posSecond] = 1;
+                matrix[posSecond][posChampion] = 2;
+                cantLocalsAndVisitorsPerRow.get(posChampion).set(0, cantLocalsAndVisitorsPerRow.get(posChampion).get(1)+1);
+                cantLocalsAndVisitorsPerRow.get(posSecond).set(1, cantLocalsAndVisitorsPerRow.get(posSecond).get(1)+1);
+
+
+            }
+            else{
+
+                matrix[posChampion][posSecond] = 2;
+                matrix[posSecond][posChampion] = 1;
+                cantLocalsAndVisitorsPerRow.get(posChampion).set(1, cantLocalsAndVisitorsPerRow.get(posChampion).get(1)+1);
+                cantLocalsAndVisitorsPerRow.get(posSecond).set(0, cantLocalsAndVisitorsPerRow.get(posSecond).get(0)+1);
+            }
+        }
 
         int cantMaxLocalOrVisitor = matrix.length / 2;
 
@@ -463,10 +486,98 @@ public class TTPDefinition {
                 if (i != j) {
                     if (matrix[i][j] == 0) {
                         if (cantLocalsAndVisitorsPerRow.get(i).get(0) < cantMaxLocalOrVisitor) {
-                            matrix[i][j] = 1;
-                            matrix[j][i] = 2;
-                            cantLocalsAndVisitorsPerRow.get(i).set(0, cantLocalsAndVisitorsPerRow.get(i).get(0)+1);
-                            cantLocalsAndVisitorsPerRow.get(j).set(1, cantLocalsAndVisitorsPerRow.get(j).get(1)+1);
+                            if (champion) {
+                                if (cantLocalsAndVisitorsPerRow.get(j).get(1) < cantMaxLocalOrVisitor) {
+                                    matrix[i][j] = 1;
+                                    matrix[j][i] = 2;
+                                    cantLocalsAndVisitorsPerRow.get(i).set(0, cantLocalsAndVisitorsPerRow.get(i).get(0)+1);
+                                    cantLocalsAndVisitorsPerRow.get(j).set(1, cantLocalsAndVisitorsPerRow.get(j).get(1)+1);
+                                }
+                                else {
+                                    if (cantLocalsAndVisitorsPerRow.get(i).get(1) < cantMaxLocalOrVisitor && cantLocalsAndVisitorsPerRow.get(j).get(0) < cantMaxLocalOrVisitor){
+                                        matrix[i][j] = 2;
+                                        matrix[j][i] = 1;
+                                        cantLocalsAndVisitorsPerRow.get(i).set(1, cantLocalsAndVisitorsPerRow.get(i).get(1)+1);
+                                        cantLocalsAndVisitorsPerRow.get(j).set(0, cantLocalsAndVisitorsPerRow.get(j).get(0)+1);
+                                    }
+                                    else{
+                                        boolean goBackPossibility = false;
+                                        int lastRowModified = -1;
+                                        while (!goBackPossibility && i >= 0){
+                                            while (!goBackPossibility & j > 0){
+                                                j--;
+                                                if (matrix[i][j] == 1){
+                                                    if (cantLocalsAndVisitorsPerRow.get(i).get(1) < cantMaxLocalOrVisitor && cantLocalsAndVisitorsPerRow.get(j).get(0) < cantMaxLocalOrVisitor){
+                                                        matrix[i][j] = 2;
+                                                        matrix[j][i] = 1;
+
+                                                        cantLocalsAndVisitorsPerRow.get(i).set(1, cantLocalsAndVisitorsPerRow.get(i).get(1)+1);
+                                                        cantLocalsAndVisitorsPerRow.get(j).set(0, cantLocalsAndVisitorsPerRow.get(j).get(0)+1);
+
+                                                        cantLocalsAndVisitorsPerRow.get(i).set(0, cantLocalsAndVisitorsPerRow.get(i).get(0)-1);
+                                                        cantLocalsAndVisitorsPerRow.get(j).set(1, cantLocalsAndVisitorsPerRow.get(j).get(1)-1);
+
+                                                        goBackPossibility = true;
+                                                        i = lastRowModified;
+                                                        j = -1;
+                                                    }
+                                                }
+                                                else if(matrix[i][j] == 2){
+                                                    if (cantLocalsAndVisitorsPerRow.get(i).get(0) < cantMaxLocalOrVisitor && cantLocalsAndVisitorsPerRow.get(j).get(1) < cantMaxLocalOrVisitor){
+                                                        matrix[i][j] = 1;
+                                                        matrix[j][i] = 2;
+
+                                                        cantLocalsAndVisitorsPerRow.get(i).set(0, cantLocalsAndVisitorsPerRow.get(i).get(0)+1);
+                                                        cantLocalsAndVisitorsPerRow.get(j).set(1, cantLocalsAndVisitorsPerRow.get(j).get(1)+1);
+
+                                                        cantLocalsAndVisitorsPerRow.get(i).set(1, cantLocalsAndVisitorsPerRow.get(i).get(1)-1);
+                                                        cantLocalsAndVisitorsPerRow.get(j).set(0, cantLocalsAndVisitorsPerRow.get(j).get(0)-1);
+
+                                                        goBackPossibility = true;
+                                                        i = lastRowModified;
+                                                        j = -1;
+                                                    }
+                                                }
+                                                if(!goBackPossibility && matrix[i][j] != 0){
+                                                    if (matrix[i][j] == 1){
+                                                        cantLocalsAndVisitorsPerRow.get(i).set(0, cantLocalsAndVisitorsPerRow.get(i).get(0)-1);
+                                                        cantLocalsAndVisitorsPerRow.get(j).set(1, cantLocalsAndVisitorsPerRow.get(j).get(1)-1);
+                                                    }
+                                                    else {
+                                                        cantLocalsAndVisitorsPerRow.get(i).set(1, cantLocalsAndVisitorsPerRow.get(i).get(1)-1);
+                                                        cantLocalsAndVisitorsPerRow.get(j).set(0, cantLocalsAndVisitorsPerRow.get(j).get(0)-1);
+                                                    }
+                                                    matrix[i][j] = 0;
+                                                    matrix[j][i] = 0;
+                                                    if (i < j){
+                                                        if(i < lastRowModified){
+                                                            lastRowModified = i;
+                                                        }
+                                                    }
+                                                    else{
+                                                        if(j < lastRowModified){
+                                                            lastRowModified = j;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            if (!goBackPossibility){
+                                                i--;
+                                                j = matrix.length;
+                                            }
+                                        }
+                                        if(i < 0){
+                                            i = 0;
+                                        }
+                                    }
+                                }
+                            }
+                            else {
+                                matrix[i][j] = 1;
+                                matrix[j][i] = 2;
+                                cantLocalsAndVisitorsPerRow.get(i).set(0, cantLocalsAndVisitorsPerRow.get(i).get(0)+1);
+                                cantLocalsAndVisitorsPerRow.get(j).set(1, cantLocalsAndVisitorsPerRow.get(j).get(1)+1);
+                            }
                         }
                         else {
                             if(cantLocalsAndVisitorsPerRow.get(j).get(0) < cantMaxLocalOrVisitor){

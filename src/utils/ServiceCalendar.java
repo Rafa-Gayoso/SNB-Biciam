@@ -69,8 +69,7 @@ public class ServiceCalendar extends javafx.concurrent.Service<String> implement
                     }
 
 
-                    //createCalendarSheet(workbook,Strategy.getStrategy().getBestState(),i);
-                    //thisLapBests.add(Strategy.getStrategy().getBestState());
+
                     CalendarState state = (CalendarState) Strategy.getStrategy().getBestState();
 
                     CalendarConfiguration configuration = state.getConfiguration();
@@ -107,7 +106,7 @@ public class ServiceCalendar extends javafx.concurrent.Service<String> implement
                     }
 
                     Executer.getInstance().getResultStates().add(state);
-                    //resultStates.add(Strategy.getStrategy().getBestState());
+
                     Strategy.destroyExecute();
                     /*Strategy.getStrategy().setStopexecute(new StopExecute());
                     Strategy.getStrategy().setUpdateparameter(new UpdateParameter());
