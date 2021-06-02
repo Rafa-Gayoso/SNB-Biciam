@@ -48,7 +48,7 @@ public class RestSelectorController implements Initializable {
             if (ConfigurationCalendarController.inaugural){
                 size += 1;
             }
-            i++;
+            //i++;
             for(; i < size; i++){
                 dates.add("Fecha "+(i));
             }

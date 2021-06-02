@@ -405,7 +405,7 @@ public class TTPDefinition {
         for(int i = 1; i  < itinerary.size() - 1; i++) {
             ArrayList<Integer> row = itinerary.get(i);
 
-            //if(Collections.disjoint(row, configuration.getTeamsIndexes())){
+            if (!compareArrays(row, configuration.getTeamsIndexes())) {
                 for (int j = 0; j < row.size(); j++) {
                     int destiny = row.get(j);
 
@@ -421,10 +421,21 @@ public class TTPDefinition {
                         counts.set(j, 0);
                     }
                 }
-            //}
-
+            }
         }
         return cont;
+    }
+
+    private boolean compareArrays(ArrayList<Integer> current, ArrayList<Integer> teamIndexes){
+        boolean equals = true;
+
+        for (int i: teamIndexes) {
+            if(!current.contains(i)){
+                equals = false;
+                break;
+            }
+        }
+        return equals;
     }
 
     public int getPenalization() {

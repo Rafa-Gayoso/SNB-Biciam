@@ -60,7 +60,7 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
         this.mutations = new ArrayList<>();
         this.heuristics = new ArrayList<>();
         this.saveData = new ArrayList<>();
-        this.EXECUTIONS = 1;
+        this.EXECUTIONS = 5;
         this.ITERATIONS = 1000;
         this.selectedMH = 0;
         this.idMaps = new HashMap<>();
