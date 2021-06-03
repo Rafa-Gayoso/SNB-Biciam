@@ -460,7 +460,7 @@ public class TTPDefinition {
         boolean champion = false;
         if (posChampion != -1) {
             champion = true;
-            if(TTPDefinition.getInstance().isInauguralGame()) {
+            /*if(TTPDefinition.getInstance().isInauguralGame()) {
 
                 // if(posChampion < posSecond){
                 matrix[posChampion][posSecond] = 1;
@@ -470,13 +470,13 @@ public class TTPDefinition {
 
 
             }
-            else{
+            else{*/
 
                 matrix[posChampion][posSecond] = 2;
                 matrix[posSecond][posChampion] = 1;
                 cantLocalsAndVisitorsPerRow.get(posChampion).set(1, cantLocalsAndVisitorsPerRow.get(posChampion).get(1)+1);
                 cantLocalsAndVisitorsPerRow.get(posSecond).set(0, cantLocalsAndVisitorsPerRow.get(posSecond).get(0)+1);
-            }
+            //}
         }
 
         int cantMaxLocalOrVisitor = matrix.length / 2;

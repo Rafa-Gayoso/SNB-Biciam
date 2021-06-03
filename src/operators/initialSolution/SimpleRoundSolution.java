@@ -30,13 +30,7 @@ public class SimpleRoundSolution extends InitialSolution {
             }
         }
 
-        for (int i = 0; i <newMatrix.length; i++) {
-            for (int j = 0; j < newMatrix.length; j++) {
 
-                System.out.print(newMatrix[i][j] + " ");
-            }
-            System.out.println();
-        }
 
         ArrayList<Integer> teamsIndexes = TTPDefinition.getInstance().getTeamsIndexes();
 
@@ -47,11 +41,11 @@ public class SimpleRoundSolution extends InitialSolution {
                     if(newMatrix[i][j] !=0){
                         ArrayList<Integer> pair = new ArrayList<>(2);
                         if (newMatrix[i][j] == 1) {
-                            pair.add(teamsIndexes.get(i));
                             pair.add(teamsIndexes.get(j));
+                            pair.add(teamsIndexes.get(i));
                         } else {
-                            pair.add(teamsIndexes.get(j));
                             pair.add(teamsIndexes.get(i));
+                            pair.add(teamsIndexes.get(j));
                         }
                         duels.add(pair);
                     }

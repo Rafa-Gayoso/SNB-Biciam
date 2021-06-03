@@ -78,13 +78,6 @@ public class SelectGridController implements Initializable, ICreateInitialSoluti
                 notification.setAnimationType(AnimationType.FADE);
                 notification.showAndDismiss(Duration.seconds(2));
 
-                for (int i = 0; i < matrixCalendar.length; i++){
-                    for (int j = 0; j < matrixCalendar.length; j++){
-                        System.out.print(matrixCalendar[i][j] + " ");
-                    }
-                    System.out.println();
-                }
-                System.out.println("Nueva");
                 showCalendar();
                 HomeController.conf = true;
             } else {
