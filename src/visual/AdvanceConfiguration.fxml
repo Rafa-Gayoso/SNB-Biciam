@@ -23,7 +23,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <GridPane layoutX="9.0" layoutY="14.0" prefHeight="476.0" prefWidth="1159.0">
+      <GridPane layoutX="9.0" layoutY="14.0" prefHeight="476.0" prefWidth="1159.0" AnchorPane.bottomAnchor="142.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="14.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="534.0" minWidth="10.0" prefWidth="534.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="380.0" minWidth="10.0" prefWidth="60.0" />
@@ -78,7 +78,7 @@
             </JFXListView>
          </children>
       </GridPane>
-      <GridPane layoutX="9.0" layoutY="500.0" prefHeight="51.0" prefWidth="1159.0">
+      <GridPane layoutX="9.0" layoutY="490.0" prefHeight="74.0" prefWidth="1159.0" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="490.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

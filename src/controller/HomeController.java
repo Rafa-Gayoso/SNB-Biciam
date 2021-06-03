@@ -242,7 +242,7 @@ public class HomeController implements Initializable {
 
             stage.setTitle("Configuraci\u00f3n de las mutaciones");
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
-            stage.setResizable(false);
+            stage.setResizable(true);
             stage.setScene(new Scene(scale));
 
             object = loader.getController();
@@ -262,7 +262,7 @@ public class HomeController implements Initializable {
 
             stage.setTitle("Selecci\u00f3n de descansos");
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
-            stage.setResizable(false);
+            stage.setResizable(true);
             stage.setScene(new Scene(scale));
 
             object = loader.getController();
@@ -280,7 +280,7 @@ public class HomeController implements Initializable {
             scale.setContent(anchorPane);
             stage.setTitle("Itinerario de equipos");
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
-            stage.setResizable(false);
+            stage.setResizable(true);
             stage.setScene(new Scene(scale));
 
             object = loader.getController();
@@ -298,7 +298,7 @@ public class HomeController implements Initializable {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setTitle("Restricciones del calendario");
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
-            stage.setResizable(false);
+            stage.setResizable(true);
             stage.setScene(new Scene(anchorPane));
 
             object = loader.getController();
@@ -312,14 +312,17 @@ public class HomeController implements Initializable {
             object = loader.getController();
             ((CalendarController) object).setHomeController(this);
             setNode(anchorPane);
+            ScalableContentPane scale = new ScalableContentPane();
+            scale.setContent(anchorPane);
         } else if (object instanceof SelectGridController) {
             object = loader.getController();
             ((SelectGridController) object).setHomeController(this);
             setNode(anchorPane);
+            ScalableContentPane scale = new ScalableContentPane();
+            scale.setContent(anchorPane);
         } else if (object instanceof ConfigurationCalendarController) {
             object = loader.getController();
             ((ConfigurationCalendarController) object).setHomeController(this);
-
             setNode(anchorPane);
         }else if (object instanceof AdvanceConfigurationController) {
             object = loader.getController();
@@ -338,11 +341,13 @@ public class HomeController implements Initializable {
 
             Parent root = FXMLLoader.load(getClass().getResource("/visual/Cruds.fxml"));
             Stage stage = new Stage();
+            ScalableContentPane scale = new ScalableContentPane();
+            scale.setContent(anchorPane);
             stage.setTitle("Gesti\u00f3n de datos");
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
-            stage.setResizable(false);
+            stage.setResizable(true);
 
-            stage.setScene(new Scene(anchorPane));
+            stage.setScene(new Scene(scale));
 
             object = loader.getController();
             ((CrudsController) object).setHomeController(this);
@@ -360,7 +365,7 @@ public class HomeController implements Initializable {
             scale.setContent(anchorPane);
             stage.setTitle("Resumen estad\u00edstico");
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
-            stage.setResizable(false);
+            stage.setResizable(true);
             stage.setScene(new Scene(scale));
 
             object = loader.getController();
