@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TareaBiciam.iml" filepath="$PROJECT_DIR$/TareaBiciam.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SNB-Biciam.iml" filepath="$PROJECT_DIR$/SNB-Biciam.iml" />
     </modules>
   </component>
 </project>

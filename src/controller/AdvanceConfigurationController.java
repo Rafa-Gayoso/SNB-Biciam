@@ -29,8 +29,6 @@ import java.util.ResourceBundle;
 public class AdvanceConfigurationController implements Initializable {
 
     private HomeController homeController;
-    private final String MUTATTIONS_ADDRESS = "src\\files\\Mutations.xlsx";
-    private final String HEURISTICS_ADDRESS = "src\\files\\Heuristics.xlsx";
 
     private TrayNotification notification;
 
@@ -73,23 +71,19 @@ public class AdvanceConfigurationController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         iterationsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,Integer.MAX_VALUE, Executer.getInstance().getITERATIONS()));
         executionsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,Integer.MAX_VALUE, Executer.getInstance().getEXECUTIONS()));
-        List<String> dataRead = DataFiles.getSingletonDataFiles().readExcelFiles(MUTATTIONS_ADDRESS);
-        List<String> mutations = new ArrayList<>();
-        for (String s : dataRead) {
-            String[] mutation = s.split("\\.");
-            mutations.add(mutation[0]);
-        }
+        List<String> mutations = DataFiles.getSingletonDataFiles().getMutations();
+
         mutationListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         mutationListView.setItems(FXCollections.observableList(mutations));
 
         mutationListView.getSelectionModel().selectAll();
 
-        dataRead = DataFiles.getSingletonDataFiles().readExcelFiles(HEURISTICS_ADDRESS);
+        List<String> heuristics = DataFiles.getSingletonDataFiles().getHeuristics();
 
         heuristicsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        heuristicsListView.setItems(FXCollections.observableList(dataRead));
+        heuristicsListView.setItems(FXCollections.observableList(heuristics));
 
         heuristicsListView.getSelectionModel().selectAll();
 
@@ -117,8 +111,8 @@ public class AdvanceConfigurationController implements Initializable {
         ArrayList<Integer> indexesHeuristics = new ArrayList<>(heuristicsListView.getSelectionModel().getSelectedIndices());
         if (indexesMutations.isEmpty()) {
             notification = getNotification();
-            notification.setTitle("Selección de cambios");
-            notification.setMessage("Debe escoger al menos una mutación");
+            notification.setTitle("Selecci\u00f3n de cambios");
+            notification.setMessage("Debe escoger al menos una mutaci\u00f3n");
             notification.setNotificationType(NotificationType.ERROR);
             notification.setRectangleFill(Paint.valueOf("#2F2484"));
             notification.setAnimationType(AnimationType.FADE);
@@ -126,8 +120,8 @@ public class AdvanceConfigurationController implements Initializable {
         }
         else if(indexesHeuristics.isEmpty()){
             notification = getNotification();
-            notification.setTitle("Selección de cambios");
-            notification.setMessage("Debe escoger al menos una heurística");
+            notification.setTitle("Selecci\u00f3n de cambios");
+            notification.setMessage("Debe escoger al menos una heur\u00edstica");
             notification.setNotificationType(NotificationType.ERROR);
             notification.setRectangleFill(Paint.valueOf("#2F2484"));
             notification.setAnimationType(AnimationType.FADE);

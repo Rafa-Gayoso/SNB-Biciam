@@ -48,8 +48,12 @@ public class Date implements Cloneable {
         this.games = games;
     }
 
-    public Object clone() throws CloneNotSupportedException{
-        return super.clone();
+    public Date clone() throws CloneNotSupportedException{
+        Date date = new Date();
+        for (ArrayList<Integer> duel: games) {
+            date.getGames().add( new ArrayList<>(duel));
+        }
+        return date;
     }
 
     @Override

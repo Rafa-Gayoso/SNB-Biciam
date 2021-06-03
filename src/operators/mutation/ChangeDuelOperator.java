@@ -1,45 +1,56 @@
 package operators.mutation;
 
 import com.sun.prism.shader.Solid_Color_AlphaTest_Loader;
+import controller.MutationsConfigurationController;
+import definition.TTPDefinition;
+import definition.state.CalendarState;
 import definition.state.statecode.Date;
+import operators.interfaces.*;
 import problem.definition.State;
+import utils.CalendarConfiguration;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class ChangeDuelOperator extends MutationOperator {
+public class ChangeDuelOperator extends MutationOperator implements ISwapTeams {
     @Override
     public State applyMutation(State state) {
-        State resultSate = new State();
-        copyState(resultSate,state);
+        State resultState = state.clone();
+
+        CalendarConfiguration configuration = ((CalendarState)resultState).getConfiguration();
         int posFirstDate = -1;
         int posLastDate = -1;
         int posFirstDuel = -1;
         int startPosition = 0;
 
-        /*if (!mutationsConfigurationsList.isEmpty()) {
-            posFirstDate = mutationsConfigurationsList.get(number).get(0);
-            posLastDate = mutationsConfigurationsList.get(number).get(1);
-            posFirstDuel = mutationsConfigurationsList.get(number).get(2);
+        if(configuration.isInauguralGame()){
+            startPosition = 1;
+        }
 
-        }*/
+        if (!TTPDefinition.getInstance().getMutationsConfigurationsList().isEmpty()) {
+            int position = MutationsConfigurationController.currentMutationPostion;
+            posFirstDate = TTPDefinition.getInstance().getMutationsConfigurationsList().get(position).get(0);
+            posLastDate =  TTPDefinition.getInstance().getMutationsConfigurationsList().get(position).get(1);
+            posFirstDuel = TTPDefinition.getInstance().getMutationsConfigurationsList().get(position).get(2);
+        }
+
 
         if (posFirstDate == -1) {
             do {
-                posFirstDate = ThreadLocalRandom.current().nextInt(startPosition, resultSate.getCode().size());
+                posFirstDate = ThreadLocalRandom.current().nextInt(startPosition, resultState.getCode().size());
             }
             while (posLastDate == posFirstDate);
         }
 
         if (posLastDate == -1) {
             do {
-                posLastDate = ThreadLocalRandom.current().nextInt(startPosition, resultSate.getCode().size());
+                posLastDate = ThreadLocalRandom.current().nextInt(startPosition, resultState.getCode().size());
             }
             while (posLastDate == posFirstDate);
         }
 
-        Date firstDate = (Date)resultSate.getCode().get(posFirstDate);
-        Date secondDate = (Date)resultSate.getCode().get(posLastDate);
+        Date firstDate = (Date)resultState.getCode().get(posFirstDate);
+        Date secondDate = (Date)resultState.getCode().get(posLastDate);
 
         if (posFirstDuel == -1) {
             do{
@@ -50,54 +61,9 @@ public class ChangeDuelOperator extends MutationOperator {
 
 
         swapTeams(posFirstDuel, false, firstDate, secondDate);
-        return resultSate ;
+
+        return resultState ;
     }
 
-    private void swapTeams(int posGame, boolean compatible, Date firstDate, Date secondDate) {
-        ArrayList<Integer> firstDuel = firstDate.getGames().get(posGame);
-        int tempSize = secondDate.getGames().size();
-        secondDate.getGames().add(firstDuel);
-        firstDate.getGames().remove(firstDuel);
-        ArrayList<ArrayList<Integer>> results = new ArrayList<>();
-        results.add(firstDuel);
-        while (!compatible) {
-            results = incompatibleDuels(secondDate, results, tempSize);
-            if (results.isEmpty()) {
-                compatible = true;
-            } else {
-                tempSize = firstDate.getGames().size();
-                firstDate.getGames().addAll(results);
 
-                for (ArrayList<Integer> duel: results) {
-                    secondDate.getGames().remove(secondDate.getGames().indexOf(duel));
-                }
-
-                results = incompatibleDuels(firstDate, results, tempSize);
-                if (results.isEmpty()) {
-                    compatible = true;
-                } else {
-                    tempSize = secondDate.getGames().size();
-                    secondDate.getGames().addAll(results);
-                    firstDate.getGames().removeAll(results);
-                }
-            }
-        }
-    }
-
-    private ArrayList<ArrayList<Integer>> incompatibleDuels(Date date, ArrayList<ArrayList<Integer>> duels, int size) {
-        ArrayList<ArrayList<Integer>> incompatibleDuels = new ArrayList<>();
-
-        for (ArrayList<Integer> duel : duels) {
-            for (int j = 0; j < size; j++) {
-                ArrayList<Integer> dateDuels = date.getGames().get(j);
-
-                if (dateDuels.contains(duel.get(0)) || dateDuels.contains(duel.get(1))) {
-                    if (!incompatibleDuels.contains(dateDuels)) {
-                        incompatibleDuels.add(dateDuels);
-                    }
-                }
-            }
-        }
-        return incompatibleDuels;
-    }
 }

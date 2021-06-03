@@ -4,7 +4,9 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import definition.TTPDefinition;
+import definition.state.CalendarState;
 import execute.Executer;
+import utils.CalendarConfiguration;
 import utils.DataFiles;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -19,6 +21,7 @@ import problem.definition.State;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -41,6 +44,7 @@ public class TeamsItineraryController implements Initializable {
 
     private State calendar;
 
+    private CalendarConfiguration config;
 
     @FXML
     private TableColumn<ObservableList, String> colDates;
@@ -54,6 +58,7 @@ public class TeamsItineraryController implements Initializable {
 
 
         calendar = Executer.getInstance().getResultStates().get(selectedCalendar);
+        config = ((CalendarState) calendar).getConfiguration();
         ArrayList<Integer> teamsIndexes = TTPDefinition.getInstance().getTeamsIndexes();
         System.out.println(teamsIndexes);
         List<String> teams = new ArrayList<>() ;
@@ -99,19 +104,37 @@ public class TeamsItineraryController implements Initializable {
             itineraryTable.getColumns().add(col);
         }
 
-        for(int i=1; i < itinerary.size();i++){
+        int date = 0;
+        for(int i=1; i < itinerary.size()-1;i++){
             ObservableList<String> row = FXCollections.observableArrayList();
-            row.add(Integer.toString(i));
+
             ArrayList<Integer> current = itinerary.get(i);
-            for (int selectedTeam : selectedTeams) {
-                row.add(DataFiles.getSingletonDataFiles().getAcronyms().get(current.get(selectedTeam)));
+            if(!compareArrays(current, config.getTeamsIndexes())) {
+                date++;
+                row.add(Integer.toString(date));
+                for (int selectedTeam : selectedTeams) {
+                    row.add(DataFiles.getSingletonDataFiles().getAcronyms().get(current.get(selectedTeam)));
+                }
+                System.out.println(row);
+                data.add(row);
             }
-            System.out.println(row);
-            data.add(row);
+
         }
 
         itineraryTable.setItems(data);
 
+    }
+
+    private boolean compareArrays(ArrayList<Integer> current, ArrayList<Integer> teamIndexes){
+        boolean equals = true;
+
+        for (int i: teamIndexes) {
+            if(!current.contains(i)){
+                equals = false;
+                break;
+            }
+        }
+        return equals;
     }
 
     public HomeController getHomeController() {

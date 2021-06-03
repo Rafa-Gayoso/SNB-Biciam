@@ -1,0 +1,78 @@
+
+
+#statisticsTable {
+    -fx-base: white;
+    -fx-control-inner-background: white;
+    -fx-background-color: white;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+}
+
+#statisticsTable .column-header-background {
+    -fx-background-color: transparent;
+}
+
+#statisticsTable .column-header, .table-view .filler {
+    -fx-size: 60pt;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    /*-fx-border-color:
+            transparent
+            transparent
+            derive(-fx-base, 80%)
+            transparent;*/
+    -fx-border-insets: 0 10 1 0;
+}
+
+#statisticsTable .column-header .label {
+    -fx-font-size: 22px;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill:  #2f2484;
+    -fx-alignment: center;
+    -fx-opacity: 1;
+}
+
+#statisticsTable:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color;
+}
+
+#statisticsTable .table-row-cell {
+    -fx-background-color: white;
+}
+
+#statisticsTable .table-cell {
+    -fx-border-color: -fx-box-border -fx-box-border transparent transparent;
+    -fx-font:20px "Segoe UI Symbol";
+    -fx-text-fill: #2f2484;
+    -fx-alignment: CENTER;
+}
+
+
+
+/* scroll bar starts here */
+
+/* The increment and decrement button CSS class of scrollbar */
+.table-view .increment-button ,.table-view .decrement-button {
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-background-radius: 2em;
+
+}
+
+/* The main scrollbar **track** CSS class  */
+.table-view .scroll-bar:horizontal .track,
+.table-view .scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color:derive( #2f2484,80%);
+
+    -fx-background-radius: 2em;
+    -fx-border-radius:2em;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.table-view .scroll-bar:horizontal .thumb,
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background-color:derive( #2f2484,90%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
+
+}

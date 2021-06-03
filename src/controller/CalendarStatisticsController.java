@@ -2,10 +2,11 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import definition.TTPDefinition;
-import definition.state.StateWithDistance;
+import definition.state.CalendarState;
 import execute.Executer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -57,6 +58,10 @@ public class CalendarStatisticsController {
     private NumberAxis yAxisMoreTeam;
 
 
+    @FXML
+    private JFXButton btnStatisticsResume;
+
+
    /* @FXML
     private BarChart<String, Float> barChart;
 
@@ -100,15 +105,15 @@ public class CalendarStatisticsController {
         for(int i =0; i < calendarsList.size();i++){
             
             //Distancias de los calendarios
-            State calendar = calendarsList.get(i);
+            CalendarState calendar = (CalendarState) calendarsList.get(i);
 
-            ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(calendar);
-            StateWithDistance stateDistance = new StateWithDistance(calendar);
-            xAxisCalendarData.add("Calendario "+(i+1));
+
+
+            xAxisCalendarData.add(calendar.getConfiguration().getCalendarId());
             calendarData.add(xAxisCalendarData.get(i));
             XYChart.Series<String, Float>seriesCalendar = new XYChart.Series<String, Float>();
             seriesCalendar.setName(calendarData.get(i));
-            seriesCalendar.getData().add(new XYChart.Data(xAxisCalendarData.get(i), stateDistance.getDistance()));
+            seriesCalendar.getData().add(new XYChart.Data(xAxisCalendarData.get(i), calendar.getDistance()));
             barChartCalendar.getData().addAll(seriesCalendar);
             
             //Estadísticas de los calendarios
@@ -116,7 +121,7 @@ public class CalendarStatisticsController {
             //estadisticas de los equipos que menos distancias recorren
             ArrayList<ArrayList<Double>> itineraryDistance = Distance.getInstance().itineraryDistances(calendar);
             Statistics.getInstance().lessStatistics(itineraryDistance);
-            xAxisLessTeamData.add(Statistics.getInstance().getTeam() + "- Calendario "+(i+1));
+            xAxisLessTeamData.add(Statistics.getInstance().getTeam() + " - "+ calendar.getConfiguration().getCalendarId());
             lessTeamData.addAll(xAxisLessTeamData);
             XYChart.Series<String, Float> seriesLessTeam = new XYChart.Series<String,Float>();
 
@@ -125,7 +130,7 @@ public class CalendarStatisticsController {
             barChartLessTeam.getData().addAll(seriesLessTeam);
 
            Statistics.getInstance().moreStatistics(itineraryDistance);
-            xAxisMoreTeamData.add(Statistics.getInstance().getTeam() + "- Calendario "+(i+1));
+            xAxisMoreTeamData.add(Statistics.getInstance().getTeam() + " - "+ calendar.getConfiguration().getCalendarId());
             moreTeamData.addAll(xAxisMoreTeamData);
             XYChart.Series<String, Float> seriesMoreTeam = new XYChart.Series<String,Float>();
 
@@ -187,6 +192,18 @@ public class CalendarStatisticsController {
             e.printStackTrace();
         }
 
+    }
+
+
+    @FXML
+    void statisticsResume(ActionEvent event) {
+        try {
+            AnchorPane structureOver = homeController.getPrincipalPane();
+            homeController.createPage(new StatisticsResumeController(), structureOver, "/visual/StatisticsResume.fxml");
+            homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
