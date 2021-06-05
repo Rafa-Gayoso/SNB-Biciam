@@ -16,6 +16,7 @@ import javafx.util.Duration;
 import operators.initialSolution.InitialSolutionType;
 import operators.interfaces.ICreateInitialSolution;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.streaming.SXSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -361,7 +362,36 @@ public class DataFiles implements ICreateInitialSolution {
         cellData =  rowData.createCell(0);
         cellData.setCellStyle(style);
         cellData.setCellValue(configuration.getMaxVisitorGamesInARow());
+        int currentRow = 10;
 
+        int [][] duelMatrix = configuration.getDuelMatrix();
+        for (int i = 0; i < duelMatrix.length; i++) {
+            for (int k = 0; k < duelMatrix.length ; k++) {
+                System.out.print(duelMatrix[i][k] + " ");
+            }
+            System.out.println();
+        }
+
+        System.out.println("------");
+        for(int i =0; i < duelMatrix.length; i++){
+            currentRow++;
+            rowData = spreadsheetData.createRow(11+i);
+
+            for (int k = 0; k < duelMatrix.length; k++) {
+                cellData =  rowData.createCell(k);
+                cellData.setCellStyle(style);
+                cellData.setCellValue(duelMatrix[i][k]);
+                System.out.print(duelMatrix[i][k] + " ");
+            }
+            System.out.println();
+        }
+        currentRow++;
+        rowData = spreadsheetData.createRow(currentRow);
+        for(int k = 0; k < configuration.getRestDates().size(); k++){
+            cellData =  rowData.createCell(k);
+            cellData.setCellStyle(style);
+            cellData.setCellValue(configuration.getRestDates().get(k));
+        }
 
         XSSFFont headerCellDateFont = workbook.createFont();
         headerCellDateFont.setBold(true);
@@ -718,7 +748,7 @@ public class DataFiles implements ICreateInitialSolution {
             for (Cell cellData : rowTeamIndexes) {
                 configuration.getTeamsIndexes().add((int) cellData.getNumericCellValue());
             }
-
+            int [][] duelMatrix = new int [configuration.getTeamsIndexes().size()][configuration.getTeamsIndexes().size()];
             configuration.setInauguralGame(rowIteratorData.next().getCell(0).getBooleanCellValue());
             configuration.setChampionVsSecondPlace(rowIteratorData.next().getCell(0).getBooleanCellValue());
             configuration.setChampion((int) rowIteratorData.next().getCell(0).getNumericCellValue());
@@ -728,6 +758,33 @@ public class DataFiles implements ICreateInitialSolution {
             configuration.setOccidenteVsOriente(rowIteratorData.next().getCell(0).getBooleanCellValue());
             configuration.setMaxLocalGamesInARow((int) rowIteratorData.next().getCell(0).getNumericCellValue());
             configuration.setMaxVisitorGamesInARow((int) rowIteratorData.next().getCell(0).getNumericCellValue());
+
+            for (int i = 0; i < configuration.getTeamsIndexes().size(); i++) {
+                Row row = rowIteratorData.next();
+                Iterator<Cell> cellIterator = row.cellIterator();
+                int cellNumber =0;
+                while (cellIterator.hasNext()){
+                    Cell cell = cellIterator.next();
+                    duelMatrix[i][cellNumber] = (int)cell.getNumericCellValue();
+                    cellNumber++;
+                }
+            }
+
+            configuration.setDuelMatrix(duelMatrix);
+
+            ArrayList<Integer> rest = new ArrayList<>();
+            Row row1 = rowIteratorData.next();
+            Iterator<Cell> cellIterator = row1.cellIterator();
+
+            while (cellIterator.hasNext()){
+                Cell cell = cellIterator.next();
+                if(cell !=null){
+                    rest.add((int)cell.getNumericCellValue());
+                }
+            }
+            configuration.setRestDates(rest);
+
+
 
             TTPDefinition.getInstance().setTeamIndexes(configuration.getTeamsIndexes());
             TTPDefinition.getInstance().setSymmetricSecondRound(configuration.isSymmetricSecondRound());
@@ -740,6 +797,8 @@ public class DataFiles implements ICreateInitialSolution {
             TTPDefinition.getInstance().setInauguralGame(configuration.isInauguralGame());
             TTPDefinition.getInstance().setOccidentVsOrient(configuration.isOccidenteVsOriente());
             TTPDefinition.getInstance().setCalendarId(configuration.getCalendarId());
+            TTPDefinition.getInstance().setDuelMatrix(configuration.getDuelMatrix());
+            TTPDefinition.getInstance().setRestIndexes(configuration.getRestDates());
 
 
             XSSFSheet xssfSheet = workbook.getSheetAt(0);
