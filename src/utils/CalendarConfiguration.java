@@ -16,11 +16,12 @@ public class CalendarConfiguration {
     private int maxLocalGamesInARow;
     private int maxVisitorGamesInARow;
     private ArrayList<Integer> restDates;
+    private int [][] duelMatrix;
 
     public CalendarConfiguration(String calendarId, ArrayList<Integer> teamsIndexes, boolean inauguralGame,
                                  boolean championVsSecondPlace, int champion, int secondPlace,
                                  boolean secondRoundCalendar, boolean symmetricSecondRound, boolean OccidenteVsOriente,
-                                 int maxLocalGamesInARow, int maxVisitorGamesInARow, ArrayList<Integer> restDates) {
+                                 int maxLocalGamesInARow, int maxVisitorGamesInARow, ArrayList<Integer> restDates, int [][] duelMatrix) {
         this.calendarId = calendarId;
         this.teamsIndexes = teamsIndexes;
         this.inauguralGame = inauguralGame;
@@ -33,6 +34,7 @@ public class CalendarConfiguration {
         this.maxLocalGamesInARow = maxLocalGamesInARow;
         this.maxVisitorGamesInARow = maxVisitorGamesInARow;
         this.restDates = restDates;
+        this.duelMatrix = duelMatrix;
     }
 
     public CalendarConfiguration() {
@@ -47,6 +49,9 @@ public class CalendarConfiguration {
         this.OccidenteVsOriente = false;
         this.maxLocalGamesInARow = 0;
         this.maxVisitorGamesInARow = 0;
+        this.restDates = new ArrayList<>();
+        this.duelMatrix = new int [0][0];
+
     }
 
     public String getCalendarId() {
@@ -165,7 +170,21 @@ public class CalendarConfiguration {
         clone.setMaxLocalGamesInARow(this.maxLocalGamesInARow);
         clone.setMaxVisitorGamesInARow(this.maxVisitorGamesInARow);
         clone.setRestDates(this.restDates);
+        clone.setDuelMatrix(new int [teamsIndexes.size()][teamsIndexes.size()]);
+        for (int i=0; i < duelMatrix.length; i++){
+            for (int j =0; j < duelMatrix.length; j++){
+                clone.getDuelMatrix()[i][j] = duelMatrix[i][j];
+            }
+        }
         return clone;
+    }
+
+    public int[][] getDuelMatrix() {
+        return duelMatrix;
+    }
+
+    public void setDuelMatrix(int[][] duelMatrix) {
+        this.duelMatrix = duelMatrix;
     }
 
     public ArrayList<Integer> getRestDates() {

@@ -242,7 +242,7 @@ public class TTPDefinition {
                     TTPDefinition.getInstance().isChampionVsSub(), TTPDefinition.getInstance().getFirstPlace(),
                     TTPDefinition.getInstance().getSecondPlace(),TTPDefinition.getInstance().isSecondRound(), TTPDefinition.getInstance().isSymmetricSecondRound(),
                     TTPDefinition.getInstance().isOccidentVsOrient(), TTPDefinition.getInstance().getCantVecesLocal(), TTPDefinition.getInstance().getCantVecesVisitante(), TTPDefinition.getInstance().getRestIndexes()
-            );
+            ,TTPDefinition.getInstance().getDuelMatrix());
         }
 
         ArrayList<Integer> teamsIndexes = (ArrayList<Integer>) configuration.getTeamsIndexes().clone();

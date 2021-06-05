@@ -2,6 +2,7 @@ package controller;
 
 import com.jfoenix.controls.*;
 import definition.TTPDefinition;
+import definition.state.CalendarState;
 import execute.Executer;
 import javafx.beans.property.Property;
 import javafx.collections.ObservableList;
@@ -12,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import operators.heuristics.HeuristicOperatorType;
 import operators.mutation.MutationOperator;
 import operators.mutation.MutationOperatorType;
+import utils.CalendarConfiguration;
 import utils.DataFiles;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -268,12 +270,8 @@ public class ConfigurationCalendarController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
 
-        //boolean existingConfiguration = false;
+        int calendarPosition = CalendarController.selectedCalendar;
 
-        /*if(controller.getLastSavedConfiguration() != null){
-            existingConfiguration = true;
-            configuration = controller.getLastSavedConfiguration();
-        }*/
         DataFiles.getSingletonDataFiles().readTeams();
         List<String> teams = DataFiles.getSingletonDataFiles().getTeams();
 
@@ -322,9 +320,10 @@ public class ConfigurationCalendarController implements Initializable {
         });
 
         calendarId.setTextFormatter(new TextFormatter<>(change ->
-                (change.getControlNewText().matches("^[A-Za-z0-9Ò—·ÈÌÛ˙¡…Õ”⁄ _]*$")) ? change : null));
+                (change.getControlNewText().matches("^[A-Za-z0-9Ò—·ÈÌÛ˙¡…Õ”⁄ _.]*$")) ? change : null));
 
         //if(!existingConfiguration){
+        if(calendarPosition == -1){
         HomeController.escogidos = false;
         selectAll.setSelected(true);
 
@@ -353,15 +352,28 @@ public class ConfigurationCalendarController implements Initializable {
         comboChamp.setVisible(true);
         comboSub.setVisible(true);
         btnSwap.setVisible(true);
-        /*}
+        }
         else{
             HomeController.escogidos = true;
+            CalendarConfiguration configuration = ((CalendarState)Executer.getInstance().getResultStates().get(calendarPosition)).getConfiguration();
+            calendarId.setText(configuration.getCalendarId());
 
-
+            if(configuration.isInauguralGame()){
+                inauguralGame.setSelected(true);
+                inauguralGame.setText("SÌ");
+            }
+            else{
+                inauguralGame.setSelected(false);
+                inauguralGame.setText("No");
+            }
 
             if(configuration.getTeamsIndexes().size() == DataFiles.getSingletonDataFiles().getTeams().size()){
                 selectAll.setSelected(true);
                 teamsSelectionListView.getSelectionModel().selectAll();
+                listComboChamp = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
+                listComboSub = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
+                comboChamp.setItems(listComboChamp);
+                comboSub.setItems(listComboSub);
             }
             else{
                 selectAll.setSelected(false);
@@ -372,17 +384,51 @@ public class ConfigurationCalendarController implements Initializable {
                     array[i] = configuration.getTeamsIndexes().get(i);
                 }
                 teamsSelectionListView.getSelectionModel().selectIndices(-1, array);
-
+                listComboChamp = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
+                listComboSub = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
+                comboChamp.setItems(listComboChamp);
+                comboSub.setItems(listComboSub);
             }
+
 
 
             if(configuration.isSecondRoundCalendar()){
                 secondRoundButton.setSelected(true);
                 secondRoundButton.setText("SÌ");
+                if (configuration.isSymmetricSecondRound()){
+                    lblSymmetricSecondRound.setVisible(true);
+                    symmetricSecondRound.setVisible(true);
+                    symmetricSecondRound.setText("SÌ");
+                }
+                else{
+                    lblSymmetricSecondRound.setVisible(false);
+                    symmetricSecondRound.setVisible(false);
+                    symmetricSecondRound.setText("No");
+                }
             }
             else{
                 secondRoundButton.setSelected(false);
                 secondRoundButton.setText("No");
+            }
+
+            if(configuration.isChampionVsSecondPlace()){
+                champVsSub.setSelected(true);
+
+                champVsSub.setText("SÌ");
+                comboChamp.setVisible(true);
+                comboSub.setVisible(true);
+                btnSwap.setVisible(true);
+
+                comboChamp.setValue(teams.get(configuration.getChampion()));
+                comboSub.setValue(teams.get(configuration.getSecondPlace()));
+                listComboSub.remove(teams.get(configuration.getChampion()));
+            }
+            else{
+                champVsSub.setText("No");
+                champVsSub.setSelected(false);
+                comboChamp.setVisible(false);
+                comboSub.setVisible(false);
+                btnSwap.setVisible(false);
             }
 
             int maxGames = teamsSelectionListView.getSelectionModel().getSelectedIndices().size() / 2;
@@ -391,7 +437,17 @@ public class ConfigurationCalendarController implements Initializable {
             maxHomeGamesSpinner.getValueFactory().setValue(4);
             maxVisitorGamesSpinner.getValueFactory().setValue(4);
             ConfigurationCalendarController.teams = configuration.getTeamsIndexes().size();
-        }*/
+            if(configuration.isOccidenteVsOriente()){
+                occidenteVsOrienteToggle.setSelected(true);
+                occidenteVsOrienteToggle.setText("SÌ");
+
+            }else{
+                occidenteVsOrienteToggle.setSelected(false);
+                occidenteVsOrienteToggle.setText("No");
+            }
+        }
+
+
 
 
         notification = new TrayNotification();

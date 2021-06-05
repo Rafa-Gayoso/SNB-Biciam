@@ -71,26 +71,26 @@ public class ServiceOccidentOrientCalendar extends javafx.concurrent.Service<Str
                             allTeams, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                             TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                             TTPDefinition.getInstance().isSymmetricSecondRound(), true, TTPDefinition.getInstance().getCantVecesLocal(),
-                            TTPDefinition.getInstance().getCantVecesVisitante(), TTPDefinition.getInstance().getRestIndexes());
+                            TTPDefinition.getInstance().getCantVecesVisitante(), TTPDefinition.getInstance().getRestIndexes(),TTPDefinition.getInstance().getDuelMatrix());
 
 
                     CalendarConfiguration confOnlyOccident = new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
                             teamsOnlyOccident, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                             TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                             TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
-                            TTPDefinition.getInstance().getCantVecesVisitante(), TTPDefinition.getInstance().getRestIndexes());
+                            TTPDefinition.getInstance().getCantVecesVisitante(), TTPDefinition.getInstance().getRestIndexes(),matrixOnlyOccident);
 
                     CalendarConfiguration confOnlyOrient = new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
                             teamsOnlyOrient, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                             TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                             TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
-                            TTPDefinition.getInstance().getCantVecesVisitante(), TTPDefinition.getInstance().getRestIndexes());
+                            TTPDefinition.getInstance().getCantVecesVisitante(), TTPDefinition.getInstance().getRestIndexes(),matrixOnlyOrient);
 
                     CalendarConfiguration confOccVsOr = new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
                             allTeams, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                             TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                             TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
-                            TTPDefinition.getInstance().getCantVecesVisitante(), TTPDefinition.getInstance().getRestIndexes());
+                            TTPDefinition.getInstance().getCantVecesVisitante(), TTPDefinition.getInstance().getRestIndexes(),newMatrix);
 
                     if (TTPDefinition.getInstance().getFirstPlace() != -1) {
                         int posChamp = teamsOnlyOccident.indexOf(TTPDefinition.getInstance().getFirstPlace());
@@ -259,7 +259,7 @@ public class ServiceOccidentOrientCalendar extends javafx.concurrent.Service<Str
                                 allTeams, originalConfiguration.isInauguralGame(), originalConfiguration.isChampionVsSecondPlace(),
                                 originalConfiguration.getChampion(), originalConfiguration.getSecondPlace(), originalConfiguration.isSecondRoundCalendar(),
                                 originalConfiguration.isSymmetricSecondRound(), originalConfiguration.isOccidenteVsOriente(), originalConfiguration.getMaxLocalGamesInARow(),
-                                originalConfiguration.getMaxVisitorGamesInARow(), originalConfiguration.getRestDates());
+                                originalConfiguration.getMaxVisitorGamesInARow(), originalConfiguration.getRestDates(), originalConfiguration.getDuelMatrix());
 
                         tempState.setConfiguration(tempConfiguration);
                         tempState.setCalendarType(type.ordinal());

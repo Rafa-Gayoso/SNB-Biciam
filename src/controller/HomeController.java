@@ -312,14 +312,12 @@ public class HomeController implements Initializable {
             object = loader.getController();
             ((CalendarController) object).setHomeController(this);
             setNode(anchorPane);
-            ScalableContentPane scale = new ScalableContentPane();
-            scale.setContent(anchorPane);
+
         } else if (object instanceof SelectGridController) {
             object = loader.getController();
             ((SelectGridController) object).setHomeController(this);
             setNode(anchorPane);
-            ScalableContentPane scale = new ScalableContentPane();
-            scale.setContent(anchorPane);
+
         } else if (object instanceof ConfigurationCalendarController) {
             object = loader.getController();
             ((ConfigurationCalendarController) object).setHomeController(this);

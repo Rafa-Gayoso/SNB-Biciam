@@ -38,7 +38,7 @@ public class CalendarController implements Initializable {
     private ArrayList<Date> calendar;
     private ArrayList<TableView<Duel>> tables;
     private HomeController homeController;
-    public static int selectedCalendar;
+    public static int selectedCalendar =-1;
     private TrayNotification notification;
 
     @FXML
@@ -243,6 +243,7 @@ public class CalendarController implements Initializable {
                 Label label = new Label("No hay datos para mostrar");
                 tab.setContent(label);
                 calendarsTabPane.getTabs().add(tab);
+                selectedCalendar = -1;
             }
 
     }
