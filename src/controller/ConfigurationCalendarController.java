@@ -43,6 +43,8 @@ public class ConfigurationCalendarController implements Initializable {
     public static boolean secondRound = false;
     public static boolean inaugural = false;
     public static boolean ok = true;
+    public static boolean savedConfiguration = false;
+    private CalendarConfiguration lastConfiguration =new CalendarConfiguration();
 
     private int posChampion = -1, posSub = -2;
 
@@ -113,7 +115,6 @@ public class ConfigurationCalendarController implements Initializable {
     private JFXButton restBtn;
 
 
-
     @FXML
     void selectAllTeams(ActionEvent event) {
         if (selectAll.isSelected()) {
@@ -124,8 +125,6 @@ public class ConfigurationCalendarController implements Initializable {
         }
     }
 
-
-    
 
     @FXML
     void selectTeams(ActionEvent event) throws IOException {
@@ -151,43 +150,35 @@ public class ConfigurationCalendarController implements Initializable {
         for (int index : selectedIndexes) {
             teamsNames.add(DataFiles.getSingletonDataFiles().getAcronyms().get(index));
 
-            if (occidenteVsOrienteToggle.isSelected()){
-                if (DataFiles.getSingletonDataFiles().getLocations().get(index).equalsIgnoreCase("Occidental")){
+            if (occidenteVsOrienteToggle.isSelected()) {
+                if (DataFiles.getSingletonDataFiles().getLocations().get(index).equalsIgnoreCase("Occidental")) {
                     occAmount++;
-                }
-                else{
+                } else {
                     orAmount++;
                 }
             }
         }
 
-        if(calendarId.getText().equalsIgnoreCase(" ")||calendarId.getText().equalsIgnoreCase("")){
+        if (calendarId.getText().equalsIgnoreCase(" ") || calendarId.getText().equalsIgnoreCase("")) {
             showNotification("Debe Introducir el identificador del calendario");
             ok = false;
-        }
-
-        else if (selectedIndexes.size() <= 2) {
+        } else if (selectedIndexes.size() <= 2) {
             showNotification("Debe escoger al menos dos equipos");
             ok = false;
-        }
-
-        else if (selectedIndexes.size() % 2 !=0) {
+        } else if (selectedIndexes.size() % 2 != 0) {
             showNotification("Debe escoger una cantidad par de equipos");
             ok = false;
-        }
-        else if(occidenteVsOrienteToggle.isSelected() && (occAmount != orAmount)){
+        } else if (occidenteVsOrienteToggle.isSelected() && (occAmount != orAmount)) {
             showNotification("Las cantidades de equipos seleccionados" + "\n" + " de Oriente y Occidente deben ser iguales");
             ok = false;
-        }
-        else if (inauguralGame.isSelected()) {
+        } else if (inauguralGame.isSelected()) {
             if (champVsSub.isSelected()) {
                 validateChampionAndSubchampion();
             } else {
                 showNotification("Debe escoger al campeón y subcampeón.");
                 ok = false;
             }
-        }
-        else if (champVsSub.isSelected()) {
+        } else if (champVsSub.isSelected()) {
             validateChampionAndSubchampion();
         }
 
@@ -196,8 +187,8 @@ public class ConfigurationCalendarController implements Initializable {
             teams = selectedIndexes.size();
 
             int posChampion = -1;
-            int posSub =-1;
-            if(champVsSub.isSelected()){
+            int posSub = -1;
+            if (champVsSub.isSelected()) {
                 String champion = comboChamp.getSelectionModel().getSelectedItem();
                 String subchampion = comboSub.getSelectionModel().getSelectedItem();
                 posChampion = DataFiles.getSingletonDataFiles().getTeams().indexOf(champion);
@@ -221,7 +212,6 @@ public class ConfigurationCalendarController implements Initializable {
             TTPDefinition.getInstance().setCalendarId(calendarId.getText());
 
 
-
             if (Executer.getInstance().getMutations().isEmpty()) {
                 ArrayList<MutationOperatorType> mutationsOperatorTypes = new ArrayList<>();
                 mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_ORDER);
@@ -229,7 +219,7 @@ public class ConfigurationCalendarController implements Initializable {
                 mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DUEL);
                 mutationsOperatorTypes.add(MutationOperatorType.SWAP_DATES);
 
-                if(TTPDefinition.getInstance().isSecondRound() && !TTPDefinition.getInstance().isSymmetricSecondRound()){
+                if (TTPDefinition.getInstance().isSecondRound() && !TTPDefinition.getInstance().isSymmetricSecondRound()) {
                     mutationsOperatorTypes.add(MutationOperatorType.CHANGE_TEAMS_OPERATOR);
                     mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_DUELS_ORDER_OPERATOR);
                     mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_SINGLE_DUEL_ORDER_OPERATOR);
@@ -238,14 +228,13 @@ public class ConfigurationCalendarController implements Initializable {
 
 
                 Executer.getInstance().setMutations(mutationsOperatorTypes);
-            }
-            else {
-                if((TTPDefinition.getInstance().isSecondRound() && TTPDefinition.getInstance().isSymmetricSecondRound())
+            } else {
+                if ((TTPDefinition.getInstance().isSecondRound() && TTPDefinition.getInstance().isSymmetricSecondRound())
                         || !TTPDefinition.getInstance().isSecondRound()) {
-                    MutationOperatorType [] types = MutationOperatorType.values();
+                    MutationOperatorType[] types = MutationOperatorType.values();
 
-                    for (int i = 4; i < types.length ; i++) {
-                        if(Executer.getInstance().getMutations().contains(types[i])){
+                    for (int i = 4; i < types.length; i++) {
+                        if (Executer.getInstance().getMutations().contains(types[i])) {
                             Executer.getInstance().getMutations().remove(types[i]);
                         }
                     }
@@ -270,6 +259,7 @@ public class ConfigurationCalendarController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
 
+        lastConfiguration = new CalendarConfiguration();
         int calendarPosition = CalendarController.selectedCalendar;
 
         DataFiles.getSingletonDataFiles().readTeams();
@@ -323,64 +313,168 @@ public class ConfigurationCalendarController implements Initializable {
                 (change.getControlNewText().matches("^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ _.]*$")) ? change : null));
 
         //if(!existingConfiguration){
-        if(calendarPosition == -1){
-        HomeController.escogidos = false;
-        selectAll.setSelected(true);
+        if (calendarPosition == -1 && TTPDefinition.getInstance().getTeamsIndexes() == null) {
+            HomeController.escogidos = false;
+            selectAll.setSelected(true);
 
-        secondRoundButton.setSelected(true);
-        teamsSelectionListView.getSelectionModel().selectAll();
+            secondRoundButton.setSelected(true);
+            teamsSelectionListView.getSelectionModel().selectAll();
 
-        int maxGames = teamsSelectionListView.getSelectionModel().getSelectedIndices().size() / 2;
-        maxHomeGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGames));
-        maxVisitorGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGames));
+            int maxGames = teamsSelectionListView.getSelectionModel().getSelectedIndices().size() / 2;
+            maxHomeGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGames));
+            maxVisitorGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGames));
 
-        lblSymmetricSecondRound.setVisible(true);
-        symmetricSecondRound.setVisible(true);
-        secondRoundButton.setSelected(true);
-        teamsSelectionListView.getSelectionModel().selectAll();
-        this.teams = teamsSelectionListView.getSelectionModel().getSelectedIndices().size();
-        listComboChamp = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
+            lblSymmetricSecondRound.setVisible(true);
+            symmetricSecondRound.setVisible(true);
+            secondRoundButton.setSelected(true);
+            teamsSelectionListView.getSelectionModel().selectAll();
+            this.teams = teamsSelectionListView.getSelectionModel().getSelectedIndices().size();
+            listComboChamp = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
 
-        listComboSub = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
-        comboChamp.setItems(listComboChamp);
-        //comboChamp.getSelectionModel().select(5);
-        comboSub.setItems(listComboSub);
-        //comboSub.getSelectionModel().select(10);
-        occidenteVsOrienteToggle.setSelected(false);
+            listComboSub = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
+            comboChamp.setItems(listComboChamp);
+            //comboChamp.getSelectionModel().select(5);
+            comboSub.setItems(listComboSub);
+            //comboSub.getSelectionModel().select(10);
+            occidenteVsOrienteToggle.setSelected(false);
 
-        champVsSub.setSelected(true);
-        comboChamp.setVisible(true);
-        comboSub.setVisible(true);
-        btnSwap.setVisible(true);
-        }
-        else{
+            champVsSub.setSelected(true);
+            comboChamp.setVisible(true);
+            comboSub.setVisible(true);
+            btnSwap.setVisible(true);
+        } else if(TTPDefinition.getInstance().getTeamsIndexes() != null){
             HomeController.escogidos = true;
-            CalendarConfiguration configuration = ((CalendarState)Executer.getInstance().getResultStates().get(calendarPosition)).getConfiguration();
-            calendarId.setText(configuration.getCalendarId());
 
-            if(configuration.isInauguralGame()){
+            calendarId.setText(TTPDefinition.getInstance().getCalendarId());
+
+            if (lastConfiguration.isInauguralGame()) {
                 inauguralGame.setSelected(true);
                 inauguralGame.setText("Sí");
-            }
-            else{
+            } else {
                 inauguralGame.setSelected(false);
                 inauguralGame.setText("No");
             }
 
-            if(configuration.getTeamsIndexes().size() == DataFiles.getSingletonDataFiles().getTeams().size()){
+            if (TTPDefinition.getInstance().getTeamsIndexes().size() == DataFiles.getSingletonDataFiles().getTeams().size()) {
                 selectAll.setSelected(true);
                 teamsSelectionListView.getSelectionModel().selectAll();
                 listComboChamp = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
                 listComboSub = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
                 comboChamp.setItems(listComboChamp);
                 comboSub.setItems(listComboSub);
+            } else {
+                selectAll.setSelected(false);
+
+                teamsSelectionListView.getSelectionModel().clearSelection();
+                int[] array = new int[TTPDefinition.getInstance().getTeamsIndexes().size()];
+                for (int i = 0; i < TTPDefinition.getInstance().getTeamsIndexes().size(); i++) {
+                    array[i] = TTPDefinition.getInstance().getTeamsIndexes().get(i);
+                }
+                teamsSelectionListView.getSelectionModel().selectIndices(-1, array);
+                listComboChamp = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
+                listComboSub = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
+                comboChamp.setItems(listComboChamp);
+                comboSub.setItems(listComboSub);
             }
-            else{
+
+
+            if (TTPDefinition.getInstance().isSecondRound()) {
+                secondRoundButton.setSelected(true);
+                secondRoundButton.setText("Sí");
+                lblSymmetricSecondRound.setVisible(true);
+                symmetricSecondRound.setVisible(true);
+                if (TTPDefinition.getInstance().isSymmetricSecondRound()) {
+                    symmetricSecondRound.setSelected(true);
+                    symmetricSecondRound.setText("Sí");
+                } else {
+                    symmetricSecondRound.setSelected(false);
+                    symmetricSecondRound.setText("No");
+                }
+            } else {
+                symmetricSecondRound.setSelected(false);
+                secondRoundButton.setSelected(false);
+                secondRoundButton.setText("No");
+                lblSymmetricSecondRound.setVisible(false);
+                symmetricSecondRound.setVisible(false);
+                symmetricSecondRound.setText("No");
+            }
+
+            if (TTPDefinition.getInstance().isChampionVsSub()) {
+                champVsSub.setSelected(true);
+
+                champVsSub.setText("Sí");
+                comboChamp.setVisible(true);
+                comboSub.setVisible(true);
+                btnSwap.setVisible(true);
+
+                int champion = TTPDefinition.getInstance().getFirstPlace();
+                int second = TTPDefinition.getInstance().getSecondPlace();
+                if(champion!=-1 && second !=-1 ){
+                    comboChamp.setValue(teams.get(TTPDefinition.getInstance().getFirstPlace()));
+                    comboSub.setValue(teams.get(TTPDefinition.getInstance().getSecondPlace()));
+                    listComboSub.remove(teams.get(TTPDefinition.getInstance().getFirstPlace()));
+                }
+                else if( champion == -1 && second !=-1){
+                    comboChamp.setValue("Seleccione");
+                    comboSub.setValue(teams.get(TTPDefinition.getInstance().getSecondPlace()));
+                    //listComboSub.remove(teams.get(TTPDefinition.getInstance().getFirstPlace()));
+                }else if( champion != -1 && second ==-1){
+                    comboChamp.setValue(teams.get(TTPDefinition.getInstance().getFirstPlace()));
+                    comboSub.setValue("Seleccione");
+                    //listComboSub.remove(teams.get(TTPDefinition.getInstance().getFirstPlace()));
+                }else{
+                    comboChamp.setValue("Seleccione");
+                    comboSub.setValue("Seleccione");
+                }
+
+            } else {
+                champVsSub.setText("No");
+                champVsSub.setSelected(false);
+                comboChamp.setVisible(false);
+                comboSub.setVisible(false);
+                btnSwap.setVisible(false);
+            }
+
+            int maxGames = teamsSelectionListView.getSelectionModel().getSelectedIndices().size() / 2;
+            maxHomeGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGames));
+            maxVisitorGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGames));
+            maxHomeGamesSpinner.getValueFactory().setValue(4);
+            maxVisitorGamesSpinner.getValueFactory().setValue(4);
+            ConfigurationCalendarController.teams = TTPDefinition.getInstance().getTeamsIndexes().size();
+            if (TTPDefinition.getInstance().isOccidentVsOrient()) {
+                occidenteVsOrienteToggle.setSelected(true);
+                occidenteVsOrienteToggle.setText("Sí");
+
+            } else {
+                occidenteVsOrienteToggle.setSelected(false);
+                occidenteVsOrienteToggle.setText("No");
+            }
+        }else if(calendarPosition != -1) {
+            HomeController.escogidos = true;
+            CalendarConfiguration configuration = ((CalendarState) Executer.getInstance().getResultStates().get(calendarPosition)).getConfiguration();
+            calendarId.setText(configuration.getCalendarId());
+
+            if (configuration.isInauguralGame()) {
+                inauguralGame.setSelected(true);
+                inauguralGame.setText("Sí");
+            } else {
+                inauguralGame.setSelected(false);
+                inauguralGame.setText("No");
+            }
+
+            if (configuration.getTeamsIndexes().size() == DataFiles.getSingletonDataFiles().getTeams().size()) {
+                selectAll.setSelected(true);
+                teamsSelectionListView.getSelectionModel().selectAll();
+                listComboChamp = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
+                listComboSub = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
+                comboChamp.setItems(listComboChamp);
+                comboSub.setItems(listComboSub);
+            } else {
                 selectAll.setSelected(false);
 
                 teamsSelectionListView.getSelectionModel().clearSelection();
                 int[] array = new int[configuration.getTeamsIndexes().size()];
-                for (int i = 0; i < configuration.getTeamsIndexes().size(); i++){
+                for (int i = 0; i < configuration.getTeamsIndexes().size(); i++) {
                     array[i] = configuration.getTeamsIndexes().get(i);
                 }
                 teamsSelectionListView.getSelectionModel().selectIndices(-1, array);
@@ -391,27 +485,27 @@ public class ConfigurationCalendarController implements Initializable {
             }
 
 
-
-            if(configuration.isSecondRoundCalendar()){
+            if (configuration.isSecondRoundCalendar()) {
                 secondRoundButton.setSelected(true);
                 secondRoundButton.setText("Sí");
-                if (configuration.isSymmetricSecondRound()){
-                    lblSymmetricSecondRound.setVisible(true);
-                    symmetricSecondRound.setVisible(true);
+                lblSymmetricSecondRound.setVisible(true);
+                symmetricSecondRound.setVisible(true);
+                if (configuration.isSymmetricSecondRound()) {
+                    symmetricSecondRound.setSelected(true);
                     symmetricSecondRound.setText("Sí");
-                }
-                else{
-                    lblSymmetricSecondRound.setVisible(false);
-                    symmetricSecondRound.setVisible(false);
+                } else {
+                    symmetricSecondRound.setSelected(false);
                     symmetricSecondRound.setText("No");
                 }
-            }
-            else{
+            } else {
                 secondRoundButton.setSelected(false);
                 secondRoundButton.setText("No");
+                symmetricSecondRound.setSelected(false);
+                lblSymmetricSecondRound.setVisible(false);
+                symmetricSecondRound.setVisible(false);
             }
 
-            if(configuration.isChampionVsSecondPlace()){
+            if (configuration.isChampionVsSecondPlace()) {
                 champVsSub.setSelected(true);
 
                 champVsSub.setText("Sí");
@@ -422,8 +516,7 @@ public class ConfigurationCalendarController implements Initializable {
                 comboChamp.setValue(teams.get(configuration.getChampion()));
                 comboSub.setValue(teams.get(configuration.getSecondPlace()));
                 listComboSub.remove(teams.get(configuration.getChampion()));
-            }
-            else{
+            } else {
                 champVsSub.setText("No");
                 champVsSub.setSelected(false);
                 comboChamp.setVisible(false);
@@ -437,17 +530,15 @@ public class ConfigurationCalendarController implements Initializable {
             maxHomeGamesSpinner.getValueFactory().setValue(4);
             maxVisitorGamesSpinner.getValueFactory().setValue(4);
             ConfigurationCalendarController.teams = configuration.getTeamsIndexes().size();
-            if(configuration.isOccidenteVsOriente()){
+            if (configuration.isOccidenteVsOriente()) {
                 occidenteVsOrienteToggle.setSelected(true);
                 occidenteVsOrienteToggle.setText("Sí");
 
-            }else{
+            } else {
                 occidenteVsOrienteToggle.setSelected(false);
                 occidenteVsOrienteToggle.setText("No");
             }
         }
-
-
 
 
         notification = new TrayNotification();
@@ -590,139 +681,168 @@ public class ConfigurationCalendarController implements Initializable {
 
     void showTeamsMatrix() throws IOException {
 
-            //System.out.println(restIndices);
-            //TTPDefinition.getInstance().setRestIndexes(restIndices);
-            if (TTPDefinition.getInstance().isSecondRound()) {
+        //System.out.println(restIndices);
+        //TTPDefinition.getInstance().setRestIndexes(restIndices);
+        if (TTPDefinition.getInstance().isSecondRound()) {
 
-                TTPDefinition.getInstance().setDuelMatrix(generateMatrix(TTPDefinition.getInstance().getCantEquipos()));
-                StackPane stackPane = new StackPane();
+            TTPDefinition.getInstance().setDuelMatrix(generateMatrix(TTPDefinition.getInstance().getCantEquipos()));
+            StackPane stackPane = new StackPane();
 
-                JFXDialog jfxDialog = new JFXDialog();
-                JFXDialogLayout content = new JFXDialogLayout();
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/visual/CalendarService.fxml"));
-                AnchorPane progressContent = fxmlLoader.load();
-                CalendarServiceController serviceController = fxmlLoader.getController();
+            JFXDialog jfxDialog = new JFXDialog();
+            JFXDialogLayout content = new JFXDialogLayout();
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/visual/CalendarService.fxml"));
+            AnchorPane progressContent = fxmlLoader.load();
+            CalendarServiceController serviceController = fxmlLoader.getController();
 
-                content.setBody(progressContent);
+            content.setBody(progressContent);
 
-                jfxDialog.setContent(content);
-                //TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
-                jfxDialog.setDialogContainer(stackPane);
-                panel.getChildren().add(stackPane);
-                stackPane.setLayoutX(400);
-                stackPane.setLayoutY(200);
-                jfxDialog.setPrefHeight(105);
-                jfxDialog.setPrefWidth(432);
-                jfxDialog.show();
-                if (!TTPDefinition.getInstance().isOccidentVsOrient()) {
-                    TTPDefinition.getInstance().setNumberOfDates(TTPDefinition.getInstance().getTeamsIndexes().size() - 1);
+            jfxDialog.setContent(content);
+            //TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
+            jfxDialog.setDialogContainer(stackPane);
+            panel.getChildren().add(stackPane);
+            stackPane.setLayoutX(400);
+            stackPane.setLayoutY(200);
+            jfxDialog.setPrefHeight(105);
+            jfxDialog.setPrefWidth(432);
+            jfxDialog.show();
+            if (!TTPDefinition.getInstance().isOccidentVsOrient()) {
+                TTPDefinition.getInstance().setNumberOfDates(TTPDefinition.getInstance().getTeamsIndexes().size() - 1);
 
 
-                    ServiceCalendar service = new ServiceCalendar();
+                ServiceCalendar service = new ServiceCalendar();
 
-                    service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-                        @Override
-                        public void handle(WorkerStateEvent workerStateEvent) {
-                            AnchorPane structureOver = homeController.getPrincipalPane();
-                            try {
-                                //TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
-                                //Executer.getInstance().executeEC();
-                                homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
-                                homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
+                service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                    @Override
+                    public void handle(WorkerStateEvent workerStateEvent) {
+                        AnchorPane structureOver = homeController.getPrincipalPane();
+                        try {
+                            //TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
+                            //Executer.getInstance().executeEC();
+                            homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
+                            homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    });
 
-                    service.setOnRunning(new EventHandler<WorkerStateEvent>() {
-                        @Override
-                        public void handle(WorkerStateEvent workerStateEvent) {
-                            serviceController.getProgress().progressProperty().bind(service.progressProperty());
-                            serviceController.getLblProgress().textProperty().bindBidirectional((Property<String>) service.messageProperty());
+                    }
+                });
 
-
-                        }
-                    });
+                service.setOnRunning(new EventHandler<WorkerStateEvent>() {
+                    @Override
+                    public void handle(WorkerStateEvent workerStateEvent) {
+                        serviceController.getProgress().progressProperty().bind(service.progressProperty());
+                        serviceController.getLblProgress().textProperty().bindBidirectional((Property<String>) service.messageProperty());
 
 
-                    service.setOnFailed(new EventHandler<WorkerStateEvent>() {
-                        @Override
-                        public void handle(WorkerStateEvent workerStateEvent) {
-                            TrayNotification notification = new TrayNotification();
-                            notification.setTitle("Generar Calendarios");
-                            notification.setMessage("Ocurri\u00f3 un error y no se pudo generar los calendarios");
-                            notification.setNotificationType(NotificationType.ERROR);
-                            notification.setRectangleFill(Paint.valueOf("#2F2484"));
-                            notification.setAnimationType(AnimationType.FADE);
-                            notification.showAndDismiss(Duration.seconds(2));
-
-                        }
-                    });
-                    service.restart();
-                    //Executer.getInstance().executeEC();
-                } else {
-                    ServiceOccidentOrientCalendar serviceOccidentOrientCalendar = new ServiceOccidentOrientCalendar();
-
-                    serviceOccidentOrientCalendar.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-                        @Override
-                        public void handle(WorkerStateEvent workerStateEvent) {
-                            AnchorPane structureOver = homeController.getPrincipalPane();
-                            try {
-                                //TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
-                                //Executer.getInstance().executeEC();
-                                homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
-                                homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-
-                        }
-                    });
-
-                    serviceOccidentOrientCalendar.setOnRunning(new EventHandler<WorkerStateEvent>() {
-                        @Override
-                        public void handle(WorkerStateEvent workerStateEvent) {
-                            serviceController.getProgress().progressProperty().bind(serviceOccidentOrientCalendar.progressProperty());
-                            serviceController.getLblProgress().textProperty().bindBidirectional((Property<String>) serviceOccidentOrientCalendar.messageProperty());
+                    }
+                });
 
 
-                        }
-                    });
+                service.setOnFailed(new EventHandler<WorkerStateEvent>() {
+                    @Override
+                    public void handle(WorkerStateEvent workerStateEvent) {
+                        TrayNotification notification = new TrayNotification();
+                        notification.setTitle("Generar Calendarios");
+                        notification.setMessage("Ocurri\u00f3 un error y no se pudo generar los calendarios");
+                        notification.setNotificationType(NotificationType.ERROR);
+                        notification.setRectangleFill(Paint.valueOf("#2F2484"));
+                        notification.setAnimationType(AnimationType.FADE);
+                        notification.showAndDismiss(Duration.seconds(2));
 
-
-                    serviceOccidentOrientCalendar.setOnFailed(new EventHandler<WorkerStateEvent>() {
-                        @Override
-                        public void handle(WorkerStateEvent workerStateEvent) {
-                            TrayNotification notification = new TrayNotification();
-                            notification.setTitle("Generar Calendarios");
-                            notification.setMessage("Ocurri\u00f3 un error y no se pudo generar los calendarios");
-                            notification.setNotificationType(NotificationType.ERROR);
-                            notification.setRectangleFill(Paint.valueOf("#2F2484"));
-                            notification.setAnimationType(AnimationType.FADE);
-                            notification.showAndDismiss(Duration.seconds(2));
-
-                        }
-                    });
-                    serviceOccidentOrientCalendar.restart();
-
-                }
-
-
+                    }
+                });
+                service.restart();
+                //Executer.getInstance().executeEC();
             } else {
+                ServiceOccidentOrientCalendar serviceOccidentOrientCalendar = new ServiceOccidentOrientCalendar();
+
+                serviceOccidentOrientCalendar.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                    @Override
+                    public void handle(WorkerStateEvent workerStateEvent) {
+                        AnchorPane structureOver = homeController.getPrincipalPane();
+                        try {
+                            //TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
+                            //Executer.getInstance().executeEC();
+                            homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
+                            homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+
+                serviceOccidentOrientCalendar.setOnRunning(new EventHandler<WorkerStateEvent>() {
+                    @Override
+                    public void handle(WorkerStateEvent workerStateEvent) {
+                        serviceController.getProgress().progressProperty().bind(serviceOccidentOrientCalendar.progressProperty());
+                        serviceController.getLblProgress().textProperty().bindBidirectional((Property<String>) serviceOccidentOrientCalendar.messageProperty());
 
 
-                AnchorPane structureOver = homeController.getPrincipalPane();
-                homeController.createPage(new SelectGridController(), structureOver, "/visual/SelectGrid.fxml");
+                    }
+                });
 
-                homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
+
+                serviceOccidentOrientCalendar.setOnFailed(new EventHandler<WorkerStateEvent>() {
+                    @Override
+                    public void handle(WorkerStateEvent workerStateEvent) {
+                        TrayNotification notification = new TrayNotification();
+                        notification.setTitle("Generar Calendarios");
+                        notification.setMessage("Ocurri\u00f3 un error y no se pudo generar los calendarios");
+                        notification.setNotificationType(NotificationType.ERROR);
+                        notification.setRectangleFill(Paint.valueOf("#2F2484"));
+                        notification.setAnimationType(AnimationType.FADE);
+                        notification.showAndDismiss(Duration.seconds(2));
+
+                    }
+                });
+                serviceOccidentOrientCalendar.restart();
+
             }
+
+
+        } else {
+
+
+            AnchorPane structureOver = homeController.getPrincipalPane();
+            homeController.createPage(new SelectGridController(), structureOver, "/visual/SelectGrid.fxml");
+
+            homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
+        }
 
     }
 
     void showAdvanceConfiguration() throws IOException {
+        savedConfiguration = true;
+        selectedIndexes = new ArrayList<>(teamsSelectionListView.getSelectionModel().getSelectedIndices());
+        teamsNames = new ArrayList<>();
+        teams = selectedIndexes.size();
+
+        int posChampion = -1;
+        int posSub = -1;
+        if (champVsSub.isSelected()) {
+            String champion = comboChamp.getSelectionModel().getSelectedItem();
+            String subchampion = comboSub.getSelectionModel().getSelectedItem();
+            posChampion = DataFiles.getSingletonDataFiles().getTeams().indexOf(champion);
+            posSub = DataFiles.getSingletonDataFiles().getTeams().indexOf(subchampion);
+        }
+
+        secondRound = secondRoundButton.isSelected();
+        int localGames = maxHomeGamesSpinner.getValueFactory().getValue();
+        int visitorGames = maxVisitorGamesSpinner.getValueFactory().getValue();
+
+        TTPDefinition.getInstance().setTeamIndexes(selectedIndexes);
+        TTPDefinition.getInstance().setSymmetricSecondRound(symmetricSecondRound.isSelected());
+        TTPDefinition.getInstance().setSecondRound(secondRound);
+        TTPDefinition.getInstance().setCantVecesLocal(localGames);
+        TTPDefinition.getInstance().setCantVecesVisitante(visitorGames);
+        TTPDefinition.getInstance().setChampionVsSub(champVsSub.isSelected());
+        TTPDefinition.getInstance().setFirstPlace(posChampion);
+        TTPDefinition.getInstance().setSecondPlace(posSub);
+        TTPDefinition.getInstance().setInauguralGame(inauguralGame.isSelected());
+        TTPDefinition.getInstance().setOccidentVsOrient(occidenteVsOrienteToggle.isSelected());
+        TTPDefinition.getInstance().setCalendarId(calendarId.getText());
         AnchorPane structureOver = homeController.getPrincipalPane();
         homeController.createPage(new AdvanceConfigurationController(), structureOver, "/visual/AdvanceConfiguration.fxml");
         homeController.getButtonReturnSelectionTeamConfiguration().setVisible(false);
@@ -741,7 +861,7 @@ public class ConfigurationCalendarController implements Initializable {
     }
 
     @FXML
-    void showRest(ActionEvent event) throws IOException  {
+    void showRest(ActionEvent event) throws IOException {
         teams = teamsSelectionListView.getSelectionModel().getSelectedIndices().size();
         secondRound = secondRoundButton.isSelected();
         inaugural = inauguralGame.isSelected();

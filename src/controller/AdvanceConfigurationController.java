@@ -4,11 +4,13 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXToggleButton;
+import definition.TTPDefinition;
 import execute.Executer;
 import javafx.scene.control.*;
 import operators.heuristics.HeuristicOperatorType;
 import operators.mutation.MutationOperatorType;
 import org.controlsfx.control.CheckListView;
+import utils.CalendarConfiguration;
 import utils.DataFiles;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -65,6 +67,8 @@ public class AdvanceConfigurationController implements Initializable {
     @FXML
     private JFXRadioButton radioRS;
 
+    private CalendarConfiguration configuration;
+
 
     public AdvanceConfigurationController() {
     }
@@ -72,6 +76,12 @@ public class AdvanceConfigurationController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        configuration = new CalendarConfiguration(
+                TTPDefinition.getInstance().getCalendarId(), TTPDefinition.getInstance().getTeamsIndexes(), TTPDefinition.getInstance().isInauguralGame(),
+                TTPDefinition.getInstance().isChampionVsSub(), TTPDefinition.getInstance().getFirstPlace(),
+                TTPDefinition.getInstance().getSecondPlace(),TTPDefinition.getInstance().isSecondRound(), TTPDefinition.getInstance().isSymmetricSecondRound(),
+                TTPDefinition.getInstance().isOccidentVsOrient(), TTPDefinition.getInstance().getCantVecesLocal(),
+                TTPDefinition.getInstance().getCantVecesVisitante(), null,null);
         iterationsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,Integer.MAX_VALUE, Executer.getInstance().getITERATIONS()));
         executionsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,Integer.MAX_VALUE, Executer.getInstance().getEXECUTIONS()));
         List<String> mutations = DataFiles.getSingletonDataFiles().getMutations();

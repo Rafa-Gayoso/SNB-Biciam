@@ -963,6 +963,16 @@ public class DataFiles implements ICreateInitialSolution {
             cellMoreTeamDistance.setCellStyle(style);
             cellMoreTeamDistance.setCellValue(data.getMoreTeamDistance());
 
+            Cell cellLocalRestriction = row.createCell(6);
+            cellLocalRestriction.setCellStyle(style);
+            cellLocalRestriction.setCellValue(data.getLocalRestrictionsVioleted());
+
+
+
+            Cell cellvisitorlRestriction = row.createCell(7);
+            cellvisitorlRestriction.setCellStyle(style);
+            cellvisitorlRestriction.setCellValue(data.getVisitorRestrictionsVioleted());
+
 
         }
 

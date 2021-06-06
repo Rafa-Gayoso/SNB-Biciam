@@ -178,14 +178,28 @@ public class MutationsConfigurationController implements Initializable {
 
         int dates = calendar.getCode().size();
         boolean inaugural = configuration.isInauguralGame();
-        for (int i = 0; i < dates; i++) {
-            if (inaugural && (i == 0)) {
-                i++;
+        boolean symmetric = configuration.isSymmetricSecondRound();
+
+        if(symmetric){
+            for (int i = 0; i < dates/2; i++) {
+                if (inaugural && (i == 0)) {
+                    i++;
+                }
+                String date = "Fecha " + (i + 1);
+                comboDate1.getItems().add(date);
+                comboDate2.getItems().add(date);
             }
-            String date = "Fecha " + (i + 1);
-            comboDate1.getItems().add(date);
-            comboDate2.getItems().add(date);
+        }else {
+            for (int i = 0; i < dates; i++) {
+                if (inaugural && (i == 0)) {
+                    i++;
+                }
+                String date = "Fecha " + (i + 1);
+                comboDate1.getItems().add(date);
+                comboDate2.getItems().add(date);
+            }
         }
+
 
         for (int i = 0; i < configuration.getTeamsIndexes().size(); i++) {
 
@@ -193,6 +207,7 @@ public class MutationsConfigurationController implements Initializable {
             comboTeam1.getItems().add(team);
             comboTeam2.getItems().add(team);
         }
+
         comboBoxValidation(comboDate1, comboDuel1);
         comboBoxValidation(comboDate2, comboDuel2);
         comboBoxTeamValidation(comboTeam1,comboTeam2);
