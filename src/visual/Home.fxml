@@ -2,10 +2,9 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -36,12 +35,11 @@
                         <rowConstraints>
                             <RowConstraints maxHeight="357.0" minHeight="0.0" percentHeight="16.6" prefHeight="0.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" percentHeight="16.6" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="357.0" minHeight="10.0" percentHeight="16.6" prefHeight="149.0" vgrow="SOMETIMES" />
                             <RowConstraints maxHeight="357.0" minHeight="10.0" percentHeight="16.6" prefHeight="184.0" vgrow="SOMETIMES" />
                             <RowConstraints maxHeight="357.0" minHeight="10.0" percentHeight="16.6" prefHeight="26.0" vgrow="SOMETIMES" />
                         </rowConstraints>
                         <children>
-                            <JFXButton fx:id="buttonInfromation" alignment="CENTER_RIGHT" buttonType="RAISED" graphicTextGap="10.0" onAction="#showInformation" prefHeight="66.0" prefWidth="166.0" ripplerFill="WHITE" stylesheets="@../styles/PrincipalMenu.css" text="Ayuda     " textAlignment="RIGHT" textFill="WHITE" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                            <JFXButton fx:id="buttonInfromation" alignment="CENTER_RIGHT" buttonType="RAISED" graphicTextGap="10.0" onAction="#showInformation" prefHeight="66.0" prefWidth="166.0" ripplerFill="WHITE" stylesheets="@../styles/PrincipalMenu.css" text="Ayuda     " textAlignment="RIGHT" textFill="WHITE" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                                 <font>
                                     <Font name="Segoe UI Symbol" size="16.0" />
                                 </font>
@@ -77,32 +75,6 @@
                                     <Tooltip text="Calendario generado para el torneo" />
                                 </tooltip>
                             </JFXButton>
-                            <JFXButton fx:id="buttonExportCalendar" alignment="CENTER_RIGHT" buttonType="RAISED" graphicTextGap="12.0" lineSpacing="10.0" onAction="#exportCalendar" prefHeight="66.0" prefWidth="166.0" ripplerFill="WHITE" stylesheets="@../styles/PrincipalMenu.css" text="Exportar  " textAlignment="RIGHT" textFill="WHITE" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-                                <font>
-                                    <Font name="Segoe UI Symbol" size="16.0" />
-                                </font>
-                                <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                </cursor>
-                                <graphic>
-                                    <ImageView fitHeight="62.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                                        <image>
-                                            <Image url="@../resources/importar.png" />
-                                        </image>
-                                    </ImageView>
-                                </graphic>
-                                <tooltip>
-                                    <Tooltip text="Permite importar un calendario desde un fichero Excel y modificarlo" />
-                                </tooltip>
-                        <contextMenu>
-                           <ContextMenu>
-                             <items>
-                               <MenuItem fx:id="exportCalendar" onAction="#exportSelectedCalendar" text="Exportar Calendario Seleccionado" />
-                                 <MenuItem fx:id="exportAllCalendar" mnemonicParsing="false" onAction="#exportAllCalendar" text="Exportar todos los calendarios" />
-                             </items>
-                           </ContextMenu>
-                        </contextMenu>
-                            </JFXButton>
                      <JFXButton fx:id="buttonImportCalendar" alignment="CENTER_RIGHT" buttonType="RAISED" graphicTextGap="12.0" onAction="#importCalendar" prefHeight="66.0" prefWidth="166.0" ripplerFill="WHITE" stylesheets="@../styles/PrincipalMenu.css" text="Importar  " textAlignment="RIGHT" textFill="WHITE" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                         <font>
                            <Font name="Segoe UI Symbol" size="16.0" />
@@ -121,7 +93,7 @@
                            <Tooltip text="Permite importar un calendario desde un fichero Excel y modificarlo" />
                         </tooltip>
                      </JFXButton>
-                     <JFXButton fx:id="dataBtn" alignment="CENTER_RIGHT" buttonType="RAISED" graphicTextGap="12.0" onAction="#showData" prefHeight="66.0" prefWidth="166.0" ripplerFill="WHITE" stylesheets="@../styles/PrincipalMenu.css" text="Datos     " textAlignment="RIGHT" textFill="WHITE" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                     <JFXButton fx:id="dataBtn" alignment="CENTER_RIGHT" buttonType="RAISED" graphicTextGap="12.0" onAction="#showData" prefHeight="66.0" prefWidth="166.0" ripplerFill="WHITE" stylesheets="@../styles/PrincipalMenu.css" text="Datos     " textAlignment="RIGHT" textFill="WHITE" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                         <font>
                            <Font name="Segoe UI Symbol" size="16.0" />
                         </font>
@@ -144,16 +116,19 @@
                 </children>
             </AnchorPane>
             <AnchorPane fx:id="pane" prefHeight="657.0" prefWidth="1152.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
-                <ImageView fx:id="logo" fitHeight="500.0" fitWidth="516.0" layoutX="338.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="logo" fitHeight="430.0" fitWidth="476.0" layoutX="347.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../resources/snb.png" />
                 </ImageView>
-                <Label fx:id="information" layoutX="353.0" layoutY="511.0" prefHeight="104.0" prefWidth="516.0" text="bn" textFill="#2f1a84">
-                    <font>
-                        <Font name="Segoe UI Symbol" size="35.0" />
-                    </font>
-                </Label>
+            <Label alignment="CENTER" layoutX="179.0" layoutY="477.0" prefHeight="117.0" prefWidth="776.0" text="Serie Nacional de Beísbol" textFill="#2f2484">
+               <font>
+                  <Font name="Segoe UI Symbol" size="64.0" />
+               </font>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </Label>
             </AnchorPane>
-              <ImageView fitHeight="136.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+              <ImageView fx:id="imgSuperior" fitHeight="136.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                   <image>
                       <Image url="@../resources/snb1.png" />
                   </image>
@@ -169,10 +144,16 @@
                       <FontAwesomeIconView fill="#2f2484" glyphName="CHEVRON_LEFT" size="60" />
                   </graphic>
               </JFXButton>
-              <Label prefHeight="117.0" prefWidth="768.0" text="Serie Nacional de Beísbol" textFill="#2f2484" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+              <Label fx:id="lblSuperior" alignment="CENTER" prefHeight="117.0" prefWidth="776.0" text="Serie Nacional de Beísbol" textFill="#2f2484" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                   <font>
                       <Font name="Segoe UI Symbol" size="64.0" />
                   </font>
+            <padding>
+               <Insets left="20.0" />
+            </padding>
+            <GridPane.margin>
+               <Insets left="50.0" />
+            </GridPane.margin>
               </Label>
         </children>
     </GridPane>

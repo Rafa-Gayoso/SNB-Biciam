@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.SelectionMode;
 import javafx.stage.Stage;
+import org.controlsfx.control.CheckListView;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,11 +22,12 @@ public class RestSelectorController implements Initializable {
 
     private HomeController homeController;
 
-    @FXML
-    private JFXListView<String> restList;
 
     @FXML
     private JFXButton saveBtn;
+
+    @FXML
+    private CheckListView<String> checkBoxListView;
 
 
     @Override
@@ -54,21 +56,22 @@ public class RestSelectorController implements Initializable {
             }
         }
 
-        restList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        restList.setItems(FXCollections.observableArrayList(dates));
+
+
+        checkBoxListView.setItems(FXCollections.observableArrayList(dates));
 
     }
 
 
     @FXML
     void save(ActionEvent event) {
-        ArrayList<Integer> indices = new ArrayList<>(restList.getSelectionModel().getSelectedIndices());
+        ArrayList<Integer> indices = new ArrayList<>(checkBoxListView.getCheckModel().getCheckedIndices());
 
         ArrayList<Integer> restIndices = (ArrayList<Integer>) indices.stream().map(i -> i+1).collect(Collectors.toList());
         System.out.println(restIndices);
         TTPDefinition.getInstance().setRestIndexes(restIndices);
 
-        Stage stage = (Stage) restList.getScene().getWindow();
+        Stage stage = (Stage) checkBoxListView.getScene().getWindow();
         stage.close();
     }
 

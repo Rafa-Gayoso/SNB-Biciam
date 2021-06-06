@@ -1,6 +1,7 @@
 package utils;
 
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -12,16 +13,21 @@ public class TableStatisticsData {
     private SimpleDoubleProperty calendarDistance;
     private SimpleDoubleProperty lessTeamDistance;
     private SimpleDoubleProperty moreTeamDistance;
+    private SimpleIntegerProperty localRestrictionsVioleted;
+    private SimpleIntegerProperty visitorRestrictionsVioleted;
 
 
     public TableStatisticsData(String calendarId, String lessTeam, String moreTeam, double calendarDistance,
-                               double lessTeamDistance, double moreTeamDistance){
+                               double lessTeamDistance, double moreTeamDistance, int localRestrictionsVioleted,
+                               int visitorRestrictionsVioleted){
         this.calendarId = new SimpleStringProperty(calendarId);
         this.lessTeam = new SimpleStringProperty(lessTeam);
         this.moreTeam = new SimpleStringProperty(moreTeam);
         this.calendarDistance = new SimpleDoubleProperty(calendarDistance);
         this.lessTeamDistance = new SimpleDoubleProperty(lessTeamDistance);
         this.moreTeamDistance = new SimpleDoubleProperty(moreTeamDistance);
+        this.localRestrictionsVioleted = new SimpleIntegerProperty(localRestrictionsVioleted);
+        this.visitorRestrictionsVioleted = new SimpleIntegerProperty(visitorRestrictionsVioleted);
     }
 
 
@@ -95,5 +101,29 @@ public class TableStatisticsData {
 
     public void setMoreTeamDistance(double moreTeamDistance) {
         this.moreTeamDistance.set(moreTeamDistance);
+    }
+
+    public int getLocalRestrictionsVioleted() {
+        return localRestrictionsVioleted.get();
+    }
+
+    public SimpleIntegerProperty localRestrictionsVioletedProperty() {
+        return localRestrictionsVioleted;
+    }
+
+    public void setLocalRestrictionsVioleted(int localRestrictionsVioleted) {
+        this.localRestrictionsVioleted.set(localRestrictionsVioleted);
+    }
+
+    public int getVisitorRestrictionsVioleted() {
+        return visitorRestrictionsVioleted.get();
+    }
+
+    public SimpleIntegerProperty visitorRestrictionsVioletedProperty() {
+        return visitorRestrictionsVioleted;
+    }
+
+    public void setVisitorRestrictionsVioleted(int visitorRestrictionsVioleted) {
+        this.visitorRestrictionsVioleted.set(visitorRestrictionsVioleted);
     }
 }

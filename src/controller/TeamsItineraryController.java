@@ -49,6 +49,10 @@ public class TeamsItineraryController implements Initializable {
     @FXML
     private TableColumn<ObservableList, String> colDates;
 
+    @FXML
+    private JFXButton showIAlltinerar;
+
+
 
 
 
@@ -143,6 +147,55 @@ public class TeamsItineraryController implements Initializable {
 
     public void setHomeController(HomeController homeController) {
         this.homeController = homeController;
+    }
+
+
+    @FXML
+    void displayAllItinerary(ActionEvent event) {
+        data = FXCollections.observableArrayList();
+
+
+        itineraryTable.getColumns().removeAll(itineraryTable.getColumns());
+        itineraryTable.setItems(FXCollections.observableArrayList(new ArrayList<>()));
+        ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(calendar);
+        teamsListView.getSelectionModel().selectAll();
+        ArrayList<Integer> selectedTeams = new ArrayList<>(teamsListView.getSelectionModel().getSelectedIndices());
+        colDates = new TableColumn("Fecha");
+        colDates.setPrefWidth(92);
+        int index=0;
+        for (int selectedTeam : selectedTeams) {
+            final int j= index;
+            if(index == 0){
+                itineraryTable.getColumns().add(colDates);
+            }
+            colDates.setCellValueFactory(
+                    param1 -> new SimpleStringProperty(param1.getValue().get(0).toString()));
+            TableColumn<ObservableList, String> col = new TableColumn(DataFiles.getSingletonDataFiles().getAcronyms().get(selectedTeam));
+            col.setCellValueFactory(
+                    param -> new SimpleStringProperty(param.getValue().get(j+1).toString()));
+
+            index++;
+            itineraryTable.getColumns().add(col);
+        }
+
+        int date = 0;
+        for(int i=1; i < itinerary.size()-1;i++){
+            ObservableList<String> row = FXCollections.observableArrayList();
+
+            ArrayList<Integer> current = itinerary.get(i);
+            if(!compareArrays(current, config.getTeamsIndexes())) {
+                date++;
+                row.add(Integer.toString(date));
+                for (int selectedTeam : selectedTeams) {
+                    row.add(DataFiles.getSingletonDataFiles().getAcronyms().get(current.get(selectedTeam)));
+                }
+                System.out.println(row);
+                data.add(row);
+            }
+
+        }
+
+        itineraryTable.setItems(data);
     }
 
 

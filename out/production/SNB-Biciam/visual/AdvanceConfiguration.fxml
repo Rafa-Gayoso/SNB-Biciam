@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -12,6 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.CheckListView?>
 
 <AnchorPane prefHeight="632.0" prefWidth="1176.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdvanceConfigurationController">
    <children>
@@ -66,16 +66,8 @@
                   <Font name="Segoe UI Symbol" size="30.0" />
                </font>
             </Label>
-            <JFXListView fx:id="mutationListView" prefHeight="289.0" prefWidth="542.0" stylesheets="@../styles/PrincipalMenu.css" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXListView>
-            <JFXListView fx:id="heuristicsListView" prefHeight="357.0" prefWidth="545.0" stylesheets="@../styles/PrincipalMenu.css" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXListView>
+            <CheckListView fx:id="mutationsCheckBox" stylesheets="@../styles/PrincipalMenu.css" GridPane.rowIndex="3" />
+            <CheckListView fx:id="heuristicsCheckBox" stylesheets="@../styles/PrincipalMenu.css" GridPane.columnIndex="2" GridPane.rowIndex="3" />
          </children>
       </GridPane>
       <GridPane layoutX="9.0" layoutY="490.0" prefHeight="74.0" prefWidth="1159.0" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="490.0">

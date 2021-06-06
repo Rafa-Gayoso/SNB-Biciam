@@ -193,4 +193,12 @@
     );
 }
 
+.menu-button .text{
+    -fx-fill: white;
+}
+
+#exportSelect .text, #exportAll .text{
+    -fx-fill: black;
+}
+
 

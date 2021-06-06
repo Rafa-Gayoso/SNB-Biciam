@@ -12,7 +12,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import operators.initialSolution.InitialSolutionType;
 import problem.definition.State;
+import utils.DataFiles;
+import utils.Distance;
+import utils.Statistics;
 
+import javax.xml.crypto.Data;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -35,7 +39,24 @@ public class RestrictionsController {
     private Label lblVisitorNumber;
 
     @FXML
-    private Label lblLongTripNumber;
+    private Label lblDistanceText;
+
+    @FXML
+    private Label lblVisitorText2;
+
+    @FXML
+    private Label lblVisitorText3;
+
+    @FXML
+    private Label lblDisttance;
+
+    @FXML
+    private Label lblLessTeam;
+
+    @FXML
+    private Label lblMoreTeam;
+
+
 
 
 
@@ -74,7 +95,17 @@ public class RestrictionsController {
             lblVisitorText.setTextFill(Color.web("#a52727"));
             lblVisitorNumber.setTextFill(Color.web("#a52727"));
         }
+        ArrayList<ArrayList<Double>> itineraryDistance = Distance.getInstance().itineraryDistances(calendar);
 
+        lblDisttance.setText(Double.toString(((CalendarState)calendar).getDistance()));
+        Statistics.getInstance().lessStatistics(itineraryDistance);
+        String team = Statistics.getInstance().getTeam();
+        int pos = DataFiles.getSingletonDataFiles().getTeams().indexOf(team);
+        lblLessTeam.setText(DataFiles.getSingletonDataFiles().getAcronyms().get(pos));
+        Statistics.getInstance().moreStatistics(itineraryDistance);
+        team = Statistics.getInstance().getTeam();
+        pos = DataFiles.getSingletonDataFiles().getTeams().indexOf(team);
+        lblMoreTeam.setText(DataFiles.getSingletonDataFiles().getAcronyms().get(pos));
 
     }
 

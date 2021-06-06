@@ -8,6 +8,7 @@ import execute.Executer;
 import javafx.scene.control.*;
 import operators.heuristics.HeuristicOperatorType;
 import operators.mutation.MutationOperatorType;
+import org.controlsfx.control.CheckListView;
 import utils.DataFiles;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -32,10 +33,6 @@ public class AdvanceConfigurationController implements Initializable {
 
     private TrayNotification notification;
 
-    @FXML
-    private JFXListView<String> mutationListView;
-    @FXML
-    private JFXListView<String> heuristicsListView;
 
     @FXML
     private Spinner<Integer> iterationsSpinner;
@@ -48,6 +45,12 @@ public class AdvanceConfigurationController implements Initializable {
     private JFXButton select;
 
     public static boolean ok = true;
+
+    @FXML
+    private CheckListView<String> mutationsCheckBox;
+
+    @FXML
+    private CheckListView<String> heuristicsCheckBox;
 
 
     @FXML
@@ -73,29 +76,33 @@ public class AdvanceConfigurationController implements Initializable {
         executionsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,Integer.MAX_VALUE, Executer.getInstance().getEXECUTIONS()));
         List<String> mutations = DataFiles.getSingletonDataFiles().getMutations();
 
-        mutationListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        //mutationListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        mutationListView.setItems(FXCollections.observableList(mutations));
+        mutationsCheckBox.setItems(FXCollections.observableList(mutations));
 
-        mutationListView.getSelectionModel().selectAll();
+
+            mutationsCheckBox.getCheckModel().checkAll();
+
+
 
         List<String> heuristics = DataFiles.getSingletonDataFiles().getHeuristics();
 
-        heuristicsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+       // heuristicsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        heuristicsListView.setItems(FXCollections.observableList(heuristics));
+        heuristicsCheckBox.setItems(FXCollections.observableList(heuristics));
 
         if(Executer.getInstance().getHeuristics().size() == 0){
-            heuristicsListView.getSelectionModel().selectAll();
+
+                heuristicsCheckBox.getCheckModel().checkAll();
         }
         else{
-            heuristicsListView.getSelectionModel().clearSelection();
+            heuristicsCheckBox.getCheckModel().clearChecks();
             int[] array = new int[Executer.getInstance().getHeuristics().size()];
             for (int i = 0; i <Executer.getInstance().getHeuristics().size(); i++){
                 HeuristicOperatorType heuristicOperatorType = Executer.getInstance().getHeuristics().get(i);
                 array[i] = heuristicOperatorType.ordinal();
             }
-            heuristicsListView.getSelectionModel().selectIndices(-1, array);
+            heuristicsCheckBox.getCheckModel().checkIndices(array);
         }
 
 
@@ -128,8 +135,8 @@ public class AdvanceConfigurationController implements Initializable {
     @FXML
     void saveNewAdvancesConfigurations(ActionEvent event) throws IOException {
 
-        ArrayList<Integer> indexesMutations = new ArrayList<>(mutationListView.getSelectionModel().getSelectedIndices());
-        ArrayList<Integer> indexesHeuristics = new ArrayList<>(heuristicsListView.getSelectionModel().getSelectedIndices());
+        ArrayList<Integer> indexesMutations = new ArrayList<>(mutationsCheckBox.getCheckModel().getCheckedIndices());
+        ArrayList<Integer> indexesHeuristics = new ArrayList<>(heuristicsCheckBox.getCheckModel().getCheckedIndices());
         if (indexesMutations.isEmpty()) {
             notification = getNotification();
             notification.setTitle("Selecci\u00f3n de cambios");

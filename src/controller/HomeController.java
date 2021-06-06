@@ -7,15 +7,18 @@ import eu.mihosoft.scaledfx.ScalableContentPane;
 import execute.Executer;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
@@ -42,6 +45,8 @@ public class HomeController implements Initializable {
     private File file;
     private static HomeController singletonController;
 
+    @FXML
+    private ContextMenu contextMenu;
     @FXML
     private MenuItem exportCalendar;
 
@@ -78,6 +83,8 @@ public class HomeController implements Initializable {
     @FXML
     private JFXButton buttonReturnSelectionTeamConfiguration;
 
+
+
     @FXML
     private JFXButton buttonExportCalendar;
 
@@ -87,6 +94,14 @@ public class HomeController implements Initializable {
 
     @FXML
     private JFXButton buttonInfromation;
+
+    @FXML
+    private ImageView imgSuperior;
+
+    @FXML
+    private Label lblSuperior;
+
+    private boolean areVisible;
 
 
     public JFXButton getButtonReturnSelectionTeamConfiguration() {
@@ -194,9 +209,8 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        areVisible = false;
 
-        int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
-        information.setText(" " + (year - 1960) + " Serie Nacional de Be\u00edsbol");
         buttonReturnSelectionTeamConfiguration.setVisible(false);
     }
 
@@ -232,18 +246,29 @@ public class HomeController implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(HomeController.class.getResource(loc));
         anchorPane = loader.load();
+        if(!areVisible){
+            lblSuperior.setVisible(true);
+            FadeTransition ft = new FadeTransition(Duration.millis(2000));
+            ft.setNode(lblSuperior);
+            ft.setFromValue(0.1);
+            ft.setToValue(1);
+            ft.setCycleCount(1);
+            ft.setAutoReverse(false);
+            ft.play();
+            areVisible = true;
+        }
 
         if (object instanceof MutationsConfigurationController) {
 
             Parent root = FXMLLoader.load(getClass().getResource("/visual/MutationsConfiguration.fxml"));
             Stage stage = new Stage();
-            ScalableContentPane scale = new ScalableContentPane();
-            scale.setContent(anchorPane);
+           /* ScalableContentPane scale = new ScalableContentPane();
+            scale.setContent(anchorPane);*/
 
             stage.setTitle("Configuraci\u00f3n de las mutaciones");
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
             stage.setResizable(true);
-            stage.setScene(new Scene(scale));
+            stage.setScene(new Scene(root));
 
             object = loader.getController();
             ((MutationsConfigurationController) object).setHomeController(this);
@@ -378,6 +403,7 @@ public class HomeController implements Initializable {
 
 
 
+
     @FXML
     void exportSelectedCalendar(ActionEvent event) {
         /*int calendarToExport = CalendarController.selectedCalendar;
@@ -425,4 +451,8 @@ public class HomeController implements Initializable {
             DataFiles.getSingletonDataFiles().exportItinerary(all);
         }
     }
+
+
+
+
 }

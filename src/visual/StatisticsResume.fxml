@@ -8,9 +8,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="494.0" prefWidth="1319.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StatisticsResumeController">
+<AnchorPane minHeight="400.0" minWidth="600.0" prefHeight="494.0" prefWidth="1876.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StatisticsResumeController">
    <children>
-      <TableView fx:id="statisticsTable" layoutX="-5.0" layoutY="-6.0" prefHeight="503.0" prefWidth="1326.0" stylesheets="@../styles/statictisTable.css" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="-6.0">
+      <TableView fx:id="statisticsTable" layoutX="-5.0" layoutY="-6.0" minWidth="600.0" prefHeight="503.0" prefWidth="1886.0" stylesheets="@../styles/statictisTable.css" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-6.0">
         <columns>
           <TableColumn fx:id="calendarColumn" prefWidth="180.00003051757812" text="Calendario" />
           <TableColumn fx:id="calendarDistanceColumn" prefWidth="140.0" text="Distancia(Km)" />
@@ -18,6 +18,8 @@
             <TableColumn fx:id="teamLessDistanceColumn" prefWidth="144.0" text="Distancia(Km)" />
             <TableColumn fx:id="teamMoreNameColumn" prefWidth="347.0" text="Equipo que menor distancia recorre" />
             <TableColumn fx:id="teamMoreDistanceColumn" prefWidth="157.0" text="Distancia(Km)" />
+            <TableColumn fx:id="localRestrictionsColum" prefWidth="263.0" text="Equipos más veces de local" />
+            <TableColumn fx:id="visitorRestrictionsColum" prefWidth="297.0" text="Equipos más veces de visitante" />
         </columns>
          <contextMenu>
             <ContextMenu>

@@ -20,7 +20,7 @@
 
 <AnchorPane fx:id="panel" minHeight="632.0" minWidth="1148.0" prefHeight="632.0" prefWidth="1148.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" GridPane.columnSpan="2" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ConfigurationCalendarController">
     <children>
-      <GridPane layoutX="21.0" layoutY="14.0" prefHeight="591.0" prefWidth="1106.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="14.0">
+      <GridPane layoutX="19.0" layoutY="22.0" prefHeight="583.0" prefWidth="1108.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="14.0">
         <columnConstraints>
             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="506.0" minWidth="10.0" prefWidth="427.0" />
           <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="506.0" minWidth="10.0" prefWidth="328.0" />
@@ -56,7 +56,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                <tooltip>
-                  <Tooltip text="El calendario será a doble vuelta">
+                  <Tooltip text="El calendario será a doble vuelta o simple vuelta. ">
                      <font>
                         <Font name="Segoe UI Emoji" size="24.0" />
                      </font>
@@ -257,7 +257,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                <tooltip>
-                  <Tooltip text="Los enfrentamientos de la segunda vuelta se efectuarán en el mismo orden de la primera vuelta">
+                  <Tooltip text="Primero se realizarán enfrentamientos entre equipos de la misma región y luego se enfrentarán las dos regiones">
                      <font>
                         <Font name="Segoe UI Emoji" size="24.0" />
                      </font>
