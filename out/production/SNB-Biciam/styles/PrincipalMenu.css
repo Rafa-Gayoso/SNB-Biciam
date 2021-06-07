@@ -197,7 +197,7 @@
     -fx-fill: white;
 }
 
-#exportSelect .text, #exportAll .text{
+#exportSelect .text, #exportAll .text, #statistics .text,#statisticsResume .text{
     -fx-fill: black;
 }
 

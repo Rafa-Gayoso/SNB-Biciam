@@ -83,7 +83,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="buttonApplyMuttations" buttonType="RAISED" layoutX="891.0" layoutY="657.0" onAction="#applyMutations" prefHeight="46.0" prefWidth="226.0" stylesheets="@../styles/PrincipalMenu.css" text="Aplicar mutaciones" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="891.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="657.0">
+      <JFXButton fx:id="buttonApplyMuttations" buttonType="RAISED" layoutX="896.0" layoutY="615.0" onAction="#applyMutations" prefHeight="46.0" prefWidth="231.0" stylesheets="@../styles/PrincipalMenu.css" text="Aplicar mutaciones" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="896.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="615.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -91,12 +91,12 @@
             <Font name="Segoe UI Emoji" size="20.0" />
          </font>
       </JFXButton>
-      <Label layoutX="888.0" layoutY="585.0" prefHeight="30.0" prefWidth="118.0" text="Iteraciones" textFill="#2f2484" AnchorPane.bottomAnchor="135.0" AnchorPane.leftAnchor="888.0" AnchorPane.rightAnchor="141.0" AnchorPane.topAnchor="585.0">
+      <Label layoutX="889.0" layoutY="547.0" prefHeight="30.0" prefWidth="118.0" text="Iteraciones" textFill="#2f2484" AnchorPane.bottomAnchor="173.0" AnchorPane.leftAnchor="889.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="547.0">
          <font>
             <Font name="Segoe UI Emoji" size="21.0" />
          </font>
       </Label>
-      <Spinner fx:id="iterations" editable="true" layoutX="1002.0" layoutY="567.0" prefHeight="46.0" prefWidth="127.0" stylesheets="@../styles/PrincipalMenu.css" AnchorPane.bottomAnchor="135.0" AnchorPane.leftAnchor="1002.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="567.0" />
+      <Spinner fx:id="iterations" editable="true" layoutX="1003.0" layoutY="529.0" prefHeight="46.0" prefWidth="127.0" stylesheets="@../styles/PrincipalMenu.css" AnchorPane.bottomAnchor="173.0" AnchorPane.leftAnchor="1003.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="529.0" />
       <JFXListView fx:id="selectedMutationListView" layoutX="26.0" layoutY="421.0" prefHeight="307.0" prefWidth="832.0" stylesheets="@../styles/PrincipalMenu.css" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="421.0">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -107,5 +107,13 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
       </JFXListView>
+      <JFXButton buttonType="RAISED" layoutX="896.0" layoutY="693.0" onAction="#close" prefHeight="46.0" prefWidth="231.0" stylesheets="@../styles/PrincipalMenu.css" text="Aplicar mutaciones">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Segoe UI Emoji" size="20.0" />
+         </font>
+      </JFXButton>
     </children>
 </AnchorPane>

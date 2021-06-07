@@ -78,6 +78,9 @@
          <font>
             <Font name="Segoe UI Emoji" size="20.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
       <Label layoutX="422.0" layoutY="26.0" text="Estadísticas de los calendarios" textFill="#2f2484" AnchorPane.bottomAnchor="580.0" AnchorPane.leftAnchor="422.0" AnchorPane.rightAnchor="422.0" AnchorPane.topAnchor="26.0">
          <font>

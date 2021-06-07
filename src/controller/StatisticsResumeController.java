@@ -13,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import problem.definition.State;
 import utils.*;
 
@@ -107,6 +108,12 @@ public class StatisticsResumeController implements Initializable {
     @FXML
     void exportStatistics(ActionEvent event) {
         DataFiles.getSingletonDataFiles().exportsStatistics(statisticsTable);
+    }
+
+    @FXML
+    void close(ActionEvent event) {
+        Stage stage = (Stage) statisticsTable.getScene().getWindow();
+        stage.close();
     }
 
 }

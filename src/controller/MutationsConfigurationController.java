@@ -447,5 +447,10 @@ public class MutationsConfigurationController implements Initializable {
         this.homeController = homeController;
     }
 
+    @FXML
+    void close(ActionEvent event) {
+        Stage stage = (Stage) selectMutations.getScene().getWindow();
+        stage.close();
+    }
 
 }

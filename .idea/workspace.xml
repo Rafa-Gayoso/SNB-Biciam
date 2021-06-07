@@ -26,10 +26,36 @@
   <component name="ChangeListManager">
     <list default="true" id="31c4c62d-8161-430c-9912-ecee8f383fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/AdvanceConfigurationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AdvanceConfigurationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SNB-Biciam/styles/application.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SNB-Biciam/styles/application.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SNB-Biciam/styles/statictisTable.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SNB-Biciam/styles/statictisTable.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/Calendar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/Calendar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/CalendarStatistics.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/CalendarStatistics.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/ConfigurationCalendar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/ConfigurationCalendar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/Home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/MutationsConfiguration.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/MutationsConfiguration.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/SelectGrid.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/SelectGrid.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/StatisticsResume.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/StatisticsResume.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/TeamsItinerary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/TeamsItinerary.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/CalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CalendarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/CalendarStatisticsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CalendarStatisticsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/MutationsConfigurationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/MutationsConfigurationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/DataFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/DataFiles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/SelectGridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SelectGridController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/StatisticsResumeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/StatisticsResumeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/TeamsItineraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/TeamsItineraryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/definition/TTPDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/TTPDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/PrincipalMenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/PrincipalMenu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/application.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/application.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/statictisTable.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/statictisTable.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/visual/Calendar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/visual/Calendar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/visual/CalendarStatistics.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/visual/CalendarStatistics.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/visual/ConfigurationCalendar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/visual/ConfigurationCalendar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/visual/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/visual/Home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/visual/MutationsConfiguration.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/visual/MutationsConfiguration.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/visual/SelectGrid.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/visual/SelectGrid.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/visual/StatisticsResume.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/visual/StatisticsResume.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/visual/TeamsItinerary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/visual/TeamsItinerary.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +94,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/visual" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -77,8 +103,12 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\resources" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\visual" />
+      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\utils" />
+      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\config_files" />
+      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\files" />
+      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\operators\interfaces" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="controller" />
@@ -87,12 +117,8 @@
       <recent name="application" />
       <recent name="files" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\visual" />
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\utils" />
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\config_files" />
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\files" />
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\operators\interfaces" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\resources" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
@@ -144,6 +170,19 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -250,7 +289,9 @@
       <workItem from="1622858170547" duration="9195000" />
       <workItem from="1622909657164" duration="363000" />
       <workItem from="1622936954581" duration="11182000" />
-      <workItem from="1622950736415" duration="2624000" />
+      <workItem from="1622950736415" duration="3215000" />
+      <workItem from="1622994967310" duration="12846000" />
+      <workItem from="1623030249343" duration="9515000" />
     </task>
     <servers />
   </component>
@@ -294,11 +335,11 @@
     <state x="-1230" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621479874782" />
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1621478207096" />
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1620485928739" />
-    <state x="553" y="151" width="688" height="595" key="#xdebugger.evaluate" timestamp="1622953003637">
+    <state x="553" y="151" width="688" height="595" key="#xdebugger.evaluate" timestamp="1623003861325">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1300" y="445" key="#xdebugger.evaluate/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621723464833" />
-    <state x="553" y="151" width="688" height="595" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1622953003637" />
+    <state x="553" y="151" width="688" height="595" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1623003861325" />
     <state width="553" height="331" key="DebuggerActiveHint" timestamp="1622529406249">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -308,58 +349,58 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="463" y="123" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1622208311593" />
-    <state width="1877" height="265" key="GridCell.Tab.0.bottom" timestamp="1622953134783">
+    <state width="1877" height="265" key="GridCell.Tab.0.bottom" timestamp="1623040030589">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1323" height="74" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1622584472346" />
     <state width="1877" height="248" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621894253924" />
     <state width="1877" height="253" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1621478315766" />
-    <state width="1877" height="265" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1622953134783" />
-    <state width="1877" height="265" key="GridCell.Tab.0.center" timestamp="1622953134782">
+    <state width="1877" height="265" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1623040030589" />
+    <state width="1877" height="265" key="GridCell.Tab.0.center" timestamp="1623040030588">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1323" height="74" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1622584472346" />
     <state width="1877" height="248" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621894253923" />
     <state width="1877" height="253" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1621478315766" />
-    <state width="1877" height="265" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1622953134782" />
-    <state width="1877" height="265" key="GridCell.Tab.0.left" timestamp="1622953134782">
+    <state width="1877" height="265" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1623040030588" />
+    <state width="1877" height="265" key="GridCell.Tab.0.left" timestamp="1623040030588">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1323" height="74" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1622584472346" />
     <state width="1877" height="248" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621894253923" />
     <state width="1877" height="253" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1621478315765" />
-    <state width="1877" height="265" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1622953134782" />
-    <state width="1877" height="265" key="GridCell.Tab.0.right" timestamp="1622953134782">
+    <state width="1877" height="265" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1623040030588" />
+    <state width="1877" height="265" key="GridCell.Tab.0.right" timestamp="1623040030589">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1323" height="74" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1622584472346" />
     <state width="1877" height="248" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621894253924" />
     <state width="1877" height="253" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1621478315766" />
-    <state width="1877" height="265" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1622953134782" />
-    <state width="1877" height="338" key="GridCell.Tab.1.bottom" timestamp="1622953035739">
+    <state width="1877" height="265" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1623040030589" />
+    <state width="1877" height="372" key="GridCell.Tab.1.bottom" timestamp="1623031534361">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1323" height="110" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1622532464559" />
     <state width="1877" height="411" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621892671184" />
-    <state width="1877" height="338" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1622953035739" />
-    <state width="1877" height="338" key="GridCell.Tab.1.center" timestamp="1622953035738">
+    <state width="1877" height="372" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1623031534361" />
+    <state width="1877" height="372" key="GridCell.Tab.1.center" timestamp="1623031534361">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1323" height="110" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1622532464559" />
     <state width="1877" height="411" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621892671184" />
-    <state width="1877" height="338" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1622953035738" />
-    <state width="1877" height="338" key="GridCell.Tab.1.left" timestamp="1622953035737">
+    <state width="1877" height="372" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1623031534361" />
+    <state width="1877" height="372" key="GridCell.Tab.1.left" timestamp="1623031534361">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1323" height="110" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1622532464559" />
     <state width="1877" height="411" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621892671184" />
-    <state width="1877" height="338" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1622953035737" />
-    <state width="1877" height="338" key="GridCell.Tab.1.right" timestamp="1622953035738">
+    <state width="1877" height="372" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1623031534361" />
+    <state width="1877" height="372" key="GridCell.Tab.1.right" timestamp="1623031534361">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1323" height="110" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1622532464559" />
     <state width="1877" height="411" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1621892671184" />
-    <state width="1877" height="338" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1622953035738" />
+    <state width="1877" height="372" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1623031534361" />
     <state x="540" y="254" key="IDE.errors.dialog" timestamp="1621979935004">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -398,9 +439,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java</url>
-          <line>380</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/src/controller/SelectGridController.java</url>
+          <line>234</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/definition/TTPDefinition.java</url>
+          <line>772</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/controller/SelectGridController.java</url>
+          <line>435</line>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -410,6 +461,8 @@
         <watch expression="orderedPosibleDuels" />
         <watch expression="newDate.getGames()" />
         <watch expression="calendarBacktracking.get(i)" />
+        <watch expression="matrix[i][j]" />
+        <watch expression="matrixCalendar[n][m]" />
       </configuration>
     </watches-manager>
   </component>

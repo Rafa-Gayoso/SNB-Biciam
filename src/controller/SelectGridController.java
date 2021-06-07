@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.util.Duration;
@@ -52,9 +53,16 @@ public class SelectGridController implements Initializable, ICreateInitialSoluti
     @FXML
     private GridPane selectionGrid;
 
+    @FXML
+    private ScrollPane scroll;
+
 
     @FXML
     private JFXButton saveLocations;
+
+
+    @FXML
+    private JFXButton invertDuels;
 
 
     boolean error = false;
@@ -406,6 +414,115 @@ public class SelectGridController implements Initializable, ICreateInitialSoluti
 
         return compare;
 
+    }
+
+
+    @FXML
+    void invertDuels(ActionEvent event) {
+        int [][] newMatrix = new int[matrixCalendar.length][matrixCalendar.length];
+
+        for(int i =0; i < matrixCalendar.length; i++){
+            for (int j = 0; j < matrixCalendar.length; j++) {
+                if(matrixCalendar[i][j] == 1){
+                    newMatrix[i][j] = 2;
+                }else if(matrixCalendar[i][j] == 2){
+                    newMatrix [i][j] = 1;
+                }
+                else
+                    newMatrix[i][j]=0;
+
+            }
+        }
+        if(TTPDefinition.getInstance().isChampionVsSub()){
+            int posChampion = TTPDefinition.getInstance().getFirstPlace();
+            int posSecond = TTPDefinition.getInstance().getSecondPlace();
+            newMatrix[posChampion][posSecond] = 2;
+            newMatrix[posSecond][posChampion] = 1;
+        }
+
+        newMatrix = TTPDefinition.getInstance().readjustSymmetricCalendar(newMatrix);
+
+
+        matrixCalendar = newMatrix;
+
+        for(int i =0; i < matrixCalendar.length; i++){
+            for (int j = 0; j < matrixCalendar.length; j++) {
+                System.out.print(matrixCalendar[i][j] + " ");
+            }
+            System.out.println("");
+        }
+        boolean symmetric = checkSymetricMatrix();
+        if (symmetric) {
+            notBalanceCalendar.setVisible(false);
+            balanceCalendar.setVisible(true);
+            error = false;
+        } else {
+            int champion = TTPDefinition.getInstance().getFirstPlace();
+            int second = TTPDefinition.getInstance().getSecondPlace();;
+            int i =0;
+            while (i < matrixCalendar.length && !symmetric){
+                if(i != second){
+                    if(matrixCalendar[champion][i] == 1){
+                        matrixCalendar[champion][i] = 2;
+                        matrixCalendar[i][champion] = 1;
+                        symmetric= checkSymetricMatrix();
+                        if(!symmetric){
+                            matrixCalendar[champion][i] = 1;
+                            matrixCalendar[i][champion] = 2;
+                        }
+                    }else if(matrixCalendar[champion][i] == 2){
+                        matrixCalendar[champion][i] = 1;
+                        matrixCalendar[i][champion] = 2;
+                        symmetric= checkSymetricMatrix();
+                        if(!symmetric){
+                            matrixCalendar[champion][i] = 2;
+                            matrixCalendar[i][champion] = 1;
+                        }
+                    }
+                }
+
+                i++;
+            }
+            /*for(int i = 0; i < matrixCalendar.length && !symmetric; i++){
+                if(matrixCalendar[champion][i] == 1){
+                    matrixCalendar[champion][i] = 2;
+                    matrixCalendar[i][champion] = 1;
+                    symmetric= checkSymetricMatrix();
+                    if(!symmetric){
+
+                    }
+                }
+            }*/
+        }
+
+        matrix = generateMatrixToggleButton(matrixCalendar.length);
+
+        selectionGrid.setGridLinesVisible(false);
+
+        selectionGrid.getChildren().removeAll(selectionGrid.getChildren());
+
+
+
+        for (int i = 1; i <= names.size(); i++) {
+            Label label = new Label(names.get(i - 1));
+            selectionGrid.add(label, i, 0);
+
+        }
+        for (int i = 1; i <= names.size(); i++) {
+            Label label = new Label(names.get(i - 1));
+            selectionGrid.add(label, 0, i);
+        }
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (i != j) {
+                    selectionGrid.add(matrix[i][j], j + 1, i + 1);
+                }
+            }
+        }
+        selectionGrid.setGridLinesVisible(true);
+
+
+        //scroll.setContent(selectionGrid);
     }
 
 }

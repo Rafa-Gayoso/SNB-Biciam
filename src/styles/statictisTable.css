@@ -25,7 +25,7 @@
 }
 
 #statisticsTable .column-header .label {
-    -fx-font-size: 22px;
+    -fx-font-size: 18px;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill:  #2f2484;
     -fx-alignment: center;
@@ -42,7 +42,7 @@
 
 #statisticsTable .table-cell {
     -fx-border-color: -fx-box-border -fx-box-border transparent transparent;
-    -fx-font:20px "Segoe UI Symbol";
+    -fx-font:16px "Segoe UI Symbol";
     -fx-text-fill: #2f2484;
     -fx-alignment: CENTER;
 }

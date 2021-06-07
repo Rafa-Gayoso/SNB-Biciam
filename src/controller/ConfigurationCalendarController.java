@@ -13,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import operators.heuristics.HeuristicOperatorType;
 import operators.mutation.MutationOperator;
 import operators.mutation.MutationOperatorType;
+import org.controlsfx.control.CheckListView;
 import utils.CalendarConfiguration;
 import utils.DataFiles;
 import javafx.collections.FXCollections;
@@ -54,6 +55,11 @@ public class ConfigurationCalendarController implements Initializable {
     public static int teams;
     public static ArrayList<String> teamsNames;
     public static ArrayList<Integer> selectedIndexes;
+
+
+    @FXML
+    private CheckListView<String> teamCheckList;
+
 
 
     @FXML
@@ -119,9 +125,9 @@ public class ConfigurationCalendarController implements Initializable {
     void selectAllTeams(ActionEvent event) {
         if (selectAll.isSelected()) {
 
-            teamsSelectionListView.getSelectionModel().selectAll();
+            teamCheckList.getCheckModel().checkAll();
         } else {
-            teamsSelectionListView.getSelectionModel().clearSelection();
+            teamCheckList.getCheckModel().clearChecks();
         }
     }
 
@@ -140,7 +146,7 @@ public class ConfigurationCalendarController implements Initializable {
 
     private void validateData() throws IOException {
 
-        selectedIndexes = new ArrayList<>(teamsSelectionListView.getSelectionModel().getSelectedIndices());
+        selectedIndexes = new ArrayList<>(teamCheckList.getCheckModel().getCheckedIndices());
         teamsNames = new ArrayList<>();
 
         int occAmount = 0;
@@ -265,11 +271,11 @@ public class ConfigurationCalendarController implements Initializable {
         DataFiles.getSingletonDataFiles().readTeams();
         List<String> teams = DataFiles.getSingletonDataFiles().getTeams();
 
-        teamsSelectionListView.setItems(FXCollections.observableArrayList(teams));
-        teamsSelectionListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        teamCheckList.setItems(FXCollections.observableArrayList(teams));
+        //teamsSelectionListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        teamsSelectionListView.setOnMouseClicked(event -> {
-            int indices = teamsSelectionListView.getSelectionModel().getSelectedIndices().size();
+        teamCheckList.setOnMouseClicked(event -> {
+            int indices = teamCheckList.getCheckModel().getCheckedIndices().size();
             if (indices > 1) {
                 int valTempLocal = maxHomeGamesSpinner.getValue();
                 int valTempVisitor = maxVisitorGamesSpinner.getValue();
@@ -297,10 +303,10 @@ public class ConfigurationCalendarController implements Initializable {
             comboSub.getSelectionModel().clearSelection();
 
             listComboChamp.clear();
-            listComboChamp.addAll(teamsSelectionListView.getSelectionModel().getSelectedItems());
+            listComboChamp.addAll(teamCheckList.getCheckModel().getCheckedItems());
 
             listComboSub.clear();
-            listComboSub.addAll(teamsSelectionListView.getSelectionModel().getSelectedItems());
+            listComboSub.addAll(teamCheckList.getCheckModel().getCheckedItems());
 
             if (indices == DataFiles.getSingletonDataFiles().getTeams().size()) {
                 selectAll.setSelected(true);
@@ -318,20 +324,20 @@ public class ConfigurationCalendarController implements Initializable {
             selectAll.setSelected(true);
 
             secondRoundButton.setSelected(true);
-            teamsSelectionListView.getSelectionModel().selectAll();
+            teamCheckList.getCheckModel().checkAll();
 
-            int maxGames = teamsSelectionListView.getSelectionModel().getSelectedIndices().size() / 2;
+            int maxGames = teamCheckList.getCheckModel().getCheckedIndices().size() / 2;
             maxHomeGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGames));
             maxVisitorGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGames));
 
             lblSymmetricSecondRound.setVisible(true);
             symmetricSecondRound.setVisible(true);
             secondRoundButton.setSelected(true);
-            teamsSelectionListView.getSelectionModel().selectAll();
-            this.teams = teamsSelectionListView.getSelectionModel().getSelectedIndices().size();
-            listComboChamp = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
+            teamCheckList.getCheckModel().checkAll();
+            this.teams = teamCheckList.getCheckModel().getCheckedIndices().size();
+            listComboChamp = FXCollections.observableArrayList(teamCheckList.getCheckModel().getCheckedItems());
 
-            listComboSub = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
+            listComboSub = FXCollections.observableArrayList(teamCheckList.getCheckModel().getCheckedItems());
             comboChamp.setItems(listComboChamp);
             //comboChamp.getSelectionModel().select(5);
             comboSub.setItems(listComboSub);
@@ -357,22 +363,22 @@ public class ConfigurationCalendarController implements Initializable {
 
             if (TTPDefinition.getInstance().getTeamsIndexes().size() == DataFiles.getSingletonDataFiles().getTeams().size()) {
                 selectAll.setSelected(true);
-                teamsSelectionListView.getSelectionModel().selectAll();
-                listComboChamp = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
-                listComboSub = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
+                teamCheckList.getCheckModel().checkAll();
+                listComboChamp = FXCollections.observableArrayList(teamCheckList.getCheckModel().getCheckedItems());
+                listComboSub = FXCollections.observableArrayList(teamCheckList.getCheckModel().getCheckedItems());
                 comboChamp.setItems(listComboChamp);
                 comboSub.setItems(listComboSub);
             } else {
                 selectAll.setSelected(false);
 
-                teamsSelectionListView.getSelectionModel().clearSelection();
+                teamCheckList.getCheckModel().clearChecks();
                 int[] array = new int[TTPDefinition.getInstance().getTeamsIndexes().size()];
                 for (int i = 0; i < TTPDefinition.getInstance().getTeamsIndexes().size(); i++) {
                     array[i] = TTPDefinition.getInstance().getTeamsIndexes().get(i);
                 }
-                teamsSelectionListView.getSelectionModel().selectIndices(-1, array);
-                listComboChamp = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
-                listComboSub = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
+                teamCheckList.getCheckModel().checkIndices(array);
+                listComboChamp = FXCollections.observableArrayList(teamCheckList.getCheckModel().getCheckedItems());
+                listComboSub = FXCollections.observableArrayList(teamCheckList.getCheckModel().getCheckedItems());
                 comboChamp.setItems(listComboChamp);
                 comboSub.setItems(listComboSub);
             }
@@ -415,16 +421,16 @@ public class ConfigurationCalendarController implements Initializable {
                     listComboSub.remove(teams.get(TTPDefinition.getInstance().getFirstPlace()));
                 }
                 else if( champion == -1 && second !=-1){
-                    comboChamp.setValue("Seleccione");
+                    comboChamp.getSelectionModel().select(-1);
                     comboSub.setValue(teams.get(TTPDefinition.getInstance().getSecondPlace()));
                     //listComboSub.remove(teams.get(TTPDefinition.getInstance().getFirstPlace()));
                 }else if( champion != -1 && second ==-1){
                     comboChamp.setValue(teams.get(TTPDefinition.getInstance().getFirstPlace()));
-                    comboSub.setValue("Seleccione");
+                    comboSub.getSelectionModel().select(-1);
                     //listComboSub.remove(teams.get(TTPDefinition.getInstance().getFirstPlace()));
                 }else{
-                    comboChamp.setValue("Seleccione");
-                    comboSub.setValue("Seleccione");
+                    comboChamp.getSelectionModel().select(-1);
+                    comboSub.getSelectionModel().select(-1);
                 }
 
             } else {
@@ -435,7 +441,7 @@ public class ConfigurationCalendarController implements Initializable {
                 btnSwap.setVisible(false);
             }
 
-            int maxGames = teamsSelectionListView.getSelectionModel().getSelectedIndices().size() / 2;
+            int maxGames = teamCheckList.getCheckModel().getCheckedItems().size() / 2;
             maxHomeGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGames));
             maxVisitorGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGames));
             maxHomeGamesSpinner.getValueFactory().setValue(4);
@@ -464,22 +470,22 @@ public class ConfigurationCalendarController implements Initializable {
 
             if (configuration.getTeamsIndexes().size() == DataFiles.getSingletonDataFiles().getTeams().size()) {
                 selectAll.setSelected(true);
-                teamsSelectionListView.getSelectionModel().selectAll();
-                listComboChamp = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
-                listComboSub = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
+                teamCheckList.getCheckModel().checkAll();
+                listComboChamp = FXCollections.observableArrayList(teamCheckList.getCheckModel().getCheckedItems());
+                listComboSub = FXCollections.observableArrayList(teamCheckList.getCheckModel().getCheckedItems());
                 comboChamp.setItems(listComboChamp);
                 comboSub.setItems(listComboSub);
             } else {
                 selectAll.setSelected(false);
 
-                teamsSelectionListView.getSelectionModel().clearSelection();
+                teamCheckList.getCheckModel().clearChecks();
                 int[] array = new int[configuration.getTeamsIndexes().size()];
                 for (int i = 0; i < configuration.getTeamsIndexes().size(); i++) {
                     array[i] = configuration.getTeamsIndexes().get(i);
                 }
-                teamsSelectionListView.getSelectionModel().selectIndices(-1, array);
-                listComboChamp = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
-                listComboSub = FXCollections.observableArrayList(teamsSelectionListView.getSelectionModel().getSelectedItems());
+                teamCheckList.getCheckModel().checkIndices( array);
+                listComboChamp = FXCollections.observableArrayList(teamCheckList.getCheckModel().getCheckedItems());
+                listComboSub = FXCollections.observableArrayList(teamCheckList.getCheckModel().getCheckedItems());
                 comboChamp.setItems(listComboChamp);
                 comboSub.setItems(listComboSub);
             }
@@ -524,7 +530,7 @@ public class ConfigurationCalendarController implements Initializable {
                 btnSwap.setVisible(false);
             }
 
-            int maxGames = teamsSelectionListView.getSelectionModel().getSelectedIndices().size() / 2;
+            int maxGames =teamCheckList.getCheckModel().getCheckedItems().size() / 2;
             maxHomeGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGames));
             maxVisitorGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGames));
             maxHomeGamesSpinner.getValueFactory().setValue(4);
@@ -580,7 +586,7 @@ public class ConfigurationCalendarController implements Initializable {
     void selectTeamChamp(ActionEvent event) {
 
         listComboSub.clear();
-        listComboSub.addAll(teamsSelectionListView.getSelectionModel().getSelectedItems());
+        listComboSub.addAll(teamCheckList.getCheckModel().getCheckedItems());
         listComboSub.remove(comboChamp.getSelectionModel().getSelectedItem());
     }
 
@@ -815,7 +821,7 @@ public class ConfigurationCalendarController implements Initializable {
 
     void showAdvanceConfiguration() throws IOException {
         savedConfiguration = true;
-        selectedIndexes = new ArrayList<>(teamsSelectionListView.getSelectionModel().getSelectedIndices());
+        selectedIndexes = new ArrayList<>(teamCheckList.getCheckModel().getCheckedIndices());
         teamsNames = new ArrayList<>();
         teams = selectedIndexes.size();
 
@@ -862,7 +868,7 @@ public class ConfigurationCalendarController implements Initializable {
 
     @FXML
     void showRest(ActionEvent event) throws IOException {
-        teams = teamsSelectionListView.getSelectionModel().getSelectedIndices().size();
+        teams = teamCheckList.getCheckModel().getCheckedItems().size();
         secondRound = secondRoundButton.isSelected();
         inaugural = inauguralGame.isSelected();
         AnchorPane structureOver = homeController.getPrincipalPane();

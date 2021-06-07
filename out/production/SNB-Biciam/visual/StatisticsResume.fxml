@@ -1,41 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ContextMenu?>
-<?import javafx.scene.control.MenuItem?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="400.0" minWidth="600.0" prefHeight="494.0" prefWidth="1876.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StatisticsResumeController">
+<AnchorPane minHeight="606.0" minWidth="1673.0" prefHeight="606.0" prefWidth="1673.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StatisticsResumeController">
    <children>
-      <TableView fx:id="statisticsTable" layoutX="-5.0" layoutY="-6.0" minWidth="600.0" prefHeight="503.0" prefWidth="1886.0" stylesheets="@../styles/statictisTable.css" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="-6.0">
-        <columns>
-          <TableColumn fx:id="calendarColumn" prefWidth="180.00003051757812" text="Calendario" />
-          <TableColumn fx:id="calendarDistanceColumn" prefWidth="140.0" text="Distancia(Km)" />
-            <TableColumn fx:id="teamLessNameColumn" prefWidth="347.0" text="Equipo que menor distancia recorre" />
-            <TableColumn fx:id="teamLessDistanceColumn" prefWidth="144.0" text="Distancia(Km)" />
-            <TableColumn fx:id="teamMoreNameColumn" prefWidth="347.0" text="Equipo que menor distancia recorre" />
-            <TableColumn fx:id="teamMoreDistanceColumn" prefWidth="157.0" text="Distancia(Km)" />
-            <TableColumn fx:id="localRestrictionsColum" prefWidth="263.0" text="Equipos más veces de local" />
-            <TableColumn fx:id="visitorRestrictionsColum" prefWidth="297.0" text="Equipos más veces de visitante" />
-        </columns>
-         <contextMenu>
-            <ContextMenu>
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#exportStatistics" text="Exportar">
+      <VBox prefHeight="606.0" prefWidth="1673.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TableView fx:id="statisticsTable" minWidth="600.0" prefHeight="541.0" prefWidth="1673.0" stylesheets="@../styles/statictisTable.css">
+              <columns>
+                <TableColumn fx:id="calendarColumn" prefWidth="180.00003051757812" text="Calendario" />
+                <TableColumn fx:id="calendarDistanceColumn" prefWidth="131.99996948242188" text="Distancia(Km)" />
+                  <TableColumn fx:id="teamLessNameColumn" prefWidth="287.9999694824219" text="Equipo que menor distancia recorre" />
+                  <TableColumn fx:id="teamLessDistanceColumn" prefWidth="148.0" text="Distancia(Km)" />
+                  <TableColumn fx:id="teamMoreNameColumn" prefWidth="297.0" text="Equipo que menor distancia recorre" />
+                  <TableColumn fx:id="teamMoreDistanceColumn" prefWidth="153.0" text="Distancia(Km)" />
+                  <TableColumn fx:id="localRestrictionsColum" prefWidth="228.0" text="Equipos más veces de local" />
+                  <TableColumn fx:id="visitorRestrictionsColum" prefWidth="240.0" text="Equipos más veces de visitante" />
+              </columns>
+            </TableView>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXButton onAction="#exportStatistics" prefHeight="45.0" prefWidth="129.0" stylesheets="@../styles/PrincipalMenu.css" text="Exportar">
+                     <font>
+                        <Font name="Segoe UI" size="18.0" />
+                     </font>
                      <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="32.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../resources/exportar.png" />
                            </image>
                         </ImageView>
                      </graphic>
-                  </MenuItem>
-              </items>
-            </ContextMenu>
-         </contextMenu>
-      </TableView>
+                     <HBox.margin>
+                        <Insets left="725.0" top="15.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton onAction="#close" prefHeight="45.0" prefWidth="107.0" stylesheets="@../styles/PrincipalMenu.css" text="Regresar">
+                     <font>
+                        <Font name="Segoe UI" size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="25.0" top="15.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

@@ -268,6 +268,8 @@ public class HomeController implements Initializable {
             stage.setTitle("Configuraci\u00f3n de las mutaciones");
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
             stage.setResizable(true);
+            stage.setMinWidth(1152 );
+            stage.setMinHeight(763);
             stage.setScene(new Scene(root));
 
             object = loader.getController();
@@ -288,6 +290,8 @@ public class HomeController implements Initializable {
             stage.setTitle("Selecci\u00f3n de descansos");
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
             stage.setResizable(true);
+            stage.setMinWidth(305 );
+            stage.setMinHeight(382);
             stage.setScene(new Scene(scale));
 
             object = loader.getController();
@@ -307,6 +311,8 @@ public class HomeController implements Initializable {
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
             stage.setResizable(true);
             stage.setScene(new Scene(scale));
+            stage.setMinWidth(1148);
+            stage.setMinHeight(632);
 
             object = loader.getController();
             ((TeamsItineraryController) object).setHomeController(this);
@@ -369,7 +375,8 @@ public class HomeController implements Initializable {
             stage.setTitle("Gesti\u00f3n de datos");
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
             stage.setResizable(true);
-
+            stage.setMinWidth(1015);
+            stage.setMinHeight(506);
             stage.setScene(new Scene(scale));
 
             object = loader.getController();
@@ -384,12 +391,13 @@ public class HomeController implements Initializable {
 
             Parent root = FXMLLoader.load(getClass().getResource("/visual/StatisticsResume.fxml"));
             Stage stage = new Stage();
-            ScalableContentPane scale = new ScalableContentPane();
-            scale.setContent(anchorPane);
+
             stage.setTitle("Resumen estad\u00edstico");
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
             stage.setResizable(true);
-            stage.setScene(new Scene(scale));
+            stage.setMinWidth(1673);
+            stage.setMinHeight(606);
+            stage.setScene(new Scene(root));
 
             object = loader.getController();
             ((StatisticsResumeController) object).setHomeController(this);

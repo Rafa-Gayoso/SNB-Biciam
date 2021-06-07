@@ -6,6 +6,8 @@ import com.jfoenix.controls.JFXListView;
 import definition.TTPDefinition;
 import definition.state.CalendarState;
 import execute.Executer;
+import javafx.stage.Stage;
+import org.controlsfx.control.CheckListView;
 import utils.CalendarConfiguration;
 import utils.DataFiles;
 import javafx.beans.property.SimpleStringProperty;
@@ -29,8 +31,6 @@ public class TeamsItineraryController implements Initializable {
 
 
     public static int selectedCalendar;
-    @FXML
-    private JFXListView<String> teamsListView;
 
     @FXML
     private TableView<ObservableList> itineraryTable;
@@ -52,6 +52,9 @@ public class TeamsItineraryController implements Initializable {
     @FXML
     private JFXButton showIAlltinerar;
 
+    @FXML
+    private CheckListView<String> checkListView;
+
 
 
 
@@ -70,8 +73,8 @@ public class TeamsItineraryController implements Initializable {
             teams.add(DataFiles.getSingletonDataFiles().getTeams().get(teamsIndex));
         }
 
-        teamsListView.setItems(FXCollections.observableArrayList(teams));
-        teamsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        checkListView.setItems(FXCollections.observableArrayList(teams));
     }
 
     @FXML
@@ -81,7 +84,7 @@ public class TeamsItineraryController implements Initializable {
 
         itineraryTable.getColumns().removeAll(itineraryTable.getColumns());
         itineraryTable.setItems(FXCollections.observableArrayList(new ArrayList<>()));
-        ArrayList<Integer> selectedTeams = new ArrayList<>(teamsListView.getSelectionModel().getSelectedIndices());
+        ArrayList<Integer> selectedTeams = new ArrayList<>(checkListView.getCheckModel().getCheckedIndices());
 
         ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(calendar);
 
@@ -158,8 +161,8 @@ public class TeamsItineraryController implements Initializable {
         itineraryTable.getColumns().removeAll(itineraryTable.getColumns());
         itineraryTable.setItems(FXCollections.observableArrayList(new ArrayList<>()));
         ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(calendar);
-        teamsListView.getSelectionModel().selectAll();
-        ArrayList<Integer> selectedTeams = new ArrayList<>(teamsListView.getSelectionModel().getSelectedIndices());
+        checkListView.getCheckModel().checkAll();;
+        ArrayList<Integer> selectedTeams = new ArrayList<>(checkListView.getCheckModel().getCheckedIndices());
         colDates = new TableColumn("Fecha");
         colDates.setPrefWidth(92);
         int index=0;
@@ -197,6 +200,13 @@ public class TeamsItineraryController implements Initializable {
 
         itineraryTable.setItems(data);
     }
+
+    @FXML
+    void close(ActionEvent event) {
+        Stage stage = (Stage) itineraryTable.getScene().getWindow();
+        stage.close();
+    }
+
 
 
 }

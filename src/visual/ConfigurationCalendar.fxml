@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
@@ -13,280 +12,320 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.CheckListView?>
 
 <AnchorPane fx:id="panel" minHeight="632.0" minWidth="1148.0" prefHeight="632.0" prefWidth="1148.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" GridPane.columnSpan="2" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ConfigurationCalendarController">
     <children>
-      <GridPane layoutX="19.0" layoutY="22.0" prefHeight="583.0" prefWidth="1108.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="14.0">
-        <columnConstraints>
-            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="506.0" minWidth="10.0" prefWidth="427.0" />
-          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="506.0" minWidth="10.0" prefWidth="328.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="244.0" minWidth="0.0" prefWidth="27.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="338.0" minWidth="10.0" prefWidth="321.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="61.0" valignment="CENTER" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="62.0" valignment="CENTER" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="63.0" valignment="CENTER" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="251.0" minHeight="10.0" prefHeight="62.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="62.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="64.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="62.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="62.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="56.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="73.0" valignment="CENTER" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <HBox prefHeight="632.0" prefWidth="1148.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="Calendario a doble vuelta" textFill="#2f2484" GridPane.columnIndex="1" GridPane.rowIndex="4">
-               <font>
-                  <Font name="Segoe UI Symbol" size="24.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="20.0" />
-               </GridPane.margin>
-            </Label>
-            <JFXToggleButton fx:id="secondRoundButton" contentDisplay="RIGHT" onAction="#setSecondRound" prefHeight="76.0" prefWidth="135.0" size="12.0" text="Sí" textFill="#2f2484" toggleColor="WHITE" toggleLineColor="#2f2484" GridPane.columnIndex="3" GridPane.rowIndex="4">
-               <font>
-                  <Font name="Segoe UI Symbol" size="22.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <tooltip>
-                  <Tooltip text="El calendario será a doble vuelta o simple vuelta. ">
+            <VBox prefHeight="632.0" prefWidth="451.0">
+               <children>
+                  <JFXToggleButton fx:id="selectAll" contentDisplay="RIGHT" onAction="#selectAllTeams" prefHeight="71.0" prefWidth="418.0" size="11.0" text="Seleccionar todos los equipos" textFill="#2f2484" toggleColor="WHITE" toggleLineColor="#2f2484">
                      <font>
-                        <Font name="Segoe UI Emoji" size="24.0" />
+                        <Font size="24.0" />
                      </font>
-                  </Tooltip>
-               </tooltip>
-            </JFXToggleButton>
-            <Label prefHeight="35.0" prefWidth="304.0" text="Juegos seguidos de local" textFill="#2f2484" GridPane.columnIndex="1" GridPane.rowIndex="7">
-               <font>
-                  <Font name="Segoe UI Symbol" size="24.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="20.0" />
-               </GridPane.margin>
-            </Label>
-            <Label prefHeight="35.0" prefWidth="333.0" text="Juegos seguidos de visitante" textFill="#2f2484" GridPane.columnIndex="1" GridPane.rowIndex="8">
-               <font>
-                  <Font name="Segoe UI Symbol" size="24.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="20.0" />
-               </GridPane.margin>
-            </Label>
-            <Spinner fx:id="maxHomeGamesSpinner" prefHeight="48.0" prefWidth="249.0" stylesheets="@../styles/PrincipalMenu.css" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="7">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Spinner>
-            <Spinner fx:id="maxVisitorGamesSpinner" prefHeight="48.0" prefWidth="248.0" stylesheets="@../styles/PrincipalMenu.css" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="8">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Spinner>
-              <JFXButton fx:id="select" onAction="#selectTeams" prefHeight="51.0" prefWidth="135.0" stylesheets="@../styles/PrincipalMenu.css" text="Avanzar" textFill="#fcf8f8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
-                  <font>
-                      <Font name="Segoe UI Symbol" size="20.0" />
-                  </font>
-                  <cursor>
-                      <Cursor fx:constant="HAND" />
-                  </cursor>
-               <GridPane.margin>
-                  <Insets top="10.0" />
-               </GridPane.margin>
-              </JFXButton>
-            <JFXToggleButton fx:id="selectAll" contentDisplay="RIGHT" onAction="#selectAllTeams" prefHeight="71.0" prefWidth="418.0" size="11.0" text="Seleccionar todos los equipos" textFill="#2f2484" toggleColor="WHITE" toggleLineColor="#2f2484">
-               <font>
-                  <Font size="24.0" />
-               </font>
-               <tooltip>
-                  <Tooltip contentDisplay="CENTER" text="Participarán todos los equipos en el torneo">
+                     <tooltip>
+                        <Tooltip contentDisplay="CENTER" text="Participarán todos los equipos en el torneo">
+                           <font>
+                              <Font name="Segoe UI Symbol" size="24.0" />
+                           </font>
+                        </Tooltip>
+                     </tooltip>
+                  </JFXToggleButton>
+                  <CheckListView fx:id="teamCheckList" prefHeight="482.0" />
+                  <JFXButton fx:id="advanceConfigurationBtn" buttonType="RAISED" contentDisplay="RIGHT" onAction="#advanceConfiguration" prefHeight="55.0" prefWidth="377.0" text="Configuración avanzada" textFill="#2f2484">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="39.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/settings.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Configuración avanzada" textAlignment="JUSTIFY">
+                           <font>
+                              <Font name="Segoe UI Symbol" size="24.0" />
+                           </font>
+                        </Tooltip>
+                     </tooltip>
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="632.0" prefWidth="316.0">
+               <children>
+                  <Label text="Identificador del Calendario" textFill="#2f2484">
                      <font>
                         <Font name="Segoe UI Symbol" size="24.0" />
                      </font>
-                  </Tooltip>
-               </tooltip>
-            </JFXToggleButton>
-              <JFXListView fx:id="teamsSelectionListView" prefHeight="482.0" prefWidth="409.0" showTooltip="true" stylesheets="@../styles/PrincipalMenu.css" GridPane.rowIndex="1" GridPane.rowSpan="8">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <GridPane.margin>
-                  <Insets right="20.0" />
-               </GridPane.margin>
-            </JFXListView>
-            <JFXButton fx:id="advanceConfigurationBtn" buttonType="RAISED" contentDisplay="RIGHT" onAction="#advanceConfiguration" prefHeight="55.0" prefWidth="377.0" text="Configuración avanzada" textFill="#2f2484" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="39.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/settings.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <tooltip>
-                  <Tooltip text="Configuración avanzada" textAlignment="JUSTIFY">
+                     <VBox.margin>
+                        <Insets top="23.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Juego Inaugural " textFill="#2f2484">
                      <font>
                         <Font name="Segoe UI Symbol" size="24.0" />
                      </font>
-                  </Tooltip>
-               </tooltip>
-               <GridPane.margin>
-                  <Insets right="40.0" />
-               </GridPane.margin>
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </JFXButton>
-            <JFXComboBox fx:id="comboChamp" labelFloat="true" onAction="#selectTeamChamp" prefHeight="53.0" prefWidth="254.0" promptText="Campeón" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-            <JFXTextField fx:id="calendarId" focusColor="#2f2484" labelFloat="true" promptText="Identificador del Calendario" stylesheets="@../styles/PrincipalMenu.css" GridPane.columnIndex="3" GridPane.halignment="CENTER">
-               <font>
-                  <Font name="Segoe UI Symbol" size="20.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="TEXT" />
-               </cursor>
-            </JFXTextField>
-            <Label text="Identificador del Calendario" textFill="#2f2484" GridPane.columnIndex="1" GridPane.halignment="CENTER">
-               <font>
-                  <Font name="Segoe UI Symbol" size="24.0" />
-               </font>
-            </Label>
-            <JFXComboBox fx:id="comboSub" focusColor="#383aa1" labelFloat="true" onAction="#selectTeamSubChamp" prefHeight="53.0" prefWidth="254.0" promptText="Subcampeón" unFocusColor="#171616" GridPane.columnIndex="3" GridPane.rowIndex="3">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXComboBox>
-            <JFXToggleButton fx:id="champVsSub" contentDisplay="RIGHT" onAction="#setChampVsSub" prefHeight="76.0" prefWidth="135.0" size="12.0" text="Sí" textFill="#2f2484" toggleColor="WHITE" toggleLineColor="#2f2484" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-               <font>
-                  <Font name="Segoe UI Symbol" size="22.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <tooltip>
-                  <Tooltip text="El enfrentamiento entre el campeón y subcampeón de la serie anterior se efectuará en la primera fecha">
+                     <VBox.margin>
+                        <Insets top="23.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Campeón y subcampeón" textFill="#2f2484">
+                     <font>
+                        <Font name="Segoe UI Symbol" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="23.0" />
+                     </VBox.margin>
+                  </Label>
+                  <JFXComboBox fx:id="comboChamp" labelFloat="true" onAction="#selectTeamChamp" prefHeight="53.0" prefWidth="254.0" promptText="Campeón">
+                     <VBox.margin>
+                        <Insets top="23.0" />
+                     </VBox.margin>
+                  </JFXComboBox>
+                  <Label text="Calendario a doble vuelta" textFill="#2f2484">
+                     <font>
+                        <Font name="Segoe UI Symbol" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="26.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="lblSymmetricSecondRound" text="Doble vuelta simétrica" textFill="#2f2484">
+                     <font>
+                        <Font name="Segoe UI Symbol" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="23.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="lblOccidenteVsOriente" prefHeight="35.0" prefWidth="232.0" text="Occidente vs Oriente" textFill="#2f2484">
+                     <font>
+                        <Font name="Segoe UI Symbol" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="23.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label prefHeight="35.0" prefWidth="273.0" text="Juegos seguidos de local" textFill="#2f2484">
+                     <font>
+                        <Font name="Segoe UI Symbol" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="23.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label prefHeight="35.0" prefWidth="310.0" text="Juegos seguidos de visitante" textFill="#2f2484">
+                     <font>
+                        <Font name="Segoe UI Symbol" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="23.0" />
+                     </VBox.margin>
+                  </Label>
+                  <JFXButton fx:id="restBtn" buttonType="RAISED" contentDisplay="RIGHT" onAction="#showRest" prefHeight="22.0" prefWidth="316.0" text="Seleccionar descansos" textFill="#2f2484">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="39.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/baseball-field-return.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Selección de descansos" textAlignment="JUSTIFY">
+                           <font>
+                              <Font name="Segoe UI Symbol" size="24.0" />
+                           </font>
+                        </Tooltip>
+                     </tooltip>
+                     <font>
+                        <Font name="Segoe UI" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="632.0" prefWidth="41.0">
+               <children>
+                  <JFXButton fx:id="btnSwap" buttonType="RAISED" onAction="#swapTeams" prefHeight="26.0" prefWidth="64.0" text="">
+                     <graphic>
+                        <ImageView fitHeight="31.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                           <image>
+                              <Image url="@../resources/icons8-swap-48.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="CLOSED_HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <tooltip>
+                        <Tooltip text="Intercambiar campeón y subcampeón">
+                           <font>
+                              <Font name="Segoe UI Symbol" size="24.0" />
+                           </font>
+                        </Tooltip>
+                     </tooltip>
+                     <VBox.margin>
+                        <Insets top="220.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="632.0" prefWidth="329.0">
+               <children>
+                  <JFXTextField fx:id="calendarId" focusColor="#2f2484" labelFloat="true" promptText="Identificador del Calendario" stylesheets="@../styles/PrincipalMenu.css">
                      <font>
                         <Font name="Segoe UI Symbol" size="20.0" />
                      </font>
-                  </Tooltip>
-               </tooltip>
-            </JFXToggleButton>
-            <JFXToggleButton fx:id="inauguralGame" contentDisplay="RIGHT" onAction="#setInauguralGame" prefHeight="76.0" prefWidth="135.0" size="12.0" text="No" textFill="#2f2484" toggleColor="WHITE" toggleLineColor="#2f2484" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-               <font>
-                  <Font size="22.0" />
-               </font>
-               <tooltip>
-                  <Tooltip text="Juego inaugural entre el campeón y subcampeón de la serie anterior que se efectuará previamente a la fecha inicial del torneo">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <JFXToggleButton fx:id="inauguralGame" contentDisplay="RIGHT" onAction="#setInauguralGame" prefHeight="76.0" prefWidth="135.0" size="12.0" text="No" textFill="#2f2484" toggleColor="WHITE" toggleLineColor="#2f2484">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                     <tooltip>
+                        <Tooltip text="Juego inaugural entre el campeón y subcampeón de la serie anterior que se efectuará previamente a la fecha inicial del torneo">
+                           <font>
+                              <Font name="Segoe UI Symbol" size="22.0" />
+                           </font>
+                        </Tooltip>
+                     </tooltip>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXToggleButton>
+                  <JFXToggleButton fx:id="champVsSub" contentDisplay="RIGHT" onAction="#setChampVsSub" prefHeight="76.0" prefWidth="135.0" size="12.0" text="Sí" textFill="#2f2484" toggleColor="WHITE" toggleLineColor="#2f2484">
                      <font>
                         <Font name="Segoe UI Symbol" size="22.0" />
                      </font>
-                  </Tooltip>
-               </tooltip>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXToggleButton>
-            <Label text="Juego Inaugural " textFill="#2f2484" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-               <font>
-                  <Font name="Segoe UI Symbol" size="24.0" />
-               </font>
-            </Label>
-            <Label text="Campeón y subcampeón" textFill="#2f2484" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-               <font>
-                  <Font name="Segoe UI Symbol" size="24.0" />
-               </font>
-            </Label>
-            <JFXButton fx:id="btnSwap" buttonType="RAISED" onAction="#swapTeams" prefHeight="26.0" prefWidth="64.0" text="" GridPane.columnIndex="2" GridPane.rowIndex="3">
-               <graphic>
-                  <ImageView fitHeight="31.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-                     <image>
-                        <Image url="@../resources/icons8-swap-48.png" />
-                     </image>
                      <cursor>
-                        <Cursor fx:constant="CLOSED_HAND" />
+                        <Cursor fx:constant="HAND" />
                      </cursor>
-                  </ImageView>
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <tooltip>
-                  <Tooltip text="Intercambiar campeón y subcampeón">
+                     <tooltip>
+                        <Tooltip text="El enfrentamiento entre el campeón y subcampeón de la serie anterior se efectuará en la primera fecha">
+                           <font>
+                              <Font name="Segoe UI Symbol" size="20.0" />
+                           </font>
+                        </Tooltip>
+                     </tooltip>
+                     <VBox.margin>
+                        <Insets top="-20.0" />
+                     </VBox.margin>
+                  </JFXToggleButton>
+                  <JFXComboBox fx:id="comboSub" focusColor="#383aa1" labelFloat="true" onAction="#selectTeamSubChamp" prefHeight="53.0" prefWidth="254.0" promptText="Subcampeón" unFocusColor="#171616">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </JFXComboBox>
+                  <JFXToggleButton fx:id="secondRoundButton" contentDisplay="RIGHT" onAction="#setSecondRound" prefHeight="50.0" prefWidth="136.0" size="12.0" text="Sí" textFill="#2f2484" toggleColor="WHITE" toggleLineColor="#2f2484">
                      <font>
-                        <Font name="Segoe UI Symbol" size="24.0" />
+                        <Font name="Segoe UI Symbol" size="22.0" />
                      </font>
-                  </Tooltip>
-               </tooltip>
-            </JFXButton>
-            <Label fx:id="lblSymmetricSecondRound" text="Doble vuelta simétrica" textFill="#2f2484" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5">
-               <font>
-                  <Font name="Segoe UI Symbol" size="24.0" />
-               </font>
-            </Label>
-            <JFXToggleButton fx:id="symmetricSecondRound" contentDisplay="RIGHT" onAction="#setSymmetricSecondRound" prefHeight="76.0" prefWidth="135.0" size="12.0" text="No" textFill="#2f2484" toggleColor="WHITE" toggleLineColor="#2f2484" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5">
-               <font>
-                  <Font name="Segoe UI Symbol" size="22.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <tooltip>
-                  <Tooltip text="Los enfrentamientos de la segunda vuelta se efectuarán en el mismo orden de la primera vuelta">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <tooltip>
+                        <Tooltip text="El calendario será a doble vuelta o simple vuelta. ">
+                           <font>
+                              <Font name="Segoe UI Emoji" size="24.0" />
+                           </font>
+                        </Tooltip>
+                     </tooltip>
+                  </JFXToggleButton>
+                  <JFXToggleButton fx:id="symmetricSecondRound" contentDisplay="RIGHT" onAction="#setSymmetricSecondRound" prefHeight="76.0" prefWidth="135.0" size="12.0" text="No" textFill="#2f2484" toggleColor="WHITE" toggleLineColor="#2f2484">
                      <font>
-                        <Font name="Segoe UI Emoji" size="24.0" />
+                        <Font name="Segoe UI Symbol" size="22.0" />
                      </font>
-                  </Tooltip>
-               </tooltip>
-            </JFXToggleButton>
-            <Label fx:id="lblOccidenteVsOriente" prefHeight="35.0" prefWidth="232.0" text="Occidente vs Oriente" textFill="#2f2484" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6">
-               <font>
-                  <Font name="Segoe UI Symbol" size="24.0" />
-               </font>
-            </Label>
-            <JFXToggleButton fx:id="occidenteVsOrienteToggle" contentDisplay="RIGHT" onAction="#setOccidenteVsOriente" prefHeight="76.0" prefWidth="135.0" size="12.0" text="No" textFill="#2f2484" toggleColor="WHITE" toggleLineColor="#2f2484" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6">
-               <font>
-                  <Font name="Segoe UI Symbol" size="22.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <tooltip>
-                  <Tooltip text="Primero se realizarán enfrentamientos entre equipos de la misma región y luego se enfrentarán las dos regiones">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <tooltip>
+                        <Tooltip text="Los enfrentamientos de la segunda vuelta se efectuarán en el mismo orden de la primera vuelta">
+                           <font>
+                              <Font name="Segoe UI Emoji" size="24.0" />
+                           </font>
+                        </Tooltip>
+                     </tooltip>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="-20.0" />
+                     </VBox.margin>
+                  </JFXToggleButton>
+                  <JFXToggleButton fx:id="occidenteVsOrienteToggle" contentDisplay="RIGHT" onAction="#setOccidenteVsOriente" prefHeight="76.0" prefWidth="135.0" size="12.0" text="No" textFill="#2f2484" toggleColor="WHITE" toggleLineColor="#2f2484">
                      <font>
-                        <Font name="Segoe UI Emoji" size="24.0" />
+                        <Font name="Segoe UI Symbol" size="22.0" />
                      </font>
-                  </Tooltip>
-               </tooltip>
-            </JFXToggleButton>
-            <JFXButton fx:id="restBtn" buttonType="RAISED" contentDisplay="RIGHT" onAction="#showRest" prefHeight="47.0" prefWidth="330.0" text="Seleccionar descansos" textFill="#2f2484" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="39.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/baseball-field-return.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <tooltip>
-                  <Tooltip text="Selección de descansos" textAlignment="JUSTIFY">
-                     <font>
-                        <Font name="Segoe UI Symbol" size="24.0" />
-                     </font>
-                  </Tooltip>
-               </tooltip>
-               <font>
-                  <Font name="Segoe UI" size="24.0" />
-               </font>
-            </JFXButton>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <tooltip>
+                        <Tooltip text="Primero se realizarán enfrentamientos entre equipos de la misma región y luego se enfrentarán las dos regiones">
+                           <font>
+                              <Font name="Segoe UI Emoji" size="24.0" />
+                           </font>
+                        </Tooltip>
+                     </tooltip>
+                     <VBox.margin>
+                        <Insets top="-30.0" />
+                     </VBox.margin>
+                  </JFXToggleButton>
+                  <Spinner fx:id="maxHomeGamesSpinner" prefHeight="48.0" prefWidth="249.0" stylesheets="@../styles/PrincipalMenu.css">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets top="-10.0" />
+                     </VBox.margin>
+                  </Spinner>
+                  <Spinner fx:id="maxVisitorGamesSpinner" prefHeight="48.0" prefWidth="248.0" stylesheets="@../styles/PrincipalMenu.css">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Spinner>
+                    <JFXButton fx:id="select" onAction="#selectTeams" prefHeight="51.0" prefWidth="135.0" stylesheets="@../styles/PrincipalMenu.css" text="Avanzar" textFill="#fcf8f8">
+                        <font>
+                            <Font name="Segoe UI Symbol" size="20.0" />
+                        </font>
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                    </JFXButton>
+               </children>
+            </VBox>
          </children>
-      </GridPane>
+      </HBox>
     </children>
 </AnchorPane>

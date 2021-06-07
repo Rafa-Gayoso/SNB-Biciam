@@ -43,10 +43,8 @@ public class CalendarController implements Initializable {
 
     @FXML
     private JFXTabPane calendarsTabPane;
-
-
     @FXML
-    private JFXButton statisticsBtn;
+    private MenuButton statisticsBtn;
 
     @FXML
     private JFXButton configurationBtn;
@@ -144,7 +142,7 @@ public class CalendarController implements Initializable {
                     }*/
                 }
 
-                currentCalendarTabPane.setPrefWidth(restrictionsContent.getPrefWidth());
+                currentCalendarTabPane.setPrefWidth(restrictionsContent.getPrefWidth()-100);
                 HBox hboxCalendarContent = new HBox();
                 HBox hboxRestrictionContent = new HBox();
                 hboxCalendarContent.getChildren().addAll(currentCalendarTabPane);
@@ -152,7 +150,7 @@ public class CalendarController implements Initializable {
                 hboxRestrictionContent.getChildren().addAll(restrictionsContent);
 
                 allContent.getChildren().addAll(hboxCalendarContent,hboxRestrictionContent);
-                allContent.setLeftAnchor(hboxCalendarContent, 0.0);
+                allContent.setLeftAnchor(hboxCalendarContent, 10.0);
                 allContent.setLeftAnchor(hboxRestrictionContent, currentCalendarTabPane.getPrefWidth());
                 Tab tab =  new Tab(calendar.getConfiguration().getCalendarId());
                 tab.setContent(allContent);
@@ -310,6 +308,17 @@ public class CalendarController implements Initializable {
         notification.setRectangleFill(Paint.valueOf("#2F2484"));
         notification.setAnimationType(AnimationType.FADE);
         notification.showAndDismiss(Duration.seconds(1));
+    }
+
+    @FXML
+    void showResume(ActionEvent event) {
+        try {
+            AnchorPane structureOver = homeController.getPrincipalPane();
+            homeController.createPage(new StatisticsResumeController(), structureOver, "/visual/StatisticsResume.fxml");
+            homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 
