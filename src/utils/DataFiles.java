@@ -457,12 +457,23 @@ public class DataFiles implements ICreateInitialSolution {
     private static void showSuccessfulMessage() {
         TrayNotification notification = new TrayNotification();
         notification.setTitle("Guardar Calendario");
-        notification.setMessage("Calendario exportado con éxito");
+        notification.setMessage("Calendario exportado con \u00e9xito");
         notification.setNotificationType(NotificationType.SUCCESS);
         notification.setRectangleFill(Paint.valueOf("#2F2484"));
         notification.setAnimationType(AnimationType.FADE);
         notification.showAndDismiss(Duration.seconds(2));
     }
+
+    private static void showSuccessfulMessageStatistics() {
+        TrayNotification notification = new TrayNotification();
+        notification.setTitle("Guardar Estad\u00edsticas");
+        notification.setMessage("Estad\u00edsticas exportadas con \u00e9xito");
+        notification.setNotificationType(NotificationType.SUCCESS);
+        notification.setRectangleFill(Paint.valueOf("#2F2484"));
+        notification.setAnimationType(AnimationType.FADE);
+        notification.showAndDismiss(Duration.seconds(2));
+    }
+
 
     public ArrayList<ArrayList<String>> getMutationsConfiguration() {
         return mutationsConfiguration;
@@ -773,15 +784,20 @@ public class DataFiles implements ICreateInitialSolution {
             configuration.setDuelMatrix(duelMatrix);
 
             ArrayList<Integer> rest = new ArrayList<>();
-            Row row1 = rowIteratorData.next();
-            Iterator<Cell> cellIterator = row1.cellIterator();
+            try {
+                Row row1 = rowIteratorData.next();
+                Iterator<Cell> cellIterator = row1.cellIterator();
 
-            while (cellIterator.hasNext()){
-                Cell cell = cellIterator.next();
-                if(cell !=null){
-                    rest.add((int)cell.getNumericCellValue());
+                while (cellIterator.hasNext()){
+                    Cell cell = cellIterator.next();
+                    if(cell !=null){
+                        rest.add((int)cell.getNumericCellValue());
+                    }
                 }
+            }catch (Exception e){
+
             }
+
             configuration.setRestDates(rest);
 
 
@@ -936,7 +952,7 @@ public class DataFiles implements ICreateInitialSolution {
             //
             Cell cellCalendar = row.createCell(0);
             cellCalendar.setCellStyle(style);
-            cellCalendar.setCellValue("Calendario "+(i)/*data.getCalendarId()*/);
+            cellCalendar.setCellValue(data.getCalendarId());
 
             //
             Cell cellCalendarDistance = row.createCell(1);
@@ -989,7 +1005,7 @@ public class DataFiles implements ICreateInitialSolution {
             fileOut = new FileOutputStream(file.getAbsolutePath());
             workbook.write(fileOut);
             fileOut.close();
-            showSuccessfulMessage();
+            showSuccessfulMessageStatistics();
 
         } catch (Exception e) {
             e.printStackTrace();

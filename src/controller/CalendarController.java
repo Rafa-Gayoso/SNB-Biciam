@@ -76,7 +76,7 @@ public class CalendarController implements Initializable {
 
         notification = new TrayNotification();
         selectedCalendar = 0;
-
+        exportButton.setDisable(false);
         tables = new ArrayList<>();
         List<State> calendarsList = Executer.getInstance().getResultStates();
         try{
@@ -245,9 +245,9 @@ public class CalendarController implements Initializable {
                 tab.setContent(label);
                 calendarsTabPane.getTabs().add(tab);
                 selectedCalendar = -1;
-                exportBtn.setDisable(true);
+                exportButton.setDisable(true);
             }else
-                exportBtn.setDisable(true);
+                exportButton.setDisable(false);
 
     }
 

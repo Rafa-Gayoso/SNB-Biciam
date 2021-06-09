@@ -309,6 +309,11 @@ public class TTPDefinition {
             for (int m = 0; m < date.getGames().size(); m++) {
                 int first = date.getGames().get(m).get(0);
                 int second = date.getGames().get(m).get(1);
+                if(teamsIndexes.indexOf(first) == -1){
+                    first = findTeam(date.getGames(), configuration);
+                }else if(teamsIndexes.indexOf(second) == -1){
+                    second = findTeam(date.getGames(), configuration);
+                }
                 row.set(teamsIndexes.indexOf(first), first);
                 row.set(teamsIndexes.indexOf(second), first);
             }
@@ -820,5 +825,28 @@ public class TTPDefinition {
             list.add(teamsIndexes.get(k));
         }
         return list;
+    }
+
+
+    private int findTeam(ArrayList<ArrayList<Integer>> games, CalendarConfiguration config){
+
+        int team = -1;
+
+
+        ArrayList<Integer> allTeamsDate = new ArrayList<>();
+        for(int i =0; i < games.size(); i++){
+            allTeamsDate.add(games.get(i).get(0));
+            allTeamsDate.add(games.get(i).get(1));
+        }
+
+        for (int i =0; i < config.getTeamsIndexes().size(); i++){
+            if(!allTeamsDate.contains(config.getTeamsIndexes().get(i))){
+                team = config.getTeamsIndexes().get(i);
+            }
+        }
+
+        return team;
+
+
     }
 }

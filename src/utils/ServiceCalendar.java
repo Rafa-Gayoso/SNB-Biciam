@@ -6,7 +6,6 @@ import evolutionary_algorithms.complement.MutationType;
 import evolutionary_algorithms.complement.ReplaceType;
 import evolutionary_algorithms.complement.SelectionType;
 import execute.Executer;
-import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import local_search.complement.StopExecute;
 import local_search.complement.UpdateParameter;
@@ -16,6 +15,7 @@ import metaheuristics.generators.GeneratorType;
 import operators.interfaces.IChampionGame;
 import operators.interfaces.IInauguralGame;
 import operators.interfaces.ISecondRound;
+
 
 public class ServiceCalendar extends javafx.concurrent.Service<String> implements ISecondRound, IInauguralGame, IChampionGame {
 
@@ -174,11 +174,14 @@ public class ServiceCalendar extends javafx.concurrent.Service<String> implement
 
                     Executer.getInstance().getResultStates().add(state);
                     Strategy.destroyExecute();*/
+
                     updateProgress(i+1,Executer.getInstance().getEXECUTIONS());
 
                     percent = percent(i+1);
                     updateMessage(percent+" %");
                 }
+
+
 
                 updateProgress(i,Executer.getInstance().getEXECUTIONS());
 
@@ -189,6 +192,7 @@ public class ServiceCalendar extends javafx.concurrent.Service<String> implement
             }
         };
     }
+
 
 
 

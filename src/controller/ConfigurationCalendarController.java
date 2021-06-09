@@ -348,7 +348,7 @@ public class ConfigurationCalendarController implements Initializable {
             comboChamp.setVisible(true);
             comboSub.setVisible(true);
             btnSwap.setVisible(true);
-        } else if(TTPDefinition.getInstance().getTeamsIndexes() != null){
+        } else if(TTPDefinition.getInstance().getTeamsIndexes() != null && calendarPosition == -1){
             HomeController.escogidos = true;
 
             calendarId.setText(TTPDefinition.getInstance().getCalendarId());
@@ -455,7 +455,7 @@ public class ConfigurationCalendarController implements Initializable {
                 occidenteVsOrienteToggle.setSelected(false);
                 occidenteVsOrienteToggle.setText("No");
             }
-        }else if(calendarPosition != -1) {
+        }else {
             HomeController.escogidos = true;
             CalendarConfiguration configuration = ((CalendarState) Executer.getInstance().getResultStates().get(calendarPosition)).getConfiguration();
             calendarId.setText(configuration.getCalendarId());
