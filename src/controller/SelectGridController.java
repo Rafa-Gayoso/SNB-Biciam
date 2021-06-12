@@ -257,6 +257,12 @@ public class SelectGridController implements Initializable, ICreateInitialSoluti
     void showCalendar() throws Exception {
 
         TTPDefinition.getInstance().setDuelMatrix(matrixCalendar);
+        /*TTPDefinition.getInstance().setNumberOfDates(TTPDefinition.getInstance().getTeamsIndexes().size() - 1);
+        Executer.getInstance().executeEC();
+        AnchorPane structureOver = homeController.getPrincipalPane();
+        homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
+
+        homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");*/
         StackPane stackPane = new StackPane();
 
         JFXDialog jfxDialog = new JFXDialog();

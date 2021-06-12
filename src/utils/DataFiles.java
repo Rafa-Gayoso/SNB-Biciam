@@ -474,6 +474,16 @@ public class DataFiles implements ICreateInitialSolution {
         notification.showAndDismiss(Duration.seconds(2));
     }
 
+    private static void showSuccessfulMessageConfiguration() {
+        TrayNotification notification = new TrayNotification();
+        notification.setTitle("Guardar Configuraci\u00f3n");
+        notification.setMessage("Configuraci\u00f3n exportada con \u00e9xito");
+        notification.setNotificationType(NotificationType.SUCCESS);
+        notification.setRectangleFill(Paint.valueOf("#2F2484"));
+        notification.setAnimationType(AnimationType.FADE);
+        notification.showAndDismiss(Duration.seconds(2));
+    }
+
 
     public ArrayList<ArrayList<String>> getMutationsConfiguration() {
         return mutationsConfiguration;
@@ -883,7 +893,7 @@ public class DataFiles implements ICreateInitialSolution {
             fis.close();
         }catch (Exception e) {
             TrayNotification notification = new TrayNotification();
-            notification.setTitle("Importación de Calendario");
+            notification.setTitle("Importaci\u00f3n de Calendario");
             notification.setMessage("Archivo con formato incorrecto.");
             notification.setNotificationType(NotificationType.ERROR);
             notification.setRectangleFill(Paint.valueOf("#2F2484"));
@@ -1011,8 +1021,194 @@ public class DataFiles implements ICreateInitialSolution {
             e.printStackTrace();
         }
 
+    }
+
+    public void exportConfiguration(CalendarConfiguration configuration){
+        DirectoryChooser fc = new DirectoryChooser();
 
 
+        //Set extension filter for text files
+        /*FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xlsx)", "*.xlsx");
+        fc.getExtensionFilters().add(extFilter);*/
+
+
+        //dc = new DirectoryChooser();
+        File f = fc.showDialog(new Stage());
+        File dir = new File(f.getAbsoluteFile() + "/Configuraci\u00f3n");
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+
+        File file = new File(dir.getAbsolutePath() + "/Configuraci\u00f3n " + configuration.getCalendarId() + ".xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        Sheet spreadsheetData = workbook.createSheet("Data");
+        Row rowData = spreadsheetData.createRow(0);
+        Cell cellData =  rowData.createCell(0);
+        cellData.setCellValue(configuration.getCalendarId());
+
+        rowData = spreadsheetData.createRow(1);
+
+        for (int i = 0; i < configuration.getTeamsIndexes().size(); i++){
+            cellData = rowData.createCell(i);
+            cellData.setCellValue(configuration.getTeamsIndexes().get(i));
+        }
+
+        rowData = spreadsheetData.createRow(2);
+        cellData =  rowData.createCell(0);
+        cellData.setCellValue(configuration.isInauguralGame());
+
+        rowData = spreadsheetData.createRow(3);
+        cellData =  rowData.createCell(0);
+        cellData.setCellValue(configuration.isChampionVsSecondPlace());
+
+        rowData = spreadsheetData.createRow(4);
+        cellData =  rowData.createCell(0);
+        cellData.setCellValue(configuration.getChampion());
+
+        rowData = spreadsheetData.createRow(5);
+        cellData =  rowData.createCell(0);
+
+        cellData.setCellValue(configuration.getSecondPlace());
+
+        rowData = spreadsheetData.createRow(6);
+        cellData =  rowData.createCell(0);
+
+        cellData.setCellValue(configuration.isSecondRoundCalendar());
+
+        rowData = spreadsheetData.createRow(7);
+        cellData =  rowData.createCell(0);
+
+        cellData.setCellValue(configuration.isSymmetricSecondRound());
+
+        rowData = spreadsheetData.createRow(8);
+        cellData =  rowData.createCell(0);
+
+        cellData.setCellValue(configuration.isOccidenteVsOriente());
+
+        rowData = spreadsheetData.createRow(9);
+        cellData =  rowData.createCell(0);
+
+        cellData.setCellValue(configuration.getMaxLocalGamesInARow());
+
+        rowData = spreadsheetData.createRow(10);
+        cellData =  rowData.createCell(0);
+
+        cellData.setCellValue(configuration.getMaxVisitorGamesInARow());
+
+
+        rowData = spreadsheetData.createRow(11);
+        for(int k = 0; k < configuration.getRestDates().size(); k++){
+            cellData =  rowData.createCell(k);
+
+            cellData.setCellValue(configuration.getRestDates().get(k));
+        }
+
+        for (int i = 0; i < rowData.getLastCellNum(); i++) {
+            spreadsheetData.autoSizeColumn(i);
+        }
+
+        OutputStream fileOut = null;
+        try {
+            fileOut = new FileOutputStream(file.getAbsolutePath());
+            workbook.write(fileOut);
+            fileOut.close();
+            showSuccessfulMessageStatistics();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            TrayNotification notification = new TrayNotification();
+            notification.setTitle("Exportaci\u00f3n de Calendario");
+            notification.setMessage("Ha ocurrido un Error.");
+            notification.setNotificationType(NotificationType.ERROR);
+            notification.setRectangleFill(Paint.valueOf("#2F2484"));
+            notification.setAnimationType(AnimationType.FADE);
+            notification.showAndDismiss(Duration.seconds(2));
+        }
+
+
+
+    }
+
+    public CalendarConfiguration readConfiguration(String route) throws IOException {
+        CalendarConfiguration configuration = null;
+        try {
+            configuration  = new CalendarConfiguration();
+
+            ArrayList<Date> dates = new ArrayList<>();
+            //ArrayList<Integer>teamsIndexes = new ArrayList<>();
+
+            FileInputStream fis = new FileInputStream(route);
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+
+            XSSFSheet xssfSheetData = workbook.getSheetAt(1);
+            Iterator<Row> rowIteratorData = xssfSheetData.iterator();
+
+            configuration.setCalendarId(rowIteratorData.next().getCell(0).getStringCellValue());
+
+            Row rowTeamIndexes = rowIteratorData.next();
+
+            for (Cell cellData : rowTeamIndexes) {
+                configuration.getTeamsIndexes().add((int) cellData.getNumericCellValue());
+            }
+            int [][] duelMatrix = new int [configuration.getTeamsIndexes().size()][configuration.getTeamsIndexes().size()];
+            configuration.setInauguralGame(rowIteratorData.next().getCell(0).getBooleanCellValue());
+            configuration.setChampionVsSecondPlace(rowIteratorData.next().getCell(0).getBooleanCellValue());
+            configuration.setChampion((int) rowIteratorData.next().getCell(0).getNumericCellValue());
+            configuration.setSecondPlace((int) rowIteratorData.next().getCell(0).getNumericCellValue());
+            configuration.setSecondRoundCalendar(rowIteratorData.next().getCell(0).getBooleanCellValue());
+            configuration.setSymmetricSecondRound(rowIteratorData.next().getCell(0).getBooleanCellValue());
+            configuration.setOccidenteVsOriente(rowIteratorData.next().getCell(0).getBooleanCellValue());
+            configuration.setMaxLocalGamesInARow((int) rowIteratorData.next().getCell(0).getNumericCellValue());
+            configuration.setMaxVisitorGamesInARow((int) rowIteratorData.next().getCell(0).getNumericCellValue());
+
+
+            ArrayList<Integer> rest = new ArrayList<>();
+            try {
+                Row row1 = rowIteratorData.next();
+                Iterator<Cell> cellIterator = row1.cellIterator();
+
+                while (cellIterator.hasNext()){
+                    Cell cell = cellIterator.next();
+                    if(cell !=null){
+                        rest.add((int)cell.getNumericCellValue());
+                    }
+                }
+            }catch (Exception e){
+
+            }
+
+            configuration.setRestDates(rest);
+
+
+
+            TTPDefinition.getInstance().setTeamIndexes(configuration.getTeamsIndexes());
+            TTPDefinition.getInstance().setSymmetricSecondRound(configuration.isSymmetricSecondRound());
+            TTPDefinition.getInstance().setSecondRound(configuration.isSecondRoundCalendar());
+            TTPDefinition.getInstance().setCantVecesLocal(configuration.getMaxLocalGamesInARow());
+            TTPDefinition.getInstance().setCantVecesVisitante(configuration.getMaxVisitorGamesInARow());
+            TTPDefinition.getInstance().setChampionVsSub(configuration.isChampionVsSecondPlace());
+            TTPDefinition.getInstance().setFirstPlace(configuration.getChampion());
+            TTPDefinition.getInstance().setSecondPlace(configuration.getSecondPlace());
+            TTPDefinition.getInstance().setInauguralGame(configuration.isInauguralGame());
+            TTPDefinition.getInstance().setOccidentVsOrient(configuration.isOccidenteVsOriente());
+            TTPDefinition.getInstance().setCalendarId(configuration.getCalendarId());
+            TTPDefinition.getInstance().setDuelMatrix(configuration.getDuelMatrix());
+            TTPDefinition.getInstance().setRestIndexes(configuration.getRestDates());
+
+
+            workbook.close();
+            fis.close();
+        }catch (Exception e) {
+            TrayNotification notification = new TrayNotification();
+            notification.setTitle("Importaci\u00f3n de la Configuraci\u00f3n");
+            notification.setMessage("Archivo con formato incorrecto.");
+            notification.setNotificationType(NotificationType.ERROR);
+            notification.setRectangleFill(Paint.valueOf("#2F2484"));
+            notification.setAnimationType(AnimationType.FADE);
+            notification.showAndDismiss(Duration.seconds(2));
+        }
+
+        return configuration;
     }
 
 }

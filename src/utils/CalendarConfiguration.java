@@ -37,6 +37,25 @@ public class CalendarConfiguration {
         this.duelMatrix = duelMatrix;
     }
 
+    public CalendarConfiguration(String calendarId, ArrayList<Integer> teamsIndexes, boolean inauguralGame,
+                                 boolean championVsSecondPlace, int champion, int secondPlace,
+                                 boolean secondRoundCalendar, boolean symmetricSecondRound, boolean OccidenteVsOriente,
+                                 int maxLocalGamesInARow, int maxVisitorGamesInARow, ArrayList<Integer> restDates) {
+        this.calendarId = calendarId;
+        this.teamsIndexes = teamsIndexes;
+        this.inauguralGame = inauguralGame;
+        this.championVsSecondPlace = championVsSecondPlace;
+        this.champion = champion;
+        this.secondPlace = secondPlace;
+        this.secondRoundCalendar = secondRoundCalendar;
+        this.symmetricSecondRound = symmetricSecondRound;
+        this.OccidenteVsOriente = OccidenteVsOriente;
+        this.maxLocalGamesInARow = maxLocalGamesInARow;
+        this.maxVisitorGamesInARow = maxVisitorGamesInARow;
+        this.restDates = restDates;
+        this.duelMatrix = duelMatrix;
+    }
+
     public CalendarConfiguration() {
         this.calendarId = "";
         this.teamsIndexes = new ArrayList<>();
@@ -171,11 +190,14 @@ public class CalendarConfiguration {
         clone.setMaxVisitorGamesInARow(this.maxVisitorGamesInARow);
         clone.setRestDates(this.restDates);
         clone.setDuelMatrix(new int [teamsIndexes.size()][teamsIndexes.size()]);
-        for (int i=0; i < duelMatrix.length; i++){
-            for (int j =0; j < duelMatrix.length; j++){
-                clone.getDuelMatrix()[i][j] = duelMatrix[i][j];
+        if(duelMatrix !=null){
+            for (int i=0; i < duelMatrix.length; i++){
+                for (int j =0; j < duelMatrix.length; j++){
+                    clone.getDuelMatrix()[i][j] = duelMatrix[i][j];
+                }
             }
         }
+
         return clone;
     }
 

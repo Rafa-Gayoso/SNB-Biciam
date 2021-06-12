@@ -209,8 +209,7 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        areVisible = false;
-
+        areVisible = false;lblSuperior.setVisible(false);
         buttonReturnSelectionTeamConfiguration.setVisible(false);
     }
 

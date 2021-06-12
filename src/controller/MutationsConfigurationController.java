@@ -37,7 +37,7 @@ public class MutationsConfigurationController implements Initializable {
 
 
     private int selectedCalendar;
-    private HomeController homeController;
+    public static HomeController homeController;
 
     private ArrayList<ArrayList<Boolean>> booleanValues;//lista de boolean para saber que componentes activar o no
 

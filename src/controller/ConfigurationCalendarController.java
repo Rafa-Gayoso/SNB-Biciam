@@ -3,6 +3,7 @@ package controller;
 import com.jfoenix.controls.*;
 import definition.TTPDefinition;
 import definition.state.CalendarState;
+import definition.state.statecode.Date;
 import execute.Executer;
 import javafx.beans.property.Property;
 import javafx.collections.ObservableList;
@@ -11,9 +12,15 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.StackPane;
 import operators.heuristics.HeuristicOperatorType;
+import operators.initialSolution.InitialSolutionType;
+import operators.interfaces.IChampionGame;
+import operators.interfaces.ICreateInitialSolution;
+import operators.interfaces.IInauguralGame;
+import operators.interfaces.ISecondRound;
 import operators.mutation.MutationOperator;
 import operators.mutation.MutationOperatorType;
 import org.controlsfx.control.CheckListView;
+import problem.definition.State;
 import utils.CalendarConfiguration;
 import utils.DataFiles;
 import javafx.collections.FXCollections;
@@ -37,7 +44,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class ConfigurationCalendarController implements Initializable {
+public class ConfigurationCalendarController implements Initializable, ISecondRound, IInauguralGame, IChampionGame, ICreateInitialSolution {
 
     private TrayNotification notification;
     private HomeController homeController;
@@ -133,7 +140,7 @@ public class ConfigurationCalendarController implements Initializable {
 
 
     @FXML
-    void selectTeams(ActionEvent event) throws IOException {
+    void selectTeams(ActionEvent event) throws Exception {
         validateData();
 
     }
@@ -144,7 +151,7 @@ public class ConfigurationCalendarController implements Initializable {
 
     }
 
-    private void validateData() throws IOException {
+    private void validateData() throws Exception {
 
         selectedIndexes = new ArrayList<>(teamCheckList.getCheckModel().getCheckedIndices());
         teamsNames = new ArrayList<>();
@@ -685,15 +692,20 @@ public class ConfigurationCalendarController implements Initializable {
         this.homeController = homeController;
     }
 
-    void showTeamsMatrix() throws IOException {
+    void showTeamsMatrix() throws Exception {
 
         //System.out.println(restIndices);
         //TTPDefinition.getInstance().setRestIndexes(restIndices);
         if (TTPDefinition.getInstance().isSecondRound()) {
-
+            /*TTPDefinition.getInstance().setNumberOfDates(TTPDefinition.getInstance().getTeamsIndexes().size() - 1);
             TTPDefinition.getInstance().setDuelMatrix(generateMatrix(TTPDefinition.getInstance().getCantEquipos()));
-            StackPane stackPane = new StackPane();
+            Executer.getInstance().executeEC();
+            AnchorPane structureOver = homeController.getPrincipalPane();
+            homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
 
+            homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");*/
+            StackPane stackPane = new StackPane();
+            TTPDefinition.getInstance().setDuelMatrix(generateMatrix(TTPDefinition.getInstance().getCantEquipos()));
             JFXDialog jfxDialog = new JFXDialog();
             JFXDialogLayout content = new JFXDialogLayout();
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -761,7 +773,9 @@ public class ConfigurationCalendarController implements Initializable {
                 service.restart();
                 //Executer.getInstance().executeEC();
             } else {
+
                 ServiceOccidentOrientCalendar serviceOccidentOrientCalendar = new ServiceOccidentOrientCalendar();
+                //TTPDefinition.getInstance().setDuelMatrix(generateMatrix(TTPDefinition.getInstance().getCantEquipos()));
 
                 serviceOccidentOrientCalendar.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
                     @Override
@@ -804,7 +818,6 @@ public class ConfigurationCalendarController implements Initializable {
                     }
                 });
                 serviceOccidentOrientCalendar.restart();
-
             }
 
 

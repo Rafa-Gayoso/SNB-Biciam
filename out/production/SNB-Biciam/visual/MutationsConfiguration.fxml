@@ -107,7 +107,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
       </JFXListView>
-      <JFXButton buttonType="RAISED" layoutX="896.0" layoutY="693.0" onAction="#close" prefHeight="46.0" prefWidth="231.0" stylesheets="@../styles/PrincipalMenu.css" text="Aplicar mutaciones">
+      <JFXButton buttonType="RAISED" layoutX="896.0" layoutY="693.0" onAction="#close" prefHeight="46.0" prefWidth="231.0" stylesheets="@../styles/PrincipalMenu.css" text="Regresar">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
