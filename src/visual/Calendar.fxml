@@ -63,7 +63,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="CloseCalendarBtn" onAction="#closeSelectedTab" prefHeight="54.0" prefWidth="206.0" stylesheets="@../styles/PrincipalMenu.css" text="Cerrar calendario" GridPane.columnIndex="4" GridPane.rowIndex="2">
+      <JFXButton fx:id="CloseCalendarBtn" onAction="#closeSelectedTab" prefHeight="54.0" prefWidth="206.0" stylesheets="@../styles/PrincipalMenu.css" text="Borrar calendario" GridPane.columnIndex="4" GridPane.rowIndex="2">
          <font>
             <Font name="Segoe UI Emoji" size="16.0" />
          </font>
@@ -78,7 +78,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <MenuButton fx:id="exportButton" alignment="CENTER" mnemonicParsing="false" popupSide="TOP" prefHeight="54.0" prefWidth="206.0" styleClass="jfx-button" stylesheets="@../styles/PrincipalMenu.css" text="Exportar" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <MenuButton fx:id="exportButton" alignment="CENTER" mnemonicParsing="false" popupSide="TOP" prefHeight="54.0" prefWidth="206.0" styleClass="jfx-menu-button" stylesheets="@../styles/PrincipalMenu.css" text="Exportar" GridPane.columnIndex="2" GridPane.rowIndex="2">
         <items>
           <MenuItem fx:id="exportSelect" mnemonicParsing="false" onAction="#exportSelectedCalendar" text="Exportar calendario seleccionado" />
           <MenuItem fx:id="exportAll" mnemonicParsing="false" onAction="#exportAllCalendar" text="Exportar todos los calendarios" />
@@ -93,8 +93,11 @@
          <font>
             <Font name="Segoe UI" size="16.0" />
          </font>
+          <cursor>
+              <Cursor fx:constant="HAND" />
+          </cursor>
       </MenuButton>
-      <MenuButton fx:id="statisticsBtn" alignment="CENTER" mnemonicParsing="false" popupSide="TOP" prefHeight="54.0" prefWidth="206.0" styleClass="jfx-button" stylesheets="@../styles/PrincipalMenu.css" text="Estadísticas" GridPane.rowIndex="2">
+      <MenuButton fx:id="statisticsBtn" alignment="CENTER" mnemonicParsing="false" popupSide="TOP" prefHeight="54.0" prefWidth="206.0" styleClass="jfx-menu-button" stylesheets="@../styles/PrincipalMenu.css" text="Estadísticas" GridPane.rowIndex="2">
          <items>
             <MenuItem fx:id="statistics" mnemonicParsing="false" onAction="#showStatistics" text="Mostrar gráficos estadísticos" />
             <MenuItem fx:id="statisticsResume" mnemonicParsing="false" onAction="#showResume" text="Mostrar resumen estadístico" />
@@ -109,6 +112,9 @@
          <font>
             <Font name="Segoe UI" size="16.0" />
          </font>
+          <cursor>
+              <Cursor fx:constant="HAND" />
+          </cursor>
       </MenuButton>
       <JFXTabPane fx:id="calendarsTabPane" prefHeight="471.0" prefWidth="1120.0" GridPane.columnSpan="5" GridPane.rowIndex="1">
          <GridPane.margin>

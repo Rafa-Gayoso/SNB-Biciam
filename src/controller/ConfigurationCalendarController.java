@@ -6,6 +6,7 @@ import definition.state.CalendarState;
 import definition.state.statecode.Date;
 import execute.Executer;
 import javafx.beans.property.Property;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
@@ -284,44 +285,54 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
         teamCheckList.setItems(FXCollections.observableArrayList(teams));
         //teamsSelectionListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        teamCheckList.setOnMouseClicked(event -> {
-            int indices = teamCheckList.getCheckModel().getCheckedIndices().size();
-            if (indices > 1) {
-                int valTempLocal = maxHomeGamesSpinner.getValue();
-                int valTempVisitor = maxVisitorGamesSpinner.getValue();
+        teamCheckList.getCheckModel().getCheckedItems().addListener(new ListChangeListener<String>() {
+            @Override
+            public void onChanged(Change<? extends String> change) {
+                {
+                    try{
+                        int indices = teamCheckList.getCheckModel().getCheckedIndices().size();
+                        if (indices > 1) {
+                            int valTempLocal = maxHomeGamesSpinner.getValue();
+                            int valTempVisitor = maxVisitorGamesSpinner.getValue();
 
-                int maxGamesOther = indices / 2;
-                maxHomeGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGamesOther));
-                maxVisitorGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGamesOther));
+                            int maxGamesOther = indices / 2;
+                            maxHomeGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGamesOther));
+                            maxVisitorGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGamesOther));
 
-                if (valTempLocal <= maxGamesOther) {
-                    maxHomeGamesSpinner.getValueFactory().setValue(valTempLocal);
-                } else {
-                    maxHomeGamesSpinner.getValueFactory().setValue(maxGamesOther);
+                            if (valTempLocal <= maxGamesOther) {
+                                maxHomeGamesSpinner.getValueFactory().setValue(valTempLocal);
+                            } else {
+                                maxHomeGamesSpinner.getValueFactory().setValue(maxGamesOther);
+                            }
+
+                            if (valTempVisitor <= maxGamesOther) {
+                                maxVisitorGamesSpinner.getValueFactory().setValue(valTempVisitor);
+                            } else {
+                                maxVisitorGamesSpinner.getValueFactory().setValue(maxGamesOther);
+                            }
+                        } else {
+                            maxHomeGamesSpinner.getValueFactory().setValue(4);
+                            maxVisitorGamesSpinner.getValueFactory().setValue(4);
+                        }
+                        comboChamp.getSelectionModel().clearSelection();
+                        comboSub.getSelectionModel().clearSelection();
+
+                        listComboChamp.clear();
+                        listComboChamp.addAll(teamCheckList.getCheckModel().getCheckedItems());
+
+                        listComboSub.clear();
+                        listComboSub.addAll(teamCheckList.getCheckModel().getCheckedItems());
+
+                        if (indices == DataFiles.getSingletonDataFiles().getTeams().size()) {
+                            selectAll.setSelected(true);
+                        } else {
+                            selectAll.setSelected(false);
+                        }
+                    }catch (Exception e){
+
+                    }
+
                 }
-
-                if (valTempVisitor <= maxGamesOther) {
-                    maxVisitorGamesSpinner.getValueFactory().setValue(valTempVisitor);
-                } else {
-                    maxVisitorGamesSpinner.getValueFactory().setValue(maxGamesOther);
-                }
-            } else {
-                maxHomeGamesSpinner.getValueFactory().setValue(4);
-                maxVisitorGamesSpinner.getValueFactory().setValue(4);
-            }
-            comboChamp.getSelectionModel().clearSelection();
-            comboSub.getSelectionModel().clearSelection();
-
-            listComboChamp.clear();
-            listComboChamp.addAll(teamCheckList.getCheckModel().getCheckedItems());
-
-            listComboSub.clear();
-            listComboSub.addAll(teamCheckList.getCheckModel().getCheckedItems());
-
-            if (indices == DataFiles.getSingletonDataFiles().getTeams().size()) {
-                selectAll.setSelected(true);
-            } else {
-                selectAll.setSelected(false);
             }
         });
 

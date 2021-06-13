@@ -64,17 +64,20 @@
                         <Insets left="30.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <MenuButton fx:id="statisticsBtn" alignment="CENTER" mnemonicParsing="false" popupSide="TOP" prefHeight="42.0" prefWidth="281.0" styleClass="jfx-button" stylesheets="@../styles/PrincipalMenu.css" text="Importar/Exportar Configuración">
+                  <MenuButton fx:id="statisticsBtn" alignment="CENTER" mnemonicParsing="false" popupSide="TOP" prefHeight="37.0" prefWidth="281.0" styleClass="jfx-menu-button" stylesheets="@../styles/PrincipalMenu.css" text="Importar/Exportar Configuración">
                      <items>
-                        <MenuItem fx:id="importConfigurationBtn" mnemonicParsing="false" onAction="#importConfiguration" style="-fx-fill-color: black;" text="Importar Configuración" />
-                        <MenuItem fx:id="exportConfigurationBtn" mnemonicParsing="false" onAction="#exportConfiguration" style="-fx-fill: black;;" text="Exportar Configuración" />
+                        <MenuItem fx:id="importConfigurationBtn" mnemonicParsing="false" onAction="#importConfiguration" text="Importar Configuración" />
+                        <MenuItem fx:id="exportConfigurationBtn" mnemonicParsing="false" onAction="#exportConfiguration" text="Exportar Configuración" />
                      </items>
                      <font>
                         <Font name="Segoe UI" size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="70.0" top="10.0" />
+                        <Insets left="70.0" top="15.0" />
                      </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </MenuButton>
                </children>
             </VBox>

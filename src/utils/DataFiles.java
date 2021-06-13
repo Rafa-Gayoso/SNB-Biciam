@@ -1135,7 +1135,7 @@ public class DataFiles implements ICreateInitialSolution {
             FileInputStream fis = new FileInputStream(route);
             XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
-            XSSFSheet xssfSheetData = workbook.getSheetAt(1);
+            XSSFSheet xssfSheetData = workbook.getSheetAt(0);
             Iterator<Row> rowIteratorData = xssfSheetData.iterator();
 
             configuration.setCalendarId(rowIteratorData.next().getCell(0).getStringCellValue());
