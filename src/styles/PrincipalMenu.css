@@ -197,7 +197,8 @@
     -fx-fill: white;
 }
 
-#exportSelect .text, #exportAll .text, #statistics .text,#statisticsResume .text{
+#exportSelect .text, #exportAll .text, #statistics .text,#statisticsResume .text, #exportConfigurationBtn .text,
+#importConfigurationBtn .text{
     -fx-fill: black;
 }
 

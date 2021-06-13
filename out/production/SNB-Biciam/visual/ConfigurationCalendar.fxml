@@ -7,6 +7,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
@@ -36,7 +38,7 @@
                         </Tooltip>
                      </tooltip>
                   </JFXToggleButton>
-                  <CheckListView fx:id="teamCheckList" prefHeight="482.0" />
+                  <CheckListView fx:id="teamCheckList" prefHeight="433.0" prefWidth="451.0" />
                   <JFXButton fx:id="advanceConfigurationBtn" buttonType="RAISED" contentDisplay="RIGHT" onAction="#advanceConfiguration" prefHeight="55.0" prefWidth="377.0" text="Configuración avanzada" textFill="#2f2484">
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -58,7 +60,22 @@
                      <font>
                         <Font size="24.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets left="30.0" />
+                     </VBox.margin>
                   </JFXButton>
+                  <MenuButton fx:id="statisticsBtn" alignment="CENTER" mnemonicParsing="false" popupSide="TOP" prefHeight="42.0" prefWidth="281.0" styleClass="jfx-button" stylesheets="@../styles/PrincipalMenu.css" text="Importar/Exportar Configuración">
+                     <items>
+                        <MenuItem fx:id="importConfigurationBtn" mnemonicParsing="false" onAction="#importConfiguration" text="Importar Configuración" />
+                        <MenuItem fx:id="exportConfigurationBtn" mnemonicParsing="false" onAction="#exportConfiguration" text="Exportar Configuración" />
+                     </items>
+                     <font>
+                        <Font name="Segoe UI" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="70.0" top="10.0" />
+                     </VBox.margin>
+                  </MenuButton>
                </children>
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="632.0" prefWidth="316.0">
@@ -124,7 +141,7 @@
                         <Insets top="23.0" />
                      </VBox.margin>
                   </Label>
-                  <Label prefHeight="35.0" prefWidth="310.0" text="Juegos seguidos de visitante" textFill="#2f2484">
+                  <Label prefHeight="35.0" prefWidth="305.0" text="Juegos seguidos de visitante" textFill="#2f2484">
                      <font>
                         <Font name="Segoe UI Symbol" size="24.0" />
                      </font>
@@ -191,7 +208,7 @@
                   </JFXButton>
                </children>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="632.0" prefWidth="329.0">
+            <VBox alignment="TOP_CENTER" prefHeight="462.0" prefWidth="329.0">
                <children>
                   <JFXTextField fx:id="calendarId" focusColor="#2f2484" labelFloat="true" promptText="Identificador del Calendario" stylesheets="@../styles/PrincipalMenu.css">
                      <font>

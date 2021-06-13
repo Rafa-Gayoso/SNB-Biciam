@@ -18,7 +18,7 @@
                 </GridPane>
             </content>
         </ScrollPane>
-        <JFXButton fx:id="saveLocations" layoutX="472.0" layoutY="566.0" onAction="#saveLocations" prefHeight="49.0" prefWidth="205.0" stylesheets="@../styles/PrincipalMenu.css" text="Generar Calendario" textFill="WHITE">
+        <JFXButton fx:id="saveLocations" layoutX="441.0" layoutY="566.0" onAction="#saveLocations" prefHeight="49.0" prefWidth="205.0" stylesheets="@../styles/PrincipalMenu.css" text="Generar Calendario" textFill="WHITE">
             <font>
                 <Font name="Segoe UI Symbol" size="20.0" />
             </font>
@@ -33,7 +33,7 @@
         </Label>
         <FontAwesomeIconView fx:id="balanceCalendar" fill="#10a132" glyphName="CHECK" layoutX="330.0" layoutY="607.0" size="48" />
         <FontAwesomeIconView fx:id="notBalanceCalendar" fill="#f50000" glyphName="TIMES" layoutX="333.0" layoutY="607.0" size="48" text="" wrappingWidth="40.999997831881046" />
-      <JFXButton fx:id="invertDuels" layoutX="883.0" layoutY="566.0" onAction="#invertDuels" prefHeight="49.0" prefWidth="205.0" stylesheets="@../styles/PrincipalMenu.css" text="Invertir sedes" textFill="WHITE">
+      <JFXButton fx:id="invertDuels" layoutX="752.0" layoutY="566.0" onAction="#invertDuels" prefHeight="49.0" prefWidth="197.0" stylesheets="@../styles/PrincipalMenu.css" text="Invertir sedes" textFill="WHITE">
          <font>
             <Font name="Segoe UI Symbol" size="20.0" />
          </font>

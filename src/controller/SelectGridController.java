@@ -531,4 +531,23 @@ public class SelectGridController implements Initializable, ICreateInitialSoluti
         //scroll.setContent(selectionGrid);
     }
 
+    @FXML
+    void exportConfiguration(ActionEvent event) {
+
+        CalendarConfiguration configuration = new CalendarConfiguration();
+
+        configuration.setInauguralGame(TTPDefinition.getInstance().isInauguralGame());
+        configuration.setChampionVsSecondPlace(TTPDefinition.getInstance().isChampionVsSub());
+        configuration.setChampion(TTPDefinition.getInstance().getFirstPlace());
+        configuration.setSecondPlace(TTPDefinition.getInstance().getSecondPlace());
+        configuration.setSecondRoundCalendar(TTPDefinition.getInstance().isSecondRound());
+        configuration.setSymmetricSecondRound(TTPDefinition.getInstance().isSymmetricSecondRound());
+        configuration.setOccidenteVsOriente(TTPDefinition.getInstance().isOccidentVsOrient());
+        configuration.setMaxLocalGamesInARow(TTPDefinition.getInstance().getCantVecesLocal());
+        configuration.setMaxVisitorGamesInARow(TTPDefinition.getInstance().getCantVecesVisitante());
+        configuration.setTeamsIndexes(TTPDefinition.getInstance().getTeamsIndexes());
+        configuration.setRestDates(TTPDefinition.getInstance().getRestIndexes());
+
+        DataFiles.getSingletonDataFiles().exportConfiguration(configuration);
+    }
 }

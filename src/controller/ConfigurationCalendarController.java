@@ -11,6 +11,8 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import operators.heuristics.HeuristicOperatorType;
 import operators.initialSolution.InitialSolutionType;
 import operators.interfaces.IChampionGame;
@@ -37,6 +39,7 @@ import tray.notification.TrayNotification;
 import utils.ServiceCalendar;
 import utils.ServiceOccidentOrientCalendar;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -888,5 +891,54 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
         homeController.createPage(new RestSelectorController(), structureOver, "/visual/RestSelector.fxml");
 
         homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
+    }
+
+    @FXML
+    void importConfiguration(ActionEvent event) throws IOException {
+
+        Stage stage = new Stage();
+        FileChooser fc = new FileChooser();
+
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Documento Excel", "*xlsx"));
+        File file = fc.showOpenDialog(stage);
+
+        try {
+            if (file != null) {
+                CalendarConfiguration configuration = DataFiles.getSingletonDataFiles().importConfiguration(file.toString());
+
+                TrayNotification notification = new TrayNotification();
+                notification.setTitle("Importar configuraci\u00f3n");
+                notification.setMessage("Configuraci\u00f3n importada con éxito");
+                notification.setNotificationType(NotificationType.SUCCESS);
+                notification.setRectangleFill(Paint.valueOf("#2F2484"));
+                notification.setAnimationType(AnimationType.FADE);
+                notification.showAndDismiss(Duration.seconds(1));
+                /*this.createPage(new CalendarController(),home, "/visual/Calendar.fxml");
+                   this.buttonReturnSelectionTeamConfiguration.setVisible(true);*/
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void exportConfiguration(ActionEvent event) {
+
+        CalendarConfiguration configuration = new CalendarConfiguration();
+
+        configuration.setInauguralGame(TTPDefinition.getInstance().isInauguralGame());
+        configuration.setChampionVsSecondPlace(TTPDefinition.getInstance().isChampionVsSub());
+        configuration.setChampion(TTPDefinition.getInstance().getFirstPlace());
+        configuration.setSecondPlace(TTPDefinition.getInstance().getSecondPlace());
+        configuration.setSecondRoundCalendar(TTPDefinition.getInstance().isSecondRound());
+        configuration.setSymmetricSecondRound(TTPDefinition.getInstance().isSymmetricSecondRound());
+        configuration.setOccidenteVsOriente(TTPDefinition.getInstance().isOccidentVsOrient());
+        configuration.setMaxLocalGamesInARow(TTPDefinition.getInstance().getCantVecesLocal());
+        configuration.setMaxVisitorGamesInARow(TTPDefinition.getInstance().getCantVecesVisitante());
+        configuration.setTeamsIndexes(TTPDefinition.getInstance().getTeamsIndexes());
+        configuration.setRestDates(TTPDefinition.getInstance().getRestIndexes());
+
+        DataFiles.getSingletonDataFiles().exportConfiguration(configuration);
     }
 }

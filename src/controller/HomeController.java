@@ -150,7 +150,6 @@ public class HomeController implements Initializable {
                 if(calendar.getCode().size()>0){
                     Executer.getInstance().getResultStates().add(calendar);
 
-
                     notification = getNotification();
                     notification.setTitle("Importaci\u00f3n de Calendario");
                     notification.setMessage("Calendario importado con \u00e9xito");
@@ -162,8 +161,6 @@ public class HomeController implements Initializable {
                     this.createPage(new CalendarController(),home, "/visual/Calendar.fxml");
                     this.buttonReturnSelectionTeamConfiguration.setVisible(true);
                 }
-
-
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -192,18 +189,18 @@ public class HomeController implements Initializable {
 
     @FXML
     void showInformation(ActionEvent event) throws IOException{
-        File file = new File("config_files"+File.separator+"help.pdf");
+        Parent root = FXMLLoader.load(getClass().getResource("/visual/Help.fxml"));
+        Stage stage = new Stage();
 
-        //first check if Desktop is supported by Platform or not
-        if(!Desktop.isDesktopSupported()){
-            System.out.println("Desktop is not supported");
-            return;
-        }
+        stage.setTitle("Ayuda");
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
+        stage.setResizable(true);
+        stage.setScene(new Scene(root));
 
-        Desktop desktop = Desktop.getDesktop();
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(primaryPane.getScene().getWindow());
 
-        //let's try to open PDF file
-        if(file.exists()) desktop.open(file);
+        stage.show();
     }
 
     @Override
@@ -283,22 +280,22 @@ public class HomeController implements Initializable {
 
             Parent root = FXMLLoader.load(getClass().getResource("/visual/RestSelector.fxml"));
             Stage stage = new Stage();
-            ScalableContentPane scale = new ScalableContentPane();
-            scale.setContent(anchorPane);
+            /*ScalableContentPane scale = new ScalableContentPane();
+            scale.setContent(anchorPane);*/
 
             stage.setTitle("Selecci\u00f3n de descansos");
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
             stage.setResizable(true);
             stage.setMinWidth(305 );
             stage.setMinHeight(382);
-            stage.setScene(new Scene(scale));
+            stage.setScene(new Scene(root));
 
             object = loader.getController();
             ((RestSelectorController) object).setHomeController(this);
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(primaryPane.getScene().getWindow());
-
+            stage.setResizable(false);
             stage.show();
         }else if (object instanceof TeamsItineraryController) {
 
@@ -394,8 +391,6 @@ public class HomeController implements Initializable {
             stage.setTitle("Resumen estad\u00edstico");
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
             stage.setResizable(true);
-            stage.setMinWidth(1673);
-            stage.setMinHeight(606);
             stage.setScene(new Scene(root));
 
             object = loader.getController();
@@ -403,7 +398,8 @@ public class HomeController implements Initializable {
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(primaryPane.getScene().getWindow());
-
+            stage.setMinWidth(350);
+            stage.setMinHeight(300);
             stage.show();
         }
     }

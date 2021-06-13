@@ -810,8 +810,6 @@ public class DataFiles implements ICreateInitialSolution {
 
             configuration.setRestDates(rest);
 
-
-
             TTPDefinition.getInstance().setTeamIndexes(configuration.getTeamsIndexes());
             TTPDefinition.getInstance().setSymmetricSecondRound(configuration.isSymmetricSecondRound());
             TTPDefinition.getInstance().setSecondRound(configuration.isSecondRoundCalendar());
@@ -1124,12 +1122,9 @@ public class DataFiles implements ICreateInitialSolution {
             notification.setAnimationType(AnimationType.FADE);
             notification.showAndDismiss(Duration.seconds(2));
         }
-
-
-
     }
 
-    public CalendarConfiguration readConfiguration(String route) throws IOException {
+    public CalendarConfiguration importConfiguration(String route) throws IOException {
         CalendarConfiguration configuration = null;
         try {
             configuration  = new CalendarConfiguration();
@@ -1174,12 +1169,10 @@ public class DataFiles implements ICreateInitialSolution {
                     }
                 }
             }catch (Exception e){
-
+                e.printStackTrace();
             }
 
             configuration.setRestDates(rest);
-
-
 
             TTPDefinition.getInstance().setTeamIndexes(configuration.getTeamsIndexes());
             TTPDefinition.getInstance().setSymmetricSecondRound(configuration.isSymmetricSecondRound());
@@ -1195,7 +1188,6 @@ public class DataFiles implements ICreateInitialSolution {
             TTPDefinition.getInstance().setDuelMatrix(configuration.getDuelMatrix());
             TTPDefinition.getInstance().setRestIndexes(configuration.getRestDates());
 
-
             workbook.close();
             fis.close();
         }catch (Exception e) {
@@ -1210,5 +1202,4 @@ public class DataFiles implements ICreateInitialSolution {
 
         return configuration;
     }
-
 }
