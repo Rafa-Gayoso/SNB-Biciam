@@ -474,6 +474,16 @@ public class DataFiles implements ICreateInitialSolution {
         notification.showAndDismiss(Duration.seconds(2));
     }
 
+    private static void showSuccessfulMessageExportConfiguration() {
+        TrayNotification notification = new TrayNotification();
+        notification.setTitle("Exportar configuraci\u00f3n");
+        notification.setMessage("Configuraci\u00f3n exportada con éxito.");
+        notification.setNotificationType(NotificationType.SUCCESS);
+        notification.setRectangleFill(Paint.valueOf("#2F2484"));
+        notification.setAnimationType(AnimationType.FADE);
+        notification.showAndDismiss(Duration.seconds(2));
+    }
+
     private static void showSuccessfulMessageConfiguration() {
         TrayNotification notification = new TrayNotification();
         notification.setTitle("Guardar Configuraci\u00f3n");
@@ -1093,11 +1103,9 @@ public class DataFiles implements ICreateInitialSolution {
 
         cellData.setCellValue(configuration.getMaxVisitorGamesInARow());
 
-
         rowData = spreadsheetData.createRow(11);
         for(int k = 0; k < configuration.getRestDates().size(); k++){
             cellData =  rowData.createCell(k);
-
             cellData.setCellValue(configuration.getRestDates().get(k));
         }
 
@@ -1110,12 +1118,12 @@ public class DataFiles implements ICreateInitialSolution {
             fileOut = new FileOutputStream(file.getAbsolutePath());
             workbook.write(fileOut);
             fileOut.close();
-            showSuccessfulMessageStatistics();
+            showSuccessfulMessageExportConfiguration();
 
         } catch (Exception e) {
             e.printStackTrace();
             TrayNotification notification = new TrayNotification();
-            notification.setTitle("Exportaci\u00f3n de Calendario");
+            notification.setTitle("Exportaci\u00f3n de Configuraci\u00f3n");
             notification.setMessage("Ha ocurrido un Error.");
             notification.setNotificationType(NotificationType.ERROR);
             notification.setRectangleFill(Paint.valueOf("#2F2484"));
@@ -1124,7 +1132,7 @@ public class DataFiles implements ICreateInitialSolution {
         }
     }
 
-    public CalendarConfiguration importConfiguration(String route) throws IOException {
+    public void importConfiguration(String route) throws IOException {
         CalendarConfiguration configuration = null;
         try {
             configuration  = new CalendarConfiguration();
@@ -1145,7 +1153,7 @@ public class DataFiles implements ICreateInitialSolution {
             for (Cell cellData : rowTeamIndexes) {
                 configuration.getTeamsIndexes().add((int) cellData.getNumericCellValue());
             }
-            int [][] duelMatrix = new int [configuration.getTeamsIndexes().size()][configuration.getTeamsIndexes().size()];
+            //int [][] duelMatrix = new int [configuration.getTeamsIndexes().size()][configuration.getTeamsIndexes().size()];
             configuration.setInauguralGame(rowIteratorData.next().getCell(0).getBooleanCellValue());
             configuration.setChampionVsSecondPlace(rowIteratorData.next().getCell(0).getBooleanCellValue());
             configuration.setChampion((int) rowIteratorData.next().getCell(0).getNumericCellValue());
@@ -1191,6 +1199,7 @@ public class DataFiles implements ICreateInitialSolution {
             workbook.close();
             fis.close();
         }catch (Exception e) {
+            e.printStackTrace();
             TrayNotification notification = new TrayNotification();
             notification.setTitle("Importaci\u00f3n de la Configuraci\u00f3n");
             notification.setMessage("Archivo con formato incorrecto.");
@@ -1199,7 +1208,5 @@ public class DataFiles implements ICreateInitialSolution {
             notification.setAnimationType(AnimationType.FADE);
             notification.showAndDismiss(Duration.seconds(2));
         }
-
-        return configuration;
     }
 }

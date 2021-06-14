@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import utils.DataFiles;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -31,6 +32,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CalendarController implements Initializable {
@@ -236,6 +238,15 @@ public class CalendarController implements Initializable {
 
     @FXML
     void closeSelectedTab(ActionEvent event) {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"");
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.initOwner(calendarsTabPane.getScene().getWindow());
+        alert.getDialogPane().setContentText("Se eliminar\u00E1 el calendario seleccionado. ");
+        alert.getDialogPane().setHeaderText("Borrar Calendario");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.get() == ButtonType.OK){
             Executer.getInstance().getResultStates().remove(selectedCalendar);
             calendarsTabPane.getTabs().remove(selectedCalendar);
 
@@ -248,6 +259,8 @@ public class CalendarController implements Initializable {
                 exportButton.setDisable(true);
             }else
                 exportButton.setDisable(false);
+        }
+
 
     }
 

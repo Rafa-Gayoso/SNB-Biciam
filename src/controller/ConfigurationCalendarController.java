@@ -192,7 +192,7 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
             if (champVsSub.isSelected()) {
                 validateChampionAndSubchampion();
             } else {
-                showNotification("Debe escoger al campeón y subcampeón.");
+                showNotification("Debe escoger al campe\u00f3n y subcampe\u00f3n.");
                 ok = false;
             }
         } else if (champVsSub.isSelected()) {
@@ -284,7 +284,6 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
 
         teamCheckList.setItems(FXCollections.observableArrayList(teams));
         //teamsSelectionListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
         teamCheckList.getCheckModel().getCheckedItems().addListener(new ListChangeListener<String>() {
             @Override
             public void onChanged(Change<? extends String> change) {
@@ -336,8 +335,49 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
             }
         });
 
+        teamCheckList.setOnMouseClicked(event -> {
+            int indices = teamCheckList.getCheckModel().getCheckedIndices().size();
+            if (indices > 1) {
+                int valTempLocal = maxHomeGamesSpinner.getValue();
+                int valTempVisitor = maxVisitorGamesSpinner.getValue();
+
+                int maxGamesOther = indices / 2;
+                maxHomeGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGamesOther));
+                maxVisitorGamesSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, maxGamesOther));
+
+                if (valTempLocal <= maxGamesOther) {
+                    maxHomeGamesSpinner.getValueFactory().setValue(valTempLocal);
+                } else {
+                    maxHomeGamesSpinner.getValueFactory().setValue(maxGamesOther);
+                }
+
+                if (valTempVisitor <= maxGamesOther) {
+                    maxVisitorGamesSpinner.getValueFactory().setValue(valTempVisitor);
+                } else {
+                    maxVisitorGamesSpinner.getValueFactory().setValue(maxGamesOther);
+                }
+            } else {
+                maxHomeGamesSpinner.getValueFactory().setValue(4);
+                maxVisitorGamesSpinner.getValueFactory().setValue(4);
+            }
+            comboChamp.getSelectionModel().clearSelection();
+            comboSub.getSelectionModel().clearSelection();
+
+            listComboChamp.clear();
+            listComboChamp.addAll(teamCheckList.getCheckModel().getCheckedItems());
+
+            listComboSub.clear();
+            listComboSub.addAll(teamCheckList.getCheckModel().getCheckedItems());
+
+            if (indices == DataFiles.getSingletonDataFiles().getTeams().size()) {
+                selectAll.setSelected(true);
+            } else {
+                selectAll.setSelected(false);
+            }
+        });
+
         calendarId.setTextFormatter(new TextFormatter<>(change ->
-                (change.getControlNewText().matches("^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ _.]*$")) ? change : null));
+                (change.getControlNewText().matches("^[A-Za-z0-9 _.]*$")) ? change : null));
 
         //if(!existingConfiguration){
         if (calendarPosition == -1 && TTPDefinition.getInstance().getTeamsIndexes() == null) {
@@ -376,7 +416,7 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
 
             if (lastConfiguration.isInauguralGame()) {
                 inauguralGame.setSelected(true);
-                inauguralGame.setText("Sí");
+                inauguralGame.setText("S\u00ed");
             } else {
                 inauguralGame.setSelected(false);
                 inauguralGame.setText("No");
@@ -407,12 +447,12 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
 
             if (TTPDefinition.getInstance().isSecondRound()) {
                 secondRoundButton.setSelected(true);
-                secondRoundButton.setText("Sí");
+                secondRoundButton.setText("S\u00ed");
                 lblSymmetricSecondRound.setVisible(true);
                 symmetricSecondRound.setVisible(true);
                 if (TTPDefinition.getInstance().isSymmetricSecondRound()) {
                     symmetricSecondRound.setSelected(true);
-                    symmetricSecondRound.setText("Sí");
+                    symmetricSecondRound.setText("S\u00ed");
                 } else {
                     symmetricSecondRound.setSelected(false);
                     symmetricSecondRound.setText("No");
@@ -429,7 +469,7 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
             if (TTPDefinition.getInstance().isChampionVsSub()) {
                 champVsSub.setSelected(true);
 
-                champVsSub.setText("Sí");
+                champVsSub.setText("S\u00ed");
                 comboChamp.setVisible(true);
                 comboSub.setVisible(true);
                 btnSwap.setVisible(true);
@@ -470,7 +510,7 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
             ConfigurationCalendarController.teams = TTPDefinition.getInstance().getTeamsIndexes().size();
             if (TTPDefinition.getInstance().isOccidentVsOrient()) {
                 occidenteVsOrienteToggle.setSelected(true);
-                occidenteVsOrienteToggle.setText("Sí");
+                occidenteVsOrienteToggle.setText("S\u00ed");
 
             } else {
                 occidenteVsOrienteToggle.setSelected(false);
@@ -483,7 +523,7 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
 
             if (configuration.isInauguralGame()) {
                 inauguralGame.setSelected(true);
-                inauguralGame.setText("Sí");
+                inauguralGame.setText("S\u00ed");
             } else {
                 inauguralGame.setSelected(false);
                 inauguralGame.setText("No");
@@ -514,12 +554,12 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
 
             if (configuration.isSecondRoundCalendar()) {
                 secondRoundButton.setSelected(true);
-                secondRoundButton.setText("Sí");
+                secondRoundButton.setText("S\u00ed");
                 lblSymmetricSecondRound.setVisible(true);
                 symmetricSecondRound.setVisible(true);
                 if (configuration.isSymmetricSecondRound()) {
                     symmetricSecondRound.setSelected(true);
-                    symmetricSecondRound.setText("Sí");
+                    symmetricSecondRound.setText("S\u00ed");
                 } else {
                     symmetricSecondRound.setSelected(false);
                     symmetricSecondRound.setText("No");
@@ -535,7 +575,7 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
             if (configuration.isChampionVsSecondPlace()) {
                 champVsSub.setSelected(true);
 
-                champVsSub.setText("Sí");
+                champVsSub.setText("S\u00ed");
                 comboChamp.setVisible(true);
                 comboSub.setVisible(true);
                 btnSwap.setVisible(true);
@@ -559,7 +599,7 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
             ConfigurationCalendarController.teams = configuration.getTeamsIndexes().size();
             if (configuration.isOccidenteVsOriente()) {
                 occidenteVsOrienteToggle.setSelected(true);
-                occidenteVsOrienteToggle.setText("Sí");
+                occidenteVsOrienteToggle.setText("S\u00ed");
 
             } else {
                 occidenteVsOrienteToggle.setSelected(false);
@@ -584,10 +624,10 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
         //posSub = comboSub.getSelectionModel().getSelectedIndex();
         if (champion == null || subchampion == null) {
             //ok = false;
-            showNotification("Debe escoger al campeón y subcampeón.");
+            showNotification("Debe escoger al campeï¿½n y subcampeï¿½n.");
             ok = false;
         } else if (champion.equalsIgnoreCase(subchampion)) {
-            showNotification("El campeón y subcampeón deben ser diferentes");
+            showNotification("El campeï¿½n y subcampeï¿½n deben ser diferentes");
             ok = false;
         } else {
             ok = true;
@@ -710,7 +750,7 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
 
         //System.out.println(restIndices);
         //TTPDefinition.getInstance().setRestIndexes(restIndices);
-        if (TTPDefinition.getInstance().isSecondRound()) {
+        if (TTPDefinition.getInstance().isSecondRound() && !TTPDefinition.getInstance().isSymmetricSecondRound()) {
             /*TTPDefinition.getInstance().setNumberOfDates(TTPDefinition.getInstance().getTeamsIndexes().size() - 1);
             TTPDefinition.getInstance().setDuelMatrix(generateMatrix(TTPDefinition.getInstance().getCantEquipos()));
             Executer.getInstance().executeEC();
@@ -915,17 +955,10 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
 
         try {
             if (file != null) {
-                CalendarConfiguration configuration = DataFiles.getSingletonDataFiles().importConfiguration(file.toString());
+               DataFiles.getSingletonDataFiles().importConfiguration(file.toString());
 
-                TrayNotification notification = new TrayNotification();
-                notification.setTitle("Importar configuraci\u00f3n");
-                notification.setMessage("Configuraci\u00f3n importada con éxito");
-                notification.setNotificationType(NotificationType.SUCCESS);
-                notification.setRectangleFill(Paint.valueOf("#2F2484"));
-                notification.setAnimationType(AnimationType.FADE);
-                notification.showAndDismiss(Duration.seconds(1));
-                /*this.createPage(new CalendarController(),home, "/visual/Calendar.fxml");
-                   this.buttonReturnSelectionTeamConfiguration.setVisible(true);*/
+                AnchorPane structureOver = homeController.getPrincipalPane();
+                homeController.createPage(new ConfigurationCalendarController(), structureOver, "/visual/ConfigurationCalendar.fxml");
 
             }
         } catch (IOException e) {
@@ -936,18 +969,24 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
     @FXML
     void exportConfiguration(ActionEvent event) {
 
+        String champion = comboChamp.getSelectionModel().getSelectedItem();
+        String subchampion = comboSub.getSelectionModel().getSelectedItem();
+        int posChampionExport = DataFiles.getSingletonDataFiles().getTeams().indexOf(champion);
+        int posSubExport = DataFiles.getSingletonDataFiles().getTeams().indexOf(subchampion);
+
         CalendarConfiguration configuration = new CalendarConfiguration();
 
-        configuration.setInauguralGame(TTPDefinition.getInstance().isInauguralGame());
-        configuration.setChampionVsSecondPlace(TTPDefinition.getInstance().isChampionVsSub());
-        configuration.setChampion(TTPDefinition.getInstance().getFirstPlace());
-        configuration.setSecondPlace(TTPDefinition.getInstance().getSecondPlace());
-        configuration.setSecondRoundCalendar(TTPDefinition.getInstance().isSecondRound());
-        configuration.setSymmetricSecondRound(TTPDefinition.getInstance().isSymmetricSecondRound());
-        configuration.setOccidenteVsOriente(TTPDefinition.getInstance().isOccidentVsOrient());
-        configuration.setMaxLocalGamesInARow(TTPDefinition.getInstance().getCantVecesLocal());
-        configuration.setMaxVisitorGamesInARow(TTPDefinition.getInstance().getCantVecesVisitante());
-        configuration.setTeamsIndexes(TTPDefinition.getInstance().getTeamsIndexes());
+        configuration.setCalendarId(calendarId.getText());
+        configuration.setInauguralGame(inauguralGame.isSelected());
+        configuration.setChampionVsSecondPlace(champVsSub.isSelected());
+        configuration.setChampion(posChampionExport);
+        configuration.setSecondPlace(posSubExport);
+        configuration.setSecondRoundCalendar(secondRoundButton.isSelected());
+        configuration.setSymmetricSecondRound(symmetricSecondRound.isSelected());
+        configuration.setOccidenteVsOriente(occidenteVsOrienteToggle.isSelected());
+        configuration.setMaxLocalGamesInARow(maxHomeGamesSpinner.getValue());
+        configuration.setMaxVisitorGamesInARow(maxVisitorGamesSpinner.getValue());
+        configuration.setTeamsIndexes(new ArrayList<>(teamCheckList.getCheckModel().getCheckedIndices()));
         configuration.setRestDates(TTPDefinition.getInstance().getRestIndexes());
 
         DataFiles.getSingletonDataFiles().exportConfiguration(configuration);

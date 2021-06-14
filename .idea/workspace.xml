@@ -25,15 +25,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31c4c62d-8161-430c-9912-ecee8f383fae" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/cssdialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/SNB_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/SNB_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SNB-Biciam/styles/PrincipalMenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SNB-Biciam/styles/PrincipalMenu.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/Calendar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/Calendar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config_files/help.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/config_files/help.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/ConfigurationCalendar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/ConfigurationCalendar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/CalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CalendarController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/PrincipalMenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/PrincipalMenu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/execute/Executer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/execute/Executer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/DataFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/DataFiles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/visual/Calendar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/visual/Calendar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Days.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Days.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/visual/ConfigurationCalendar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/visual/ConfigurationCalendar.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +74,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/controller" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -82,12 +83,8 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\visual" />
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\utils" />
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\config_files" />
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\files" />
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\operators\interfaces" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="controller" />
@@ -96,8 +93,12 @@
       <recent name="application" />
       <recent name="files" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\resources" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\controller" />
+      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\utils" />
+      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\visual" />
+      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\config_files" />
+      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\files" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
@@ -153,15 +154,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -286,6 +285,10 @@
       <workItem from="1623599860977" duration="795000" />
       <workItem from="1623603672867" duration="7534000" />
       <workItem from="1623626958561" duration="1054000" />
+      <workItem from="1623628255813" duration="1606000" />
+      <workItem from="1623639051892" duration="4000" />
+      <workItem from="1623642020982" duration="211000" />
+      <workItem from="1623689289079" duration="2434000" />
     </task>
     <servers />
   </component>
@@ -309,34 +312,34 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1623538560090" />
-    <state x="690" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1623502218915">
+    <state x="690" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1623689342688">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1623502218915" />
-    <state width="1877" height="267" key="GridCell.Tab.0.bottom" timestamp="1623628022211">
+    <state x="690" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1623689342688" />
+    <state width="1877" height="267" key="GridCell.Tab.0.bottom" timestamp="1623709190654">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="267" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1623628022211" />
+    <state width="1877" height="267" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1623709190654" />
     <state width="1877" height="267" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1623614363438" />
-    <state width="1877" height="267" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1623560144531" />
-    <state width="1877" height="267" key="GridCell.Tab.0.center" timestamp="1623628022210">
+    <state width="1877" height="267" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1623631264387" />
+    <state width="1877" height="267" key="GridCell.Tab.0.center" timestamp="1623709190653">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="267" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1623628022210" />
+    <state width="1877" height="267" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1623709190653" />
     <state width="1877" height="267" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1623614363437" />
-    <state width="1877" height="267" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1623560144531" />
-    <state width="1877" height="267" key="GridCell.Tab.0.left" timestamp="1623628022210">
+    <state width="1877" height="267" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1623631264386" />
+    <state width="1877" height="267" key="GridCell.Tab.0.left" timestamp="1623709190653">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="267" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1623628022210" />
+    <state width="1877" height="267" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1623709190653" />
     <state width="1877" height="267" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1623614363437" />
-    <state width="1877" height="267" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1623560144531" />
-    <state width="1877" height="267" key="GridCell.Tab.0.right" timestamp="1623628022211">
+    <state width="1877" height="267" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1623631264386" />
+    <state width="1877" height="267" key="GridCell.Tab.0.right" timestamp="1623709190653">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="267" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1623628022211" />
+    <state width="1877" height="267" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1623709190653" />
     <state width="1877" height="267" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1623614363437" />
-    <state width="1877" height="267" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1623560144531" />
+    <state width="1877" height="267" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1623631264387" />
     <state width="1877" height="372" key="GridCell.Tab.1.bottom" timestamp="1623500517576">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -353,10 +356,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="372" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1623500517576" />
-    <state x="440" y="94" key="SettingsEditor" timestamp="1623502231592">
+    <state x="440" y="94" key="SettingsEditor" timestamp="1623689355273">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1623502231592" />
+    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1623689355273" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
