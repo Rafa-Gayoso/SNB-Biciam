@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -102,11 +103,17 @@
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton fx:id="closeBtn" onAction="#close" prefHeight="58.0" prefWidth="137.0" stylesheets="@../styles/PrincipalMenu.css" text="Regresar" GridPane.columnIndex="2" GridPane.rowIndex="8">
                <font>
                   <Font name="Segoe UI" size="18.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Label prefHeight="23.0" prefWidth="513.0" text="Version: 0.5" textAlignment="JUSTIFY" GridPane.rowIndex="7">
                <font>

@@ -238,7 +238,7 @@ public class DataFiles implements ICreateInitialSolution {
 
     private void exportSingleCalendar(CalendarState state, String route) {
 
-        File file = new File(route + "/Calendario " + state.getConfiguration().getCalendarId() + ".xlsx");
+        File file = new File(route + "/" + state.getConfiguration().getCalendarId() + ".xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook();
 
         Sheet spreadsheet = workbook.createSheet("Itinerario");
@@ -897,6 +897,17 @@ public class DataFiles implements ICreateInitialSolution {
             cal.getCode().addAll(dates);
             cal.setCalendarType(type);
             cal.setConfiguration(configuration);
+
+            if(Executer.getInstance().getIdMaps().get(cal.getConfiguration().getCalendarId())== null){
+                Executer.getInstance().getIdMaps().put(TTPDefinition.getInstance().getCalendarId(), 1);
+            }
+            else{
+
+                Executer.getInstance().getIdMaps().put(TTPDefinition.getInstance().getCalendarId(),
+                        Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId())+1);
+
+            }
+
             workbook.close();
             fis.close();
         }catch (Exception e) {
@@ -1177,7 +1188,7 @@ public class DataFiles implements ICreateInitialSolution {
                     }
                 }
             }catch (Exception e){
-                e.printStackTrace();
+                //e.printStackTrace();
             }
 
             configuration.setRestDates(rest);

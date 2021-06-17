@@ -414,7 +414,7 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
 
             calendarId.setText(TTPDefinition.getInstance().getCalendarId());
 
-            if (lastConfiguration.isInauguralGame()) {
+            if (TTPDefinition.getInstance().isInauguralGame()) {
                 inauguralGame.setSelected(true);
                 inauguralGame.setText("S\u00ed");
             } else {

@@ -388,9 +388,10 @@ public class TTPDefinition {
         boolean penalize = true;
         CalendarConfiguration configuration = ((CalendarState)calendar).getConfiguration();
         Date date = (Date) calendar.getCode().get(0);
-        if(date.getGames().get(0).get(0) == configuration.getChampion() &&
+        if(date.getGames().size() == 1 &&
+                date.getGames().get(0).get(0) == configuration.getChampion() &&
                 date.getGames().get(0).get(1) == configuration.getSecondPlace())
-            penalize = true;
+            penalize = false;
 
         return penalize? PENALIZATION: 0;
     }

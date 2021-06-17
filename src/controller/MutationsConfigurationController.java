@@ -103,7 +103,7 @@ public class MutationsConfigurationController implements Initializable {
         calendar = (CalendarState) Executer.getInstance().getResultStates().get(selectedCalendar);
         configuration = calendar.getConfiguration();
         iterations.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE));
-        iterations.getValueFactory().setValue(20000);
+        iterations.getValueFactory().setValue(1);
         mutationsToAdd = new ArrayList<>();
         positionsMutationsSelected = new ArrayList<>();
         booleanValues = new ArrayList<>();
@@ -406,6 +406,7 @@ public class MutationsConfigurationController implements Initializable {
 
 
             int numeration = Executer.getInstance().getIdMaps().get(newState.getConfiguration().getCalendarId());
+
 
             Executer.getInstance().getIdMaps().put(calendar.getConfiguration().getCalendarId(),
                     Executer.getInstance().getIdMaps().get(calendar.getConfiguration().getCalendarId())+1);
