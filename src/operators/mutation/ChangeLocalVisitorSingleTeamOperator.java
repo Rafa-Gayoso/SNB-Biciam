@@ -25,7 +25,7 @@ public class ChangeLocalVisitorSingleTeamOperator extends MutationOperator {
         }
 
         if (selectedTeam == -1) {
-            selectedTeam = ThreadLocalRandom.current().nextInt(0, configuration.getTeamsIndexes().size());
+            selectedTeam = configuration.getTeamsIndexes().get(ThreadLocalRandom.current().nextInt(0, configuration.getTeamsIndexes().size()));
         }
 
 
