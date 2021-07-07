@@ -4,12 +4,12 @@ import definition.TTPDefinition;
 import definition.codification.TTPCodification;
 import definition.objective.function.TTPObjectiveFunction;
 import definition.operator.TTPOperator;
+import definition.state.CalendarState;
+import definition.state.statecode.Date;
 import evolutionary_algorithms.complement.MutationType;
 import evolutionary_algorithms.complement.ReplaceType;
 import evolutionary_algorithms.complement.SelectionType;
 import javafx.scene.paint.Paint;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import local_search.complement.StopExecute;
 import local_search.complement.UpdateParameter;
@@ -17,6 +17,9 @@ import metaheurictics.strategy.Strategy;
 import metaheuristics.generators.EvolutionStrategies;
 import metaheuristics.generators.GeneratorType;
 import operators.heuristics.HeuristicOperatorType;
+import operators.interfaces.IChampionGame;
+import operators.interfaces.IInauguralGame;
+import operators.interfaces.ISecondRound;
 import operators.mutation.MutationOperatorType;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
@@ -31,6 +34,7 @@ import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 import utils.AuxStatePlusIterations;
+import utils.CalendarConfiguration;
 import utils.DataFiles;
 import utils.Distance;
 
@@ -39,9 +43,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class Executer {
+public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
 
     private int ITERATIONS;
     private int EXECUTIONS;
@@ -52,10 +58,9 @@ public class Executer {
     private ArrayList<AuxStatePlusIterations> saveData;
 
     private static Executer executerInstance;
-
-
-
+    private Map<String, Integer> idMaps;
     private List<State> resultStates;
+    private boolean timeToSetDateToStart;
 
     private Executer(){
         this.resultStates = new ArrayList<>();
@@ -63,8 +68,10 @@ public class Executer {
         this.heuristics = new ArrayList<>();
         this.saveData = new ArrayList<>();
         this.EXECUTIONS = 5;
-        this.ITERATIONS = 1000;
+        this.ITERATIONS = 5000;
         this.selectedMH = 0;
+        this.idMaps = new HashMap<>();
+        this.timeToSetDateToStart = false;
     }
 
     public static Executer getInstance(){
@@ -74,11 +81,20 @@ public class Executer {
         return executerInstance;
     }
 
+    public Problem getProblem() {
+        return problem;
+    }
+
+    public void setProblem(Problem problem) {
+        this.problem = problem;
+    }
+
+
     /**
      * Configura el problema estableciendo la funcion objetivo, el operador,
      * solucion inicial, tipo de problema, codificacion.
      */
-    private void configureProblem() {
+    public void configureProblem() {
 
         problem = new Problem();//Instancia del problema a resolver
         TTPObjectiveFunction objectiveFunction = new TTPObjectiveFunction();//Se instancia la funcion obj del problema
@@ -107,7 +123,7 @@ public class Executer {
         }
 
         String rounds = "";
-        if (TTPDefinition.getInstance().isDobleVuelta()){
+        if (TTPDefinition.getInstance().isSecondRound()){
             rounds = "Doble";
         }else {
             rounds = "Simple";
@@ -115,14 +131,18 @@ public class Executer {
 
         int cantEquipos = TTPDefinition.getInstance().getCantEquipos();
 
-        String fileName = nameMH+"_"+rounds+"_"+cantEquipos+"-"+"Teams"+"_"+EXECUTIONS+"-"+"Exec"+"_"+ITERATIONS+"-"+"Ite";
+        String fileName =TTPDefinition.getInstance().getCalendarId()+"_"+nameMH+"_"+rounds+"_"+cantEquipos+"-"+"Teams"+"_"+EXECUTIONS+"-"+"Exec"+"_"+ITERATIONS+"-"+"Ite";
 
         File file = new File("src/files/"+fileName+".xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook();
 
         ArrayList<State> thisLapBests = new ArrayList<>();
-
         for (int i = 0; i < EXECUTIONS; i++) {
+
+            if(timeToSetDateToStart){
+                TTPDefinition.getInstance().setDateToStart(TTPDefinition.getInstance().getDateToStartList().get(i));
+            }
+
             Strategy.getStrategy().setStopexecute(new StopExecute());
             Strategy.getStrategy().setUpdateparameter(new UpdateParameter());
             Strategy.getStrategy().setProblem(this.problem);
@@ -152,14 +172,51 @@ public class Executer {
             }
 
 
-            createCalendarSheet(workbook,Strategy.getStrategy().getBestState(),i);
-            thisLapBests.add(Strategy.getStrategy().getBestState());
-            resultStates.add(Strategy.getStrategy().getBestState());
+            //createCalendarSheet(workbook,Strategy.getStrategy().getBestState(),i);
+            //thisLapBests.add(Strategy.getStrategy().getBestState());
+            CalendarState state = (CalendarState) Strategy.getStrategy().getBestState();
+
+            CalendarConfiguration configuration = state.getConfiguration();
+
+            if(configuration.isSymmetricSecondRound()){
+                deleteInauguralGame(state);
+                setSecondRound(state);
+                if (configuration.isChampionVsSecondPlace()) {
+                    if (configuration.isInauguralGame())
+                        addInauguralGame(state);
+                    else
+                        fixChampionSubchampion(state);
+                }
+            }
+
+            if (!TTPDefinition.getInstance().isOccidentVsOrient()){
+                if( Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId()) == null){
+                    Executer.getInstance().getIdMaps().put(TTPDefinition.getInstance().getCalendarId(), 1);
+                }else{
+                    ;
+                    Executer.getInstance().getIdMaps().put(TTPDefinition.getInstance().getCalendarId(),
+                            Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId())+1);
+
+                }
+                state.getConfiguration().setCalendarId(TTPDefinition.getInstance().getCalendarId() +"."+
+                        Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId()));
+
+                if( Executer.getInstance().getIdMaps().get(state.getConfiguration().getCalendarId()) == null){
+                    Executer.getInstance().getIdMaps().put(state.getConfiguration().getCalendarId(), 1);
+                }else{
+                    Executer.getInstance().getIdMaps().put(state.getConfiguration().getCalendarId(),
+                            Executer.getInstance().getIdMaps().get(state.getConfiguration().getCalendarId())+1);
+                }
+            }
+
+
+            createCalendarSheet(workbook,state,i);
+            thisLapBests.add(state);
+            resultStates.add(state);
+           // Strategy.destroyExecute();resultStates.add(state);
+            //resultStates.add(Strategy.getStrategy().getBestState());
             Strategy.destroyExecute();
         }
-
-        createBestCalendarSheet(workbook, thisLapBests);
-
 
         FileOutputStream fileOut = null;
         try {
@@ -172,6 +229,7 @@ public class Executer {
             showMessage();
         }
     }
+
 
     private void createBestCalendarSheet(XSSFWorkbook workbook, ArrayList<State> thisLapBests) {
         Sheet spreadsheet = workbook.createSheet("Mejor Calendario ");
@@ -251,8 +309,8 @@ public class Executer {
         notification.showAndDismiss(Duration.seconds(2));
     }
 
-    private void createCalendarSheet(XSSFWorkbook workbook, State state, int calendar){
-        Sheet spreadsheet = workbook.createSheet("Calendario "+ (calendar+1));
+    private void createCalendarSheet(XSSFWorkbook workbook, CalendarState state, int calendar) {
+        Sheet spreadsheet = workbook.createSheet("Calendario " + (calendar + 1));
 
         ArrayList<ArrayList<Integer>> teamDate = TTPDefinition.getInstance().teamsItinerary(state);
         Row row = spreadsheet.createRow(0);
@@ -284,10 +342,10 @@ public class Executer {
         headerCellFont.setFontHeightInPoints((short) 12);
 
         int j = 1;
-        for(; j < teamDate.size()-1;j++ ){
+        for (; j < teamDate.size() - 1; j++) {
             ArrayList<Integer> date = teamDate.get(j);
             row = spreadsheet.createRow(j);
-            for(int k=0; k < date.size();k++){
+            for (int k = 0; k < date.size(); k++) {
                 int posTeam = teamDate.get(j).get(k);
                 String team = DataFiles.getSingletonDataFiles().getAcronyms().get(posTeam);
                 Cell cell = row.createCell(k);
@@ -295,7 +353,7 @@ public class Executer {
                 cell.setCellValue(team);
             }
         }
-        for(int l = 0; l < row.getLastCellNum(); l++){
+        for (int l = 0; l < row.getLastCellNum(); l++) {
             spreadsheet.autoSizeColumn(l);
         }
 
@@ -318,9 +376,11 @@ public class Executer {
         for (int k = 0; k < Strategy.getStrategy().listBest.size(); k++) {
             row = spreadsheet.createRow(j);
             Cell cellIte = row.createCell(0);
-            cellIte.setCellValue("Iteracion: "+ (k+1));
+            cellIte.setCellValue("Iteracion: " + (k + 1));
             Cell cellDist = row.createCell(1);
-            cellDist.setCellValue(Distance.getInstance().calculateCalendarDistance(Strategy.getStrategy().listBest.get(k)));
+            CalendarState calendarState = new CalendarState(Strategy.getStrategy().listBest.get(k), state.getConfiguration());
+
+            cellDist.setCellValue(Distance.getInstance().calculateCalendarDistance(calendarState));
             j++;
         }
 
@@ -379,5 +439,21 @@ public class Executer {
 
     public void setSelectedMH(int selectedMH) {
         this.selectedMH = selectedMH;
+    }
+
+    public Map<String, Integer> getIdMaps() {
+        return idMaps;
+    }
+
+    public void setIdMaps(Map<String, Integer> idMaps) {
+        this.idMaps = idMaps;
+    }
+
+    public boolean isTimeToSetDateToStart() {
+        return timeToSetDateToStart;
+    }
+
+    public void setTimeToSetDateToStart(boolean timeToSetDateToStart) {
+        this.timeToSetDateToStart = timeToSetDateToStart;
     }
 }

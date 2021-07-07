@@ -2,17 +2,23 @@ package controller;
 
 
 import com.jfoenix.controls.JFXButton;
+import definition.state.CalendarState;
 import eu.mihosoft.scaledfx.ScalableContentPane;
 import execute.Executer;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
@@ -39,7 +45,13 @@ public class HomeController implements Initializable {
     private File file;
     private static HomeController singletonController;
 
+    @FXML
+    private ContextMenu contextMenu;
+    @FXML
+    private MenuItem exportCalendar;
 
+    @FXML
+    private MenuItem exportAllCalendar;
 
     @FXML
     private JFXButton buttonPrincipalMenu;
@@ -48,6 +60,14 @@ public class HomeController implements Initializable {
     @FXML
     private JFXButton buttonCalendarConfiguration;
 
+
+    @FXML
+    private JFXButton dataBtn;
+
+
+
+    @FXML
+    private JFXButton buttonImportCalendar;
 
 
     @FXML
@@ -63,6 +83,8 @@ public class HomeController implements Initializable {
     @FXML
     private JFXButton buttonReturnSelectionTeamConfiguration;
 
+
+
     @FXML
     private JFXButton buttonExportCalendar;
 
@@ -72,6 +94,14 @@ public class HomeController implements Initializable {
 
     @FXML
     private JFXButton buttonInfromation;
+
+    @FXML
+    private ImageView imgSuperior;
+
+    @FXML
+    private Label lblSuperior;
+
+    private boolean areVisible;
 
 
     public JFXButton getButtonReturnSelectionTeamConfiguration() {
@@ -95,27 +125,52 @@ public class HomeController implements Initializable {
     }
 
     @FXML
+    void showData(ActionEvent event) throws IOException {
+        this.createPage(new CrudsController(), home, "/visual/Cruds.fxml");
+
+    }
+
+    @FXML
     void showReturnSelectionTeamConfiguration(ActionEvent event) throws IOException {
         this.createPage(new ConfigurationCalendarController(), home, "/visual/ConfigurationCalendar.fxml");
         buttonReturnSelectionTeamConfiguration.setVisible(false);
     }
 
     @FXML
-    void showTeams(ActionEvent event) throws IOException {
-        this.createPage(home, "/visual/Teams.fxml");
-        notification = getNotification();
-        notification.setTitle("Listado de Equipos");
-        notification.setMessage("Equipos participantes");
-        notification.setNotificationType(NotificationType.SUCCESS);
-        notification.setRectangleFill(Paint.valueOf("#2F2484"));
-        notification.setAnimationType(AnimationType.FADE);
-        notification.showAndDismiss(Duration.seconds(2));
+    void importCalendar(ActionEvent event) {
+        Stage stage = new Stage();
+        FileChooser fc = new FileChooser();
+
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Documento Excel", "*xlsx"));
+        file = fc.showOpenDialog(stage);
+
+        try {
+            if (file != null) {
+                CalendarState calendar = DataFiles.getSingletonDataFiles().readExcelItineraryToCalendar(file.toString());
+                if(calendar.getCode().size()>0){
+                    Executer.getInstance().getResultStates().add(calendar);
+
+                    notification = getNotification();
+                    notification.setTitle("Importaci\u00f3n de Calendario");
+                    notification.setMessage("Calendario importado con \u00e9xito");
+                    notification.setNotificationType(NotificationType.SUCCESS);
+                    notification.setRectangleFill(Paint.valueOf("#2F2484"));
+                    notification.setAnimationType(AnimationType.FADE);
+                    notification.showAndDismiss(Duration.seconds(2));
+                    buttonReturnSelectionTeamConfiguration.setVisible(false);
+                    this.createPage(new CalendarController(),home, "/visual/Calendar.fxml");
+                    this.buttonReturnSelectionTeamConfiguration.setVisible(true);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void exportCalendar(ActionEvent event) {
 
-       int calendarToExport = CalendarController.selectedCalendar;
+       /*int calendarToExport = CalendarController.selectedCalendar;
         System.out.println(calendarToExport+"EXPORTAR");
         if(Executer.getInstance().getResultStates().isEmpty()){
             notification = getNotification();
@@ -128,34 +183,30 @@ public class HomeController implements Initializable {
         }
         else{
             DataFiles.getSingletonDataFiles().exportItineraryInExcelFormat(Executer.getInstance().getResultStates().get(calendarToExport));
-        }
-
-
+        }*/
     }
 
 
     @FXML
     void showInformation(ActionEvent event) throws IOException{
-        File file = new File("src/help/help.pdf");
+        Parent root = FXMLLoader.load(getClass().getResource("/visual/Help.fxml"));
+        Stage stage = new Stage();
 
-        //first check if Desktop is supported by Platform or not
-        if(!Desktop.isDesktopSupported()){
-            System.out.println("Desktop is not supported");
-            return;
-        }
+        stage.setTitle("Ayuda");
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
+        stage.setResizable(true);
+        stage.setScene(new Scene(root));
 
-        Desktop desktop = Desktop.getDesktop();
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(primaryPane.getScene().getWindow());
 
-        //let's try to open PDF file
-        if(file.exists()) desktop.open(file);
+        stage.show();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
-        int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
-        information.setText(" " + (year - 1960) + " Serie Nacional de Be\u00edsbol");
+        areVisible = false;lblSuperior.setVisible(false);
         buttonReturnSelectionTeamConfiguration.setVisible(false);
     }
 
@@ -191,16 +242,73 @@ public class HomeController implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(HomeController.class.getResource(loc));
         anchorPane = loader.load();
+        if(!areVisible){
+            lblSuperior.setVisible(true);
+            FadeTransition ft = new FadeTransition(Duration.millis(2000));
+            ft.setNode(lblSuperior);
+            ft.setFromValue(0.1);
+            ft.setToValue(1);
+            ft.setCycleCount(1);
+            ft.setAutoReverse(false);
+            ft.play();
+            areVisible = true;
+        }
 
-       if (object instanceof TeamsItineraryController) {
+        if (object instanceof MutationsConfigurationController) {
+
+            Parent root = FXMLLoader.load(getClass().getResource("/visual/MutationsConfiguration.fxml"));
+            Stage stage = new Stage();
+           /* ScalableContentPane scale = new ScalableContentPane();
+            scale.setContent(anchorPane);*/
+
+            stage.setTitle("Configuraci\u00f3n de las mutaciones");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
+            stage.setResizable(true);
+            stage.setMinWidth(1152 );
+            stage.setMinHeight(763);
+            stage.setScene(new Scene(root));
+
+            object = loader.getController();
+            ((MutationsConfigurationController) object).setHomeController(this);
+
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(primaryPane.getScene().getWindow());
+
+            stage.show();
+        }
+        else if (object instanceof RestSelectorController) {
+
+            Parent root = FXMLLoader.load(getClass().getResource("/visual/RestSelector.fxml"));
+            Stage stage = new Stage();
+            /*ScalableContentPane scale = new ScalableContentPane();
+            scale.setContent(anchorPane);*/
+
+            stage.setTitle("Selecci\u00f3n de descansos");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
+            stage.setResizable(true);
+            stage.setMinWidth(305 );
+            stage.setMinHeight(382);
+            stage.setScene(new Scene(root));
+
+            object = loader.getController();
+            ((RestSelectorController) object).setHomeController(this);
+
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(primaryPane.getScene().getWindow());
+            stage.setResizable(false);
+            stage.show();
+        }else if (object instanceof TeamsItineraryController) {
 
             Parent root = FXMLLoader.load(getClass().getResource("/visual/TeamsItinerary.fxml"));
             Stage stage = new Stage();
             ScalableContentPane scale = new ScalableContentPane();
             scale.setContent(anchorPane);
             stage.setTitle("Itinerario de equipos");
-            stage.setResizable(false);
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
+            stage.setResizable(true);
             stage.setScene(new Scene(scale));
+            stage.setMinWidth(1148);
+            stage.setMinHeight(632);
 
             object = loader.getController();
             ((TeamsItineraryController) object).setHomeController(this);
@@ -216,7 +324,8 @@ public class HomeController implements Initializable {
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setTitle("Restricciones del calendario");
-            stage.setResizable(false);
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
+            stage.setResizable(true);
             stage.setScene(new Scene(anchorPane));
 
             object = loader.getController();
@@ -230,14 +339,15 @@ public class HomeController implements Initializable {
             object = loader.getController();
             ((CalendarController) object).setHomeController(this);
             setNode(anchorPane);
+
         } else if (object instanceof SelectGridController) {
             object = loader.getController();
             ((SelectGridController) object).setHomeController(this);
             setNode(anchorPane);
+
         } else if (object instanceof ConfigurationCalendarController) {
             object = loader.getController();
             ((ConfigurationCalendarController) object).setHomeController(this);
-
             setNode(anchorPane);
         }else if (object instanceof AdvanceConfigurationController) {
             object = loader.getController();
@@ -252,5 +362,100 @@ public class HomeController implements Initializable {
             setNode(anchorPane);
         }
 
+        else if (object instanceof CrudsController) {
+
+            Parent root = FXMLLoader.load(getClass().getResource("/visual/Cruds.fxml"));
+            Stage stage = new Stage();
+            ScalableContentPane scale = new ScalableContentPane();
+            scale.setContent(anchorPane);
+            stage.setTitle("Gesti\u00f3n de datos");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
+            stage.setResizable(true);
+            stage.setMinWidth(1015);
+            stage.setMinHeight(506);
+            stage.setScene(new Scene(scale));
+
+            object = loader.getController();
+            ((CrudsController) object).setHomeController(this);
+
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(primaryPane.getScene().getWindow());
+
+            stage.show();
+        }
+        else if (object instanceof StatisticsResumeController) {
+
+            Parent root = FXMLLoader.load(getClass().getResource("/visual/StatisticsResume.fxml"));
+            Stage stage = new Stage();
+
+            stage.setTitle("Resumen estad\u00edstico");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/resources/snb.png")));
+            stage.setResizable(true);
+            stage.setScene(new Scene(root));
+
+            object = loader.getController();
+            ((StatisticsResumeController) object).setHomeController(this);
+
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(primaryPane.getScene().getWindow());
+            stage.setMinWidth(350);
+            stage.setMinHeight(300);
+            stage.show();
+        }
     }
+
+
+
+
+    @FXML
+    void exportSelectedCalendar(ActionEvent event) {
+        /*int calendarToExport = CalendarController.selectedCalendar;
+        System.out.println(calendarToExport+"EXPORTAR");
+        if(Executer.getInstance().getResultStates().isEmpty()){
+            notification = getNotification();
+            notification.setTitle("Exportación de Calendario");
+            notification.setMessage("No hay calendarios para exportar");
+            notification.setNotificationType(NotificationType.ERROR);
+            notification.setRectangleFill(Paint.valueOf("#2F2484"));
+            notification.setAnimationType(AnimationType.FADE);
+            notification.showAndDismiss(Duration.seconds(2));
+        }
+        else{
+            DataFiles.getSingletonDataFiles().exportItineraryInExcelFormat(Executer.getInstance().getResultStates().get(calendarToExport));
+        }*/
+        boolean all = false;
+        if(Executer.getInstance().getResultStates().isEmpty()){
+            notification = getNotification();
+            notification.setTitle("Exportaci\u00f3n de Calendario");
+            notification.setMessage("No hay calendarios para exportar");
+            notification.setNotificationType(NotificationType.ERROR);
+            notification.setRectangleFill(Paint.valueOf("#2F2484"));
+            notification.setAnimationType(AnimationType.FADE);
+            notification.showAndDismiss(Duration.seconds(2));
+        }
+        else{
+            DataFiles.getSingletonDataFiles().exportItinerary(all);
+        }
+    }
+
+    @FXML
+    void exportAllCalendar(ActionEvent event) {
+        boolean all = true;
+        if(Executer.getInstance().getResultStates().isEmpty()){
+            notification = getNotification();
+            notification.setTitle("Exportaci\u00f3n de Calendario");
+            notification.setMessage("No hay calendarios para exportar");
+            notification.setNotificationType(NotificationType.ERROR);
+            notification.setRectangleFill(Paint.valueOf("#2F2484"));
+            notification.setAnimationType(AnimationType.FADE);
+            notification.showAndDismiss(Duration.seconds(2));
+        }
+        else{
+            DataFiles.getSingletonDataFiles().exportItinerary(all);
+        }
+    }
+
+
+
+
 }

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="763.0" prefWidth="1152.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MutationsConfigurationController">
+    <children>
+      <Label layoutX="909.0" layoutY="27.0" text="Configuraciones" textFill="#2f2484">
+         <font>
+            <Font name="Segoe UI Emoji" size="26.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="pane" layoutX="860.0" layoutY="67.0" prefHeight="462.0" prefWidth="283.0">
+         <children>
+            <JFXComboBox fx:id="comboDate1" labelFloat="true" layoutX="21.0" layoutY="24.0" prefHeight="40.0" prefWidth="242.0" promptText="Seleccione una fecha" stylesheets="@../styles/application.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXComboBox>
+            <JFXComboBox fx:id="comboDate2" layoutX="21.0" layoutY="101.0" prefHeight="40.0" prefWidth="242.0" promptText="Seleccione una fecha" stylesheets="@../styles/application.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXComboBox>
+            <JFXComboBox fx:id="comboDuel1" layoutX="21.0" layoutY="185.0" prefHeight="40.0" prefWidth="242.0" promptText="Seleccione un enfrentamiento" stylesheets="@../styles/application.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXComboBox>
+            <JFXComboBox fx:id="comboDuel2" layoutX="21.0" layoutY="267.0" prefHeight="40.0" prefWidth="242.0" promptText="Seleccione un enfrentamiento" stylesheets="@../styles/application.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXComboBox>
+            <JFXComboBox fx:id="comboTeam1" layoutX="21.0" layoutY="332.0" prefHeight="40.0" prefWidth="242.0" promptText="Seleccione un equipo" stylesheets="@../styles/application.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXComboBox>
+            <JFXComboBox fx:id="comboTeam2" layoutX="21.0" layoutY="385.0" prefHeight="40.0" prefWidth="242.0" promptText="Seleccione un equipo" stylesheets="@../styles/application.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXComboBox>
+         </children>
+      </AnchorPane>
+      <JFXButton fx:id="selectMutations" buttonType="RAISED" contentDisplay="CENTER" layoutX="480.0" layoutY="340.0" onAction="#selectMutations" prefHeight="71.0" prefWidth="79.0" text=" " AnchorPane.bottomAnchor="339.0" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="588.0" AnchorPane.topAnchor="340.0">
+         <graphic>
+            <ImageView fitHeight="60.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/down-arrow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="removeMutations" buttonType="RAISED" contentDisplay="CENTER" layoutX="323.0" layoutY="340.0" onAction="#removeMutations" prefHeight="71.0" prefWidth="79.0" text=" " AnchorPane.bottomAnchor="339.0" AnchorPane.leftAnchor="323.0" AnchorPane.rightAnchor="745.0" AnchorPane.topAnchor="340.0">
+         <graphic>
+            <ImageView fitHeight="60.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/up-arrow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="buttonApplyMuttations" buttonType="RAISED" layoutX="896.0" layoutY="615.0" onAction="#applyMutations" prefHeight="46.0" prefWidth="231.0" stylesheets="@../styles/PrincipalMenu.css" text="Aplicar mutaciones" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="896.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="615.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Segoe UI Emoji" size="20.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="889.0" layoutY="547.0" prefHeight="30.0" prefWidth="118.0" text="Iteraciones" textFill="#2f2484" AnchorPane.bottomAnchor="173.0" AnchorPane.leftAnchor="889.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="547.0">
+         <font>
+            <Font name="Segoe UI Emoji" size="21.0" />
+         </font>
+      </Label>
+      <Spinner fx:id="iterations" editable="true" layoutX="1003.0" layoutY="529.0" prefHeight="46.0" prefWidth="127.0" stylesheets="@../styles/PrincipalMenu.css" AnchorPane.bottomAnchor="173.0" AnchorPane.leftAnchor="1003.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="529.0" />
+      <JFXListView fx:id="selectedMutationListView" layoutX="26.0" layoutY="421.0" prefHeight="307.0" prefWidth="832.0" stylesheets="@../styles/PrincipalMenu.css" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="421.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXListView>
+        <JFXListView fx:id="mutationsListView" layoutX="25.0" layoutY="27.0" prefHeight="292.0" prefWidth="832.0" stylesheets="@../styles/PrincipalMenu.css" AnchorPane.bottomAnchor="431.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="27.0">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+      </JFXListView>
+      <JFXButton buttonType="RAISED" layoutX="896.0" layoutY="693.0" onAction="#close" prefHeight="46.0" prefWidth="231.0" stylesheets="@../styles/PrincipalMenu.css" text="Regresar">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Segoe UI Emoji" size="20.0" />
+         </font>
+      </JFXButton>
+    </children>
+</AnchorPane>

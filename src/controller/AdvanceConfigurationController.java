@@ -4,10 +4,13 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXToggleButton;
+import definition.TTPDefinition;
 import execute.Executer;
 import javafx.scene.control.*;
 import operators.heuristics.HeuristicOperatorType;
 import operators.mutation.MutationOperatorType;
+import org.controlsfx.control.CheckListView;
+import utils.CalendarConfiguration;
 import utils.DataFiles;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -29,15 +32,9 @@ import java.util.ResourceBundle;
 public class AdvanceConfigurationController implements Initializable {
 
     private HomeController homeController;
-    private final String MUTATTIONS_ADDRESS = "src\\files\\Mutations.xlsx";
-    private final String HEURISTICS_ADDRESS = "src\\files\\Heuristics.xlsx";
 
     private TrayNotification notification;
 
-    @FXML
-    private JFXListView<String> mutationListView;
-    @FXML
-    private JFXListView<String> heuristicsListView;
 
     @FXML
     private Spinner<Integer> iterationsSpinner;
@@ -50,6 +47,12 @@ public class AdvanceConfigurationController implements Initializable {
     private JFXButton select;
 
     public static boolean ok = true;
+
+    @FXML
+    private CheckListView<String> mutationsCheckBox;
+
+    @FXML
+    private CheckListView<String> heuristicsCheckBox;
 
 
     @FXML
@@ -64,6 +67,8 @@ public class AdvanceConfigurationController implements Initializable {
     @FXML
     private JFXRadioButton radioRS;
 
+    private CalendarConfiguration configuration;
+
 
     public AdvanceConfigurationController() {
     }
@@ -71,31 +76,58 @@ public class AdvanceConfigurationController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        configuration = new CalendarConfiguration(
+                TTPDefinition.getInstance().getCalendarId(), TTPDefinition.getInstance().getTeamsIndexes(), TTPDefinition.getInstance().isInauguralGame(),
+                TTPDefinition.getInstance().isChampionVsSub(), TTPDefinition.getInstance().getFirstPlace(),
+                TTPDefinition.getInstance().getSecondPlace(),TTPDefinition.getInstance().isSecondRound(), TTPDefinition.getInstance().isSymmetricSecondRound(),
+                TTPDefinition.getInstance().isOccidentVsOrient(), TTPDefinition.getInstance().getCantVecesLocal(),
+                TTPDefinition.getInstance().getCantVecesVisitante(), null,null);
         iterationsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,Integer.MAX_VALUE, Executer.getInstance().getITERATIONS()));
         executionsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,Integer.MAX_VALUE, Executer.getInstance().getEXECUTIONS()));
-        List<String> dataRead = DataFiles.getSingletonDataFiles().readExcelFiles(MUTATTIONS_ADDRESS);
-        List<String> mutations = new ArrayList<>();
-        for (String s : dataRead) {
-            String[] mutation = s.split("\\.");
-            mutations.add(mutation[0]);
+        List<String> mutations = DataFiles.getSingletonDataFiles().getMutations();
+
+        //mutationListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        mutationsCheckBox.setItems(FXCollections.observableList(mutations));
+
+
+            mutationsCheckBox.getCheckModel().checkAll();
+
+
+
+        List<String> heuristics = DataFiles.getSingletonDataFiles().getHeuristics();
+
+       // heuristicsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        heuristicsCheckBox.setItems(FXCollections.observableList(heuristics));
+
+        if(Executer.getInstance().getHeuristics().size() == 0){
+
+                heuristicsCheckBox.getCheckModel().checkAll();
         }
-        mutationListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        else{
+            heuristicsCheckBox.getCheckModel().clearChecks();
+            int[] array = new int[Executer.getInstance().getHeuristics().size()];
+            for (int i = 0; i <Executer.getInstance().getHeuristics().size(); i++){
+                HeuristicOperatorType heuristicOperatorType = Executer.getInstance().getHeuristics().get(i);
+                array[i] = heuristicOperatorType.ordinal();
+            }
+            heuristicsCheckBox.getCheckModel().checkIndices(array);
+        }
 
-        mutationListView.setItems(FXCollections.observableList(mutations));
-
-        mutationListView.getSelectionModel().selectAll();
-
-        dataRead = DataFiles.getSingletonDataFiles().readExcelFiles(HEURISTICS_ADDRESS);
-
-        heuristicsListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-        heuristicsListView.setItems(FXCollections.observableList(dataRead));
-
-        heuristicsListView.getSelectionModel().selectAll();
 
         formatSpinner(iterationsSpinner);
 
         formatSpinner(executionsSpinner);
+
+        int mh = Executer.getInstance().getSelectedMH();
+        if(mh==0){
+           radioHC.setSelected(true);
+        }else if(mh == 1) {
+            radioEE.setSelected(true);
+        }
+        else
+            radioRS.setSelected(true);
     }
 
     private void formatSpinner(Spinner<Integer> spinner) {
@@ -113,12 +145,12 @@ public class AdvanceConfigurationController implements Initializable {
     @FXML
     void saveNewAdvancesConfigurations(ActionEvent event) throws IOException {
 
-        ArrayList<Integer> indexesMutations = new ArrayList<>(mutationListView.getSelectionModel().getSelectedIndices());
-        ArrayList<Integer> indexesHeuristics = new ArrayList<>(heuristicsListView.getSelectionModel().getSelectedIndices());
+        ArrayList<Integer> indexesMutations = new ArrayList<>(mutationsCheckBox.getCheckModel().getCheckedIndices());
+        ArrayList<Integer> indexesHeuristics = new ArrayList<>(heuristicsCheckBox.getCheckModel().getCheckedIndices());
         if (indexesMutations.isEmpty()) {
             notification = getNotification();
-            notification.setTitle("Selección de cambios");
-            notification.setMessage("Debe escoger al menos una mutación");
+            notification.setTitle("Selecci\u00f3n de cambios");
+            notification.setMessage("Debe escoger al menos una mutaci\u00f3n");
             notification.setNotificationType(NotificationType.ERROR);
             notification.setRectangleFill(Paint.valueOf("#2F2484"));
             notification.setAnimationType(AnimationType.FADE);
@@ -126,8 +158,8 @@ public class AdvanceConfigurationController implements Initializable {
         }
         else if(indexesHeuristics.isEmpty()){
             notification = getNotification();
-            notification.setTitle("Selección de cambios");
-            notification.setMessage("Debe escoger al menos una heurística");
+            notification.setTitle("Selecci\u00f3n de cambios");
+            notification.setMessage("Debe escoger al menos una heur\u00edstica");
             notification.setNotificationType(NotificationType.ERROR);
             notification.setRectangleFill(Paint.valueOf("#2F2484"));
             notification.setAnimationType(AnimationType.FADE);
@@ -175,7 +207,7 @@ public class AdvanceConfigurationController implements Initializable {
             int selectedMH = -1;
             if(radioHC.isSelected()){
                 selectedMH = 0;
-            }else if(radioEE.isSelected()){
+            }else if(radioEE.isSelected()) {
                 selectedMH = 1;
             }
             Executer.getInstance().setSelectedMH(selectedMH);

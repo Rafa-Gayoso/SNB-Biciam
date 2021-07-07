@@ -35,6 +35,48 @@ public enum MutationOperatorType {
 
             return ChangeDuelOperator.class.getName();
         }
-    };
+    },
+
+    CHANGE_TEAMS_OPERATOR{
+
+
+        @Override
+        public String toString() {
+
+            return ChangeTeamsOperator.class.getName();
+        }
+    },
+
+
+    CHANGE_DATE_DUELS_ORDER_OPERATOR{
+
+
+        @Override
+        public String toString() {
+
+            return ChangeDateDuelsOrderOperator.class.getName();
+        }
+    },
+
+    CHANGE_DATE_SINGLE_DUEL_ORDER_OPERATOR{
+
+
+        @Override
+        public String toString() {
+
+            return ChangeDateSingleDuelOrderOperator.class.getName();
+        }
+
+    },
+    CHANGE_LOCAL_VISITOR_SINGLE_TEAM_OPERATOR{
+
+
+        @Override
+        public String toString() {
+
+            return ChangeLocalVisitorSingleTeamOperator.class.getName();
+        }
+    },
+
 
 }

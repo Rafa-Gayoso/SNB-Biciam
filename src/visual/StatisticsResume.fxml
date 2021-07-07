@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="556.0" minWidth="759.0" prefHeight="556.0" prefWidth="1195.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StatisticsResumeController">
+   <children>
+      <GridPane layoutX="-5.0" layoutY="-3.0" prefHeight="557.0" prefWidth="775.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="-3.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="370.0" />
+            <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="465.0" minWidth="161.0" prefWidth="246.0" />
+            <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="395.0" minWidth="168.0" prefWidth="189.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="392.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="70.0" prefHeight="487.0" vgrow="ALWAYS" />
+          <RowConstraints fillHeight="false" maxHeight="70.0" minHeight="70.0" prefHeight="70.0" valignment="CENTER" vgrow="NEVER" />
+        </rowConstraints>
+         <children>
+            <JFXButton maxHeight="45.0" maxWidth="124.0" minHeight="45.0" minWidth="124.0" onAction="#exportStatistics" prefHeight="45.0" prefWidth="124.0" stylesheets="@../styles/PrincipalMenu.css" text="Exportar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+               <font>
+                  <Font name="Segoe UI" size="18.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/exportar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton minHeight="45.0" minWidth="107.0" onAction="#close" prefHeight="45.0" prefWidth="107.0" stylesheets="@../styles/PrincipalMenu.css" text="Regresar" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+               <font>
+                  <Font name="Segoe UI" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="557.0" prefWidth="270.0" GridPane.columnSpan="4" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <content>
+                  <TableView fx:id="statisticsTable" minWidth="600.0" prefHeight="511.0" prefWidth="1673.0" stylesheets="@../styles/statictisTable.css">
+                    <columns>
+                      <TableColumn fx:id="calendarColumn" prefWidth="180.00003051757812" text="Calendario" />
+                      <TableColumn fx:id="calendarDistanceColumn" prefWidth="131.99996948242188" text="Distancia(Km)" />
+                        <TableColumn fx:id="teamLessNameColumn" prefWidth="287.9999694824219" text="Equipo que menor distancia recorre" />
+                        <TableColumn fx:id="teamLessDistanceColumn" prefWidth="148.0" text="Distancia(Km)" />
+                        <TableColumn fx:id="teamMoreNameColumn" prefWidth="297.0" text="Equipo que menor distancia recorre" />
+                        <TableColumn fx:id="teamMoreDistanceColumn" prefWidth="153.0" text="Distancia(Km)" />
+                        <TableColumn fx:id="localRestrictionsColum" prefWidth="228.0" text="Equipos más veces de local" />
+                        <TableColumn fx:id="visitorRestrictionsColum" prefWidth="240.0" text="Equipos más veces de visitante" />
+                    </columns>
+                  </TableView>
+               </content>
+            </ScrollPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

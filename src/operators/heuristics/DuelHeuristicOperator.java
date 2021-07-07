@@ -16,11 +16,11 @@ public class DuelHeuristicOperator extends HeuristicOperator {
     private ArrayList<ArrayList<Integer>> duels;
 
     public void initializeDuelHeuristicOperator(ArrayList<ArrayList<Integer>> duels){
-        this.teams = TTPDefinition.getInstance().getTeamsIndexes();
+        this.teams = (ArrayList<Integer>) TTPDefinition.getInstance().getTeamsIndexes().clone();
         this.duels = duels;
     }
 
-    public ArrayList<Date> generateCalendarSlow(ArrayList<ArrayList<Integer>> duels){
+    /*public ArrayList<Date> generateCalendarSlow(ArrayList<ArrayList<Integer>> duels){
         System.out.println("Empieza///////////////////////////////////////");
         initializeDuelHeuristicOperator(duels);
 
@@ -121,7 +121,7 @@ public class DuelHeuristicOperator extends HeuristicOperator {
 
         System.out.println("Termina///////////////////////////////////////");
         return calendar;
-    }
+    }*/
 
     public ArrayList<Date> generateCalendar(ArrayList<ArrayList<Integer>> duels){
         initializeDuelHeuristicOperator(duels);
@@ -152,7 +152,7 @@ public class DuelHeuristicOperator extends HeuristicOperator {
 
 
         ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> calendarBacktracking = new ArrayList<>();
-        for (int i = 1; i < teams.size()-1; i++) {
+        for (int i = 1; i < TTPDefinition.getInstance().getNumberOfDates(); i++) {
             ArrayList<ArrayList<ArrayList<Integer>>> dateBacktracking = new ArrayList<>();
             for (int j = 0; j < teams.size()/2; j++) {
                 ArrayList<ArrayList<Integer>> duelBacktracking = new ArrayList<>();
@@ -169,7 +169,7 @@ public class DuelHeuristicOperator extends HeuristicOperator {
             int j = 0;
             for (; j < calendarBacktracking.get(i).size(); j++) {
 
-                if(System.currentTimeMillis() - startTime > 1000){
+                if(System.currentTimeMillis() - startTime > 350){
                     break;
                 }
                 calendarBacktracking.get(i).get(j).clear();
@@ -228,7 +228,7 @@ public class DuelHeuristicOperator extends HeuristicOperator {
                     }
                 }
             }
-            if(System.currentTimeMillis() - startTime > 1000){
+            if(System.currentTimeMillis() - startTime > 350){
                 break;
             }
 
