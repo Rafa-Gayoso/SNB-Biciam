@@ -37,7 +37,7 @@ public class MutationsConfigurationController implements Initializable {
 
 
     private int selectedCalendar;
-    private HomeController homeController;
+    public static HomeController homeController;
 
     private ArrayList<ArrayList<Boolean>> booleanValues;//lista de boolean para saber que componentes activar o no
 
@@ -103,7 +103,7 @@ public class MutationsConfigurationController implements Initializable {
         calendar = (CalendarState) Executer.getInstance().getResultStates().get(selectedCalendar);
         configuration = calendar.getConfiguration();
         iterations.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE));
-        iterations.getValueFactory().setValue(20000);
+        iterations.getValueFactory().setValue(1);
         mutationsToAdd = new ArrayList<>();
         positionsMutationsSelected = new ArrayList<>();
         booleanValues = new ArrayList<>();
@@ -178,14 +178,28 @@ public class MutationsConfigurationController implements Initializable {
 
         int dates = calendar.getCode().size();
         boolean inaugural = configuration.isInauguralGame();
-        for (int i = 0; i < dates; i++) {
-            if (inaugural && (i == 0)) {
-                i++;
+        boolean symmetric = configuration.isSymmetricSecondRound();
+
+        if(symmetric){
+            for (int i = 0; i < dates/2; i++) {
+                if (inaugural && (i == 0)) {
+                    i++;
+                }
+                String date = "Fecha " + (i + 1);
+                comboDate1.getItems().add(date);
+                comboDate2.getItems().add(date);
             }
-            String date = "Fecha " + (i + 1);
-            comboDate1.getItems().add(date);
-            comboDate2.getItems().add(date);
+        }else {
+            for (int i = 0; i < dates; i++) {
+                if (inaugural && (i == 0)) {
+                    i++;
+                }
+                String date = "Fecha " + (i + 1);
+                comboDate1.getItems().add(date);
+                comboDate2.getItems().add(date);
+            }
         }
+
 
         for (int i = 0; i < configuration.getTeamsIndexes().size(); i++) {
 
@@ -193,6 +207,7 @@ public class MutationsConfigurationController implements Initializable {
             comboTeam1.getItems().add(team);
             comboTeam2.getItems().add(team);
         }
+
         comboBoxValidation(comboDate1, comboDuel1);
         comboBoxValidation(comboDate2, comboDuel2);
         comboBoxTeamValidation(comboTeam1,comboTeam2);
@@ -392,6 +407,7 @@ public class MutationsConfigurationController implements Initializable {
 
             int numeration = Executer.getInstance().getIdMaps().get(newState.getConfiguration().getCalendarId());
 
+
             Executer.getInstance().getIdMaps().put(calendar.getConfiguration().getCalendarId(),
                     Executer.getInstance().getIdMaps().get(calendar.getConfiguration().getCalendarId())+1);
 
@@ -432,5 +448,10 @@ public class MutationsConfigurationController implements Initializable {
         this.homeController = homeController;
     }
 
+    @FXML
+    void close(ActionEvent event) {
+        Stage stage = (Stage) selectMutations.getScene().getWindow();
+        stage.close();
+    }
 
 }

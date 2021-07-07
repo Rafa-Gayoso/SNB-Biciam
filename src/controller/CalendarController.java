@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import utils.DataFiles;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -31,6 +32,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CalendarController implements Initializable {
@@ -38,15 +40,13 @@ public class CalendarController implements Initializable {
     private ArrayList<Date> calendar;
     private ArrayList<TableView<Duel>> tables;
     private HomeController homeController;
-    public static int selectedCalendar;
+    public static int selectedCalendar =-1;
     private TrayNotification notification;
 
     @FXML
     private JFXTabPane calendarsTabPane;
-
-
     @FXML
-    private JFXButton statisticsBtn;
+    private MenuButton statisticsBtn;
 
     @FXML
     private JFXButton configurationBtn;
@@ -63,6 +63,10 @@ public class CalendarController implements Initializable {
     @FXML
     private JFXButton stadiumItineraryBtn;
 
+    @FXML
+    private MenuButton exportButton;
+
+
 
     public void setHomeController(HomeController homeController) {
         this.homeController = homeController;
@@ -74,10 +78,9 @@ public class CalendarController implements Initializable {
 
         notification = new TrayNotification();
         selectedCalendar = 0;
-
+        exportButton.setDisable(false);
         tables = new ArrayList<>();
         List<State> calendarsList = Executer.getInstance().getResultStates();
-
         try{
             for(int i=0; i < calendarsList.size();i++){
                 CalendarState calendar = (CalendarState) calendarsList.get(i);
@@ -141,7 +144,7 @@ public class CalendarController implements Initializable {
                     }*/
                 }
 
-                currentCalendarTabPane.setPrefWidth(restrictionsContent.getPrefWidth());
+                currentCalendarTabPane.setPrefWidth(restrictionsContent.getPrefWidth()-100);
                 HBox hboxCalendarContent = new HBox();
                 HBox hboxRestrictionContent = new HBox();
                 hboxCalendarContent.getChildren().addAll(currentCalendarTabPane);
@@ -149,7 +152,7 @@ public class CalendarController implements Initializable {
                 hboxRestrictionContent.getChildren().addAll(restrictionsContent);
 
                 allContent.getChildren().addAll(hboxCalendarContent,hboxRestrictionContent);
-                allContent.setLeftAnchor(hboxCalendarContent, 0.0);
+                allContent.setLeftAnchor(hboxCalendarContent, 10.0);
                 allContent.setLeftAnchor(hboxRestrictionContent, currentCalendarTabPane.getPrefWidth());
                 Tab tab =  new Tab(calendar.getConfiguration().getCalendarId());
                 tab.setContent(allContent);
@@ -235,6 +238,15 @@ public class CalendarController implements Initializable {
 
     @FXML
     void closeSelectedTab(ActionEvent event) {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"");
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.initOwner(calendarsTabPane.getScene().getWindow());
+        alert.getDialogPane().setContentText("Se eliminar\u00E1 el calendario seleccionado. ");
+        alert.getDialogPane().setHeaderText("Borrar Calendario");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.get() == ButtonType.OK){
             Executer.getInstance().getResultStates().remove(selectedCalendar);
             calendarsTabPane.getTabs().remove(selectedCalendar);
 
@@ -243,8 +255,47 @@ public class CalendarController implements Initializable {
                 Label label = new Label("No hay datos para mostrar");
                 tab.setContent(label);
                 calendarsTabPane.getTabs().add(tab);
-            }
+                selectedCalendar = -1;
+                exportButton.setDisable(true);
+            }else
+                exportButton.setDisable(false);
+        }
 
+
+    }
+
+    @FXML
+    void exportAllCalendar(ActionEvent event) {
+        boolean all = true;
+        if(Executer.getInstance().getResultStates().isEmpty()){
+            notification = new TrayNotification();
+            notification.setTitle("Exportaci\u00f3n de Calendario");
+            notification.setMessage("No hay calendarios para exportar");
+            notification.setNotificationType(NotificationType.ERROR);
+            notification.setRectangleFill(Paint.valueOf("#2F2484"));
+            notification.setAnimationType(AnimationType.FADE);
+            notification.showAndDismiss(Duration.seconds(2));
+        }
+        else{
+            DataFiles.getSingletonDataFiles().exportItinerary(all);
+        }
+    }
+
+    @FXML
+    void exportSelectedCalendar(ActionEvent event) {
+        boolean all = false;
+        if(Executer.getInstance().getResultStates().isEmpty()){
+            notification = new TrayNotification();
+            notification.setTitle("Exportaci\u00f3n de Calendario");
+            notification.setMessage("No hay calendarios para exportar");
+            notification.setNotificationType(NotificationType.ERROR);
+            notification.setRectangleFill(Paint.valueOf("#2F2484"));
+            notification.setAnimationType(AnimationType.FADE);
+            notification.showAndDismiss(Duration.seconds(2));
+        }
+        else{
+            DataFiles.getSingletonDataFiles().exportItinerary(all);
+        }
     }
 
     @FXML
@@ -270,6 +321,17 @@ public class CalendarController implements Initializable {
         notification.setRectangleFill(Paint.valueOf("#2F2484"));
         notification.setAnimationType(AnimationType.FADE);
         notification.showAndDismiss(Duration.seconds(1));
+    }
+
+    @FXML
+    void showResume(ActionEvent event) {
+        try {
+            AnchorPane structureOver = homeController.getPrincipalPane();
+            homeController.createPage(new StatisticsResumeController(), structureOver, "/visual/StatisticsResume.fxml");
+            homeController.getButtonReturnSelectionTeamConfiguration().setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 

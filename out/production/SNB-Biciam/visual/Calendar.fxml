@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTabPane?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,12 +12,15 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.geometry.Insets?>
 <AnchorPane prefHeight="632.0" prefWidth="1148.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CalendarController">
 
     <GridPane prefHeight="632.0" prefWidth="1148.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="465.0" minWidth="10.0" percentWidth="34.0" prefWidth="205.0" />
          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="465.0" minWidth="10.0" percentWidth="34.0" prefWidth="205.0" />
+         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="364.0" minWidth="10.0" percentWidth="31.0" prefWidth="243.0" />
          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="364.0" minWidth="10.0" percentWidth="31.0" prefWidth="243.0" />
          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="364.0" minWidth="10.0" percentWidth="35.0" prefWidth="212.4" />
          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="364.0" minWidth="10.0" percentWidth="0.0" prefWidth="212.4" />
@@ -29,7 +32,7 @@
          <RowConstraints maxHeight="501.0" minHeight="10.0" prefHeight="482.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="271.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
         </rowConstraints>
-      <JFXButton fx:id="configurationBtn" onAction="#showConfiguration" prefHeight="54.0" prefWidth="206.0" stylesheets="@../styles/PrincipalMenu.css" text="Configurar cambios" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <JFXButton fx:id="configurationBtn" onAction="#showConfiguration" prefHeight="54.0" prefWidth="206.0" stylesheets="@../styles/PrincipalMenu.css" text="Configurar cambios" GridPane.columnIndex="3" GridPane.rowIndex="2">
          <font>
             <Font name="Segoe UI Emoji" size="16.0" />
          </font>
@@ -44,21 +47,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-        <JFXButton fx:id="statisticsBtn" onAction="#showStatistics" prefHeight="54.0" prefWidth="206.0" stylesheets="@../styles/PrincipalMenu.css" text="Mostrar estadísticas" GridPane.rowIndex="2">
-            <font>
-                <Font name="Segoe UI Emoji" size="16.0" />
-            </font>
-            <graphic>
-                <ImageView fitHeight="35.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../resources/bar_chart.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </JFXButton>
 
       <JFXButton fx:id="itineraryBtn" onAction="#showItinerary" prefHeight="54.0" prefWidth="206.0" stylesheets="@../styles/PrincipalMenu.css" text="Itinerarios de equipos" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <font>
@@ -75,7 +63,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="CloseCalendarBtn" onAction="#closeSelectedTab" prefHeight="54.0" prefWidth="206.0" stylesheets="@../styles/PrincipalMenu.css" text="Cerrar calendario" GridPane.columnIndex="3" GridPane.rowIndex="2">
+      <JFXButton fx:id="CloseCalendarBtn" onAction="#closeSelectedTab" prefHeight="54.0" prefWidth="206.0" stylesheets="@../styles/PrincipalMenu.css" text="Borrar calendario" GridPane.columnIndex="4" GridPane.rowIndex="2">
          <font>
             <Font name="Segoe UI Emoji" size="16.0" />
          </font>
@@ -90,6 +78,44 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <MenuButton fx:id="exportButton" alignment="CENTER" mnemonicParsing="false" popupSide="TOP" prefHeight="54.0" prefWidth="206.0" styleClass="jfx-menu-button" stylesheets="@../styles/PrincipalMenu.css" text="Exportar" GridPane.columnIndex="2" GridPane.rowIndex="2">
+        <items>
+          <MenuItem fx:id="exportSelect" mnemonicParsing="false" onAction="#exportSelectedCalendar" text="Exportar calendario seleccionado" />
+          <MenuItem fx:id="exportAll" mnemonicParsing="false" onAction="#exportAllCalendar" text="Exportar todos los calendarios" />
+        </items>
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/exportar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="Segoe UI" size="16.0" />
+         </font>
+          <cursor>
+              <Cursor fx:constant="HAND" />
+          </cursor>
+      </MenuButton>
+      <MenuButton fx:id="statisticsBtn" alignment="CENTER" mnemonicParsing="false" popupSide="TOP" prefHeight="54.0" prefWidth="206.0" styleClass="jfx-menu-button" stylesheets="@../styles/PrincipalMenu.css" text="Estadísticas" GridPane.rowIndex="2">
+         <items>
+            <MenuItem fx:id="statistics" mnemonicParsing="false" onAction="#showStatistics" text="Mostrar gráficos estadísticos" />
+            <MenuItem fx:id="statisticsResume" mnemonicParsing="false" onAction="#showResume" text="Mostrar resumen estadístico" />
+         </items>
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/bar_chart.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="Segoe UI" size="16.0" />
+         </font>
+          <cursor>
+              <Cursor fx:constant="HAND" />
+          </cursor>
+      </MenuButton>
       <JFXTabPane fx:id="calendarsTabPane" prefHeight="471.0" prefWidth="1120.0" GridPane.columnSpan="5" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="15.0" right="15.0" />

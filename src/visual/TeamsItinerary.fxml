@@ -1,46 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.CheckListView?>
 
-<AnchorPane prefHeight="632.0" prefWidth="1148.0" style="-fx-background-color: white;" stylesheets="@../styles/PrincipalMenu.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TeamsItineraryController">
+<AnchorPane minHeight="632.0" minWidth="1148.0" prefHeight="632.0" prefWidth="1148.0" style="-fx-background-color: white;" stylesheets="@../styles/PrincipalMenu.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TeamsItineraryController">
    <children>
-      <JFXListView fx:id="teamsListView" layoutX="22.0" layoutY="58.0" prefHeight="551.0" prefWidth="369.0" stylesheets="@../styles/application.css" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="757.0" AnchorPane.topAnchor="58.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXListView>
-      <Label layoutX="139.0" layoutY="21.0" text="Equipos" textFill="#2f2484" AnchorPane.bottomAnchor="580.0" AnchorPane.leftAnchor="139.0" AnchorPane.rightAnchor="914.0" AnchorPane.topAnchor="21.0">
-         <font>
-            <Font name="Segoe UI Emoji" size="27.0" />
-         </font>
-      </Label>
-      <Label layoutX="803.0" layoutY="21.0" text="Itinerario" textFill="#2f2484" AnchorPane.bottomAnchor="580.0" AnchorPane.leftAnchor="803.0" AnchorPane.rightAnchor="237.0" AnchorPane.topAnchor="21.0">
-         <font>
-            <Font name="Segoe UI Emoji" size="27.0" />
-         </font>
-      </Label>
-      <TableView fx:id="itineraryTable" layoutX="566.0" layoutY="58.0" prefHeight="551.0" prefWidth="561.0" stylesheets="@../styles/PrincipalMenu.css" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="566.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="58.0">
-         <columns>
-            <TableColumn fx:id="colDates" prefWidth="92.0" text="Fecha" />
-            <TableColumn prefWidth="115.0" text="Equipo" />
-            <TableColumn prefWidth="115.0" text="Equipo" />
-            <TableColumn prefWidth="115.0" text="Equipo" />
-            <TableColumn prefWidth="115.0" text="Equipo" />
-         </columns></TableView>
-      <JFXButton fx:id="showItinerary" buttonType="RAISED" layoutX="405.0" layoutY="301.0" onAction="#displayItinerary" prefHeight="58.0" prefWidth="139.0" text="Ver Itinerario" AnchorPane.bottomAnchor="273.0" AnchorPane.leftAnchor="405.0" AnchorPane.rightAnchor="604.0" AnchorPane.topAnchor="301.0">
-         <font>
-            <Font name="Segoe UI Symbol" size="18.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
+      <HBox prefHeight="632.0" prefWidth="1148.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox prefHeight="632.0" prefWidth="344.0">
+               <children>
+                  <Label text="Equipos" textFill="#2f2484">
+                     <font>
+                        <Font name="Segoe UI Emoji" size="27.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="120.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <CheckListView fx:id="checkListView" prefHeight="552.0" prefWidth="344.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="632.0" prefWidth="222.0">
+               <children>
+                  <JFXButton fx:id="showItinerary" buttonType="RAISED" onAction="#displayItinerary" prefHeight="58.0" prefWidth="191.0" text="Ver Itinerario">
+                     <font>
+                        <Font name="Segoe UI Symbol" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets left="15.0" top="225.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="showIAlltinerar" buttonType="RAISED" onAction="#displayAllItinerary" prefHeight="58.0" prefWidth="191.0" text="Itinerario Completo">
+                     <font>
+                        <Font name="Segoe UI Symbol" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets left="15.0" top="20.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" onAction="#close" prefHeight="58.0" prefWidth="191.0" text="Regresar">
+                     <font>
+                        <Font name="Segoe UI Symbol" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets left="15.0" top="20.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <VBox prefHeight="632.0" prefWidth="582.0">
+               <children>
+                  <Label text="Itinerario" textFill="#2f2484">
+                     <font>
+                        <Font name="Segoe UI Emoji" size="27.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="250.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TableView fx:id="itineraryTable" prefHeight="551.0" prefWidth="561.0" stylesheets="@../styles/PrincipalMenu.css">
+                     <columns>
+                        <TableColumn fx:id="colDates" prefWidth="92.0" text="Fecha" />
+                        <TableColumn prefWidth="115.0" text="Equipo" />
+                        <TableColumn prefWidth="115.0" text="Equipo" />
+                        <TableColumn prefWidth="115.0" text="Equipo" />
+                        <TableColumn prefWidth="115.0" text="Equipo" />
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

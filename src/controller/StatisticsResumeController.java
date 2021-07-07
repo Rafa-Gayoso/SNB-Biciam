@@ -1,6 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
+import definition.TTPDefinition;
 import definition.state.CalendarState;
 import execute.Executer;
 import javafx.collections.FXCollections;
@@ -12,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import problem.definition.State;
 import utils.*;
 
@@ -46,6 +48,12 @@ public class StatisticsResumeController implements Initializable {
     @FXML
     private TableColumn<TableStatisticsData, Double> teamMoreDistanceColumn;
 
+    @FXML
+    private TableColumn<TableStatisticsData, Integer> localRestrictionsColum;
+
+    @FXML
+    private TableColumn<TableStatisticsData, Integer> visitorRestrictionsColum;
+
     private ObservableList<TableStatisticsData> data = FXCollections.observableArrayList();
 
 
@@ -59,6 +67,8 @@ public class StatisticsResumeController implements Initializable {
         teamLessDistanceColumn.setCellValueFactory(new PropertyValueFactory<TableStatisticsData,Double>("lessTeamDistance"));
         teamMoreNameColumn.setCellValueFactory(new PropertyValueFactory<TableStatisticsData, String>("moreTeam"));
         teamMoreDistanceColumn.setCellValueFactory(new PropertyValueFactory<TableStatisticsData,Double>("moreTeamDistance"));
+        localRestrictionsColum.setCellValueFactory(new PropertyValueFactory<TableStatisticsData,Integer>("localRestrictionsVioleted"));
+        visitorRestrictionsColum.setCellValueFactory(new PropertyValueFactory<TableStatisticsData,Integer>("visitorRestrictionsVioleted"));
         fillColumns();
     }
 
@@ -75,7 +85,10 @@ public class StatisticsResumeController implements Initializable {
             Statistics.getInstance().moreStatistics(itineraryDistance);
             String teamMoreDistance = Statistics.getInstance().getTeam();
             double moreDistance = Statistics.getInstance().getDistance();
-            data.add(new TableStatisticsData(calendar.getConfiguration().getCalendarId(), teamLessDistance, teamMoreDistance, calendar.getDistance(), lessDistance, moreDistance));
+            int maxVisitorGamesBrokeRule = TTPDefinition.getInstance().penalizeVisitorGames(calendar);
+            int maxHomeGamesBrokeRule = TTPDefinition.getInstance().penalizeLocalGames(calendar);
+            data.add(new TableStatisticsData(calendar.getConfiguration().getCalendarId(), teamLessDistance, teamMoreDistance, calendar.getDistance(), lessDistance, moreDistance,
+                    maxHomeGamesBrokeRule,maxVisitorGamesBrokeRule));
 
         }
         statisticsTable.setItems(data);
@@ -95,6 +108,12 @@ public class StatisticsResumeController implements Initializable {
     @FXML
     void exportStatistics(ActionEvent event) {
         DataFiles.getSingletonDataFiles().exportsStatistics(statisticsTable);
+    }
+
+    @FXML
+    void close(ActionEvent event) {
+        Stage stage = (Stage) statisticsTable.getScene().getWindow();
+        stage.close();
     }
 
 }

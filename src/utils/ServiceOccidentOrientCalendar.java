@@ -10,6 +10,8 @@ import operators.interfaces.IChampionGame;
 import operators.interfaces.ICreateInitialSolution;
 import operators.interfaces.IInauguralGame;
 import operators.interfaces.ISecondRound;
+import problem.definition.State;
+
 import java.util.ArrayList;
 
 public class ServiceOccidentOrientCalendar extends javafx.concurrent.Service<String> implements ISecondRound, IInauguralGame, IChampionGame, ICreateInitialSolution {
@@ -21,11 +23,22 @@ public class ServiceOccidentOrientCalendar extends javafx.concurrent.Service<Str
 
                 Executer.getInstance().configureProblem();
 
-                int i = 0;
-                updateProgress(i, Executer.getInstance().getEXECUTIONS());
-                int percent = percent(i);
+                int s = 0;
+                updateProgress(s, Executer.getInstance().getEXECUTIONS());
+                int percent = percent(s);
                 updateMessage(percent + " %");
-                for (; i < Executer.getInstance().getEXECUTIONS(); i++) {
+                int oldIterations = Executer.getInstance().getITERATIONS();
+                Executer.getInstance().setITERATIONS(500);
+
+                int [][] oldMatrix = new int[TTPDefinition.getInstance().getCantEquipos()][TTPDefinition.getInstance().getCantEquipos()];
+
+                for(int i=0; i < TTPDefinition.getInstance().getDuelMatrix().length; i++){
+                    for (int j = 0; j <TTPDefinition.getInstance().getDuelMatrix().length; j++) {
+                        oldMatrix[i][j] = TTPDefinition.getInstance().getDuelMatrix()[i][j];
+                    }
+                }
+                /*for (; s < Executer.getInstance().getEXECUTIONS(); s++) {*/
+
                     ArrayList<Integer> teamsOnlyOccident = new ArrayList<>();
                     ArrayList<Integer> teamsOnlyOrient = new ArrayList<>();
                     ArrayList<Integer> allTeams = (ArrayList<Integer>) TTPDefinition.getInstance().getTeamsIndexes().clone();
@@ -71,50 +84,54 @@ public class ServiceOccidentOrientCalendar extends javafx.concurrent.Service<Str
                             allTeams, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                             TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                             TTPDefinition.getInstance().isSymmetricSecondRound(), true, TTPDefinition.getInstance().getCantVecesLocal(),
-                            TTPDefinition.getInstance().getCantVecesVisitante(), TTPDefinition.getInstance().getRestIndexes());
+                            TTPDefinition.getInstance().getCantVecesVisitante(),TTPDefinition.getInstance().getRestIndexes(), TTPDefinition.getInstance().getDuelMatrix()).clone();
 
 
                     CalendarConfiguration confOnlyOccident = new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
                             teamsOnlyOccident, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                             TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                             TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
-                            TTPDefinition.getInstance().getCantVecesVisitante(), TTPDefinition.getInstance().getRestIndexes());
+                            TTPDefinition.getInstance().getCantVecesVisitante(),TTPDefinition.getInstance().getRestIndexes(), matrixOnlyOccident);
 
                     CalendarConfiguration confOnlyOrient = new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
                             teamsOnlyOrient, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                             TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                             TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
-                            TTPDefinition.getInstance().getCantVecesVisitante(), TTPDefinition.getInstance().getRestIndexes());
+                            TTPDefinition.getInstance().getCantVecesVisitante(),TTPDefinition.getInstance().getRestIndexes(), matrixOnlyOrient);
 
                     CalendarConfiguration confOccVsOr = new CalendarConfiguration(TTPDefinition.getInstance().getCalendarId(),
                             allTeams, TTPDefinition.getInstance().isInauguralGame(), TTPDefinition.getInstance().isChampionVsSub(),
                             TTPDefinition.getInstance().getFirstPlace(), TTPDefinition.getInstance().getSecondPlace(), TTPDefinition.getInstance().isSecondRound(),
                             TTPDefinition.getInstance().isSymmetricSecondRound(), false, TTPDefinition.getInstance().getCantVecesLocal(),
-                            TTPDefinition.getInstance().getCantVecesVisitante(), TTPDefinition.getInstance().getRestIndexes());
+                            TTPDefinition.getInstance().getCantVecesVisitante(),TTPDefinition.getInstance().getRestIndexes(), newMatrix);
 
-                    if (TTPDefinition.getInstance().getFirstPlace() != -1) {
+                    if (TTPDefinition.getInstance().getFirstPlace() != -1){
                         int posChamp = teamsOnlyOccident.indexOf(TTPDefinition.getInstance().getFirstPlace());
                         int posSub = teamsOnlyOccident.indexOf(TTPDefinition.getInstance().getSecondPlace());
 
-                        if (posChamp != -1 && posSub != -1) {
+                        if(posChamp != -1 && posSub != -1){
                             confOnlyOrient.setChampionVsSecondPlace(false);
                             confOnlyOrient.setInauguralGame(false);
                             confOccVsOr.setChampionVsSecondPlace(false);
-                        } else if (posChamp == -1 && posSub == -1) {
+                        }
+                        else if(posChamp == -1 && posSub == -1){
                             confOnlyOccident.setChampionVsSecondPlace(false);
                             confOnlyOccident.setInauguralGame(false);
                             confOccVsOr.setChampionVsSecondPlace(false);
-                        } else if (posChamp != -1 && posSub == -1 && TTPDefinition.getInstance().isInauguralGame()) {
+                        }
+                        else if(posChamp != -1 && posSub == -1 && TTPDefinition.getInstance().isInauguralGame()){
                             confOnlyOccident.setChampionVsSecondPlace(false);
                             confOnlyOccident.setInauguralGame(false);
-                        } else if (posChamp == -1 && posSub != -1 && TTPDefinition.getInstance().isInauguralGame()) {
+                        }
+                        else if(posChamp == -1 && posSub != -1 && TTPDefinition.getInstance().isInauguralGame()){
                             confOnlyOrient.setChampionVsSecondPlace(false);
                             confOnlyOrient.setInauguralGame(false);
-                        } else {
+                        }
+                        else{
                             confOnlyOrient.setChampionVsSecondPlace(false);
                             confOnlyOccident.setChampionVsSecondPlace(false);
                         }
-                        if (TTPDefinition.getInstance().isInauguralGame()) {
+                        if (TTPDefinition.getInstance().isInauguralGame()){
                             confOccVsOr.setInauguralGame(false);
                         }
                     }
@@ -122,61 +139,62 @@ public class ServiceOccidentOrientCalendar extends javafx.concurrent.Service<Str
                     TTPDefinition.getInstance().setTeamIndexes(teamsOnlyOccident);
                     TTPDefinition.getInstance().setDuelMatrix(matrixOnlyOccident);
                     TTPDefinition.getInstance().setOccidentOrientConfiguration(confOnlyOccident);
-                    TTPDefinition.getInstance().setNumberOfDates(teamsOnlyOccident.size() - 1);
+                    TTPDefinition.getInstance().setNumberOfDates(teamsOnlyOccident.size()-1);
                     Executer.getInstance().executeEC();
 
                     ArrayList<problem.definition.State> calendarOccList = new ArrayList<>();
 
-                    for (int j = 0; j < Executer.getInstance().getEXECUTIONS(); j++) {
-                        calendarOccList.add(0, Executer.getInstance().getResultStates().get(Executer.getInstance().getResultStates().size() - 1));
-                        Executer.getInstance().getResultStates().remove(Executer.getInstance().getResultStates().size() - 1);
+                    for (int i = 0; i < Executer.getInstance().getEXECUTIONS(); i++) {
+                        calendarOccList.add(0, Executer.getInstance().getResultStates().get(Executer.getInstance().getResultStates().size()-1));
+                        Executer.getInstance().getResultStates().remove(Executer.getInstance().getResultStates().size()-1);
                     }
 
                     TTPDefinition.getInstance().setTeamIndexes(teamsOnlyOrient);
                     TTPDefinition.getInstance().setDuelMatrix(matrixOnlyOrient);
                     TTPDefinition.getInstance().setOccidentOrientConfiguration(confOnlyOrient);
-                    TTPDefinition.getInstance().setNumberOfDates(teamsOnlyOrient.size() - 1);
+                    TTPDefinition.getInstance().setNumberOfDates(teamsOnlyOrient.size()-1);
                     Executer.getInstance().executeEC();
 
                     ArrayList<problem.definition.State> calendarOrList = new ArrayList<>();
 
-                    for (int j = 0; j < Executer.getInstance().getEXECUTIONS(); j++) {
-                        calendarOrList.add(0, Executer.getInstance().getResultStates().get(Executer.getInstance().getResultStates().size() - 1));
-                        Executer.getInstance().getResultStates().remove(Executer.getInstance().getResultStates().size() - 1);
+                    for (int i = 0; i < Executer.getInstance().getEXECUTIONS(); i++) {
+                        calendarOrList.add(0, Executer.getInstance().getResultStates().get(Executer.getInstance().getResultStates().size()-1));
+                        Executer.getInstance().getResultStates().remove(Executer.getInstance().getResultStates().size()-1);
                     }
 
                     ArrayList<problem.definition.State> allTogetherList = new ArrayList<>();
                     ArrayList<Date> dateToStarList = new ArrayList<>();
 
-                    if (originalConfiguration.isInauguralGame()) {
-                        for (int j = 0; j < calendarOccList.size(); j++) {
-                            if (confOnlyOccident.isInauguralGame()) {
-                                deleteInauguralGame(calendarOccList.get(j));
-                            } else if (confOnlyOrient.isInauguralGame()) {
-                                deleteInauguralGame(calendarOrList.get(j));
+                    if (originalConfiguration.isInauguralGame()){
+                        for (int i = 0; i < calendarOccList.size(); i++) {
+                            if (confOnlyOccident.isInauguralGame()){
+                                deleteInauguralGame(calendarOccList.get(i));
+                            }
+                            else if(confOnlyOrient.isInauguralGame()){
+                                deleteInauguralGame(calendarOrList.get(i));
                             }
                         }
                     }
 
 
-                    for (int k = 0; k < Executer.getInstance().getEXECUTIONS(); k++) {
+                    for (int i = 0; i < Executer.getInstance().getEXECUTIONS(); i++) {
 
                         problem.definition.State allTogether = new problem.definition.State();
                         for (int j = 0; j < calendarOccList.get(i).getCode().size(); j++) {
 
-                            Date dateOcc = new definition.state.statecode.Date();
-                            dateOcc.setGames(((Date) (calendarOccList.get(k).getCode().get(j))).getGames());
+                            definition.state.statecode.Date dateOcc = new definition.state.statecode.Date();
+                            dateOcc.setGames(((Date)(calendarOccList.get(i).getCode().get(j))).getGames());
 
-                            Date dateOr = new definition.state.statecode.Date();
-                            dateOr.setGames(((Date) (calendarOrList.get(k).getCode().get(j))).getGames());
+                            definition.state.statecode.Date dateOr = new definition.state.statecode.Date();
+                            dateOr.setGames(((Date)(calendarOrList.get(i).getCode().get(j))).getGames());
 
-                            Date dateTogether = new definition.state.statecode.Date();
+                            definition.state.statecode.Date dateTogether = new definition.state.statecode.Date();
                             dateTogether.getGames().addAll(dateOcc.getGames());
                             dateTogether.getGames().addAll(dateOr.getGames());
 
                             allTogether.getCode().add(dateTogether);
 
-                            if (j == calendarOccList.get(k).getCode().size() - 1) {
+                            if (j == calendarOccList.get(i).getCode().size()-1){
                                 dateToStarList.add(dateTogether);
                             }
                         }
@@ -185,10 +203,11 @@ public class ServiceOccidentOrientCalendar extends javafx.concurrent.Service<Str
                     TTPDefinition.getInstance().getDateToStartList().addAll(dateToStarList);
 
                     int numberOfDate = 0;
-                    if (TTPDefinition.getInstance().isSecondRound()) {
-                        numberOfDate = (allTeams.size() - 1) - (calendarOccList.get(0).getCode().size() / 2);
-                    } else {
-                        numberOfDate = (allTeams.size() - 1) - calendarOccList.get(0).getCode().size();
+                    if (TTPDefinition.getInstance().isSecondRound()){
+                        numberOfDate = (allTeams.size()-1) - (calendarOccList.get(0).getCode().size()/2);
+                    }
+                    else{
+                        numberOfDate = (allTeams.size()-1) - calendarOccList.get(0).getCode().size();
                     }
 
                     TTPDefinition.getInstance().setTeamIndexes(allTeams);
@@ -197,29 +216,31 @@ public class ServiceOccidentOrientCalendar extends javafx.concurrent.Service<Str
                     TTPDefinition.getInstance().setNumberOfDates(numberOfDate);
 
 
+
                     ArrayList<Integer> originalRests = new ArrayList<>();
                     originalRests.addAll(TTPDefinition.getInstance().getRestIndexes());
 
                     int numberToModifyRests = allTogetherList.get(0).getCode().size();
-                    if (TTPDefinition.getInstance().isInauguralGame()) {
+                    if (TTPDefinition.getInstance().isInauguralGame()){
                         numberToModifyRests += 1;
                     }
 
                     boolean setDateToStart = true;
 
                     ArrayList<Integer> modifiedRests = new ArrayList<>();
-                    for (int j = 0;j < originalRests.size(); j++) {
-                        if (originalRests.get(j) > numberToModifyRests) {
-                            int tempRest = originalRests.get(j);
+                    for (int i = 0; i < originalRests.size(); i++) {
+                        if (originalRests.get(i) > numberToModifyRests){
+                            int tempRest = originalRests.get(i);
                             tempRest -= numberToModifyRests;
                             modifiedRests.add(tempRest);
-                        } else if (originalRests.get(j) == numberToModifyRests) {
+                        }
+                        else if (originalRests.get(i) == numberToModifyRests){
                             setDateToStart = false;
                         }
                     }
                     TTPDefinition.getInstance().setRestIndexes(modifiedRests);
 
-                    if (setDateToStart) {
+                    if (setDateToStart){
                         Executer.getInstance().setTimeToSetDateToStart(true);
                         TTPDefinition.getInstance().setUseDateToStart(true);
                     }
@@ -228,33 +249,43 @@ public class ServiceOccidentOrientCalendar extends javafx.concurrent.Service<Str
 
                     TTPDefinition.getInstance().setRestIndexes(originalRests);
 
-                    if (setDateToStart) {
+                    if (setDateToStart){
                         Executer.getInstance().setTimeToSetDateToStart(false);
                         TTPDefinition.getInstance().setUseDateToStart(false);
                     }
 
                     ArrayList<problem.definition.State> calendarOccVsOrList = new ArrayList<>();
 
-                    for (int j= 0; j < Executer.getInstance().getEXECUTIONS(); j++) {
-                        calendarOccVsOrList.add(0, Executer.getInstance().getResultStates().get(Executer.getInstance().getResultStates().size() - 1));
-                        Executer.getInstance().getResultStates().remove(Executer.getInstance().getResultStates().size() - 1);
+                    for (int i = 0; i < Executer.getInstance().getEXECUTIONS(); i++) {
+                        calendarOccVsOrList.add(0, Executer.getInstance().getResultStates().get(Executer.getInstance().getResultStates().size()-1));
+                        Executer.getInstance().getResultStates().remove(Executer.getInstance().getResultStates().size()-1);
                     }
 
-                    if (originalConfiguration.isInauguralGame() && confOccVsOr.isInauguralGame()) {
-                        for (int j = 0; j < calendarOccVsOrList.size(); j++) {
-                            deleteInauguralGame(calendarOccVsOrList.get(j));
+                    if (originalConfiguration.isInauguralGame() && confOccVsOr.isInauguralGame()){
+                        for (int i = 0; i < calendarOccVsOrList.size(); i++) {
+                            deleteInauguralGame(calendarOccVsOrList.get(i));
                         }
                     }
 
-                    for (int j = 0; j < Executer.getInstance().getEXECUTIONS(); j++) {
-                        allTogetherList.get(j).getCode().addAll(calendarOccVsOrList.get(j).getCode());
+                    for (int i = 0; i < Executer.getInstance().getEXECUTIONS(); i++) {
+                        allTogetherList.get(i).getCode().addAll(calendarOccVsOrList.get(i).getCode());
                     }
 
                     InitialSolutionType type = createSolutionType();
+                    for(int j =0; j < Executer.getInstance().getEXECUTIONS();j++){
+                    updateProgress(s + 1, Executer.getInstance().getEXECUTIONS());
 
-                    for (int j = 0; j < Executer.getInstance().getEXECUTIONS(); j++) {
+                    percent = percent(s + 1);
+                    updateMessage(percent + " %");
+                    s++;
+                        Thread.sleep(10);
+                    }
+
+
+                updateProgress(s, Executer.getInstance().getEXECUTIONS());
+                    for (int i = 0; i < Executer.getInstance().getEXECUTIONS(); i++) {
                         CalendarState tempState = new CalendarState();
-                        tempState.getCode().addAll(allTogetherList.get(j).getCode());
+                        tempState.getCode().addAll(allTogetherList.get(i).getCode());
                         CalendarConfiguration tempConfiguration = new CalendarConfiguration(originalConfiguration.getCalendarId(),
                                 allTeams, originalConfiguration.isInauguralGame(), originalConfiguration.isChampionVsSecondPlace(),
                                 originalConfiguration.getChampion(), originalConfiguration.getSecondPlace(), originalConfiguration.isSecondRoundCalendar(),
@@ -263,41 +294,44 @@ public class ServiceOccidentOrientCalendar extends javafx.concurrent.Service<Str
 
                         tempState.setConfiguration(tempConfiguration);
                         tempState.setCalendarType(type.ordinal());
-                        if (originalConfiguration.isInauguralGame()) {
+                        if (originalConfiguration.isInauguralGame()){
                             addInauguralGame(tempState);
                         }
+                        tempState.getConfiguration().setDuelMatrix(oldMatrix);
+
                         Executer.getInstance().getResultStates().add(tempState);
 
-                        if (Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId()) == null) {
+                        if( Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId()) == null){
                             Executer.getInstance().getIdMaps().put(TTPDefinition.getInstance().getCalendarId(), 1);
-                        } else {
+                        }else{
                             ;
                             Executer.getInstance().getIdMaps().put(TTPDefinition.getInstance().getCalendarId(),
-                                    Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId()) + 1);
+                                    Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId())+1);
 
                         }
-                        tempState.getConfiguration().setCalendarId(TTPDefinition.getInstance().getCalendarId() + "." +
+                        tempState.getConfiguration().setCalendarId(TTPDefinition.getInstance().getCalendarId() +"."+
                                 Executer.getInstance().getIdMaps().get(TTPDefinition.getInstance().getCalendarId()));
 
-                        if (Executer.getInstance().getIdMaps().get(tempState.getConfiguration().getCalendarId()) == null) {
+                        if( Executer.getInstance().getIdMaps().get(tempState.getConfiguration().getCalendarId()) == null){
                             Executer.getInstance().getIdMaps().put(tempState.getConfiguration().getCalendarId(), 1);
-                        } else {
+                        }else{
                             Executer.getInstance().getIdMaps().put(tempState.getConfiguration().getCalendarId(),
-                                    Executer.getInstance().getIdMaps().get(tempState.getConfiguration().getCalendarId()) + 1);
+                                    Executer.getInstance().getIdMaps().get(tempState.getConfiguration().getCalendarId())+1);
                         }
                     }
 
-                    updateProgress(i + 1, Executer.getInstance().getEXECUTIONS());
+                   /*updateProgress(s + 1, Executer.getInstance().getEXECUTIONS());
 
-                    percent = percent(i + 1);
-                    updateMessage(percent + " %");
-                }
+                    percent = percent(s + 1);
+                    updateMessage(percent + " %");*/
 
-                updateProgress(i, Executer.getInstance().getEXECUTIONS());
 
-                percent = percent(i);
-                updateMessage(percent + " %");
+                //updateProgress(s, Executer.getInstance().getEXECUTIONS());
+
+                /*percent = percent(s);
+                updateMessage(percent + " %");*/
                 Thread.sleep(10);
+                Executer.getInstance().setITERATIONS(oldIterations);
                 return "";
             }
         };

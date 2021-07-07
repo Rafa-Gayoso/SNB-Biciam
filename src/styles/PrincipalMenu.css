@@ -8,6 +8,16 @@
     /*-fx-border-radius:100;*/
 }
 
+.jfx-menu-button, .jfx-menu-button:focused {
+    -fx-effect: dropshadow(three-pass-box, #011b1d, 50, 0.1, 1, 3);
+    -fx-background-color: #2F2484;
+    -fx-background-insets: 2 2 2 2;
+    /*-fx-border-color: white;*/
+    -fx-background-radius: 0 10 0 10;
+    -fx-text-fill: white;
+    /*-fx-border-radius:100;*/
+}
+
 .jfx-button:hover {
     -fx-effect: dropshadow(two-pass-box, #011b1d, 8, 0.1, 1, 3);
 }
@@ -191,6 +201,14 @@
             derive(-fx-accent, 30%),
             derive(-fx-accent, 30%)
     );
+}
+
+.menu-button .text{
+    -fx-fill: white;
+}
+
+#exportSelect .text, #exportAll .text, #statistics .text,#statisticsResume .text, #exportConfigurationBtn .text,#importConfigurationBtn .text{
+    -fx-fill: black;
 }
 
 

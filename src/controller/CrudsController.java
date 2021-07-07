@@ -119,7 +119,7 @@ public class CrudsController implements Initializable {
 
     @FXML
     void showData(ActionEvent event) throws IOException {
-        File file = new File("src/files/Data.xlsx");
+        File file = new File("config_files" + File.separator + "Data.xlsx");
 
         //first check if Desktop is supported by Platform or not
         if(!Desktop.isDesktopSupported()){

@@ -11,14 +11,14 @@
 
 <AnchorPane fx:id="panel" prefHeight="632.0" prefWidth="1148.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SelectGridController">
     <children>
-        <ScrollPane layoutX="19.0" layoutY="1.0" prefHeight="560.0" prefWidth="1107.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="1.0">
+        <ScrollPane fx:id="scroll" layoutX="19.0" layoutY="1.0" prefHeight="560.0" prefWidth="1107.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="1.0">
             <content>
                 <GridPane fx:id="selectionGrid" prefHeight="557.0" prefWidth="1147.0">
 
                 </GridPane>
             </content>
         </ScrollPane>
-        <JFXButton fx:id="saveLocations" layoutX="470.0" layoutY="566.0" onAction="#saveLocations" prefHeight="49.0" prefWidth="205.0" stylesheets="@../styles/PrincipalMenu.css" text="Generar Calendario" textFill="WHITE">
+        <JFXButton fx:id="saveLocations" layoutX="441.0" layoutY="566.0" onAction="#saveLocations" prefHeight="49.0" prefWidth="205.0" stylesheets="@../styles/PrincipalMenu.css" text="Generar Calendario" textFill="WHITE">
             <font>
                 <Font name="Segoe UI Symbol" size="20.0" />
             </font>
@@ -33,5 +33,13 @@
         </Label>
         <FontAwesomeIconView fx:id="balanceCalendar" fill="#10a132" glyphName="CHECK" layoutX="330.0" layoutY="607.0" size="48" />
         <FontAwesomeIconView fx:id="notBalanceCalendar" fill="#f50000" glyphName="TIMES" layoutX="333.0" layoutY="607.0" size="48" text="" wrappingWidth="40.999997831881046" />
+      <JFXButton fx:id="invertDuels" layoutX="752.0" layoutY="566.0" onAction="#invertDuels" prefHeight="49.0" prefWidth="197.0" stylesheets="@../styles/PrincipalMenu.css" text="Invertir sedes" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Symbol" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
     </children>
 </AnchorPane>

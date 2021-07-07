@@ -3,7 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/controller/CalendarController.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/src/controller/CalendarStatisticsController.java" charset="ISO-8859-1" />
-    <file url="file://$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/controller/HomeController.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/src/controller/SelectGridController.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/src/styles/PrincipalMenu.css" charset="ISO-8859-1" />

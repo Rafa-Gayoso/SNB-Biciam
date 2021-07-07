@@ -17,6 +17,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import problem.definition.State;
+import utils.DataFiles;
 import utils.Distance;
 import utils.Statistics;
 
@@ -121,7 +122,9 @@ public class CalendarStatisticsController {
             //estadisticas de los equipos que menos distancias recorren
             ArrayList<ArrayList<Double>> itineraryDistance = Distance.getInstance().itineraryDistances(calendar);
             Statistics.getInstance().lessStatistics(itineraryDistance);
-            xAxisLessTeamData.add(Statistics.getInstance().getTeam() + " - "+ calendar.getConfiguration().getCalendarId());
+            String team = Statistics.getInstance().getTeam();
+            int pos = DataFiles.getSingletonDataFiles().getTeams().indexOf(team);
+            xAxisLessTeamData.add(DataFiles.getSingletonDataFiles().getAcronyms().get(pos) + " - "+ calendar.getConfiguration().getCalendarId());
             lessTeamData.addAll(xAxisLessTeamData);
             XYChart.Series<String, Float> seriesLessTeam = new XYChart.Series<String,Float>();
 
@@ -129,8 +132,10 @@ public class CalendarStatisticsController {
             seriesLessTeam.getData().add(new XYChart.Data(xAxisLessTeamData.get(i), Statistics.getInstance().getDistance()));
             barChartLessTeam.getData().addAll(seriesLessTeam);
 
-           Statistics.getInstance().moreStatistics(itineraryDistance);
-            xAxisMoreTeamData.add(Statistics.getInstance().getTeam() + " - "+ calendar.getConfiguration().getCalendarId());
+            Statistics.getInstance().moreStatistics(itineraryDistance);
+            team = Statistics.getInstance().getTeam();
+            pos = DataFiles.getSingletonDataFiles().getTeams().indexOf(team);
+            xAxisMoreTeamData.add(DataFiles.getSingletonDataFiles().getAcronyms().get(pos) + " - "+ calendar.getConfiguration().getCalendarId());
             moreTeamData.addAll(xAxisMoreTeamData);
             XYChart.Series<String, Float> seriesMoreTeam = new XYChart.Series<String,Float>();
 

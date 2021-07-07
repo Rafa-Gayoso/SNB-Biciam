@@ -169,7 +169,7 @@ public class DuelHeuristicOperator extends HeuristicOperator {
             int j = 0;
             for (; j < calendarBacktracking.get(i).size(); j++) {
 
-                if(System.currentTimeMillis() - startTime > 1000){
+                if(System.currentTimeMillis() - startTime > 350){
                     break;
                 }
                 calendarBacktracking.get(i).get(j).clear();
@@ -228,7 +228,7 @@ public class DuelHeuristicOperator extends HeuristicOperator {
                     }
                 }
             }
-            if(System.currentTimeMillis() - startTime > 1000){
+            if(System.currentTimeMillis() - startTime > 350){
                 break;
             }
 

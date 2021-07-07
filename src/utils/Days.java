@@ -4,43 +4,43 @@ public enum Days {
     LUNES{
         @Override
         public String toString() {
-            return "Lunes";
+            return "Lu";
         }
     },
     MARTES{
         @Override
         public String toString() {
-            return "Martes";
+            return "Ma";
         }
     },
     MIERCOLES{
         @Override
         public String toString() {
-            return "Mi\u00e9rcoles";
+            return "Mi";
         }
     },
     JUEVES{
         @Override
         public String toString() {
-            return "Jueves";
+            return "Ju";
         }
     },
     VIERNES{
         @Override
         public String toString() {
-            return "Viernes";
+            return "Vi";
         }
     },
     SABADO{
         @Override
         public String toString() {
-            return "S\u00e1bado";
+            return "S\u00e1";
         }
     },
     DOMINGO{
         @Override
         public String toString() {
-            return "Domingo";
+            return "Do";
         }
     }
 }

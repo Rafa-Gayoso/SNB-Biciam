@@ -26,11 +26,11 @@ public class ChangeTeamsOperator extends MutationOperator{
         }
 
         if(firstTeam == -1){
-            firstTeam = ThreadLocalRandom.current().nextInt(0, configuration.getTeamsIndexes().size());
+            firstTeam = configuration.getTeamsIndexes().get(ThreadLocalRandom.current().nextInt(0, configuration.getTeamsIndexes().size()));
             secondTeam = firstTeam;
 
             while (firstTeam == secondTeam) {
-                secondTeam = ThreadLocalRandom.current().nextInt(0, configuration.getTeamsIndexes().size());
+                secondTeam = configuration.getTeamsIndexes().get(ThreadLocalRandom.current().nextInt(0, configuration.getTeamsIndexes().size()));
             }
         }
 

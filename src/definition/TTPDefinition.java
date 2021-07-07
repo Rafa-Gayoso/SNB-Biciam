@@ -242,7 +242,7 @@ public class TTPDefinition {
                     TTPDefinition.getInstance().isChampionVsSub(), TTPDefinition.getInstance().getFirstPlace(),
                     TTPDefinition.getInstance().getSecondPlace(),TTPDefinition.getInstance().isSecondRound(), TTPDefinition.getInstance().isSymmetricSecondRound(),
                     TTPDefinition.getInstance().isOccidentVsOrient(), TTPDefinition.getInstance().getCantVecesLocal(), TTPDefinition.getInstance().getCantVecesVisitante(), TTPDefinition.getInstance().getRestIndexes()
-            );
+                    ,TTPDefinition.getInstance().getDuelMatrix());
         }
 
         ArrayList<Integer> teamsIndexes = (ArrayList<Integer>) configuration.getTeamsIndexes().clone();
@@ -383,9 +383,10 @@ public class TTPDefinition {
         boolean penalize = true;
         CalendarConfiguration configuration = ((CalendarState)calendar).getConfiguration();
         Date date = (Date) calendar.getCode().get(0);
-        if(date.getGames().get(0).get(0) == configuration.getChampion() &&
+        if(date.getGames().size() == 1 &&
+                date.getGames().get(0).get(0) == configuration.getChampion() &&
                 date.getGames().get(0).get(1) == configuration.getSecondPlace())
-            penalize = true;
+            penalize = false;
 
         return penalize? PENALIZATION: 0;
     }
@@ -472,10 +473,13 @@ public class TTPDefinition {
             }
             else{*/
 
-                matrix[posChampion][posSecond] = 2;
-                matrix[posSecond][posChampion] = 1;
-                cantLocalsAndVisitorsPerRow.get(posChampion).set(1, cantLocalsAndVisitorsPerRow.get(posChampion).get(1)+1);
-                cantLocalsAndVisitorsPerRow.get(posSecond).set(0, cantLocalsAndVisitorsPerRow.get(posSecond).get(0)+1);
+            matrix[posChampion][posSecond] = 2;
+            matrix[posSecond][posChampion] = 1;
+            //if(!exist){
+            cantLocalsAndVisitorsPerRow.get(posChampion).set(1, cantLocalsAndVisitorsPerRow.get(posChampion).get(1)+1);
+            cantLocalsAndVisitorsPerRow.get(posSecond).set(0, cantLocalsAndVisitorsPerRow.get(posSecond).get(0)+1);
+            //}
+
             //}
         }
 
@@ -659,7 +663,117 @@ public class TTPDefinition {
                 }
             }
         }
+        int posLocal = -1;
+        int posVisitor = -1;
+        for(int i=0; i < cantLocalsAndVisitorsPerRow.size();i++){
+            if(cantLocalsAndVisitorsPerRow.get(i).get(1) == 1){
+                posLocal = i;
+            }
+            if(cantLocalsAndVisitorsPerRow.get(i).get(0) == 1){
+                posVisitor = i;
+            }
+        }
+        if(posLocal != -1 && posVisitor !=-1){
+            matrix[posLocal][posVisitor] = 2;
+            matrix[posVisitor][posLocal] = 1;
+            cantLocalsAndVisitorsPerRow.get(posChampion).set(1, cantLocalsAndVisitorsPerRow.get(posChampion).get(1)-1);
+            cantLocalsAndVisitorsPerRow.get(posSecond).set(0, cantLocalsAndVisitorsPerRow.get(posSecond).get(0)-1);
+        }
+
+
+
         return matrix;
+    }
+
+    public int [][] readjustSymmetricCalendar(int [][]matrix){
+        ArrayList<ArrayList<Integer>> cantLocalsAndVisitorsPerRow = new ArrayList<>();
+
+        for (int i = 0; i < matrix.length; i++){
+            ArrayList<Integer> row = new ArrayList<>();
+            row.add(0);
+            row.add(0);
+            cantLocalsAndVisitorsPerRow.add(row);
+        }
+        int cantMaxLocalOrVisitor = matrix.length / 2;
+
+        if(TTPDefinition.getInstance().isChampionVsSub()){
+            int posChampion = TTPDefinition.getInstance().getFirstPlace();
+            int posSecond  = TTPDefinition.getInstance().getSecondPlace();
+            cantLocalsAndVisitorsPerRow.get(posChampion).set(1, cantLocalsAndVisitorsPerRow.get(posChampion).get(1)+1);
+            cantLocalsAndVisitorsPerRow.get(posSecond).set(0, cantLocalsAndVisitorsPerRow.get(posSecond).get(0)+1);
+        }
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (i<j){
+                if(matrix[i][j] == 1){
+                    if (cantLocalsAndVisitorsPerRow.get(i).get(1) < cantMaxLocalOrVisitor && cantLocalsAndVisitorsPerRow.get(j).get(0) < cantMaxLocalOrVisitor){
+                        cantLocalsAndVisitorsPerRow.get(i).set(1, cantLocalsAndVisitorsPerRow.get(i).get(1)+1);
+                        cantLocalsAndVisitorsPerRow.get(j).set(0, cantLocalsAndVisitorsPerRow.get(j).get(0)+1);
+
+                        /*cantLocalsAndVisitorsPerRow.get(i).set(0, cantLocalsAndVisitorsPerRow.get(i).get(0)-1);
+                        cantLocalsAndVisitorsPerRow.get(j).set(1, cantLocalsAndVisitorsPerRow.get(j).get(1)-1);*/
+                    }
+
+                    /*cantLocalsAndVisitorsPerRow.get(i).set(1, cantLocalsAndVisitorsPerRow.get(i).get(1)-1);
+                    cantLocalsAndVisitorsPerRow.get(j).set(0, cantLocalsAndVisitorsPerRow.get(j).get(0)-1);*/
+                }else if(matrix[i][j] == 2){
+                    /*matrix[i][j] = 2;
+                    matrix[j][i] = 1;*/
+                    if (cantLocalsAndVisitorsPerRow.get(i).get(0) < cantMaxLocalOrVisitor && cantLocalsAndVisitorsPerRow.get(j).get(1) < cantMaxLocalOrVisitor) {
+                        cantLocalsAndVisitorsPerRow.get(i).set(0, cantLocalsAndVisitorsPerRow.get(i).get(0)+1);
+                        cantLocalsAndVisitorsPerRow.get(j).set(1, cantLocalsAndVisitorsPerRow.get(j).get(1)+1);
+
+                        /*cantLocalsAndVisitorsPerRow.get(i).set(1, cantLocalsAndVisitorsPerRow.get(i).get(1)-1);
+                        cantLocalsAndVisitorsPerRow.get(j).set(0, cantLocalsAndVisitorsPerRow.get(j).get(0)-1);*/
+                    }
+                    /*cantLocalsAndVisitorsPerRow.get(i).set(0, cantLocalsAndVisitorsPerRow.get(i).get(0)-1);
+                    cantLocalsAndVisitorsPerRow.get(j).set(1, cantLocalsAndVisitorsPerRow.get(j).get(1)-1);*/
+                }
+            }
+            }
+        }
+
+        int poslocal = -1;
+        int posVisitante = -1;
+        for (int i = 0; i < cantLocalsAndVisitorsPerRow.size(); i++) {
+            if(cantLocalsAndVisitorsPerRow.get(i).get(0) == cantMaxLocalOrVisitor &&
+                    cantLocalsAndVisitorsPerRow.get(i).get(1) == cantMaxLocalOrVisitor){
+                poslocal=i;
+            }
+            else if(cantLocalsAndVisitorsPerRow.get(i).get(0) == cantMaxLocalOrVisitor-1 &&
+                    cantLocalsAndVisitorsPerRow.get(i).get(1) == cantMaxLocalOrVisitor-1){
+                posVisitante=i;
+            }
+        }
+
+        System.out.println("Antes");
+        for(int i =0; i < matrix.length; i++){
+            for (int j = 0; j < matrix.length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println("");
+        }
+        if(poslocal !=-1 && posVisitante !=-1){
+            cantLocalsAndVisitorsPerRow.get(poslocal).set(1, cantLocalsAndVisitorsPerRow.get(poslocal).get(1)-1);
+            cantLocalsAndVisitorsPerRow.get(posVisitante).set(1, cantLocalsAndVisitorsPerRow.get(posVisitante).get(0)+1);
+            /*matrix[poslocal][posVisitante]= 2;
+            matrix[posVisitante][poslocal]=1;*/
+            /*matrix[TTPDefinition.getInstance().getFirstPlace()][posVisitante] = 2;
+            matrix[posVisitante][TTPDefinition.getInstance().getFirstPlace()] = 1;
+            matrix[poslocal][TTPDefinition.getInstance().getSecondPlace()] = 1;
+            matrix[TTPDefinition.getInstance().getSecondPlace()][poslocal] = 2;*/
+        }
+        System.out.println("Despues");
+        for(int i =0; i < matrix.length; i++){
+            for (int j = 0; j < matrix.length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println("");
+        }
+        System.out.println(cantLocalsAndVisitorsPerRow);
+
+        return  matrix;
     }
 
     private void quickSort(ArrayList<Integer> list, int left, int right){
@@ -708,4 +822,5 @@ public class TTPDefinition {
         }
         return list;
     }
+
 }

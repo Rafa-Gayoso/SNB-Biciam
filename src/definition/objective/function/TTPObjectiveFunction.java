@@ -15,8 +15,7 @@ public class TTPObjectiveFunction extends ObjetiveFunction implements ISecondRou
     public Double Evaluation(State calendar) {
         State state = calendar.clone();
         CalendarConfiguration configuration = ((CalendarState)state).getConfiguration();
-        int penalizeVisitorGames = TTPDefinition.getInstance().penalizeVisitorGames(state);
-        int penalizeHomeGames = TTPDefinition.getInstance().penalizeLocalGames(state);
+
         int penalizeChampion = 0;
         int penalizeInauguralGame = 0;
 
@@ -39,6 +38,8 @@ public class TTPObjectiveFunction extends ObjetiveFunction implements ISecondRou
         }
 
         double totalDistance = 0;
+        int penalizeVisitorGames = TTPDefinition.getInstance().penalizeVisitorGames(state);
+        int penalizeHomeGames = TTPDefinition.getInstance().penalizeLocalGames(state);
         ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(state);
         for (int i = 0; i < itinerary.size() - 1; i++) {
             ArrayList<Integer> row1 = itinerary.get(i);

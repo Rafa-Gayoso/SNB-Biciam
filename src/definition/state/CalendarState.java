@@ -11,6 +11,15 @@ public class CalendarState extends State {
     private CalendarConfiguration configuration;
     private double distance;
 
+    public CalendarState(State ps, CalendarConfiguration configuration) {
+        this.code = ps.getCode();
+        this.configuration = configuration;
+        //this.distance = Distance.getInstance().calculateCalendarDistance(ps);
+    }
+
+    public CalendarState() {
+
+    }
 
     @Override
     public State clone() {
