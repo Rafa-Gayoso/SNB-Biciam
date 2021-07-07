@@ -27,11 +27,7 @@
     <list default="true" id="31c4c62d-8161-430c-9912-ecee8f383fae" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/SNB_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/SNB_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/SNB_jar/config_files/help.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/SNB_jar/config_files/help.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/definition/TTPDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/TTPDefinition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/definition/objective/function/TTPObjectiveFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/objective/function/TTPObjectiveFunction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeLocalVisitorSingleTeamOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeLocalVisitorSingleTeamOperator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeTeamsOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeTeamsOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,6 +142,17 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -287,6 +294,7 @@
       <workItem from="1624401907697" duration="51000" />
       <workItem from="1624494628423" duration="1523000" />
       <workItem from="1624675912722" duration="825000" />
+      <workItem from="1624726099794" duration="140000" />
     </task>
     <servers />
   </component>
@@ -306,10 +314,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="690" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1623959287411">
+    <state x="690" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1624726173288">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1623959287411" />
+    <state x="690" y="310" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1624726173288" />
     <state x="715" y="222" key="#xdebugger.evaluate" timestamp="1623958936434">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -346,10 +354,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="372" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1624380222005" />
-    <state x="440" y="94" key="SettingsEditor" timestamp="1623959305158">
+    <state x="440" y="94" key="SettingsEditor" timestamp="1624726186501">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1623959305158" />
+    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1624726186501" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
