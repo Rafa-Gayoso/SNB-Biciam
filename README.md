@@ -1,2 +1,2 @@
 # SNB-Biciam
-Creación de Calendarios de la Serie Nacional de Béisbol de Cuba usando Biciam
+Software for the generate calendars of the National Baseball Series using Biciam and Metaheuristics
