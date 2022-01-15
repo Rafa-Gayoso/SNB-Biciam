@@ -289,7 +289,7 @@ public class CrudsController implements Initializable {
 
 
                             DataFiles.getSingletonDataFiles().addModifyTeamToData(teamName, acro, location, distances, pos+1);
-                            DataFiles.getSingletonDataFiles().modifyTeamFXML(teamName, acro, location, pos);
+                            //DataFiles.getSingletonDataFiles().modifyTeamFXML(teamName, acro, location, pos);
 
                             DataFiles.getSingletonDataFiles().readTeams();
                             Distance.getInstance().fillMatrixDistance();
