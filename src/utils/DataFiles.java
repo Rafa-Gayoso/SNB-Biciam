@@ -181,7 +181,11 @@ public class DataFiles implements ICreateInitialSolution {
 
             SAXBuilder sax = new SAXBuilder();
             // XML is a local file
-            Document doc = sax.build(new File(TEAMS));
+            String charset = "UTF-8"; // or what corresponds
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader (new FileInputStream(TEAMS), charset));
+
+            Document doc = sax.build(in);
 
             Element rootNode = doc.getRootElement();
             List<Element> list = rootNode.getChildren("team");
@@ -668,7 +672,11 @@ public class DataFiles implements ICreateInitialSolution {
 
             SAXBuilder sax = new SAXBuilder();
             // XML is a local file
-            Document doc = sax.build(new File(TEAMS));
+            String charset = "UTF-8"; // or what corresponds
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader (new FileInputStream(TEAMS), charset));
+
+            Document doc = sax.build(in);
 
             Element rootNode = doc.getRootElement();
             List<Element> list = rootNode.getChildren("team");
@@ -681,11 +689,12 @@ public class DataFiles implements ICreateInitialSolution {
             rootNode.addContent(team);
 
 
-            XMLOutputter xmlOutput = new XMLOutputter();
+            Format format = Format.getPrettyFormat();
+            format.setEncoding("UTF-8");
+            XMLOutputter xmlOutput = new XMLOutputter(format);
 
             // display nice nice
-            xmlOutput.setFormat(Format.getPrettyFormat());
-            xmlOutput.output(doc, new FileWriter(TEAMS));
+            xmlOutput.output(doc, new FileOutputStream (TEAMS));
 
             // xmlOutput.output(doc, System.out);
 
@@ -697,39 +706,17 @@ public class DataFiles implements ICreateInitialSolution {
         }
     }
 
-    public void modifyTeamFXML(String teamName, String acronym, String location, int pos) {
-        try {
-
-            SAXBuilder sax = new SAXBuilder();
-            // XML is a local file
-            Document doc = sax.build(new File(TEAMS));
-
-            Element rootNode = doc.getRootElement();
-            List<Element> list = rootNode.getChildren("team");
-
-
-            XMLOutputter xmlOutput = new XMLOutputter();
-
-            // display nice nice
-            xmlOutput.setFormat(Format.getPrettyFormat());
-            xmlOutput.output(doc, new FileWriter(TEAMS));
-
-            // xmlOutput.output(doc, System.out);
-
-            System.out.println("File updated!");
-        } catch (IOException io) {
-            io.printStackTrace();
-        } catch (JDOMException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void removeTeamFXML(int pos) {
         try {
 
             SAXBuilder sax = new SAXBuilder();
             // XML is a local file
-            Document doc = sax.build(new File(TEAMS));
+            String charset = "UTF-8"; // or what corresponds
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader (new FileInputStream(TEAMS), charset));
+
+            Document doc = sax.build(in);
 
             Element rootNode = doc.getRootElement();
             List<Element> list = rootNode.getChildren("team");
@@ -741,12 +728,12 @@ public class DataFiles implements ICreateInitialSolution {
                     break;
                 }
             }
-
-            XMLOutputter xmlOutput = new XMLOutputter();
+            Format format = Format.getPrettyFormat();
+            format.setEncoding("UTF-8");
+            XMLOutputter xmlOutput = new XMLOutputter(format);
 
             // display nice nice
-            xmlOutput.setFormat(Format.getPrettyFormat());
-            xmlOutput.output(doc, new FileWriter(TEAMS));
+            xmlOutput.output(doc, new FileOutputStream (TEAMS));
 
             // xmlOutput.output(doc, System.out);
 
