@@ -15,5 +15,6 @@
     <orderEntry type="library" name="controlsfx-8.40.15" level="project" />
     <orderEntry type="library" name="fontawesomefx-8.9" level="project" />
     <orderEntry type="library" name="jdom" level="project" />
+    <orderEntry type="library" name="xmlbeans-3.1.0" level="project" />
   </component>
 </module>

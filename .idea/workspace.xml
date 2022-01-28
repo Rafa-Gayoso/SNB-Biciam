@@ -5,6 +5,9 @@
       <artifact name="SNB-Biciam:jar" />
     </artifacts-to-build>
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -25,7 +28,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31c4c62d-8161-430c-9912-ecee8f383fae" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/SNB_Biciam_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/SNB_Biciam_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,6 +55,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
@@ -61,19 +68,27 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/out/artifacts/SNB_Biciam_jar/config_files" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Death\Desktop\Investigación\SNB-Biciam" />
+      <recent name="C:\Users\Rafa Gayoso\Documents\Github\SNB-Biciam\out\artifacts\SNB_Biciam_jar\config_files" />
+      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\definition" />
+      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\utils" />
+      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\controller" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\resources" />
     </key>
@@ -84,16 +99,11 @@
       <recent name="application" />
       <recent name="files" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Rafa Gayoso\Documents\Github\SNB-Biciam\out\artifacts\SNB_Biciam_jar\config_files" />
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\definition" />
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\utils" />
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\controller" />
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\visual" />
-    </key>
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="corretto-1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="application.Main" />
       <module name="SNB-Biciam" />
       <extension name="coverage">
@@ -149,6 +159,13 @@
       <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/SNB_Biciam_jar/SNB-Biciam.jar" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Test" />
+      <item itemvalue="Application.TestMain" />
+      <item itemvalue="Application.TrstMain" />
+      <item itemvalue="JAR Application.SNB-Biciam.jar" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -307,33 +324,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="499" y="207" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1642271562082">
-      <screen x="0" y="0" width="1536" height="832" />
-    </state>
-    <state x="499" y="207" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.832@0.0.1536.832" timestamp="1642271562082" />
-    <state width="1493" height="196" key="GridCell.Tab.0.bottom" timestamp="1642280956261">
-      <screen x="0" y="0" width="1536" height="832" />
-    </state>
-    <state width="1493" height="196" key="GridCell.Tab.0.bottom/0.0.1536.832@0.0.1536.832" timestamp="1642280956261" />
-    <state width="1493" height="196" key="GridCell.Tab.0.center" timestamp="1642280956261">
-      <screen x="0" y="0" width="1536" height="832" />
-    </state>
-    <state width="1493" height="196" key="GridCell.Tab.0.center/0.0.1536.832@0.0.1536.832" timestamp="1642280956261" />
-    <state width="1493" height="196" key="GridCell.Tab.0.left" timestamp="1642280956261">
-      <screen x="0" y="0" width="1536" height="832" />
-    </state>
-    <state width="1493" height="196" key="GridCell.Tab.0.left/0.0.1536.832@0.0.1536.832" timestamp="1642280956261" />
-    <state width="1493" height="196" key="GridCell.Tab.0.right" timestamp="1642280956261">
-      <screen x="0" y="0" width="1536" height="832" />
-    </state>
-    <state width="1493" height="196" key="GridCell.Tab.0.right/0.0.1536.832@0.0.1536.832" timestamp="1642280956261" />
-    <state x="249" y="0" key="SettingsEditor" timestamp="1642271577327">
-      <screen x="0" y="0" width="1536" height="832" />
-    </state>
-    <state x="249" y="0" key="SettingsEditor/0.0.1536.832@0.0.1536.832" timestamp="1642271577327" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
