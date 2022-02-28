@@ -52,11 +52,14 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
 
     private TrayNotification notification;
     private HomeController homeController;
-    public static boolean secondRound = false;
-    public static boolean inaugural = false;
+    public static boolean secondRound = true;
+    public static boolean inaugural = true;
     public static boolean ok = true;
     public static boolean savedConfiguration = false;
     private CalendarConfiguration lastConfiguration =new CalendarConfiguration();
+
+    //For 3-2 Calendar
+    public static boolean series32 = true;
 
     private int posChampion = -1, posSub = -2;
 
@@ -142,11 +145,10 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
         }
     }
 
-
     @FXML
     void selectTeams(ActionEvent event) throws Exception {
-        validateData();
-
+        boolean ok = validateData();
+        if(ok) nextStep();
     }
 
     @FXML
@@ -155,7 +157,10 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
 
     }
 
-    private void validateData() throws Exception {
+    private boolean validateData() throws Exception {
+
+        //DEBUG
+        System.out.println("ConfigurationCalendarController.validateData()");
 
         selectedIndexes = new ArrayList<>(teamCheckList.getCheckModel().getCheckedIndices());
         teamsNames = new ArrayList<>();
@@ -199,17 +204,22 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
             validateChampionAndSubchampion();
         }
 
-        if (ok) {
-            HomeController.escogidos = true;
-            teams = selectedIndexes.size();
+        return ok;
+
+    }
+
+    public void nextStep() throws Exception {
+
+            HomeController.escogidos = true;    //Ya los equipos están seleccionados
+            teams = selectedIndexes.size();     //
 
             int posChampion = -1;
             int posSub = -1;
-            if (champVsSub.isSelected()) {
-                String champion = comboChamp.getSelectionModel().getSelectedItem();
+            if (champVsSub.isSelected()) {      //Si hay juego de campeon contra subcampeon
+                String champion = comboChamp.getSelectionModel().getSelectedItem();     //Leer el campoeon seleccionado
                 String subchampion = comboSub.getSelectionModel().getSelectedItem();
-                posChampion = DataFiles.getSingletonDataFiles().getTeams().indexOf(champion);
-                posSub = DataFiles.getSingletonDataFiles().getTeams().indexOf(subchampion);
+                posChampion = DataFiles.getSingletonDataFiles().getTeams().indexOf(champion);   //Obtener indice del campeon
+                posSub = DataFiles.getSingletonDataFiles().getTeams().indexOf(subchampion);     //Obtener indice del subcampeon
             }
 
             secondRound = secondRoundButton.isSelected();
@@ -227,6 +237,7 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
             TTPDefinition.getInstance().setInauguralGame(inauguralGame.isSelected());
             TTPDefinition.getInstance().setOccidentVsOrient(occidenteVsOrienteToggle.isSelected());
             TTPDefinition.getInstance().setCalendarId(calendarId.getText());
+            TTPDefinition.getInstance().setSeries32(series32);
 
 
             if (Executer.getInstance().getMutations().isEmpty()) {
@@ -267,13 +278,15 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
             }
 
             showTeamsMatrix();
-        }
-        ok = true;
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        //DEBUG
+        System.out.println("ConfigurationCalendarController.initialize()");
+
 
 
         lastConfiguration = new CalendarConfiguration();

@@ -28,9 +28,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31c4c62d-8161-430c-9912-ecee8f383fae" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/operators/heuristics2/DateHeuristicOperator2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/operators/heuristics2/DuelHeuristicOperator2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/Home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/definition/TTPDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/TTPDefinition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/definition/state/CalendarState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/state/CalendarState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/heuristics/DateHeuristicOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/heuristics/DateHeuristicOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/InitialSolutionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/InitialSolutionType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/LongShortSeriesDoubleRoundSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/LongShortSeriesDoubleRoundSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/LongShortSimpleRoundSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/LongShortSimpleRoundSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/visual/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/visual/Home.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +68,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$PROJECT_DIR$/lib/BiCIAM-MultObj.jar!/problem/definition/State.class" root0="SKIP_INSPECTION" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -73,31 +89,31 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/SceneBuilder/SceneBuilder.exe" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Death\Desktop\Investigación\SNB-Biciam\src\visual" />
+      <recent name="C:\Users\Death\Desktop\Investigación\SNB-Biciam\src\operators\heuristics2" />
       <recent name="C:\Users\Death\Desktop\Investigación\SNB-Biciam" />
       <recent name="C:\Users\Rafa Gayoso\Documents\Github\SNB-Biciam\out\artifacts\SNB_Biciam_jar\config_files" />
       <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\definition" />
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\utils" />
-      <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\controller" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\gayos\Documents\GitHub\SNB-Biciam\src\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="controller32" />
+      <recent name="controller2" />
       <recent name="controller" />
       <recent name="utils" />
       <recent name="operators.interfaces" />
-      <recent name="application" />
-      <recent name="files" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">

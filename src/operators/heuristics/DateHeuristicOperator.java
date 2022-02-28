@@ -19,6 +19,16 @@ public class DateHeuristicOperator extends HeuristicOperator{
     private DuelHeuristicOperator duelHeuristic;
 
     public void initializeDateHeuristicOperator(ArrayList<ArrayList<Integer>> duels){
+
+        //DEBUG
+        int sizeI = duels.size();
+        int sizeJ = duels.get(0).size();
+        for (int i = 0; i < sizeI; i++){
+            for(int j = 0; j < sizeJ; j++){
+                System.out.println("duel i:"+i+" j:"+duels.get(i).get(j).toString()+" ");
+            }
+        }
+
         this.teams = (ArrayList<Integer>) TTPDefinition.getInstance().getTeamsIndexes().clone();
         this.duels = duels;
         this.dateList = new ArrayList<>();
@@ -30,6 +40,7 @@ public class DateHeuristicOperator extends HeuristicOperator{
     public ArrayList<Date> generateCalendar(ArrayList<ArrayList<Integer>> duels){
         initializeDateHeuristicOperator(duels);
 
+        //El calendario es una lista
         ArrayList<Date> calendar = new ArrayList<>();
         int cantDates = dateList.size();
 

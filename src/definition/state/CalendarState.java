@@ -23,23 +23,27 @@ public class CalendarState extends State {
 
     @Override
     public State clone() {
-        State state = new CalendarState();
+        State cloneState = new CalendarState();
         try {
-        for (Object object : this.getCode()) {
-            try {
-                state.getCode().add(((Date)(object)).clone());
-            } catch (CloneNotSupportedException e) {
-                e.printStackTrace();
-            }
-        }
+            for (Object object : this.getCode()) {
+                try {
 
-            ((CalendarState)state).setConfiguration(this.getConfiguration().clone());
+                    Date date = (Date) object;
+                    Date cloneDate = date.clone();
+                    cloneState.getCode().add(cloneDate);
+
+                } catch (CloneNotSupportedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            CalendarConfiguration configurationClone = this.getConfiguration().clone();
+            ((CalendarState)cloneState).setConfiguration(configurationClone);
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
-        return state;
+        return cloneState;
     }
-
 
     public double getDistance() {
         distance = Distance.getInstance().calculateCalendarDistance(this);

@@ -12,13 +12,13 @@ import java.util.Collections;
 
 public class TTPDefinition {
 
-    private final int PENALIZATION = 100000;
-    private double [][] matrixDistance;
-    private int cantEquipos;
-    private int cantFechas;
-    private boolean secondRound;//Puede ser otra variable del problema
-    private int cantVecesLocal;
-    private int cantVecesVisitante;
+    private final int PENALIZATION = 100000;    //penalizacion de violacion de restricciones
+    private double [][] matrixDistance;     //matriz de distancia
+    private int cantEquipos;    //numero de equiupos
+    private int cantFechas;     //numero de fechas para duelos
+    private boolean secondRound;    //Puede ser otra variable del problema
+    private int cantVecesLocal;     //Juegos como Local permitidos (Restriccion)
+    private int cantVecesVisitante;     //Juegos como Visitante permitidos
     private ArrayList<Integer> teamsIndexes;
     private boolean symmetricSecondRound;
     private boolean inauguralGame;
@@ -37,7 +37,7 @@ public class TTPDefinition {
     private ArrayList<Date> dateToStartList;
     private Date dateToStart;
     private boolean useDateToStart;
-
+    private boolean series32;
 
     private TTPDefinition(){
         /*this.cantEquipos=16;
@@ -232,6 +232,10 @@ public class TTPDefinition {
     public void setCantFechas(int cantFechas) {
         this.cantFechas = cantFechas;
     }
+
+    public void setSeries32(boolean series32) { this.series32 = series32; }
+
+    public boolean isSeries32(){ return series32; }
 
     public ArrayList<ArrayList<Integer>> teamsItinerary(State calendar) {
         ArrayList<ArrayList<Integer>> teamDate = new ArrayList<>();
@@ -822,5 +826,4 @@ public class TTPDefinition {
         }
         return list;
     }
-
 }
