@@ -62,13 +62,14 @@ public enum InitialSolutionType {
         }
     },
 
-    //Initial solutions for 2-3 game series calendar
+    //Initial solutions for 2-3 game series calendarç
+    //LSS: Long Short Series. Series of 3 games, and series of 2 games
 
-    LONG_SHORT_SERIES_DOUBLE_ROUND_SOLUTION{
+    LSS_DOUBLE_ROUND_SOLUTION{
         @Override
         public String toString() {
 
-            return LongShortSeriesDoubleRoundSolution.class.getName();
+            return LSSDoubleRoundSolution.class.getName();
         }
     },
 

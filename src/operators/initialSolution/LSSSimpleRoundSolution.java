@@ -11,7 +11,7 @@ import utils.CalendarConfiguration;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class LongShortSimpleRoundSolution extends InitialSolution{
+public class LSSSimpleRoundSolution extends InitialSolution{
 
 
 
@@ -40,6 +40,7 @@ public State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
 
                 if(newMatrix[i][j] !=0){
                     ArrayList<Integer> pair = new ArrayList<>(2);
+
                     if (newMatrix[i][j] == 1) {
                         pair.add(teamsIndexes.get(j));
                         pair.add(teamsIndexes.get(i));
@@ -47,6 +48,7 @@ public State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
                         pair.add(teamsIndexes.get(i));
                         pair.add(teamsIndexes.get(j));
                     }
+
                     duels.add(pair);
                 }
 

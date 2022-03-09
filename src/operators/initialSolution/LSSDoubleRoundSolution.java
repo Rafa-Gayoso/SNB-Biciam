@@ -6,7 +6,7 @@ import problem.definition.State;
 
 import java.util.ArrayList;
 
-public class LongShortSeriesDoubleRoundSolution extends LongShortSimpleRoundSolution implements ISecondRound {
+public class LSSDoubleRoundSolution extends LSSSimpleRoundSolution implements ISecondRound {
     @Override
     public State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
         State state = super.generateCalendar(heuristics);

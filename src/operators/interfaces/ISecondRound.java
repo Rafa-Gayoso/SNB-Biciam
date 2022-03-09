@@ -11,18 +11,29 @@ import java.util.ArrayList;
 public interface ISecondRound {
 
     default void setSecondRound(State state) {
+
+        //DEBUG
+        System.out.println("ISecondRound.setSecondRound()");
+
         State newState = state.clone();
+
+        //DEBUG
+        System.out.println("\tsize of state: "+state.getCode().size());
+
         generateSecondRound(newState);
 
         ArrayList<Date> dates = getDates(newState);
         state.getCode().addAll(dates);
+
+        //DEBUG
+        System.out.println("\tsize of newState: "+state.getCode().size());
     }
 
     default void generateSecondRound(State state) {
 
-        for (int i=0; i < state.getCode().size();i++){
+        for (int i = 0; i < state.getCode().size(); i++) { //Por cada fecha del estado
             Date date = (Date) state.getCode().get(i);
-            for (int j = 0; j < date.getGames().size(); j++) {
+            for (int j = 0; j < date.getGames().size(); j++) { //Por cada duelo de la fecha
                 ArrayList<Integer> duel = date.getGames().get(j);
                 int local = duel.get(0);
                 int visitor = duel.get(1);

@@ -147,8 +147,11 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
 
     @FXML
     void selectTeams(ActionEvent event) throws Exception {
-        boolean ok = validateData();
-        if(ok) nextStep();
+
+        //DEBUG
+        System.out.println("ConfigurationCalendarController.selectTeams()");
+
+        validateData();
     }
 
     @FXML
@@ -157,7 +160,7 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
 
     }
 
-    private boolean validateData() throws Exception {
+    private void validateData() throws Exception {
 
         //DEBUG
         System.out.println("ConfigurationCalendarController.validateData()");
@@ -204,11 +207,7 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
             validateChampionAndSubchampion();
         }
 
-        return ok;
-
-    }
-
-    public void nextStep() throws Exception {
+        if(ok) {
 
             HomeController.escogidos = true;    //Ya los equipos están seleccionados
             teams = selectedIndexes.size();     //
@@ -276,7 +275,7 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
                 heuristicOperatorTypes.add(HeuristicOperatorType.DATE_HEURISTIC);
                 Executer.getInstance().setHeuristics(heuristicOperatorTypes);
             }
-
+        }
             showTeamsMatrix();
     }
 
@@ -761,6 +760,9 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
 
     void showTeamsMatrix() throws Exception {
 
+        //DEBUG
+        System.out.println("ConfigurationCalendarController.showTeamsMatrix()");
+
         //System.out.println(restIndices);
         //TTPDefinition.getInstance().setRestIndexes(restIndices);
         if (TTPDefinition.getInstance().isSecondRound() && !TTPDefinition.getInstance().isSymmetricSecondRound()) {
@@ -772,7 +774,7 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
 
             homeController.createPage(new CalendarController(), structureOver, "/visual/Calendar.fxml");*/
             StackPane stackPane = new StackPane();
-            TTPDefinition.getInstance().setDuelMatrix(generateMatrix(TTPDefinition.getInstance().getCantEquipos()));
+            TTPDefinition.getInstance().setDuelMatrix(generateMatrix(TTPDefinition.getInstance().getCantEquipos())); //generar matriz
             JFXDialog jfxDialog = new JFXDialog();
             JFXDialogLayout content = new JFXDialogLayout();
             FXMLLoader fxmlLoader = new FXMLLoader();

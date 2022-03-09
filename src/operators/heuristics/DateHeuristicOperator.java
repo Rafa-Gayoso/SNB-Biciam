@@ -21,6 +21,10 @@ public class DateHeuristicOperator extends HeuristicOperator{
     public void initializeDateHeuristicOperator(ArrayList<ArrayList<Integer>> duels){
 
         //DEBUG
+            System.out.println("DateHeuristicOperator.initializeDateHeuristicOperator( duels )");
+
+            /*
+        //DEBUG
         int sizeI = duels.size();
         int sizeJ = duels.get(0).size();
         for (int i = 0; i < sizeI; i++){
@@ -28,6 +32,7 @@ public class DateHeuristicOperator extends HeuristicOperator{
                 System.out.println("duel i:"+i+" j:"+duels.get(i).get(j).toString()+" ");
             }
         }
+*/
 
         this.teams = (ArrayList<Integer>) TTPDefinition.getInstance().getTeamsIndexes().clone();
         this.duels = duels;
@@ -38,6 +43,11 @@ public class DateHeuristicOperator extends HeuristicOperator{
 
 
     public ArrayList<Date> generateCalendar(ArrayList<ArrayList<Integer>> duels){
+
+        //DEBUG
+        System.out.println("DateHeuristicOperator.generateCalendar( duels )");
+
+
         initializeDateHeuristicOperator(duels);
 
         //El calendario es una lista
@@ -45,7 +55,7 @@ public class DateHeuristicOperator extends HeuristicOperator{
         int cantDates = dateList.size();
 
         Random random = new Random();
-        int randomDate = random.nextInt(dateList.size());
+        int randomDate = random.nextInt(dateList.size()); //Numero aleatorio de los indices de la lista
         System.out.println("Fecha inicial: " + randomDate);
         calendar.add(dateList.get(randomDate));
         dateList.remove(dateList.get(randomDate));

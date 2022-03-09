@@ -57,6 +57,10 @@ public class TTPDefinition {
     public static TTPDefinition getInstance(){
         if(ttpDefinition == null){
             ttpDefinition = new TTPDefinition();
+
+            //DEBUG
+            System.out.println("TTPDefinition instance created");
+
         }
         return ttpDefinition;
     }

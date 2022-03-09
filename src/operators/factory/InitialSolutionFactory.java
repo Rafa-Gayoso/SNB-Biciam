@@ -15,6 +15,11 @@ public class InitialSolutionFactory {
     }
 
     public static InitialSolution getInstance(InitialSolutionType type){
+
+        //Debug
+        System.out.println("InitialSolutionFactory.getInstance()" +
+                "\n\tInitialSolutionType: " +type.toString());
+
         InitialSolution solution =null;
         try{
             solution = (InitialSolution) InitialSolution.class.getClassLoader().loadClass(type.toString()).newInstance();

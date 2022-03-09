@@ -14,8 +14,13 @@ public class DuelHeuristicOperator extends HeuristicOperator {
 
     private ArrayList<Integer> teams;
     private ArrayList<ArrayList<Integer>> duels;
+    private boolean series32;
 
     public void initializeDuelHeuristicOperator(ArrayList<ArrayList<Integer>> duels){
+
+        //DEBUG
+        System.out.println("DuelHeuristicOperator.initializeDuelHeuristicOperator()");
+
         this.teams = (ArrayList<Integer>) TTPDefinition.getInstance().getTeamsIndexes().clone();
         this.duels = duels;
     }
@@ -124,117 +129,129 @@ public class DuelHeuristicOperator extends HeuristicOperator {
     }*/
 
     public ArrayList<Date> generateCalendar(ArrayList<ArrayList<Integer>> duels){
-        initializeDuelHeuristicOperator(duels);
 
-        Set<ArrayList<Integer>> setDuelsCalendar = new HashSet<>();
-        Set<Integer> setTeamsDate = new HashSet<>();
+        //DEBUG
+        System.out.println("DuelHeuristicOperator.generateCalendar()");
 
-        ArrayList<Date> calendar = new ArrayList<>();
+        /*series32 = true;
+        if(series32) { //Si no es un calendario del tipo series de 3 y 2 juegos, entonces:
+            ArrayList<ArrayList<Integer>> clone = (ArrayList<ArrayList<Integer>>) duels.clone();
+            duels.addAll(clone);
+        }*/
+            initializeDuelHeuristicOperator(duels);
 
-        ArrayList<ArrayList<Integer>> duelsCopy = new ArrayList<>();
-        for (int i = 0; i < duels.size(); i++) {
-            ArrayList<Integer> temp = new ArrayList<>();
-            for (int j = 0; j < duels.get(i).size(); j++) {
-                temp.add(duels.get(i).get(j));
-            }
-            duelsCopy.add(temp);
-        }
+            Set<ArrayList<Integer>> setDuelsCalendar = new HashSet<>();
+            Set<Integer> setTeamsDate = new HashSet<>();
 
-        Date date = new Date();
-        Random random = new Random();
-        int randomDuel = random.nextInt(duelsCopy.size());
-        ArrayList<Integer> duel =  duelsCopy.get(randomDuel);
-        date.getGames().add(duel);
-        duelsCopy.remove(duel);
-        setDuelsCalendar.add(duel);
-        fillFirstDateFast(date, duelsCopy, setDuelsCalendar);
-        calendar.add(date);
+            ArrayList<Date> calendar = new ArrayList<>();
 
-
-        ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> calendarBacktracking = new ArrayList<>();
-        for (int i = 1; i < TTPDefinition.getInstance().getNumberOfDates(); i++) {
-            ArrayList<ArrayList<ArrayList<Integer>>> dateBacktracking = new ArrayList<>();
-            for (int j = 0; j < teams.size()/2; j++) {
-                ArrayList<ArrayList<Integer>> duelBacktracking = new ArrayList<>();
-                dateBacktracking.add(duelBacktracking);
-            }
-            calendarBacktracking.add(dateBacktracking);
-        }
-
-        long startTime = System.currentTimeMillis();
-        for (int i = 0; i < calendarBacktracking.size(); i++) {
-
-            Date newDate = new Date();
-            setTeamsDate = new HashSet<>();
-            int j = 0;
-            for (; j < calendarBacktracking.get(i).size(); j++) {
-
-                if(System.currentTimeMillis() - startTime > 350){
-                    break;
+            ArrayList<ArrayList<Integer>> duelsCopy = new ArrayList<>();
+            for (int i = 0; i < duels.size(); i++) {
+                ArrayList<Integer> temp = new ArrayList<>();
+                for (int j = 0; j < duels.get(i).size(); j++) {
+                    temp.add(duels.get(i).get(j));
                 }
-                calendarBacktracking.get(i).get(j).clear();
+                duelsCopy.add(temp);
+            }
 
-                ArrayList<ArrayList<Integer>> orderedPosibleDuels = lessDistanceDuels(setDuelsCalendar, setTeamsDate, calendar.get(calendar.size()-1), duelsCopy);
-                calendarBacktracking.get(i).get(j).addAll(orderedPosibleDuels);
+            Date date = new Date();
+            Random random = new Random();
+            int randomDuel = random.nextInt(duelsCopy.size());
+            ArrayList<Integer> duel = duelsCopy.get(randomDuel);
+            date.getGames().add(duel);
+            duelsCopy.remove(duel);
+            setDuelsCalendar.add(duel);
+            fillFirstDateFast(date, duelsCopy, setDuelsCalendar);
+            calendar.add(date);
 
-                if (!calendarBacktracking.get(i).get(j).isEmpty()){
-                    newDate.getGames().add(calendarBacktracking.get(i).get(j).get(0));
-                    setTeamsDate.addAll(calendarBacktracking.get(i).get(j).get(0));
+
+            ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> calendarBacktracking = new ArrayList<>();
+            for (int i = 1; i < TTPDefinition.getInstance().getNumberOfDates(); i++) {
+                ArrayList<ArrayList<ArrayList<Integer>>> dateBacktracking = new ArrayList<>();
+                for (int j = 0; j < teams.size() / 2; j++) {
+                    ArrayList<ArrayList<Integer>> duelBacktracking = new ArrayList<>();
+                    dateBacktracking.add(duelBacktracking);
                 }
-                else{
-                    j = newDate.getGames().size()-1;
-                    calendarBacktracking.get(i).get(j).remove(0);
-                    setTeamsDate.removeAll(newDate.getGames().get(newDate.getGames().size()-1));
-                    newDate.getGames().remove(newDate.getGames().size()-1);
+                calendarBacktracking.add(dateBacktracking);
+            }
 
-                    if (!calendarBacktracking.get(i).get(j).isEmpty()){
+            long startTime = System.currentTimeMillis();
+            for (int i = 0; i < calendarBacktracking.size(); i++) {
+
+                Date newDate = new Date();
+                setTeamsDate = new HashSet<>();
+                int j = 0;
+                for (; j < calendarBacktracking.get(i).size(); j++) {
+
+                    if (System.currentTimeMillis() - startTime > 350) {
+                        break;
+                    }
+                    calendarBacktracking.get(i).get(j).clear();
+
+                    ArrayList<ArrayList<Integer>> orderedPosibleDuels = lessDistanceDuels(setDuelsCalendar, setTeamsDate, calendar.get(calendar.size() - 1), duelsCopy);
+                    calendarBacktracking.get(i).get(j).addAll(orderedPosibleDuels);
+
+                    if (!calendarBacktracking.get(i).get(j).isEmpty()) {
                         newDate.getGames().add(calendarBacktracking.get(i).get(j).get(0));
                         setTeamsDate.addAll(calendarBacktracking.get(i).get(j).get(0));
-                    }
-                    else{
-                        j = newDate.getGames().size()-1;
-                        boolean stop = false;
+                    } else {
+                        j = newDate.getGames().size() - 1;
+                        calendarBacktracking.get(i).get(j).remove(0);
+                        setTeamsDate.removeAll(newDate.getGames().get(newDate.getGames().size() - 1));
+                        newDate.getGames().remove(newDate.getGames().size() - 1);
 
-                        while (i >= 0 && !stop){
-                            while (j >= 0 && !stop){
-                                calendarBacktracking.get(i).get(j).remove(0);
-                                setTeamsDate.removeAll(newDate.getGames().get(newDate.getGames().size()-1));
-                                newDate.getGames().remove(newDate.getGames().size()-1);
-                                if (!calendarBacktracking.get(i).get(j).isEmpty()){
-                                    newDate.getGames().add(calendarBacktracking.get(i).get(j).get(0));
-                                    setTeamsDate.addAll(calendarBacktracking.get(i).get(j).get(0));
-                                    stop = true;
+                        if (!calendarBacktracking.get(i).get(j).isEmpty()) {
+                            newDate.getGames().add(calendarBacktracking.get(i).get(j).get(0));
+                            setTeamsDate.addAll(calendarBacktracking.get(i).get(j).get(0));
+                        } else {
+                            j = newDate.getGames().size() - 1;
+                            boolean stop = false;
+
+                            while (i >= 0 && !stop) {
+                                while (j >= 0 && !stop) {
+                                    calendarBacktracking.get(i).get(j).remove(0);
+                                    setTeamsDate.removeAll(newDate.getGames().get(newDate.getGames().size() - 1));
+                                    newDate.getGames().remove(newDate.getGames().size() - 1);
+                                    if (!calendarBacktracking.get(i).get(j).isEmpty()) {
+                                        newDate.getGames().add(calendarBacktracking.get(i).get(j).get(0));
+                                        setTeamsDate.addAll(calendarBacktracking.get(i).get(j).get(0));
+                                        stop = true;
+                                    }
+                                    j--;
                                 }
-                                j--;
-                            }
-                            if (j == -1 && !stop){
-                                i--;
-                                j = calendarBacktracking.get(i).size()-1;
+                                if (j == -1 && !stop) {
+                                    i--;
+                                    j = calendarBacktracking.get(i).size() - 1;
 
-                                newDate.getGames().clear();
-                                setTeamsDate.clear();
-                                for (ArrayList<Integer> temp: calendar.get(calendar.size()-1).getGames()) {
-                                    newDate.getGames().add(temp);
-                                    setTeamsDate.addAll(temp);
+                                    newDate.getGames().clear();
+                                    setTeamsDate.clear();
+                                    for (ArrayList<Integer> temp : calendar.get(calendar.size() - 1).getGames()) {
+                                        newDate.getGames().add(temp);
+                                        setTeamsDate.addAll(temp);
+                                    }
+
+                                    setDuelsCalendar.removeAll(calendar.get(calendar.size() - 1).getGames());
+                                    calendar.remove(calendar.size() - 1);
                                 }
-
-                                setDuelsCalendar.removeAll(calendar.get(calendar.size()-1).getGames());
-                                calendar.remove(calendar.size()-1);
-                            }
-                            if (stop){
-                                j++;
+                                if (stop) {
+                                    j++;
+                                }
                             }
                         }
                     }
                 }
-            }
-            if(System.currentTimeMillis() - startTime > 350){
-                break;
-            }
+                if (System.currentTimeMillis() - startTime > 350) {
+                    break;
+                }
 
-            calendar.add(newDate);
-            setDuelsCalendar.addAll(newDate.getGames());
-        }
+                calendar.add(newDate);
+                setDuelsCalendar.addAll(newDate.getGames());
+            }
+        //}//else{
+            /*
+            Este Caso de Uso es cuando se solicita generar un calendario del tipo series de 3-2 juegos
+             */
+        //}
         return calendar;
     }
 
