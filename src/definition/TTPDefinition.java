@@ -7,8 +7,6 @@ import utils.Distance;
 import problem.definition.State;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 public class TTPDefinition {
 
@@ -37,7 +35,7 @@ public class TTPDefinition {
     private ArrayList<Date> dateToStartList;
     private Date dateToStart;
     private boolean useDateToStart;
-    private boolean series32;
+    private boolean lss;
 
     private TTPDefinition(){
         /*this.cantEquipos=16;
@@ -52,6 +50,9 @@ public class TTPDefinition {
         this.dateToStartList = new ArrayList<>();
         this.dateToStart = new Date();
         this.useDateToStart = false;
+
+        //NEW 11/03/2022
+        this.lss = false;
     }
 
     public static TTPDefinition getInstance(){
@@ -237,9 +238,9 @@ public class TTPDefinition {
         this.cantFechas = cantFechas;
     }
 
-    public void setSeries32(boolean series32) { this.series32 = series32; }
+    public void setLss(boolean lss) { this.lss = lss; }
 
-    public boolean isSeries32(){ return series32; }
+    public boolean isLss(){ return lss; }
 
     public ArrayList<ArrayList<Integer>> teamsItinerary(State calendar) {
         ArrayList<ArrayList<Integer>> teamDate = new ArrayList<>();

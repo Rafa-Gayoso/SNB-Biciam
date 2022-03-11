@@ -65,12 +65,48 @@ public enum InitialSolutionType {
     //Initial solutions for 2-3 game series calendarç
     //LSS: Long Short Series. Series of 3 games, and series of 2 games
 
-    LSS_DOUBLE_ROUND_SOLUTION{
+    LSS_DOUBLE_ROUND_NON_SYMMETRIC_SOLUTION{
         @Override
         public String toString() {
 
-            return LSSDoubleRoundSolution.class.getName();
+            return LSSDoubleRoundNonSymmetricSolution.class.getName();
         }
     },
+
+    LSS_SIMPLE_ROUND_INAUGURAL_SOLUTION{
+        @Override
+        public String toString() {
+
+            return LSSSimpleRoundInauguralSolution.class.getName();
+        }
+    },
+    LSS_SIMPLE_ROUND_CHAMPION_SOLUTION{
+        @Override
+        public String toString() {
+
+            return LSSSimpleRoundChampionSolution.class.getName();
+        }
+    },
+    LSS_DOUBLE_ROUND_NON_SYMMETRIC_INAUGURAL_SOLUTION{
+        @Override
+        public String toString() {
+
+            return LSSDoubleRoundNonSymmetricInauguralSolution.class.getName();
+        }
+    },
+    LSS_DOUBLE_ROUND_NON_SYMMETRIC_CHAMPION_SOLUTION{
+        @Override
+        public String toString() {
+
+            return LSSDoubleRoundNonSymmetricChampionSolution.class.getName();
+        }
+    },
+    LSS_SIMPLE_ROUND_SOLUTION{
+        @Override
+        public String toString() {
+
+            return LSSSimpleRoundSolution.class.getName();
+        }
+    }
 
 }

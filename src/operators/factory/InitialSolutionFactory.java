@@ -20,6 +20,9 @@ public class InitialSolutionFactory {
         System.out.println("InitialSolutionFactory.getInstance()" +
                 "\n\tInitialSolutionType: " +type.toString());
 
+        //TESTING
+        //type = InitialSolutionType.LSS_DOUBLE_ROUND_SOLUTION;
+
         InitialSolution solution =null;
         try{
             solution = (InitialSolution) InitialSolution.class.getClassLoader().loadClass(type.toString()).newInstance();

@@ -138,9 +138,16 @@ public class DuelHeuristicOperator extends HeuristicOperator {
             ArrayList<ArrayList<Integer>> clone = (ArrayList<ArrayList<Integer>>) duels.clone();
             duels.addAll(clone);
         }*/
+
+        //DEBUG
+        System.out.println("\tduels size:"+duels.size());
+
             initializeDuelHeuristicOperator(duels);
 
-            Set<ArrayList<Integer>> setDuelsCalendar = new HashSet<>();
+            //DEBUG
+        System.out.println("\tduels size:"+duels.size());
+
+        Set<ArrayList<Integer>> setDuelsCalendar = new HashSet<>();
             Set<Integer> setTeamsDate = new HashSet<>();
 
             ArrayList<Date> calendar = new ArrayList<>();

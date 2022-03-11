@@ -51,6 +51,10 @@ public class TTPOperator extends Operator implements ICreateInitialSolution, ISe
 
     @Override
     public List<State> generateRandomState(Integer neighborhoodSize) {
+
+        //DEBUG
+        System.out.println("TTPOperator.generateRandomState()");
+
         List<State> neighborhood = new ArrayList<>(neighborhoodSize);
         InitialSolutionType type = createSolutionType();
         InitialSolution initialSolution = InitialSolutionFactory.getInstance(type);

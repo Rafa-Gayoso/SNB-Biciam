@@ -3,7 +3,6 @@ package controller;
 import com.jfoenix.controls.*;
 import definition.TTPDefinition;
 import definition.state.CalendarState;
-import definition.state.statecode.Date;
 import execute.Executer;
 import javafx.beans.property.Property;
 import javafx.collections.ListChangeListener;
@@ -15,15 +14,12 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import operators.heuristics.HeuristicOperatorType;
-import operators.initialSolution.InitialSolutionType;
 import operators.interfaces.IChampionGame;
 import operators.interfaces.ICreateInitialSolution;
 import operators.interfaces.IInauguralGame;
 import operators.interfaces.ISecondRound;
-import operators.mutation.MutationOperator;
 import operators.mutation.MutationOperatorType;
 import org.controlsfx.control.CheckListView;
-import problem.definition.State;
 import utils.CalendarConfiguration;
 import utils.DataFiles;
 import javafx.collections.FXCollections;
@@ -46,7 +42,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class ConfigurationCalendarController implements Initializable, ISecondRound, IInauguralGame, IChampionGame, ICreateInitialSolution {
 
@@ -59,7 +54,7 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
     private CalendarConfiguration lastConfiguration =new CalendarConfiguration();
 
     //For 3-2 Calendar
-    public static boolean series32 = true;
+    public static boolean series32 = false;
 
     private int posChampion = -1, posSub = -2;
 
@@ -236,7 +231,7 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
             TTPDefinition.getInstance().setInauguralGame(inauguralGame.isSelected());
             TTPDefinition.getInstance().setOccidentVsOrient(occidenteVsOrienteToggle.isSelected());
             TTPDefinition.getInstance().setCalendarId(calendarId.getText());
-            TTPDefinition.getInstance().setSeries32(series32);
+            TTPDefinition.getInstance().setLss(series32);
 
 
             if (Executer.getInstance().getMutations().isEmpty()) {
