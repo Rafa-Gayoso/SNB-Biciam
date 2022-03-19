@@ -96,7 +96,7 @@
                         <Font name="Segoe UI Symbol" size="24.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="23.0" />
+                        <Insets top="25.0" />
                      </VBox.margin>
                   </Label>
                   <Label text="Campeón y subcampeón" textFill="#2f2484">
@@ -224,7 +224,7 @@
                         <Insets top="15.0" />
                      </VBox.margin>
                   </JFXTextField>
-                  <JFXToggleButton fx:id="inauguralGame" contentDisplay="RIGHT" onAction="#setInauguralGame" prefHeight="76.0" prefWidth="135.0" size="12.0" text="No" textFill="#2f2484" toggleColor="WHITE" toggleLineColor="#2f2484">
+                  <JFXToggleButton fx:id="inauguralGame" contentDisplay="RIGHT" onAction="#setInauguralGame" prefHeight="45.0" prefWidth="135.0" size="12.0" text="No" textFill="#2f2484" toggleColor="WHITE" toggleLineColor="#2f2484">
                      <font>
                         <Font size="22.0" />
                      </font>

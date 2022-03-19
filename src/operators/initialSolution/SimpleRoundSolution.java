@@ -18,6 +18,9 @@ public class SimpleRoundSolution extends InitialSolution {
     @Override
     public State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
 
+        //DEBUG
+        System.out.println("SumpleRoundSolution.generateCalendar(heuristics)");
+
         duels = new ArrayList<>();
 
         duelMatrix = TTPDefinition.getInstance().getDuelMatrix();
@@ -95,6 +98,8 @@ public class SimpleRoundSolution extends InitialSolution {
             else {
                 state = new CalendarState();
             }
+            //DEBUG
+            System.out.println("\tgood: "+good);
         }
 
         return state;

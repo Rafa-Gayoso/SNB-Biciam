@@ -28,21 +28,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31c4c62d-8161-430c-9912-ecee8f383fae" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/operators/initialSolution/LSSDoubleRoundNonSymmetricInauguralSolution.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/operators/initialSolution/LSSDoubleRoundNonSymmetricSolution.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/operators/initialSolution/LSSSimpleRoundChampionSolution.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/operators/initialSolution/LSSSimpleRoundInauguralSolution.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/ConfigurationCalendar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/ConfigurationCalendar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SNB-Biciam/visual/Home.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ConfigurationCalendarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/definition/TTPDefinition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/TTPDefinition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/definition/operator/TTPOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/operator/TTPOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/definition/state/statecode/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/definition/state/statecode/Date.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/operators/factory/InitialSolutionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/factory/InitialSolutionFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/operators/heuristics/DuelHeuristicOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/heuristics/DuelHeuristicOperator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/InitialSolutionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/InitialSolutionType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/LSSDoubleRoundSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/LSSDoubleRoundNonSymmetricChampionSolution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/LSSSimpleRoundSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/LSSSimpleRoundSolution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/operators/interfaces/ICreateInitialSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/interfaces/ICreateInitialSolution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundSolution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/initialSolution/SimpleRoundSolution.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/operators/interfaces/ILongShortSeries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/interfaces/ILongShortSeries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeDateDuelsOrderOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeDateDuelsOrderOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeDateOrderOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeDateOrderOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/ChangeDatePositionOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/ChangeDatePositionOperator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/operators/mutation/MutationOperatorType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/operators/mutation/MutationOperatorType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/visual/ConfigurationCalendar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/visual/ConfigurationCalendar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/visual/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/visual/Home.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -352,6 +355,16 @@
           <url>file://$PROJECT_DIR$/src/operators/initialSolution/DoubleRoundNonSymmetricSolution.java</url>
           <line>11</line>
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/operators/heuristics/DuelHeuristicOperator.java</url>
+          <line>108</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/definition/codification/TTPCodification.java</url>
+          <line>14</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/utils/DataFiles.java</url>

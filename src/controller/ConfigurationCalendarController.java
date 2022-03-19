@@ -53,9 +53,6 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
     public static boolean savedConfiguration = false;
     private CalendarConfiguration lastConfiguration =new CalendarConfiguration();
 
-    //For 3-2 Calendar
-    public static boolean series32 = false;
-
     private int posChampion = -1, posSub = -2;
 
     private ObservableList<String> listComboChamp;
@@ -231,21 +228,20 @@ public class ConfigurationCalendarController implements Initializable, ISecondRo
             TTPDefinition.getInstance().setInauguralGame(inauguralGame.isSelected());
             TTPDefinition.getInstance().setOccidentVsOrient(occidenteVsOrienteToggle.isSelected());
             TTPDefinition.getInstance().setCalendarId(calendarId.getText());
-            TTPDefinition.getInstance().setLss(series32);
 
 
             if (Executer.getInstance().getMutations().isEmpty()) {
                 ArrayList<MutationOperatorType> mutationsOperatorTypes = new ArrayList<>();
                 mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_ORDER);
                 mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_POSITION);
-                mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DUEL);
-                mutationsOperatorTypes.add(MutationOperatorType.SWAP_DATES);
+                //mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DUEL);
+                //mutationsOperatorTypes.add(MutationOperatorType.SWAP_DATES);
 
                 if (TTPDefinition.getInstance().isSecondRound() && !TTPDefinition.getInstance().isSymmetricSecondRound()) {
-                    mutationsOperatorTypes.add(MutationOperatorType.CHANGE_TEAMS_OPERATOR);
-                    mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_DUELS_ORDER_OPERATOR);
-                    mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_SINGLE_DUEL_ORDER_OPERATOR);
-                    mutationsOperatorTypes.add(MutationOperatorType.CHANGE_LOCAL_VISITOR_SINGLE_TEAM_OPERATOR);
+                    //mutationsOperatorTypes.add(MutationOperatorType.CHANGE_TEAMS_OPERATOR);
+                    //mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_DUELS_ORDER_OPERATOR);
+                    //mutationsOperatorTypes.add(MutationOperatorType.CHANGE_DATE_SINGLE_DUEL_ORDER_OPERATOR);
+                    //mutationsOperatorTypes.add(MutationOperatorType.CHANGE_LOCAL_VISITOR_SINGLE_TEAM_OPERATOR);
                 }
 
 

@@ -10,7 +10,7 @@ public enum MutationOperatorType {
             return ChangeDatePositionOperator.class.getName();
         }
     },
-
+/*
     SWAP_DATES{
         @Override
         public String toString() {
@@ -18,7 +18,7 @@ public enum MutationOperatorType {
             return SwapDatesOperator.class.getName();
         }
     },
-
+*/
     CHANGE_DATE_ORDER{
 
         @Override
@@ -26,7 +26,7 @@ public enum MutationOperatorType {
             return ChangeDateOrderOperator.class.getName();
         }
     },
-
+/*
     CHANGE_DUEL{
 
 
@@ -46,7 +46,7 @@ public enum MutationOperatorType {
             return ChangeTeamsOperator.class.getName();
         }
     },
-
+*/
 
     CHANGE_DATE_DUELS_ORDER_OPERATOR{
 
@@ -57,7 +57,7 @@ public enum MutationOperatorType {
             return ChangeDateDuelsOrderOperator.class.getName();
         }
     },
-
+/*
     CHANGE_DATE_SINGLE_DUEL_ORDER_OPERATOR{
 
 
@@ -77,6 +77,6 @@ public enum MutationOperatorType {
             return ChangeLocalVisitorSingleTeamOperator.class.getName();
         }
     },
-
+*/
 
 }

@@ -2,8 +2,7 @@ package controller;
 
 
 import com.jfoenix.controls.JFXButton;
-import controller32.CalendarController32;
-import controller32.ConfigurationCalendarController32;
+import definition.TTPDefinition;
 import definition.state.CalendarState;
 import eu.mihosoft.scaledfx.ScalableContentPane;
 import execute.Executer;
@@ -131,14 +130,17 @@ public class HomeController implements Initializable {
     void showCalendar32(ActionEvent event) throws IOException {
 
         //DEBUG
-        System.out.println("Homecontroller.showCalendar32()");
+        System.out.println("Homecontroller.showCalendar()");
+
+        //NEW 12/03/2022
+        TTPDefinition.getInstance().setLss(true);
 
         if(Executer.getInstance().getResultStates().isEmpty()){
-            this.createPage(new ConfigurationCalendarController32(), home, "/visual/ConfigurationCalendar32.fxml");
+            this.createPage(new ConfigurationCalendarController(), home, "/visual/ConfigurationCalendar.fxml");
             this.buttonReturnSelectionTeamConfiguration.setVisible(false);
         }
         else{
-            this.createPage(new CalendarController32(), home, "/visual/Calendar32.fxml");
+            this.createPage(new CalendarController(), home, "/visual/Calendar.fxml");
             this.buttonReturnSelectionTeamConfiguration.setVisible(true);
         }
     }
@@ -370,10 +372,6 @@ public class HomeController implements Initializable {
             object = loader.getController();
             ((CalendarController) object).setHomeController(this);
             setNode(anchorPane);
-        }else if (object instanceof CalendarController32) {
-            object = loader.getController();
-            ((CalendarController32) object).setHomeController(this);
-            setNode(anchorPane);
 
         } else if (object instanceof SelectGridController) {
             object = loader.getController();
@@ -383,14 +381,6 @@ public class HomeController implements Initializable {
         } else if (object instanceof ConfigurationCalendarController) {
             object = loader.getController();
             ((ConfigurationCalendarController) object).setHomeController(this);
-            setNode(anchorPane);
-        } else if (object instanceof ConfigurationCalendarController32) {
-
-            //DEBUG
-            System.out.println("HomeController.createPage() if instanceof ConfigurationCalendarController32");
-
-            object = loader.getController();
-            ((ConfigurationCalendarController32) object).setHomeController(this);
             setNode(anchorPane);
         }else if (object instanceof AdvanceConfigurationController) {
             object = loader.getController();

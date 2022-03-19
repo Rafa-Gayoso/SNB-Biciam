@@ -48,6 +48,7 @@ public class Date implements Cloneable {
         this.games = games;
     }
 
+    @Override
     public Date clone() throws CloneNotSupportedException{
         Date date = new Date();
         for (ArrayList<Integer> duel: games) {

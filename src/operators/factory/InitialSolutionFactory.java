@@ -30,6 +30,9 @@ public class InitialSolutionFactory {
             Logger.getLogger(HeuristicOperator.class.getName()).log(Level.SEVERE, null, e);
         }
 
+        //DEBUG
+        System.out.println("\tInitial solution created");
+
         return solution;
     }
 }

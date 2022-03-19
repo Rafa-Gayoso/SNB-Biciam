@@ -171,6 +171,9 @@ public class DuelHeuristicOperator extends HeuristicOperator {
             fillFirstDateFast(date, duelsCopy, setDuelsCalendar);
             calendar.add(date);
 
+            //DEBUG
+        System.out.print("size of calendar: "+calendar.size());
+
 
             ArrayList<ArrayList<ArrayList<ArrayList<Integer>>>> calendarBacktracking = new ArrayList<>();
             for (int i = 1; i < TTPDefinition.getInstance().getNumberOfDates(); i++) {

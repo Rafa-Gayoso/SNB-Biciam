@@ -49,12 +49,16 @@ public class ChangeDateOrderOperator extends MutationOperator {
 
         Deque<Date> stack = new ArrayDeque<>();
 
-        for (int i = firstDate; i <= lastDate; i++) {
+        //NEW for LSS calendars 16-03-2022
+        //this is for only take dates of the same parity
+        int increment = TTPDefinition.getInstance().isLss() ? 2 : 1;
+
+        for (int i = firstDate; i <= lastDate; i+=increment) {
             Date date = (Date)resultState.getCode().get(i);
 
             stack.push(date);
         }
-        for (int i = firstDate; i <= lastDate; i++) {
+        for (int i = firstDate; i <= lastDate; i+=increment) {
             Date date = stack.poll();
             resultState.getCode().set(i, date);
         }

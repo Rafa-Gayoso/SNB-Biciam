@@ -98,6 +98,15 @@ public class TTPDefinition {
     }
 
     public ArrayList<ArrayList<Integer>> getMutationsConfigurationsList() {
+
+        /*//DEBUG
+        String m = "mutations: \n";
+        for (ArrayList<Integer> r: mutationsConfigurationsList) {
+            for (Integer c: r) { m += "" + c.toString();
+            }
+        }
+        System.out.println(m);
+*/
         return mutationsConfigurationsList;
     }
 
