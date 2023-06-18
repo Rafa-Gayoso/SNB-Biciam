@@ -51,11 +51,24 @@ public class TTPOperator extends Operator implements ICreateInitialSolution, ISe
 
     @Override
     public List<State> generateRandomState(Integer neighborhoodSize) {
+
+        //DEBUG
+        System.out.println("TTPOperator.generateRandomState()");
+        System.out.println("\tneighborhood size: "+neighborhoodSize);
+
         List<State> neighborhood = new ArrayList<>(neighborhoodSize);
         InitialSolutionType type = createSolutionType();
         InitialSolution initialSolution = InitialSolutionFactory.getInstance(type);
         for (int i = 0; i < neighborhoodSize; i++) {
+
+            //DEBUG
+            System.out.println("\tgenerating calendar...");
+
             State state = initialSolution.generateCalendar(heuristics);
+
+            //DEBUG
+                System.out.println("\tcalendar genarated");
+
             ((CalendarState) state).setCalendarType(type.ordinal());
             CalendarConfiguration configuration = ((CalendarState)state).getConfiguration();
             if (configuration.isChampionVsSecondPlace()) {
@@ -66,6 +79,10 @@ public class TTPOperator extends Operator implements ICreateInitialSolution, ISe
             }
             neighborhood.add(state);
         }
+
+        //DEBUG
+        System.out.println("TTPOperator.generateRandomState() //finished");
+
         return neighborhood;
     }
 

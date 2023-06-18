@@ -2,12 +2,12 @@ package controller;
 
 
 import com.jfoenix.controls.JFXButton;
+import definition.TTPDefinition;
 import definition.state.CalendarState;
 import eu.mihosoft.scaledfx.ScalableContentPane;
 import execute.Executer;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,7 +30,6 @@ import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 import utils.DataFiles;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -114,6 +113,28 @@ public class HomeController implements Initializable {
 
     @FXML
     void showCalendar(ActionEvent event) throws IOException {
+
+        //DEBUG
+        System.out.println("Homecontroller.showCalendar()");
+
+        if(Executer.getInstance().getResultStates().isEmpty()){
+            this.createPage(new ConfigurationCalendarController(), home, "/visual/ConfigurationCalendar.fxml");
+            this.buttonReturnSelectionTeamConfiguration.setVisible(false);
+        }
+        else{
+            this.createPage(new CalendarController(), home, "/visual/Calendar.fxml");
+            this.buttonReturnSelectionTeamConfiguration.setVisible(true);
+        }
+    }
+    @FXML
+    void showCalendar32(ActionEvent event) throws IOException {
+
+        //DEBUG
+        System.out.println("Homecontroller.showCalendar()");
+
+        //NEW 12/03/2022
+        TTPDefinition.getInstance().setLss(true);
+
         if(Executer.getInstance().getResultStates().isEmpty()){
             this.createPage(new ConfigurationCalendarController(), home, "/visual/ConfigurationCalendar.fxml");
             this.buttonReturnSelectionTeamConfiguration.setVisible(false);
@@ -189,6 +210,10 @@ public class HomeController implements Initializable {
 
     @FXML
     void showInformation(ActionEvent event) throws IOException{
+
+        //DEBUG
+        System.out.println("HomeCOntroller.showInformation()");
+
         Parent root = FXMLLoader.load(getClass().getResource("/visual/Help.fxml"));
         Stage stage = new Stage();
 
@@ -205,6 +230,10 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        //DEBUG
+        System.out.println("HomeCOntroller.initialize()");
+
 
         areVisible = false;lblSuperior.setVisible(false);
         buttonReturnSelectionTeamConfiguration.setVisible(false);
@@ -239,6 +268,10 @@ public class HomeController implements Initializable {
     }
 
     public void createPage(Object object, AnchorPane anchorPane, String loc) throws IOException {
+
+        //DEBUG
+        System.out.println("HomeCOntroller.createPage()");
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(HomeController.class.getResource(loc));
         anchorPane = loader.load();

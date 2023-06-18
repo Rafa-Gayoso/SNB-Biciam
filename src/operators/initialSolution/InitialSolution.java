@@ -4,7 +4,7 @@ import problem.definition.State;
 
 import java.util.ArrayList;
 
-public abstract class InitialSolution {
+public abstract class   InitialSolution {
 
     protected static int [][] duelMatrix;
     protected ArrayList<ArrayList<Integer>> duels;

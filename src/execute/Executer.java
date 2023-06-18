@@ -96,6 +96,9 @@ public class Executer implements ISecondRound, IInauguralGame, IChampionGame {
      */
     public void configureProblem() {
 
+        //DEBUG
+        System.out.println("Executer.configureProblem()");
+
         problem = new Problem();//Instancia del problema a resolver
         TTPObjectiveFunction objectiveFunction = new TTPObjectiveFunction();//Se instancia la funcion obj del problema
         ArrayList<ObjetiveFunction> listObj = new ArrayList<>();

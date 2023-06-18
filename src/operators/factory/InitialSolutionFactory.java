@@ -15,12 +15,23 @@ public class InitialSolutionFactory {
     }
 
     public static InitialSolution getInstance(InitialSolutionType type){
+
+        //Debug
+        System.out.println("InitialSolutionFactory.getInstance()" +
+                "\n\tInitialSolutionType: " +type.toString());
+
+        //TESTING
+        //type = InitialSolutionType.LSS_DOUBLE_ROUND_SOLUTION;
+
         InitialSolution solution =null;
         try{
             solution = (InitialSolution) InitialSolution.class.getClassLoader().loadClass(type.toString()).newInstance();
         }catch (IllegalAccessException | ClassNotFoundException | InstantiationException e){
             Logger.getLogger(HeuristicOperator.class.getName()).log(Level.SEVERE, null, e);
         }
+
+        //DEBUG
+        System.out.println("\tInitial solution created");
 
         return solution;
     }

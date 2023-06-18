@@ -7,18 +7,16 @@ import utils.Distance;
 import problem.definition.State;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 public class TTPDefinition {
 
-    private final int PENALIZATION = 100000;
-    private double [][] matrixDistance;
-    private int cantEquipos;
-    private int cantFechas;
-    private boolean secondRound;//Puede ser otra variable del problema
-    private int cantVecesLocal;
-    private int cantVecesVisitante;
+    private final int PENALIZATION = 100000;    //penalizacion de violacion de restricciones
+    private double [][] matrixDistance;     //matriz de distancia
+    private int cantEquipos;    //numero de equiupos
+    private int cantFechas;     //numero de fechas para duelos
+    private boolean secondRound;    //Puede ser otra variable del problema
+    private int cantVecesLocal;     //Juegos como Local permitidos (Restriccion)
+    private int cantVecesVisitante;     //Juegos como Visitante permitidos
     private ArrayList<Integer> teamsIndexes;
     private boolean symmetricSecondRound;
     private boolean inauguralGame;
@@ -37,7 +35,7 @@ public class TTPDefinition {
     private ArrayList<Date> dateToStartList;
     private Date dateToStart;
     private boolean useDateToStart;
-
+    private boolean lss;
 
     private TTPDefinition(){
         /*this.cantEquipos=16;
@@ -52,11 +50,18 @@ public class TTPDefinition {
         this.dateToStartList = new ArrayList<>();
         this.dateToStart = new Date();
         this.useDateToStart = false;
+
+        //NEW 11/03/2022
+        this.lss = false;
     }
 
     public static TTPDefinition getInstance(){
         if(ttpDefinition == null){
             ttpDefinition = new TTPDefinition();
+
+            //DEBUG
+            System.out.println("TTPDefinition instance created");
+
         }
         return ttpDefinition;
     }
@@ -93,6 +98,15 @@ public class TTPDefinition {
     }
 
     public ArrayList<ArrayList<Integer>> getMutationsConfigurationsList() {
+
+        /*//DEBUG
+        String m = "mutations: \n";
+        for (ArrayList<Integer> r: mutationsConfigurationsList) {
+            for (Integer c: r) { m += "" + c.toString();
+            }
+        }
+        System.out.println(m);
+*/
         return mutationsConfigurationsList;
     }
 
@@ -157,8 +171,18 @@ public class TTPDefinition {
         this.firstPlace = firstPlace;
     }
 
+    //Returns index of Champion relative to a subset of the teams
+    public int getFirstPlaceRelativeIndex() {
+        return teamsIndexes.indexOf(firstPlace);
+    }
+
     public int getSecondPlace() {
         return secondPlace;
+    }
+
+    //Returns index of subchampion relative to a subset of the teams
+    public int getSeconfPlaceRelativeIndex() {
+        return teamsIndexes.indexOf(secondPlace);
     }
 
     public void setSecondPlace(int secondPlace) {
@@ -232,6 +256,10 @@ public class TTPDefinition {
     public void setCantFechas(int cantFechas) {
         this.cantFechas = cantFechas;
     }
+
+    public void setLss(boolean lss) { this.lss = lss; }
+
+    public boolean isLss(){ return lss; }
 
     public ArrayList<ArrayList<Integer>> teamsItinerary(State calendar) {
         ArrayList<ArrayList<Integer>> teamDate = new ArrayList<>();
@@ -393,9 +421,18 @@ public class TTPDefinition {
 
     public int penalizeLocalGames(State calendar){
         int cont = 0;
+
+        //calendario actual
         State state = calendar.clone();
+
+        //matriz que guarda las ultimas ocaciones en que 2 equipos se enfrentaron
         ArrayList<Integer> counts = new ArrayList<>();
+
+        //itinerario, matriz de n x m, donde n es la cantidad de fechas del calendario, y m la cantidad de equipos,
+        //siendo matriz[i,j] la sede en la cual el equipo j jugar'a en la fecha i
         ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(state);
+
+
         CalendarConfiguration configuration = ((CalendarState)calendar).getConfiguration();
         int maxHomeGames = configuration.getMaxLocalGamesInARow();
         ArrayList<Integer> teamsIndexes = (ArrayList<Integer>) configuration.getTeamsIndexes().clone();
@@ -403,10 +440,12 @@ public class TTPDefinition {
             counts.add(0);
         }
 
+        //por cada uno de los equipos
         for(int i = 1; i  < itinerary.size() - 1; i++) {
             ArrayList<Integer> row = itinerary.get(i);
 
             if (!compareArrays(row, configuration.getTeamsIndexes())) {
+                //por cada una de las sedes que visitar'a el equipo
                 for (int j = 0; j < row.size(); j++) {
                     int destiny = row.get(j);
 
@@ -425,6 +464,98 @@ public class TTPDefinition {
             }
         }
         return cont;
+    }
+
+    //NEW for version 2.8
+    public int penalizeCloseGames(State calendar) {
+
+        //DEBUG
+        System.out.print("TTP.Definition.penalizeCloseGames()");
+
+        /*
+        Este m'etodo cuenta las veces que se viola la restricci'on de distancia minima de juegos entre 2 equipos
+         */
+
+        //contador de violaciones de la restriccion
+        int count = 0;
+        try {
+            State state = calendar.clone();
+
+
+            //itinerario, matriz de n x m, donde n es la cantidad de fechas del calendario, y m la cantidad de equipos,
+            //siendo matriz[i,j] la sede en la cual el equipo j jugar'a en la fecha i
+            ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(state);
+
+            //Debug
+            System.out.println("\tItinerary: ");
+            for (int i = 0; i < itinerary.size(); i++) {
+                System.out.println("\t" + itinerary.get(i));
+            }
+
+            CalendarConfiguration configuration = ((CalendarState) calendar).getConfiguration();
+            int minCloseGames = configuration.getMinCloseGamesInARow();
+            ArrayList<Integer> teamsIndexes = (ArrayList<Integer>) configuration.getTeamsIndexes().clone();
+
+            //la lista de los indices de los topes de cada equpipo contra cada esquipo es una matriz cuadrada, donde cada
+            // celda contiene el ultimo indice o fechasen que esos 2 equipos se toparon,. La matriz empieza inicializada
+            // cada celda con -1. a medida que se recorren los itinerarios se va chequeando para cada juego, si hubo uno
+            // anterior en el calendario entre los mismos 2 equipos. En la celda estara el valor -1 si es el primer tope,
+            // si no, estara el indice del ultimo encuentro. En este caso se restaran ambos indices.
+            // Si la diferencia > minDiferencia, penalizar
+            // Luego escribir en la celda el valor de este último indice
+
+            //Tomando el indice real del unltimo equipo, como size.
+            int size = 16;
+
+            //matriz que guarda las ultimas ocaciones en que 2 equipos se enfrentaron
+            ArrayList<ArrayList<Integer>> listaDeIndicesDeJuegosPorEquipo = new ArrayList<>(size);
+            for (int i = 0; i < size; i++) {
+
+                ArrayList<Integer> column = new ArrayList<>(size);
+                for (int j = 0; j < size; j++) {
+                    column.add(-1);
+                }
+                listaDeIndicesDeJuegosPorEquipo.add(column);
+            }
+
+            //un itinerario por cada equipo
+            for (int i = 1; i < itinerary.size() - 1; i++) {
+                ArrayList<Integer> row = itinerary.get(i);
+
+                if (!compareArrays(row, configuration.getTeamsIndexes())) {
+
+                    //por cada una de las sedes que visitara el equipo
+                    for (int j = 0; j < row.size(); j++) {
+
+                        int destiny = row.get(j);
+                        int destinyIndex = teamsIndexes.indexOf(destiny);
+
+                        int originIndex = teamsIndexes.get(j);
+                        int lastDate = listaDeIndicesDeJuegosPorEquipo.get(originIndex).get(destinyIndex);
+                        if (lastDate != -1) {
+                            int dif = i - lastDate;
+                            if (dif < minCloseGames)
+                                count++;
+                        }
+                        listaDeIndicesDeJuegosPorEquipo.get(originIndex).set(destinyIndex, i);
+                        listaDeIndicesDeJuegosPorEquipo.get(destinyIndex).set(originIndex, i);
+
+                        //Debug
+                        //System.out.println("\tLast Visits: ");
+                        //for (int k = 0; k < listaDeIndicesDeJuegosPorEquipo.size(); k++){
+                        //    System.out.println("\t"+listaDeIndicesDeJuegosPorEquipo.get(k));
+                        //}
+
+                    }
+                }
+            }
+            //DEBUG
+            System.out.println("\tcontador " + count);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 
     private boolean compareArrays(ArrayList<Integer> current, ArrayList<Integer> teamIndexes){
@@ -473,11 +604,13 @@ public class TTPDefinition {
             }
             else{*/
 
-            matrix[posChampion][posSecond] = 2;
-            matrix[posSecond][posChampion] = 1;
+            int metaPosChampion = teamsIndexes.indexOf(posChampion);
+            int metaPosSecond = teamsIndexes.indexOf(posSecond);
+            matrix[metaPosChampion][metaPosSecond] = 2;
+            matrix[metaPosSecond][metaPosChampion] = 1;
             //if(!exist){
-            cantLocalsAndVisitorsPerRow.get(posChampion).set(1, cantLocalsAndVisitorsPerRow.get(posChampion).get(1)+1);
-            cantLocalsAndVisitorsPerRow.get(posSecond).set(0, cantLocalsAndVisitorsPerRow.get(posSecond).get(0)+1);
+            cantLocalsAndVisitorsPerRow.get(metaPosChampion).set(1, cantLocalsAndVisitorsPerRow.get(metaPosChampion).get(1)+1);
+            cantLocalsAndVisitorsPerRow.get(metaPosSecond).set(0, cantLocalsAndVisitorsPerRow.get(metaPosSecond).get(0)+1);
             //}
 
             //}
@@ -822,5 +955,4 @@ public class TTPDefinition {
         }
         return list;
     }
-
 }

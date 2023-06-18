@@ -18,10 +18,14 @@ public class SimpleRoundSolution extends InitialSolution {
     @Override
     public State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
 
+        //DEBUG
+        System.out.println("SumpleRoundSolution.generateCalendar(heuristics)");
+
         duels = new ArrayList<>();
 
         duelMatrix = TTPDefinition.getInstance().getDuelMatrix();
 
+        //copy of the duel matrix
         int[][] newMatrix = new int[duelMatrix.length][duelMatrix.length];
 
         for (int i = 0; i < duelMatrix.length; i++) {
@@ -31,14 +35,15 @@ public class SimpleRoundSolution extends InitialSolution {
         }
 
 
-
+        //indexes
         ArrayList<Integer> teamsIndexes = TTPDefinition.getInstance().getTeamsIndexes();
 
+        //iterate superior triangle matrix of the copy of the duel matrix
         for (int i = 0; i < newMatrix.length; i++) {
             for (int j = 0; j < newMatrix[i].length; j++) {
                 if (i < j) {
 
-                    if(newMatrix[i][j] !=0){
+                    if(newMatrix[i][j] != 0){
                         ArrayList<Integer> pair = new ArrayList<>(2);
                         if (newMatrix[i][j] == 1) {
                             pair.add(teamsIndexes.get(j));
@@ -47,6 +52,8 @@ public class SimpleRoundSolution extends InitialSolution {
                             pair.add(teamsIndexes.get(i));
                             pair.add(teamsIndexes.get(j));
                         }
+
+                        //Adding pair to the duel
                         duels.add(pair);
                     }
 
@@ -56,6 +63,8 @@ public class SimpleRoundSolution extends InitialSolution {
 
         Random random = new Random();
         int randomNumber = random.nextInt(heuristics.size());
+
+        //select one of the heuristics available to create an initial solution
         HeuristicOperator heuristic = HeuristicOperatorFactory.getInstance(heuristics.get(randomNumber));
 
         CalendarState state = new CalendarState();
@@ -63,12 +72,15 @@ public class SimpleRoundSolution extends InitialSolution {
         if(TTPDefinition.getInstance().getOccidentOrientConfiguration() !=null){
             configuration = TTPDefinition.getInstance().getOccidentOrientConfiguration();
         }else{
+            TTPDefinition ttpDefInstance = TTPDefinition.getInstance();
+            //calendarID =
+
             configuration = new CalendarConfiguration(
-                    TTPDefinition.getInstance().getCalendarId(), TTPDefinition.getInstance().getTeamsIndexes(), TTPDefinition.getInstance().isInauguralGame(),
-                    TTPDefinition.getInstance().isChampionVsSub(), TTPDefinition.getInstance().getFirstPlace(),
-                    TTPDefinition.getInstance().getSecondPlace(),TTPDefinition.getInstance().isSecondRound(), TTPDefinition.getInstance().isSymmetricSecondRound(),
-                    TTPDefinition.getInstance().isOccidentVsOrient(), TTPDefinition.getInstance().getCantVecesLocal(),
-                    TTPDefinition.getInstance().getCantVecesVisitante(), TTPDefinition.getInstance().getRestIndexes(),TTPDefinition.getInstance().getDuelMatrix());
+                    ttpDefInstance.getCalendarId(), ttpDefInstance.getTeamsIndexes(), ttpDefInstance.isInauguralGame(),
+                    ttpDefInstance.isChampionVsSub(), ttpDefInstance.getFirstPlace(),
+                    ttpDefInstance.getSecondPlace(),ttpDefInstance.isSecondRound(), ttpDefInstance.isSymmetricSecondRound(),
+                    ttpDefInstance.isOccidentVsOrient(), ttpDefInstance.getCantVecesLocal(),
+                    ttpDefInstance.getCantVecesVisitante(), ttpDefInstance.getRestIndexes(),ttpDefInstance.getDuelMatrix());
         }
 
         boolean good = false;
@@ -88,6 +100,8 @@ public class SimpleRoundSolution extends InitialSolution {
             else {
                 state = new CalendarState();
             }
+            //DEBUG
+            System.out.println("\tgood: "+good);
         }
 
         return state;

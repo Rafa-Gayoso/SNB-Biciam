@@ -76,6 +76,9 @@ public class CalendarController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        //DEBUG
+        System.out.println("CalendarController.initialize()");
+
         notification = new TrayNotification();
         selectedCalendar = 0;
         exportButton.setDisable(false);

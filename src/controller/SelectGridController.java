@@ -161,8 +161,10 @@ public class SelectGridController implements Initializable, ICreateInitialSoluti
         }
 
         if (TTPDefinition.getInstance().isChampionVsSub()) {
-            matrix[TTPDefinition.getInstance().getFirstPlace()][TTPDefinition.getInstance().getSecondPlace()].setDisable(true);
-            matrix[TTPDefinition.getInstance().getSecondPlace()][TTPDefinition.getInstance().getFirstPlace()].setDisable(true);
+            int first = TTPDefinition.getInstance().getFirstPlaceRelativeIndex(),
+                    second = TTPDefinition.getInstance().getSeconfPlaceRelativeIndex();
+            matrix[first][second].setDisable(true);
+            matrix[second][first].setDisable(true);
         }
         return matrix;
     }

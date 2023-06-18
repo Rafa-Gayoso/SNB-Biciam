@@ -40,6 +40,11 @@ public class TTPObjectiveFunction extends ObjetiveFunction implements ISecondRou
         double totalDistance = 0;
         int penalizeVisitorGames = TTPDefinition.getInstance().penalizeVisitorGames(state);
         int penalizeHomeGames = TTPDefinition.getInstance().penalizeLocalGames(state);
+        int penalizeCloseGames = TTPDefinition.getInstance().penalizeCloseGames(state);
+
+        //DEBUG
+        System.out.println("\tpenalizeCloseGames = "+penalizeCloseGames);
+
         ArrayList<ArrayList<Integer>> itinerary = TTPDefinition.getInstance().teamsItinerary(state);
         for (int i = 0; i < itinerary.size() - 1; i++) {
             ArrayList<Integer> row1 = itinerary.get(i);
@@ -60,7 +65,7 @@ public class TTPObjectiveFunction extends ObjetiveFunction implements ISecondRou
         }*/
 
         return totalDistance + (TTPDefinition.getInstance().getPenalization() * (penalizeHomeGames + penalizeVisitorGames
-        + penalizeChampion + penalizeInauguralGame));
+        + penalizeChampion + penalizeInauguralGame + penalizeCloseGames));
     }
 
 

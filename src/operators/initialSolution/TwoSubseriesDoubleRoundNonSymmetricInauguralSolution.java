@@ -6,11 +6,13 @@ import problem.definition.State;
 
 import java.util.ArrayList;
 
-public class SimpleRoundInauguralSolution extends SimpleRoundSolution implements IInauguralGame {
+public class TwoSubseriesDoubleRoundNonSymmetricInauguralSolution extends TwoSubseriesDoubleRoundNonSymmetricSolution implements IInauguralGame {
     @Override
-    public State generateCalendar(ArrayList<HeuristicOperatorType> heuristics) {
+    public State generateCalendar(ArrayList<HeuristicOperatorType> heuristics){
         State state = super.generateCalendar(heuristics);
+
         addInauguralGame(state);
+
         return state;
     }
 }

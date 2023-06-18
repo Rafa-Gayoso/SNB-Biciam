@@ -14,14 +14,14 @@ public class ChangeDateDuelsOrderOperator extends MutationOperator{
     @Override
     public State applyMutation(State state) {
         State resultState = state.clone();
-        CalendarConfiguration configuration = ((CalendarState)resultState).getConfiguration();
+        CalendarConfiguration configuration = ((CalendarState) resultState).getConfiguration();
         int startPosition = 0;
 
-        if(configuration.isInauguralGame()){
+        if (configuration.isInauguralGame()) {
             startPosition = 1;
         }
 
-        int selectedDate =  -1;
+        int selectedDate = -1;
 
         if (!TTPDefinition.getInstance().getMutationsConfigurationsList().isEmpty()) {
             int position = MutationsConfigurationController.currentMutationPostion;
@@ -29,13 +29,12 @@ public class ChangeDateDuelsOrderOperator extends MutationOperator{
 
         }
 
-        if(selectedDate == -1){
+        if (selectedDate == -1) {
             do {
                 selectedDate = ThreadLocalRandom.current().nextInt(startPosition, resultState.getCode().size() - 1);
             }
             while (selectedDate == -1);
         }
-
 
 
         Date date = (Date) resultState.getCode().get(selectedDate);
@@ -53,25 +52,64 @@ public class ChangeDateDuelsOrderOperator extends MutationOperator{
 
         //interchangeLocalVisitor(resultState, selectedDate, date, temp);
 
-        if(configuration.isSecondRoundCalendar() && !configuration.isSymmetricSecondRound()){
+        boolean LSS = TTPDefinition.getInstance().isLss();
+        boolean secondRound = configuration.isSecondRoundCalendar() && !configuration.isSymmetricSecondRound();
 
-            for (ArrayList<Integer> duel: date.getGames()) {
-                for(int i=0; i < resultState.getCode().size(); i++){
-                    if(i != selectedDate){
+        if (secondRound) {
+
+            for (ArrayList<Integer> duel : date.getGames()) {
+                for (int i = 0; i < resultState.getCode().size(); i++) {
+                    if (i != selectedDate) {
                         Date pivotDate = (Date) resultState.getCode().get(i);
 
-                        for (ArrayList<Integer> pivotDuel: pivotDate.getGames()) {
-                            if(duel.get(0) == pivotDuel.get(0) && duel.get(1) == pivotDuel.get(1)){
+                        for (ArrayList<Integer> pivotDuel : pivotDate.getGames()) {
+                            if (duel.get(0) == pivotDuel.get(0) && duel.get(1) == pivotDuel.get(1)) {
                                 int local = pivotDuel.get(0);
                                 pivotDuel.set(0, pivotDuel.get(1));
                                 pivotDuel.set(1, local);
+                            }
+
+                            //Finding the couple of the duel that has the same teams, but in a different series
+                            //NEW 17-03-22
+                            else if (LSS) {
+                                if (duel.get(0) == pivotDuel.get(1) && duel.get(1) == pivotDuel.get(0)) {
+                                    int local = pivotDuel.get(0);
+                                    pivotDuel.set(0, pivotDuel.get(1));
+                                    pivotDuel.set(1, local);
+                                }
                             }
                         }
                     }
                 }
             }
-
         }
+
+        if (LSS && !secondRound) {
+            int parityFactor = selectedDate % 2;
+            for (ArrayList<Integer> duel : date.getGames()) {
+                for (int i = parityFactor; i < resultState.getCode().size(); i += 2) {
+                    if (i != selectedDate) {
+                        Date pivotDate = (Date) resultState.getCode().get(i);
+
+                        for (ArrayList<Integer> pivotDuel : pivotDate.getGames()) {
+
+                            //Finding the couple of the duel that has the same teams, but in a different series
+                            //NEW 17-03-22
+                            if (TTPDefinition.getInstance().isLss()) {
+                                if (duel.get(0) == pivotDuel.get(1) && duel.get(1) == pivotDuel.get(0)) {
+                                    int local = pivotDuel.get(0);
+                                    pivotDuel.set(0, pivotDuel.get(1));
+                                    pivotDuel.set(1, local);
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
         return resultState;
     }
 

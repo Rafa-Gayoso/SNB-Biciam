@@ -2,7 +2,7 @@ package operators.mutation;
 
 public enum MutationOperatorType {
 
-    CHANGE_DATE_POSITION{
+/*    CHANGE_DATE_POSITION{
 
         @Override
         public String toString() {
@@ -10,7 +10,7 @@ public enum MutationOperatorType {
             return ChangeDatePositionOperator.class.getName();
         }
     },
-
+/*
     SWAP_DATES{
         @Override
         public String toString() {
@@ -26,7 +26,7 @@ public enum MutationOperatorType {
             return ChangeDateOrderOperator.class.getName();
         }
     },
-
+*/
     CHANGE_DUEL{
 
 
@@ -36,7 +36,7 @@ public enum MutationOperatorType {
             return ChangeDuelOperator.class.getName();
         }
     },
-
+/*
     CHANGE_TEAMS_OPERATOR{
 
 
@@ -57,7 +57,7 @@ public enum MutationOperatorType {
             return ChangeDateDuelsOrderOperator.class.getName();
         }
     },
-
+/*
     CHANGE_DATE_SINGLE_DUEL_ORDER_OPERATOR{
 
 
@@ -77,6 +77,6 @@ public enum MutationOperatorType {
             return ChangeLocalVisitorSingleTeamOperator.class.getName();
         }
     },
-
+*/
 
 }

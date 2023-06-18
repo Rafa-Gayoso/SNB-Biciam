@@ -39,25 +39,28 @@ public class RestSelectorController implements Initializable {
 
         ArrayList<String> dates = new ArrayList<>();
 
-        int i=0;
-        for(i=1; i < size; i++){
-            dates.add("Fecha "+(i));
+        int i=1;
+//        for(i=1; i < size; i++){
+//            dates.add("Fecha "+(i));
+//        }
+
+        if (ConfigurationCalendarController.secondRound){
+            size = size*2;
+        }
+
+        if(ConfigurationCalendarController.lss){
+            size = size*2;
         }
 
         if(ConfigurationCalendarController.inaugural){
             dates.add("Fecha "+(i));
+            size += 1;
         }
 
-        if (ConfigurationCalendarController.secondRound){
-            size = size*2;
-            if (ConfigurationCalendarController.inaugural){
-                size += 1;
-            }
-            //i++;
-            for(; i < size; i++){
-                dates.add("Fecha "+(i));
-            }
+        for(i = 1; i < size; i++){
+            dates.add("Fecha "+(i));
         }
+
         int selectedCalendar = CalendarController.selectedCalendar;
         checkBoxListView.setItems(FXCollections.observableArrayList(dates));
         if(selectedCalendar != -1){
